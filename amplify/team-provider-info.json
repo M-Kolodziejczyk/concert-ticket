@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-concertticket-dev-120356-authRole",
+      "UnauthRoleArn": "arn:aws:iam::011990489463:role/amplify-concertticket-dev-120356-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::011990489463:role/amplify-concertticket-dev-120356-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-concertticket-dev-120356-deployment",
+      "UnauthRoleName": "amplify-concertticket-dev-120356-unauthRole",
+      "StackName": "amplify-concertticket-dev-120356",
+      "StackId": "arn:aws:cloudformation:eu-central-1:011990489463:stack/amplify-concertticket-dev-120356/23a55670-8a35-11eb-bfa2-060d81fec150",
+      "AmplifyAppId": "d3re5s1mghp7f0"
+    }
+  }
+}
