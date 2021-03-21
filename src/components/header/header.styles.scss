@@ -1,0 +1,40 @@
+.header {
+  max-width: 1400px;
+  width: 100%;
+  height: 80px;
+  margin: 0 auto 25px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo__container {
+    height: 100%;
+    padding: 10px;
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  .options__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .options__link {
+      padding: 20px;
+    }
+  }
+
+  .auth__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .auth__link {
+      padding: 20px;
+    }
+  }
+}
