@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "concertticket08f3b569": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
