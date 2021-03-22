@@ -1,14 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Amplify from "aws-amplify";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 
+import awsconfig from "./aws-exports";
 import store from "./redux/store";
 
 import App from "./App";
 
 import "./index.css";
+
+Amplify.configure(awsconfig);
 
 ReactDOM.render(
   <Provider store={store}>
