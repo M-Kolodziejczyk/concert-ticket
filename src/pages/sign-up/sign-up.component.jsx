@@ -19,7 +19,7 @@ const SignUpPage = () => {
     if (pushRoute) {
       history.push(`${pushRoute}`);
     }
-  }, [pushRoute]);
+  }, [pushRoute, history]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +56,6 @@ const SignUpPage = () => {
               onChange={handleChange}
             />
           </div>
-          .
           <div className="signupPage__group">
             <input type="submit" value="SUBMIT" name="submit" />
           </div>
