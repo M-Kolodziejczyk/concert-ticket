@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import useHandleChange from "../../hooks/useForm";
+import validate from "../../validators/SigninFormValidationRules";
 
 import "./signin-page.styles.scss";
 
 const SigninPage = () => {
-  const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserCredentials({ ...userCredentials, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submit, credentials: ", userCredentials);
-  };
+  const { handleChange, handleSubmit, values } = useHandleChange(
+    { email: "", password: "" },
+    validate
+  );
 
   return (
     <div className="signinPage">
@@ -29,7 +21,7 @@ const SigninPage = () => {
               type="email"
               name="email"
               placeholder="Email:"
-              value={userCredentials.email}
+              value={values.email}
               onChange={handleChange}
             />
           </div>
@@ -39,7 +31,7 @@ const SigninPage = () => {
               type="password"
               name="password"
               placeholder="Password"
-              value={userCredentials.password}
+              value={values.password}
               onChange={handleChange}
             />
           </div>
