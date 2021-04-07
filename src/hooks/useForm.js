@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-const useForm = (initialState, validate) => {
+const useForm = (initialState, validate, callback) => {
+  const dispatch = useDispatch();
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
 
@@ -17,7 +19,7 @@ const useForm = (initialState, validate) => {
     const validateErrors = validate(values);
     setErrors(validateErrors);
     if (Object.keys(validateErrors).length === 0) {
-      console.log("Send form");
+      dispatch(callback(values));
       setValues(initialState);
     }
   };

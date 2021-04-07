@@ -18,6 +18,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: action.payload.message,
       };
+    case UserActionTypes.SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        pushRoute: "/",
+        currentUser: action.payload,
+      };
+    case UserActionTypes.SIGN_IN_FAILURE:
+      return {
+        ...state,
+        error: action.payload.message,
+      };
     default:
       return state;
   }

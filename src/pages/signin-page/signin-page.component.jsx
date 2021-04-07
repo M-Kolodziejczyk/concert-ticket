@@ -1,13 +1,15 @@
 import React from "react";
 import useHandleChange from "../../hooks/useForm";
 import validate from "../../validators/SigninFormValidationRules";
+import { emailSignInStart } from "../../redux/user/user.actions";
 
 import "./signin-page.styles.scss";
 
 const SigninPage = () => {
   const { handleChange, handleSubmit, values } = useHandleChange(
     { email: "", password: "" },
-    validate
+    validate,
+    emailSignInStart
   );
 
   return (
