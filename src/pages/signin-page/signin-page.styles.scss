@@ -7,14 +7,14 @@
   h1 {
     margin: 0 auto;
   }
+  .container {
+    margin: 0 auto;
+    width: 400px;
 
-  .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .form__group {
-      margin-top: 20px;
+    .form-error-message {
+      display: block;
+      margin-top: 5px;
+      color: red;
     }
   }
 }
