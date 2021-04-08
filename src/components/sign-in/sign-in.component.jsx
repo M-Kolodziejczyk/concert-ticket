@@ -1,18 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { emailSignInStart } from "../../redux/user/user.actions";
 
 import validate from "../../validators/SigninFormValidationRules";
 
-import useHandleChange from "../../hooks/useForm";
+import useForm from "../../hooks/useForm";
 
-import CustomButton from "../../components/custom-button/custom-button.component";
-import FormInput from "../../components/form-input/form-input.component";
+import CustomButton from "../custom-button/custom-button.component";
+import FormInput from "../form-input/form-input.component";
 
-import "./signin-page.styles.scss";
+import "./sign-in.styles.scss";
 
-const SigninPage = () => {
-  const { handleChange, handleSubmit, values, errors } = useHandleChange(
+const SignIn = () => {
+  const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "", password: "" },
     validate,
     emailSignInStart
@@ -22,7 +23,8 @@ const SigninPage = () => {
 
   return (
     <div className="signinPage">
-      <h1>Sign in</h1>
+      <h2>I already have an account</h2>
+      <span className="span">Sign in with your email and password</span>
       <div className="container">
         <form className="form" onSubmit={handleSubmit}>
           <FormInput
@@ -41,6 +43,9 @@ const SigninPage = () => {
             value={values.password}
             error={errors.password}
           />
+          <Link className="form__link" to="/forgot-password">
+            Forgot password?
+          </Link>
           <div className="form__group">
             <CustomButton type="submit" name="submit">
               Signin
@@ -55,4 +60,4 @@ const SigninPage = () => {
   );
 };
 
-export default SigninPage;
+export default SignIn;

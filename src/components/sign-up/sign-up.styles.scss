@@ -4,13 +4,27 @@
   flex-direction: column;
   justify-content: center;
 
-  h1 {
-    margin: 0 auto;
+  h2 {
+    margin: 10px 0;
   }
 
   .container {
     margin: 0 auto;
     width: 400px;
+
+    .form__buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .form__link {
+        color: #000000;
+
+        &:hover {
+          color: grey;
+        }
+      }
+    }
 
     .form-error-message {
       display: block;
