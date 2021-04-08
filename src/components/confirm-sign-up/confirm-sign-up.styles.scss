@@ -1,0 +1,19 @@
+.confirm {
+  width: 400px;
+  margin: 0 auto;
+
+  .form__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .form__link {
+      color: #000000;
+      margin-right: 10px;
+
+      &:hover {
+        color: grey;
+      }
+    }
+  }
+}

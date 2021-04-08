@@ -53,7 +53,7 @@ const SignUp = () => {
           />
           <div className="form__buttons">
             <CustomButton type="submit" name="submit">
-              Signin
+              Signup
             </CustomButton>
             <Link to="/confirm-account" className="form__link">
               Go to confirm account
