@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import useHandleChange from "../../hooks/useForm";
-import validate from "../../validators/SigninFormValidationRules";
 import { emailSignInStart } from "../../redux/user/user.actions";
+
+import validate from "../../validators/SigninFormValidationRules";
+
+import useHandleChange from "../../hooks/useForm";
+
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
 
@@ -19,7 +22,7 @@ const SigninPage = () => {
 
   return (
     <div className="signinPage">
-      <h1>SIgn</h1>
+      <h1>Sign in</h1>
       <div className="container">
         <form className="form" onSubmit={handleSubmit}>
           <FormInput
@@ -33,7 +36,7 @@ const SigninPage = () => {
           <FormInput
             name="password"
             type="password"
-            label="password"
+            label="Password"
             handleChange={handleChange}
             value={values.password}
             error={errors.password}
