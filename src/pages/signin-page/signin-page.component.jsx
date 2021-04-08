@@ -2,6 +2,7 @@ import React from "react";
 import useHandleChange from "../../hooks/useForm";
 import validate from "../../validators/SigninFormValidationRules";
 import { emailSignInStart } from "../../redux/user/user.actions";
+import CustomButton from "../../components/custom-button/custom-button.component";
 
 import "./signin-page.styles.scss";
 
@@ -14,7 +15,7 @@ const SigninPage = () => {
 
   return (
     <div className="signinPage">
-      <h1>Signin Page</h1>
+      <h1>SIgn</h1>
       <div className="container">
         <form className="form" onSubmit={handleSubmit}>
           <div className="form__group">
@@ -38,7 +39,9 @@ const SigninPage = () => {
             />
           </div>
           <div className="form__group">
-            <input type="submit" value="SUBMIT" name="submit" />
+            <CustomButton type="submit" name="submit">
+              Signin
+            </CustomButton>
           </div>
         </form>
       </div>

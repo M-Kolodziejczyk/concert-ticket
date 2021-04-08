@@ -10,8 +10,6 @@ import store from "./redux/store";
 
 import App from "./App";
 
-import "./index.css";
-
 Amplify.configure(awsconfig);
 
 ReactDOM.render(
