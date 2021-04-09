@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
-import ForgotNewPasswordPage from "./pages/forgot-password/forgot-new-password.component";
+import ForgotNewPasswordPage from "./pages/forgot-new-password/forgot-new-password.component";
 import ConfirmSignUpPage from "./pages/confirm-sign-up/confirm-sign-up.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import "./App.css";

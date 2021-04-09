@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import validate from "../../validators/forgot-password";
-import { forgotPasswordStart } from "../../redux/user/user.actions";
+import validate from "../../validators/new-password";
+import { newPasswordStart } from "../../redux/user/user.actions";
 
 import useForm from "../../hooks/useForm";
 
@@ -10,20 +10,19 @@ import FormInput from "../../components/form-input/form-input.component";
 import SuccessMessage from "../success-message/success-message.component";
 import ErrorMessage from "../error-message/error-message.component";
 
-import "./forgot-password.styles.scss";
+import "./new-password.styles.scss";
 
-const ForgotPassword = () => {
+const NewPassword = () => {
   const errorMessage = useSelector((state) => state.user.errorMessage);
   const successMessage = useSelector((state) => state.user.successMessage);
   const { handleChange, handleSubmit, values, errors } = useForm(
-    { email: "" },
+    { email: "", code: "", newPassword: "" },
     validate,
-    forgotPasswordStart
+    newPasswordStart
   );
-
   return (
-    <div className="forgot-password">
-      <h2>Forgot Password</h2>
+    <div className="new-password">
+      <h2>New Password</h2>
       <div className="container">
         <form onSubmit={handleSubmit}>
           <FormInput
@@ -34,16 +33,32 @@ const ForgotPassword = () => {
             value={values.email}
             error={errors.email}
           />
+          <FormInput
+            name="code"
+            type="text"
+            label="Confirm code"
+            handleChange={handleChange}
+            value={values.code}
+            error={errors.code}
+          />
+          <FormInput
+            name="newPassword"
+            type="password"
+            label="New password"
+            handleChange={handleChange}
+            value={values.newPassword}
+            error={errors.newPassword}
+          />
           <div className="form__buttons">
             <CustomButton type="submit" name="submit">
-              Send
+              Change password
             </CustomButton>
           </div>
-          {errorMessage.forgotPassword && (
-            <ErrorMessage>{errorMessage.forgotPassword}</ErrorMessage>
+          {errorMessage?.newPassword && (
+            <ErrorMessage>{errorMessage.newPassword}</ErrorMessage>
           )}
-          {successMessage?.forgotPassword && (
-            <SuccessMessage>{successMessage.forgotPassword}</SuccessMessage>
+          {successMessage?.newPassword && (
+            <SuccessMessage>{successMessage.newPassword}</SuccessMessage>
           )}
         </form>
       </div>
@@ -51,4 +66,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default NewPassword;
