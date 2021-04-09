@@ -11,7 +11,6 @@ import SuccessMessage from "../success-message/success-message.component";
 import ErrorMessage from "../error-message/error-message.component";
 
 import "./forgot-password.styles.scss";
-import useForm from "../../hooks/useForm";
 
 const ForgotPassword = () => {
   const errorMessage = useSelector((state) => state.user.errorMessage);
@@ -25,27 +24,29 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password">
       <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          name="email"
-          type="email"
-          label="Email"
-          handleChange={handleChange}
-          value={values.email}
-          error={errors.email}
-        />
-        <div className="form__buttons">
-          <CustomButton type="submit" name="submit">
-            Resend Code
-          </CustomButton>
-        </div>
-        {errorMessage.forgotPassword && (
-          <ErrorMessage>{errorMessage.forgotPassword}</ErrorMessage>
-        )}
-        {successMessage?.forgotPassword && (
-          <SuccessMessage>{successMessage.forgotPassword}</SuccessMessage>
-        )}
-      </form>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <FormInput
+            name="email"
+            type="email"
+            label="Email"
+            handleChange={handleChange}
+            value={values.email}
+            error={errors.email}
+          />
+          <div className="form__buttons">
+            <CustomButton type="submit" name="submit">
+              Resend Code
+            </CustomButton>
+          </div>
+          {errorMessage.forgotPassword && (
+            <ErrorMessage>{errorMessage.forgotPassword}</ErrorMessage>
+          )}
+          {successMessage?.forgotPassword && (
+            <SuccessMessage>{successMessage.forgotPassword}</SuccessMessage>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
