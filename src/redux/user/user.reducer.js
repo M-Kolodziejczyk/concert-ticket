@@ -58,6 +58,22 @@ const userReducer = (state = INITIAL_STATE, action) => {
         errorMessage: { resendCode: action.payload.message },
         successMessage: {},
       };
+    case UserActionTypes.FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        successMessage: {
+          forgotPassword: "We've sent a reset code to your email.",
+        },
+        errorMessage: {},
+      };
+    case UserActionTypes.FORGOT_PASSWORD_FAILURE:
+      return {
+        ...state,
+        errorMessage: {
+          forgotPassword: action.payload.message,
+        },
+        successMessage: {},
+      };
     default:
       return state;
   }

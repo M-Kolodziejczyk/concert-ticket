@@ -60,3 +60,17 @@ export const resendCodeFailure = (error) => ({
   type: UserActionTypes.RESEND_CODE_FAILURE,
   payload: error,
 });
+
+export const forgotPasswordStart = (email) => ({
+  type: UserActionTypes.FORGOT_PASSWORD_START,
+  payload: email,
+});
+
+export const forgotPasswordSuccess = () => ({
+  type: UserActionTypes.FORGOT_PASSWORD_SUCCESS,
+});
+
+export const forgotPasswordFailure = (error) => ({
+  type: UserActionTypes.FORGOT_PASSWORD_FAILURE,
+  payload: error,
+});

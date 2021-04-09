@@ -12,6 +12,8 @@ import {
   signInFailure,
   resendCodeSuccess,
   resendCodeFailure,
+  forgotPasswordSuccess,
+  forgotPasswordFailure,
 } from "./user.actions";
 
 export function* signUp({ payload: { email, password } }) {
@@ -72,11 +74,25 @@ export function* onResendCodeStart() {
   yield takeLatest(UserActionTypes.RESEND_CODE_START, resendCode);
 }
 
+export function* forgotPassword({ payload: { email } }) {
+  try {
+    yield Auth.forgotPassword(email);
+    yield put(forgotPasswordSuccess());
+  } catch (error) {
+    yield put(forgotPasswordFailure(error));
+  }
+}
+
+export function* onForgotPasswordStart() {
+  yield takeLatest(UserActionTypes.FORGOT_PASSWORD_START, forgotPassword);
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
     call(onEmailSignInstart),
     call(onSignUpConfirmStart),
     call(onResendCodeStart),
+    call(onForgotPasswordStart),
   ]);
 }
