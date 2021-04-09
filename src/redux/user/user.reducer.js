@@ -74,6 +74,22 @@ const userReducer = (state = INITIAL_STATE, action) => {
         },
         successMessage: {},
       };
+    case UserActionTypes.NEW_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        successMessage: {
+          newPassword: "Your password has been successfully changed.",
+        },
+        errorMessage: {},
+      };
+    case UserActionTypes.NEW_PASSWORD_FAILURE:
+      return {
+        ...state,
+        errorMessage: {
+          newPassword: action.payload.message,
+        },
+        successMessage: {},
+      };
     default:
       return state;
   }
