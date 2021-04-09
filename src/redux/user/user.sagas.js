@@ -6,6 +6,8 @@ import UserActionTypes from "./user.types";
 import {
   signUpSuccess,
   signUpFailure,
+  signUpConfirmSuccess,
+  signUpConfirmFailure,
   signInSuccess,
   signInFailure,
 } from "./user.actions";
@@ -26,6 +28,19 @@ export function* onSignUpStart() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
 
+export function* signUpConfirm({ payload: { email, code } }) {
+  try {
+    yield Auth.confirmSignUp(email, code);
+    yield put(signUpConfirmSuccess());
+  } catch (error) {
+    yield put(signUpConfirmFailure(error));
+  }
+}
+
+export function* onSignUpConfirmStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_CONFIRM_START, signUpConfirm);
+}
+
 export function* emailSignIn({ payload: { email, password } }) {
   try {
     const user = yield Auth.signIn({
@@ -43,5 +58,9 @@ export function* onEmailSignInstart() {
 }
 
 export function* userSagas() {
-  yield all([call(onSignUpStart), call(onEmailSignInstart)]);
+  yield all([
+    call(onSignUpStart),
+    call(onEmailSignInstart),
+    call(onSignUpConfirmStart),
+  ]);
 }

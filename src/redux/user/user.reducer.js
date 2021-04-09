@@ -21,13 +21,25 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: { signup: action.payload.message },
       };
+    case UserActionTypes.SIGN_UP_CONFIRM_SUCCESS:
+      return {
+        ...state,
+        successMessage: { confirmSignup: "Your registration is complete" },
+        errorMessage: {},
+      };
+    case UserActionTypes.SIGN_UP_CONFIRM_FAILURE:
+      return {
+        ...state,
+        errorMessage: { confirmSignup: action.payload.message },
+        successMessage: {},
+      };
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
         pushRoute: "/",
         currentUser: action.payload,
         errorMessage: {},
-        successMessage: { signup: "You have signed in successfully" },
+        successMessage: { signin: "You have signed in successfully" },
       };
     case UserActionTypes.SIGN_IN_FAILURE:
       return {

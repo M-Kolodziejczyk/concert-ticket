@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { signUpConfirmStart } from "../../redux/user/user.actions";
 import validate from "../../validators/confirm-sign-up";
 
 import useForm from "../../hooks/useForm";
@@ -17,8 +18,8 @@ const ConfirmSignUp = () => {
   const successMessage = useSelector((state) => state.user.successMessage);
   const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "", code: "" },
-    validate
-    // signUpStart
+    validate,
+    signUpConfirmStart
   );
 
   return (

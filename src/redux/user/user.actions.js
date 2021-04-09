@@ -1,5 +1,12 @@
 import UserActionTypes from "./user.types";
 
+export const signUpStart = (userCredentials) => {
+  return {
+    type: UserActionTypes.SIGN_UP_START,
+    payload: userCredentials,
+  };
+};
+
 export const signUpSuccess = () => ({
   type: UserActionTypes.SIGN_UP_SUCCESS,
 });
@@ -9,12 +16,19 @@ export const signUpFailure = (error) => ({
   payload: error,
 });
 
-export const signUpStart = (userCredentials) => {
-  return {
-    type: UserActionTypes.SIGN_UP_START,
-    payload: userCredentials,
-  };
-};
+export const signUpConfirmStart = (userData) => ({
+  type: UserActionTypes.SIGN_UP_CONFIRM_START,
+  payload: userData,
+});
+
+export const signUpConfirmSuccess = () => ({
+  type: UserActionTypes.SIGN_UP_CONFIRM_SUCCESS,
+});
+
+export const signUpConfirmFailure = (error) => ({
+  type: UserActionTypes.SIGN_UP_CONFIRM_FAILURE,
+  payload: error,
+});
 
 export const emailSignInStart = (userCredentials) => {
   return {
