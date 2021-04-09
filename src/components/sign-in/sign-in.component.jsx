@@ -9,7 +9,8 @@ import useForm from "../../hooks/useForm";
 
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
-import MessageSuccess from "../message-success/message-success.component";
+import SuccessMessage from "../success-message/success-message.component";
+import ErrorMessage from "../error-message/error-message.component";
 
 import "./sign-in.styles.scss";
 
@@ -53,10 +54,10 @@ const SignIn = () => {
             </CustomButton>
           </div>
           {errorMessage?.signin && (
-            <span className="form-error-message">{errorMessage.signin}</span>
+            <ErrorMessage>{errorMessage.signin}</ErrorMessage>
           )}
           {successMessage?.signin && (
-            <MessageSuccess>{successMessage.signin}</MessageSuccess>
+            <SuccessMessage>{successMessage.signin}</SuccessMessage>
           )}
         </form>
       </div>

@@ -7,7 +7,8 @@ import useForm from "../../hooks/useForm";
 
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
-import MessageSuccess from "../message-success/message-success.component";
+import SuccessMessage from "../success-message/success-message.component";
+import ErrorMessage from "../error-message/error-message.component";
 
 import "./confirm-sign-up.styles.scss";
 
@@ -49,12 +50,10 @@ const ConfirmSignUp = () => {
           </Link>
         </div>
         {errorMessage.confirmSignup && (
-          <span className="form-error-message">
-            {errorMessage.confirmSignup}
-          </span>
+          <ErrorMessage>{errorMessage.confirmSignup}</ErrorMessage>
         )}
         {successMessage?.confirmSignup && (
-          <MessageSuccess>{successMessage.confirmSignup}</MessageSuccess>
+          <SuccessMessage>{successMessage.confirmSignup}</SuccessMessage>
         )}
       </form>
     </div>
