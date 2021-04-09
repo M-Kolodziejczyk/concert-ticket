@@ -4,14 +4,16 @@ import { useSelector } from "react-redux";
 import validate from "../../validators/confirm-sign-up";
 
 import useForm from "../../hooks/useForm";
+
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
+import MessageSuccess from "../message-success/message-success.component";
 
 import "./confirm-sign-up.styles.scss";
 
 const ConfirmSignUp = () => {
-  const errorMessage = useSelector((state) => state.user.error);
-
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+  const successMessage = useSelector((state) => state.user.successMessage);
   const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "", code: "" },
     validate
@@ -46,8 +48,13 @@ const ConfirmSignUp = () => {
             Go to sign in
           </Link>
         </div>
-        {errorMessage && (
-          <span className="form-error-message">{errorMessage}</span>
+        {errorMessage.confirmSignup && (
+          <span className="form-error-message">
+            {errorMessage.confirmSignup}
+          </span>
+        )}
+        {successMessage?.confirmSignup && (
+          <MessageSuccess>{successMessage.confirmSignup}</MessageSuccess>
         )}
       </form>
     </div>

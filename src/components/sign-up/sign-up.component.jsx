@@ -9,12 +9,13 @@ import useForm from "../../hooks/useForm";
 
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
+import MessageSuccess from "../message-success/message-success.component";
 
 import "./sign-up.styles.scss";
 
 const SignUp = () => {
-  const errorMessage = useSelector((state) => state.user.error);
-
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+  const successMessage = useSelector((state) => state.user.successMessage);
   const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "", password: "", password2: "" },
     validate,
@@ -59,8 +60,11 @@ const SignUp = () => {
               Go to confirm account
             </Link>
           </div>
-          {errorMessage && (
-            <span className="form-error-message">{errorMessage}</span>
+          {errorMessage?.signup && (
+            <span className="form-error-message">{errorMessage.signup}</span>
+          )}
+          {successMessage?.signup && (
+            <MessageSuccess>{successMessage.signup}</MessageSuccess>
           )}
         </form>
       </div>

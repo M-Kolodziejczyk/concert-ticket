@@ -2,7 +2,8 @@ import UserActionTypes from "./user.types";
 
 const INITIAL_STATE = {
   currentUser: null,
-  error: null,
+  errorMessage: {},
+  successMessage: {},
   pushRoute: "",
 };
 
@@ -12,23 +13,26 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         pushRoute: "/",
+        errorMessage: {},
+        successMessage: { signup: "You have signed up successfully" },
       };
     case UserActionTypes.SIGN_UP_FAILURE:
       return {
         ...state,
-        error: action.payload.message,
+        errorMessage: { signup: action.payload.message },
       };
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
         pushRoute: "/",
         currentUser: action.payload,
-        error: null,
+        errorMessage: {},
+        successMessage: { signup: "You have signed in successfully" },
       };
     case UserActionTypes.SIGN_IN_FAILURE:
       return {
         ...state,
-        error: action.payload.message,
+        errorMessage: { signin: action.payload.message },
       };
     default:
       return state;

@@ -3,18 +3,21 @@ import { useSelector } from "react-redux";
 import validate from "../../validators/resend-code";
 
 import useForm from "../../hooks/useForm";
+
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
+import MessageSuccess from "../message-success/message-success.component";
 
 import "./resend-code.styles.scss";
 
 const ResendCode = () => {
-  const errorMessage = useSelector((state) => state.user.error);
-
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+  const successMessage = useSelector((state) => state.user.successMessage);
   const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "" },
     validate
   );
+
   return (
     <div className="resend">
       <h2>Resend confirm code</h2>
@@ -32,8 +35,11 @@ const ResendCode = () => {
             Resend Code
           </CustomButton>
         </div>
-        {errorMessage && (
-          <span className="form-error-message">{errorMessage}</span>
+        {errorMessage.resendCode && (
+          <span className="form-error-message">{errorMessage.resendCode}</span>
+        )}
+        {successMessage?.resendCode && (
+          <MessageSuccess>{successMessage.resendCode}</MessageSuccess>
         )}
       </form>
     </div>
