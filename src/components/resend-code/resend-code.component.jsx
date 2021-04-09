@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import validate from "../../validators/resend-code";
+import { resendCodeStart } from "../../redux/user/user.actions";
 
 import useForm from "../../hooks/useForm";
 
@@ -16,7 +17,8 @@ const ResendCode = () => {
   const successMessage = useSelector((state) => state.user.successMessage);
   const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "" },
-    validate
+    validate,
+    resendCodeStart
   );
 
   return (

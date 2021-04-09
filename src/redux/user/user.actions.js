@@ -46,3 +46,17 @@ export const signInFailure = (error) => ({
   type: UserActionTypes.SIGN_IN_FAILURE,
   payload: error,
 });
+
+export const resendCodeStart = (email) => ({
+  type: UserActionTypes.RESEND_CODE_START,
+  payload: email,
+});
+
+export const resendCodeSuccess = () => ({
+  type: UserActionTypes.RESEND_CODE_SUCCESS,
+});
+
+export const resendCodeFailure = (error) => ({
+  type: UserActionTypes.RESEND_CODE_FAILURE,
+  payload: error,
+});

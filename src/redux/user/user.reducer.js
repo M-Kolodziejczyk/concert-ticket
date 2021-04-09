@@ -46,6 +46,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: { signin: action.payload.message },
       };
+    case UserActionTypes.RESEND_CODE_SUCCESS:
+      return {
+        ...state,
+        successMessage: { resendCode: action.payload },
+        errorMessage: {},
+      };
+    case UserActionTypes.RESEND_CODE_FAILURE:
+      return {
+        ...state,
+        errorMessage: { resendCode: action.payload.message },
+        successMessage: {},
+      };
     default:
       return state;
   }

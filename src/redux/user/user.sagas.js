@@ -10,6 +10,8 @@ import {
   signUpConfirmFailure,
   signInSuccess,
   signInFailure,
+  resendCodeSuccess,
+  resendCodeFailure,
 } from "./user.actions";
 
 export function* signUp({ payload: { email, password } }) {
@@ -57,10 +59,24 @@ export function* onEmailSignInstart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, emailSignIn);
 }
 
+export function* resendCode({ payload: { email } }) {
+  try {
+    yield Auth.resendSignUp(email);
+    yield put(resendCodeSuccess());
+  } catch (error) {
+    yield put(resendCodeFailure(error));
+  }
+}
+
+export function* onResendCodeStart() {
+  yield takeLatest(UserActionTypes.RESEND_CODE_START, resendCode);
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
     call(onEmailSignInstart),
     call(onSignUpConfirmStart),
+    call(onResendCodeStart),
   ]);
 }
