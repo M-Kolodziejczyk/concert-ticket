@@ -2,6 +2,7 @@ import UserActionTypes from "./user.types";
 
 const INITIAL_STATE = {
   currentUser: null,
+  userLoading: true,
   isLogged: false,
   errorMessage: {},
   successMessage: {},
@@ -42,12 +43,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
         errorMessage: {},
         successMessage: { signin: "You have signed in successfully" },
         isLogged: true,
+        userLoading: false,
       };
     case UserActionTypes.SIGN_IN_FAILURE:
       return {
         ...state,
         errorMessage: { signin: action.payload.message },
         isLogged: false,
+        userLoading: false,
       };
     case UserActionTypes.RESEND_CODE_SUCCESS:
       return {

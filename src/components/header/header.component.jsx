@@ -17,6 +17,9 @@ const Header = () => (
       <Link to="/concerts" className="options__link">
         Concerts
       </Link>
+      <Link to="/user" className="options__link">
+        User
+      </Link>
     </div>
     <div className="auth__container">
       <div className="auth__link">
