@@ -1,5 +1,11 @@
 import UserActionTypes from "./user.types";
 
+export const loadUserStart = () => {
+  return {
+    type: UserActionTypes.LOAD_USER_START,
+  };
+};
+
 export const signUpStart = (userCredentials) => {
   return {
     type: UserActionTypes.SIGN_UP_START,

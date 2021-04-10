@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loadUserStart } from "./redux/user/user.actions";
 
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -10,6 +12,12 @@ import UserPage from "./pages/user-page/user-page.component";
 import "./App.css";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUserStart());
+  }, [dispatch]);
+
   return (
     <div>
       <Header />

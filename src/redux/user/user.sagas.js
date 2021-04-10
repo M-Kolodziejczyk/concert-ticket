@@ -18,6 +18,19 @@ import {
   newPasswordFailure,
 } from "./user.actions";
 
+export function* loadUser() {
+  try {
+    const user = yield Auth.currentAuthenticatedUser();
+    yield put(signInSuccess(user.attributes));
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+export function* onLoadUserStart() {
+  yield takeLatest(UserActionTypes.LOAD_USER_START, loadUser);
+}
+
 export function* signUp({ payload: { email, password } }) {
   try {
     yield Auth.signUp({
@@ -110,5 +123,6 @@ export function* userSagas() {
     call(onResendCodeStart),
     call(onForgotPasswordStart),
     call(onNewPasswordStart),
+    call(onLoadUserStart),
   ]);
 }
