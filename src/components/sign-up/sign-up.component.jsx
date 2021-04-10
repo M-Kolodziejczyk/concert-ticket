@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { signUpStart } from "../../redux/user/user.actions";
 
-import validate from "../../validators/signupFormValidationRules";
+import validate from "../../validators/sign-up";
 
 import useForm from "../../hooks/useForm";
 

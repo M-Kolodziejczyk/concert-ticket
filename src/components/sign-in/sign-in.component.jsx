@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { emailSignInStart } from "../../redux/user/user.actions";
 
-import validate from "../../validators/SigninFormValidationRules";
+import validate from "../../validators/sign-in";
 
 import useForm from "../../hooks/useForm";
 
