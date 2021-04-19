@@ -96,6 +96,21 @@ const userReducer = (state = INITIAL_STATE, action) => {
         },
         successMessage: {},
       };
+    case UserActionTypes.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+        errorMessage: {},
+        successMessage: { signout: "Successfully signed out" },
+        isLogged: false,
+        userLoading: false,
+      };
+    case UserActionTypes.SIGN_OUT_FAILURE:
+      return {
+        ...state,
+        errorMessage: { signout: action.payload.message },
+        successMessage: {},
+      };
     default:
       return state;
   }

@@ -98,3 +98,16 @@ export const newPasswordFailure = (error) => ({
   type: UserActionTypes.NEW_PASSWORD_FAILURE,
   payload: error,
 });
+
+export const signOutStart = () => ({
+  type: UserActionTypes.SIGN_OUT_START,
+});
+
+export const signOutSuccess = () => ({
+  type: UserActionTypes.SIGN_OUT_SUCCESS,
+});
+
+export const signOutFailure = (error) => ({
+  type: UserActionTypes.signOutFailure,
+  payload: error,
+});

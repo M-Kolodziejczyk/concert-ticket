@@ -16,6 +16,8 @@ import {
   forgotPasswordFailure,
   newPasswordSuccess,
   newPasswordFailure,
+  signOutSuccess,
+  signOutFailure,
 } from "./user.actions";
 
 export function* loadUser() {
@@ -129,6 +131,19 @@ export function* onNewPasswordStart() {
   yield takeLatest(UserActionTypes.NEW_PASSWORD_START, newPassword);
 }
 
+export function* signOut() {
+  try {
+    yield Auth.signOut();
+    yield put(signOutSuccess());
+  } catch (error) {
+    yield put(signOutFailure(error));
+  }
+}
+
+export function* onSignOut() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
@@ -139,5 +154,6 @@ export function* userSagas() {
     call(onForgotPasswordStart),
     call(onNewPasswordStart),
     call(onLoadUserStart),
+    call(onSignOut),
   ]);
 }
