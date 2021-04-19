@@ -1,7 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { emailSignInStart } from "../../redux/user/user.actions";
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../redux/user/user.actions";
 
 import validate from "../../validators/sign-in";
 
@@ -17,11 +20,16 @@ import "./sign-in.styles.scss";
 const SignIn = () => {
   const errorMessage = useSelector((state) => state.user.errorMessage);
   const successMessage = useSelector((state) => state.user.successMessage);
+  const dispatch = useDispatch();
   const { handleChange, handleSubmit, values, errors } = useForm(
     { email: "", password: "" },
     validate,
     emailSignInStart
   );
+
+  const handleGoogleStart = () => {
+    dispatch(googleSignInStart());
+  };
 
   return (
     <div className="signinPage">
@@ -48,9 +56,12 @@ const SignIn = () => {
           <Link className="form__link" to="/forgot-password">
             Forgot password?
           </Link>
-          <div className="form__group">
+          <div className="form__btnGroup">
             <CustomButton type="submit" name="submit">
               Signin
+            </CustomButton>
+            <CustomButton type="button" isGoogleBtn onClick={handleGoogleStart}>
+              Sign in with Google
             </CustomButton>
           </div>
           {errorMessage?.signin && (

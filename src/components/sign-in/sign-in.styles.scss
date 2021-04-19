@@ -20,5 +20,10 @@
         color: grey;
       }
     }
+
+    .form__btnGroup {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }

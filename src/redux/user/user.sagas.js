@@ -76,6 +76,20 @@ export function* onEmailSignInstart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, emailSignIn);
 }
 
+export function* googleSignIn() {
+  try {
+    yield Auth.federatedSignIn({ provider: "Google" });
+    const user = yield Auth.currentAuthenticatedUser();
+    yield put(signInSuccess(user.attributes));
+  } catch (error) {
+    yield put(signInFailure(error));
+  }
+}
+
+export function* onGoogleSignIn() {
+  yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, googleSignIn);
+}
+
 export function* resendCode({ payload: { email } }) {
   try {
     yield Auth.resendSignUp(email);
@@ -119,6 +133,7 @@ export function* userSagas() {
   yield all([
     call(onSignUpStart),
     call(onEmailSignInstart),
+    call(onGoogleSignIn),
     call(onSignUpConfirmStart),
     call(onResendCodeStart),
     call(onForgotPasswordStart),

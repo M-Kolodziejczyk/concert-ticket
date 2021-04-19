@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loadUserStart } from "./redux/user/user.actions";
 
 import PrivateRoute from "./components/private-route/private-route";
@@ -16,7 +16,6 @@ import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLogged = useSelector((state) => state.user.isLogged);
 
   useEffect(() => {
     dispatch(loadUserStart());
