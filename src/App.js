@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { loadUserStart } from "./redux/user/user.actions";
 
 import PrivateRoute from "./components/private-route/private-route";
@@ -16,6 +16,7 @@ import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
+  const isLogged = useSelector((state) => state.user.isLogged);
 
   useEffect(() => {
     dispatch(loadUserStart());
@@ -26,7 +27,9 @@ const App = () => {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/signin" component={SignInSignUpPage} />
+        <Route exact path="/signin">
+          {isLogged ? <Redirect to="/" /> : <SignInSignUpPage />}
+        </Route>
         <Route exact path="/confirm-account" component={ConfirmSignUpPage} />
         <Route
           exact
