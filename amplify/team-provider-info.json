@@ -32,6 +32,12 @@
     "categories": {
       "auth": {
         "concertticket08f3b569": {}
+      },
+      "function": {
+        "concertTicketPostConfirm": {
+          "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
+          "s3Key": "amplify-builds/concertTicketPostConfirm-3232316562466f794859-build.zip"
+        }
       }
     }
   }
