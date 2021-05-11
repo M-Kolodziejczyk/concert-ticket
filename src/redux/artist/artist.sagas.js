@@ -1,12 +1,20 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
+import { API } from "aws-amplify";
+import { Auth } from "aws-amplify";
+import * as mutations from "../../api/mutations";
 
 import ArtistActionTypes from "./artist.types";
 
 import { createArtistSuccess, createArtistFailure } from "./artist.actions";
 
-export function* createArtist(artist) {
+export function* createArtist({ payload: artist }) {
   try {
-    yield put(createArtistSuccess());
+    const user = yield Auth.currentAuthenticatedUser();
+    const res = yield API.graphql({
+      query: mutations.createArtist,
+      variables: { input: { ...artist, owner: user.username } },
+    });
+    yield put(createArtistSuccess(res.data.createArtist));
   } catch (error) {
     yield put(createArtistFailure(error));
   }

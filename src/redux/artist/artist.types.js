@@ -1,7 +1,7 @@
-const ActionArtistTypes = {
+const ArtistActionTypes = {
   CREATE_ARTIST_START: "CREATE_ARTIST_START",
   CREATE_ARTIST_SUCCESS: "CREATE_ARTIST_SUCCESS",
   CREATE_ARTIST_FAILURE: "CREATE_ARTIST_FAILURE",
 };
 
-export default ActionArtistTypes;
+export default ArtistActionTypes;
