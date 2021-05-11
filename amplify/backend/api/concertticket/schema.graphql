@@ -1,0 +1,189 @@
+type Concert
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  date: String!
+  venue: String!
+  genres: String!
+  tickets: [Ticket] @connection(keyName: "byConcert", fields: ["id"])
+  bands: [ConcertBandJoin] @connection(keyName: "byConcert", fields: ["id"])
+  artists: [ConcertArtistJoin] @connection(keyName: "byConcert", fields: ["id"])
+}
+
+type Band
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  owner: String
+  name: String!
+  genre: String!
+  members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
+}
+
+type Artist
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  owner: String!
+  name: String!
+  genre: [String!]
+  role: [String!]
+  bands: [ArtistBandJoin] @connection(keyName: "byArtist", fields: ["id"])
+}
+
+type ArtistBandJoin
+  @model(queries: null)
+  @key(name: "byBand", fields: ["bandID", "artistID"])
+  @key(name: "byArtist", fields: ["artistID", "bandID"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "customerID" }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  bandID: ID!
+  artistID: ID!
+  band: Band! @connection(fields: ["bandID"])
+  artist: Artist! @connection(fields: ["artistID"])
+}
+
+type ConcertBandJoin
+  @model(queries: null)
+  @key(name: "byConcert", fields: ["concertID", "bandID"])
+  @key(name: "byBand", fields: ["bandID", "concertID"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "customerID" }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  concertID: ID!
+  bandID: ID!
+  concert: Concert! @connection(fields: ["concertID"])
+  band: Band! @connection(fields: ["bandID"])
+}
+
+type ConcertArtistJoin
+  @model(queries: null)
+  @key(name: "byConcert", fields: ["concertID", "artistID"])
+  @key(name: "byArtist", fields: ["artistID", "concertID"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "customerID" }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  concertID: ID!
+  artistID: ID!
+  concert: Concert! @connection(fields: ["concertID"])
+  artist: Artist! @connection(fields: ["artistID"])
+}
+
+type Ticket
+  @model
+  @key(name: "byConcert", fields: ["concertID"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "customerID" }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  description: String
+  price: String!
+  startDate: String!
+  endDate: String!
+  quantity: Int!
+  amount: String!
+  concertID: ID!
+  concert: Concert @connection(fields: ["concertID"])
+  orders: [TicketOrder] @connection(keyName: "byTicket", fields: ["id"])
+}
+
+type TicketOrder
+  @model
+  @key(name: "byTicket", fields: ["ticketID", "orderID"])
+  @key(name: "byOrder", fields: ["orderID", "ticketID"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "customerID" }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  id: ID!
+  ticketID: ID!
+  orderID: ID!
+  customerID: ID!
+  ticket: Ticket @connection(fields: ["ticketID"])
+  order: Order @connection(fields: ["orderID"])
+}
+
+type Order
+  @model
+  @key(name: "ByCustomerByDate", fields: ["customer", "createdAt"])
+  @key(
+    name: "ByCustomerbyStatusByDate"
+    fields: ["customer", "status", "createdAt"]
+  )
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "customerID" }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  id: ID!
+  customer: String!
+  customerID: ID!
+  status: String!
+  createdAt: String!
+  tickets: [TicketOrder] @connection(keyName: "byOrder", fields: ["id"])
+}
+
+type Customer
+  @model
+  @key(fields: ["email"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "id" }
+      { allow: groups, groups: ["Admin"] }
+    ]
+  ) {
+  id: String!
+  name: String
+  email: String!
+  ordersByDate: [Order] @connection(keyName: "ByCustomerByDate", fields: ["id"])
+  ordersByStatus: [Order]
+    @connection(keyName: "ByCustomerbyStatusByDate", fields: ["id"])
+}
