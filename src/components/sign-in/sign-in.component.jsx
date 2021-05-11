@@ -35,7 +35,7 @@ const SignIn = () => {
     <div className="signinPage">
       <h2>I already have an account</h2>
       <span className="span">Sign in with your email and password</span>
-      <div className="container">
+      <div className="signin__container">
         <form className="form" onSubmit={handleSubmit}>
           <FormInput
             name="email"
