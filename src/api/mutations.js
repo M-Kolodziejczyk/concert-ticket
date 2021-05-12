@@ -1,6 +1,120 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        identityId
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        identityId
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        identityId
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
 export const createConcert = /* GraphQL */ `
   mutation CreateConcert(
     $input: CreateConcertInput!
@@ -8,12 +122,14 @@ export const createConcert = /* GraphQL */ `
   ) {
     createConcert(input: $input, condition: $condition) {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -33,12 +149,14 @@ export const updateConcert = /* GraphQL */ `
   ) {
     updateConcert(input: $input, condition: $condition) {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -58,12 +176,14 @@ export const deleteConcert = /* GraphQL */ `
   ) {
     deleteConcert(input: $input, condition: $condition) {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -83,11 +203,12 @@ export const createBand = /* GraphQL */ `
   ) {
     createBand(input: $input, condition: $condition) {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -101,11 +222,12 @@ export const updateBand = /* GraphQL */ `
   ) {
     updateBand(input: $input, condition: $condition) {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -119,11 +241,12 @@ export const deleteBand = /* GraphQL */ `
   ) {
     deleteBand(input: $input, condition: $condition) {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -137,12 +260,13 @@ export const createArtist = /* GraphQL */ `
   ) {
     createArtist(input: $input, condition: $condition) {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -156,12 +280,13 @@ export const updateArtist = /* GraphQL */ `
   ) {
     updateArtist(input: $input, condition: $condition) {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -175,12 +300,13 @@ export const deleteArtist = /* GraphQL */ `
   ) {
     deleteArtist(input: $input, condition: $condition) {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -200,22 +326,24 @@ export const createArtistBandJoin = /* GraphQL */ `
       updatedAt
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -232,22 +360,24 @@ export const updateArtistBandJoin = /* GraphQL */ `
       updatedAt
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -264,22 +394,24 @@ export const deleteArtistBandJoin = /* GraphQL */ `
       updatedAt
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -296,22 +428,25 @@ export const createConcertBandJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -328,22 +463,25 @@ export const updateConcertBandJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -360,22 +498,25 @@ export const deleteConcertBandJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -392,23 +533,26 @@ export const createConcertArtistJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -425,23 +569,26 @@ export const updateConcertArtistJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -458,23 +605,26 @@ export const deleteConcertArtistJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -499,14 +649,16 @@ export const createTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -531,14 +683,16 @@ export const updateTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -563,14 +717,16 @@ export const deleteTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -583,11 +739,11 @@ export const createTicketOrder = /* GraphQL */ `
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -605,7 +761,7 @@ export const createTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
@@ -619,11 +775,11 @@ export const updateTicketOrder = /* GraphQL */ `
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -641,7 +797,7 @@ export const updateTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
@@ -655,11 +811,11 @@ export const deleteTicketOrder = /* GraphQL */ `
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -677,7 +833,7 @@ export const deleteTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
@@ -690,7 +846,7 @@ export const createOrder = /* GraphQL */ `
     createOrder(input: $input, condition: $condition) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
@@ -708,7 +864,7 @@ export const updateOrder = /* GraphQL */ `
     updateOrder(input: $input, condition: $condition) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
@@ -726,72 +882,12 @@ export const deleteOrder = /* GraphQL */ `
     deleteOrder(input: $input, condition: $condition) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
         nextToken
       }
-      updatedAt
-    }
-  }
-`;
-export const createCustomer = /* GraphQL */ `
-  mutation CreateCustomer(
-    $input: CreateCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    createCustomer(input: $input, condition: $condition) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateCustomer = /* GraphQL */ `
-  mutation UpdateCustomer(
-    $input: UpdateCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    updateCustomer(input: $input, condition: $condition) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteCustomer = /* GraphQL */ `
-  mutation DeleteCustomer(
-    $input: DeleteCustomerInput!
-    $condition: ModelCustomerConditionInput
-  ) {
-    deleteCustomer(input: $input, condition: $condition) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
       updatedAt
     }
   }

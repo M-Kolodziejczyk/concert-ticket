@@ -25,12 +25,13 @@ export const onCreateUser = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
     }
   }
@@ -59,12 +60,13 @@ export const onUpdateUser = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
     }
   }
@@ -93,12 +95,13 @@ export const onDeleteUser = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
     }
   }
@@ -371,12 +374,13 @@ export const onCreateArtist = /* GraphQL */ `
   subscription OnCreateArtist {
     onCreateArtist {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -387,12 +391,13 @@ export const onUpdateArtist = /* GraphQL */ `
   subscription OnUpdateArtist {
     onUpdateArtist {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -403,12 +408,13 @@ export const onDeleteArtist = /* GraphQL */ `
   subscription OnDeleteArtist {
     onDeleteArtist {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -434,12 +440,13 @@ export const onCreateArtistBandJoin = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       owner
     }
@@ -464,12 +471,13 @@ export const onUpdateArtistBandJoin = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       owner
     }
@@ -494,12 +502,13 @@ export const onDeleteArtistBandJoin = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       owner
     }
@@ -622,12 +631,13 @@ export const onCreateConcertArtistJoin = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       owner
     }
@@ -654,12 +664,13 @@ export const onUpdateConcertArtistJoin = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       owner
     }
@@ -686,12 +697,13 @@ export const onDeleteConcertArtistJoin = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       owner
     }

@@ -13,16 +13,23 @@ import {
 
 export function* createArtist({ payload: artist }) {
   try {
-    // const userCredentials = yield Auth.currentUserCredentials();
-    const user = yield Auth.currentAuthenticatedUser();
+    const authUser = yield Auth.currentAuthenticatedUser();
+    console.log(authUser.attributes.sub);
     const res = yield API.graphql({
       query: mutations.createArtist,
-      variables: { input: { ...artist, owner: user.username } },
+      variables: { input: { ...artist } },
     });
-    console.log("RES", res);
+    yield API.graphql({
+      query: mutations.updateUser,
+      variables: {
+        input: {
+          id: authUser.attributes.sub,
+          artistID: res.data.createArtist.id,
+        },
+      },
+    });
     yield put(createArtistSuccess(res.data.createArtist));
   } catch (error) {
-    console.log("ERROR: ", error);
     yield put(createArtistFailure(error));
   }
 }
@@ -34,18 +41,17 @@ export function* onCreateArtistStart() {
 export function* uploadArtistImage({ payload: { values, image } }) {
   try {
     const user = yield Auth.currentUserCredentials();
-    console.log(user);
-    console.log(image);
-    console.log(values);
-    const res = yield Storage.put(
-      "69c5f8cb-c485-4293-906d-59b2ca733c60-artist-image",
-      image,
-      {
-        level: "protected",
-        contentType: image.type,
-      }
-    );
-    console.log(res);
+    console.log(user.identityId);
+    // console.log(image);
+    // console.log(values);
+    // const res = yield Storage.put("artist-image", image, {
+    //   level: "protected",
+    //   contentType: image.type,
+    // });
+    // yield API.graphql({
+    //   query: mutations.updateA
+    // })
+    // console.log(res);
     yield put(uploadArttistImageSuccess("success"));
   } catch (error) {
     yield put(uploadArtistImageFailure(error));

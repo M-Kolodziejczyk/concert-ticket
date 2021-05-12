@@ -1,17 +1,72 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        userID
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        email
+        artistID
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getTicketOrder = /* GraphQL */ `
   query GetTicketOrder($id: ID!) {
     getTicketOrder(id: $id) {
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -29,7 +84,7 @@ export const getTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
@@ -45,7 +100,7 @@ export const listTicketOrders = /* GraphQL */ `
         id
         ticketID
         orderID
-        customerID
+        userID
         createdAt
         updatedAt
       }
@@ -58,7 +113,7 @@ export const getOrder = /* GraphQL */ `
     getOrder(id: $id) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
@@ -78,51 +133,8 @@ export const listOrders = /* GraphQL */ `
       items {
         id
         customer
-        customerID
+        userID
         status
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getCustomer = /* GraphQL */ `
-  query GetCustomer($email: String!) {
-    getCustomer(email: $email) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listCustomers = /* GraphQL */ `
-  query ListCustomers(
-    $email: String
-    $filter: ModelCustomerFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listCustomers(
-      email: $email
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        id
-        name
-        email
         createdAt
         updatedAt
       }
@@ -139,12 +151,14 @@ export const listConcerts = /* GraphQL */ `
     listConcerts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -154,12 +168,14 @@ export const getConcert = /* GraphQL */ `
   query GetConcert($id: ID!) {
     getConcert(id: $id) {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -181,11 +197,12 @@ export const listBands = /* GraphQL */ `
     listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -195,11 +212,12 @@ export const getBand = /* GraphQL */ `
   query GetBand($id: ID!) {
     getBand(id: $id) {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -215,12 +233,13 @@ export const listArtists = /* GraphQL */ `
     listArtists(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        owner
+        userID
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -230,12 +249,13 @@ export const getArtist = /* GraphQL */ `
   query GetArtist($id: ID!) {
     getArtist(id: $id) {
       id
-      owner
+      userID
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -260,7 +280,7 @@ export const listTickets = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
       nextToken
     }
@@ -284,14 +304,16 @@ export const getTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;

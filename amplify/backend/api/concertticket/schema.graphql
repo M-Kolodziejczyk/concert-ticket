@@ -64,7 +64,7 @@ type Artist
     ]
   ) {
   id: ID!
-  owner: String!
+  identityId: String
   name: String!
   genre: [String!]
   role: [String!]

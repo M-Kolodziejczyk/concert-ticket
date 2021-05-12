@@ -25,12 +25,13 @@ export const getUser = /* GraphQL */ `
       }
       artist {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
     }
   }
@@ -232,12 +233,13 @@ export const listArtists = /* GraphQL */ `
     listArtists(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        owner
+        identityId
         name
         genre
         role
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -247,12 +249,13 @@ export const getArtist = /* GraphQL */ `
   query GetArtist($id: ID!) {
     getArtist(id: $id) {
       id
-      owner
+      identityId
       name
       genre
       role
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
