@@ -18,3 +18,22 @@ export const createArtistFailure = () => {
     type: ArtistActionTypes.CREATE_ARTIST_FAILURE,
   };
 };
+
+export const uploadArtistImageStart = (values, image) => {
+  return {
+    type: ArtistActionTypes.UPLOAD_ARTIST_IMAGE_START,
+    payload: { values, image },
+  };
+};
+
+export const uploadArttistImageSuccess = () => {
+  return {
+    type: ArtistActionTypes.UPLOAD_ARTIST_IMAGE_SUCCESS,
+  };
+};
+
+export const uploadArtistImageFailure = () => {
+  return {
+    type: ArtistActionTypes.UPLOAD_ARTIST_IMAGE_FAILURE,
+  };
+};

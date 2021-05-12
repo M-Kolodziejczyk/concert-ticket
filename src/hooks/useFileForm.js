@@ -27,7 +27,6 @@ const useFileForm = (bucketInfo, format, callback) => {
     }
   };
 
-  console.log("values", values);
   const handleSubmitImage = (e) => {
     e.preventDefault();
     if (!imageErrors && validate) {

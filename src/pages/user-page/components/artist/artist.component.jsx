@@ -1,5 +1,8 @@
 import React from "react";
-import { createArtistStart } from "../../../../redux/artist/artist.actions";
+import {
+  createArtistStart,
+  uploadArtistImageStart,
+} from "../../../../redux/artist/artist.actions";
 import { useSelector } from "react-redux";
 import validate from "../../../../validators/artist";
 import awsExports from "../../../../aws-exports";
@@ -35,8 +38,8 @@ const Artist = () => {
         region: awsExports.aws_user_files_s3_bucket_region,
         key: "public/",
       },
-      ["image/jpeg"]
-      // () => console.log("hello")
+      ["image/jpeg"],
+      uploadArtistImageStart
     );
 
   return (
