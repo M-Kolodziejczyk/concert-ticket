@@ -2,8 +2,10 @@ import React from "react";
 import { createArtistStart } from "../../../../redux/artist/artist.actions";
 import { useSelector } from "react-redux";
 import validate from "../../../../validators/artist";
+import awsExports from "../../../../aws-exports";
 
 import useForm from "../../../../hooks/useForm.js";
+import useFileForm from "../../../../hooks/useFileForm";
 
 import CustomButton from "../../../../components/custom-button/custom-button.component";
 import FormInput from "../../../../components/form-input/form-input.component";
@@ -26,8 +28,34 @@ const Artist = () => {
     createArtistStart
   );
 
+  const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
+    useFileForm(
+      {
+        bucket: awsExports.aws_user_files_s3_bucket,
+        region: awsExports.aws_user_files_s3_bucket_region,
+        key: "public/",
+      },
+      ["image/jpeg"]
+      // () => console.log("hello")
+    );
+
   return (
     <div className="artist-tab">
+      <form onSubmit={handleSubmitImage}>
+        <input
+          name="img"
+          type="file"
+          label="Select image"
+          onChange={handleChangeImage}
+        />
+        {imageErrors && <div className="imageErrors">{imageErrors}</div>}
+        {imageUrl && <img src={imageUrl} alt="artist img" />}
+        <div className="form__button">
+          <CustomButton type="submit" name="submit">
+            Upload Image
+          </CustomButton>
+        </div>
+      </form>
       <form className="form" onSubmit={handleSubmit}>
         <FormInput
           name="name"

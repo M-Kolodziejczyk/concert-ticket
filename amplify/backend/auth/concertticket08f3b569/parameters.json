@@ -1,6 +1,6 @@
 {
     "identityPoolName": "concertticket08f3b569_identitypool_08f3b569",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "concer08f3b569",
     "userPoolName": "concertticket08f3b569_userpool_08f3b569",
     "autoVerifiedAttributes": [
