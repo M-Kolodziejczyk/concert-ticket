@@ -1,7 +1,7 @@
 /* Amplify Params - DO NOT EDIT
-	API_CONCERTTICKET_CUSTOMERTABLE_ARN
-	API_CONCERTTICKET_CUSTOMERTABLE_NAME
 	API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT
+	API_CONCERTTICKET_USERTABLE_ARN
+	API_CONCERTTICKET_USERTABLE_NAME
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
@@ -12,7 +12,7 @@ var ddb = new aws.DynamoDB({ apiVersion: "2012-10-08" });
 exports.handler = async (event, context) => {
   let date = new Date();
 
-  const tableName = process.env.API_CONCERTTICKET_CUSTOMERTABLE_NAME;
+  const tableName = process.env.API_CONCERTTICKET_USERTABLE_NAME;
   const region = process.env.REGION;
 
   aws.config.update({ region: region });
@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
       Item: {
         id: { S: event.request.userAttributes.sub },
         email: { S: event.request.userAttributes.email },
-        __typname: { S: "Customer" },
+        __typname: { S: "User" },
         createdAt: { S: date.toISOString() },
       },
       TableName: tableName,

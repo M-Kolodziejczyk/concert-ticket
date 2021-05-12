@@ -1,17 +1,119 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($owner: String) {
+    onCreateUser(owner: $owner) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        owner
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser($owner: String) {
+    onUpdateUser(owner: $owner) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        owner
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($owner: String) {
+    onDeleteUser(owner: $owner) {
+      id
+      name
+      email
+      artistID
+      ordersByDate {
+        nextToken
+      }
+      ordersByStatus {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        nextToken
+      }
+      bands {
+        nextToken
+      }
+      artist {
+        id
+        owner
+        name
+        genre
+        role
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
 export const onCreateTicketOrder = /* GraphQL */ `
-  subscription OnCreateTicketOrder($customerID: String) {
-    onCreateTicketOrder(customerID: $customerID) {
+  subscription OnCreateTicketOrder($userID: String) {
+    onCreateTicketOrder(userID: $userID) {
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -29,22 +131,22 @@ export const onCreateTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
 `;
 export const onUpdateTicketOrder = /* GraphQL */ `
-  subscription OnUpdateTicketOrder($customerID: String) {
-    onUpdateTicketOrder(customerID: $customerID) {
+  subscription OnUpdateTicketOrder($userID: String) {
+    onUpdateTicketOrder(userID: $userID) {
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -62,22 +164,22 @@ export const onUpdateTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
 `;
 export const onDeleteTicketOrder = /* GraphQL */ `
-  subscription OnDeleteTicketOrder($customerID: String) {
-    onDeleteTicketOrder(customerID: $customerID) {
+  subscription OnDeleteTicketOrder($userID: String) {
+    onDeleteTicketOrder(userID: $userID) {
       id
       ticketID
       orderID
-      customerID
+      userID
       order {
         id
         customer
-        customerID
+        userID
         status
         createdAt
         updatedAt
@@ -95,17 +197,17 @@ export const onDeleteTicketOrder = /* GraphQL */ `
         concertID
         createdAt
         updatedAt
-        customerID
+        owner
       }
     }
   }
 `;
 export const onCreateOrder = /* GraphQL */ `
-  subscription OnCreateOrder($customerID: String) {
-    onCreateOrder(customerID: $customerID) {
+  subscription OnCreateOrder($userID: String) {
+    onCreateOrder(userID: $userID) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
@@ -116,11 +218,11 @@ export const onCreateOrder = /* GraphQL */ `
   }
 `;
 export const onUpdateOrder = /* GraphQL */ `
-  subscription OnUpdateOrder($customerID: String) {
-    onUpdateOrder(customerID: $customerID) {
+  subscription OnUpdateOrder($userID: String) {
+    onUpdateOrder(userID: $userID) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
@@ -131,11 +233,11 @@ export const onUpdateOrder = /* GraphQL */ `
   }
 `;
 export const onDeleteOrder = /* GraphQL */ `
-  subscription OnDeleteOrder($customerID: String) {
-    onDeleteOrder(customerID: $customerID) {
+  subscription OnDeleteOrder($userID: String) {
+    onDeleteOrder(userID: $userID) {
       id
       customer
-      customerID
+      userID
       status
       createdAt
       tickets {
@@ -145,67 +247,18 @@ export const onDeleteOrder = /* GraphQL */ `
     }
   }
 `;
-export const onCreateCustomer = /* GraphQL */ `
-  subscription OnCreateCustomer($id: String) {
-    onCreateCustomer(id: $id) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateCustomer = /* GraphQL */ `
-  subscription OnUpdateCustomer($id: String) {
-    onUpdateCustomer(id: $id) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteCustomer = /* GraphQL */ `
-  subscription OnDeleteCustomer($id: String) {
-    onDeleteCustomer(id: $id) {
-      id
-      name
-      email
-      ordersByDate {
-        nextToken
-      }
-      ordersByStatus {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateConcert = /* GraphQL */ `
   subscription OnCreateConcert {
     onCreateConcert {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -222,12 +275,14 @@ export const onUpdateConcert = /* GraphQL */ `
   subscription OnUpdateConcert {
     onUpdateConcert {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -244,12 +299,14 @@ export const onDeleteConcert = /* GraphQL */ `
   subscription OnDeleteConcert {
     onDeleteConcert {
       id
+      userID
       name
       date
       venue
       genres
       createdAt
       updatedAt
+      owner
       bands {
         nextToken
       }
@@ -266,11 +323,12 @@ export const onCreateBand = /* GraphQL */ `
   subscription OnCreateBand {
     onCreateBand {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -281,11 +339,12 @@ export const onUpdateBand = /* GraphQL */ `
   subscription OnUpdateBand {
     onUpdateBand {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -296,11 +355,12 @@ export const onDeleteBand = /* GraphQL */ `
   subscription OnDeleteBand {
     onDeleteBand {
       id
-      owner
+      userID
       name
       genre
       createdAt
       updatedAt
+      owner
       members {
         nextToken
       }
@@ -365,11 +425,12 @@ export const onCreateArtistBandJoin = /* GraphQL */ `
       updatedAt
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
@@ -380,7 +441,7 @@ export const onCreateArtistBandJoin = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      customerID
+      owner
     }
   }
 `;
@@ -394,11 +455,12 @@ export const onUpdateArtistBandJoin = /* GraphQL */ `
       updatedAt
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
@@ -409,7 +471,7 @@ export const onUpdateArtistBandJoin = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      customerID
+      owner
     }
   }
 `;
@@ -423,11 +485,12 @@ export const onDeleteArtistBandJoin = /* GraphQL */ `
       updatedAt
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
@@ -438,7 +501,7 @@ export const onDeleteArtistBandJoin = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      customerID
+      owner
     }
   }
 `;
@@ -452,22 +515,25 @@ export const onCreateConcertBandJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -481,22 +547,25 @@ export const onUpdateConcertBandJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -510,22 +579,25 @@ export const onDeleteConcertBandJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       band {
         id
-        owner
+        userID
         name
         genre
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -539,12 +611,14 @@ export const onCreateConcertArtistJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
@@ -555,7 +629,7 @@ export const onCreateConcertArtistJoin = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      customerID
+      owner
     }
   }
 `;
@@ -569,12 +643,14 @@ export const onUpdateConcertArtistJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
@@ -585,7 +661,7 @@ export const onUpdateConcertArtistJoin = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      customerID
+      owner
     }
   }
 `;
@@ -599,12 +675,14 @@ export const onDeleteConcertArtistJoin = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
       artist {
         id
@@ -615,7 +693,7 @@ export const onDeleteConcertArtistJoin = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      customerID
+      owner
     }
   }
 `;
@@ -637,14 +715,16 @@ export const onCreateTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -666,14 +746,16 @@ export const onUpdateTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;
@@ -695,14 +777,16 @@ export const onDeleteTicket = /* GraphQL */ `
       updatedAt
       concert {
         id
+        userID
         name
         date
         venue
         genres
         createdAt
         updatedAt
+        owner
       }
-      customerID
+      owner
     }
   }
 `;

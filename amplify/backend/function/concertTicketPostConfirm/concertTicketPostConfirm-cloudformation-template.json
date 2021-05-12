@@ -74,12 +74,15 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_CONCERTTICKET_CUSTOMERTABLE_NAME": {
+            "API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiconcertticketGraphQLAPIIdOutput"
+            },
+            "API_CONCERTTICKET_USERTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:CustomerTable:Name"
+                "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
               }
             },
-            "API_CONCERTTICKET_CUSTOMERTABLE_ARN": {
+            "API_CONCERTTICKET_USERTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -94,14 +97,11 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:CustomerTable:Name"
+                      "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                     }
                   }
                 ]
               ]
-            },
-            "API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apiconcertticketGraphQLAPIIdOutput"
             }
           }
         },
@@ -244,7 +244,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:CustomerTable:Name"
+                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       }
                     ]
@@ -265,7 +265,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:CustomerTable:Name"
+                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       },
                       "/index/*"

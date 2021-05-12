@@ -1,13 +1,31 @@
+type User
+  @model
+  @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }]) {
+  id: ID!
+  name: String
+  email: String!
+  artistID: ID
+  artist: Artist @connection(fields: ["artistID"])
+  bands: [Band] @connection(keyName: "byUser", fields: ["id"])
+  concerts: [Concert] @connection(keyName: "byUser", fields: ["id"])
+  ordersByDate: [Order] @connection(keyName: "ByUserByDate", fields: ["id"])
+  ordersByStatus: [Order]
+    @connection(keyName: "ByUserbyStatusByDate", fields: ["id"])
+}
+
 type Concert
   @model
+  @key(name: "byUser", fields: ["userID"])
   @auth(
     rules: [
+      { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
+  userID: ID!
   name: String!
   date: String!
   venue: String!
@@ -19,6 +37,7 @@ type Concert
 
 type Band
   @model
+  @key(name: "byUser", fields: ["userID"])
   @auth(
     rules: [
       { allow: owner }
@@ -28,7 +47,7 @@ type Band
     ]
   ) {
   id: ID!
-  owner: String
+  userID: ID!
   name: String!
   genre: String!
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
@@ -58,7 +77,7 @@ type ArtistBandJoin
   @key(name: "byArtist", fields: ["artistID", "bandID"])
   @auth(
     rules: [
-      { allow: owner, ownerField: "customerID" }
+      { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
@@ -77,7 +96,7 @@ type ConcertBandJoin
   @key(name: "byBand", fields: ["bandID", "concertID"])
   @auth(
     rules: [
-      { allow: owner, ownerField: "customerID" }
+      { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
@@ -96,7 +115,7 @@ type ConcertArtistJoin
   @key(name: "byArtist", fields: ["artistID", "concertID"])
   @auth(
     rules: [
-      { allow: owner, ownerField: "customerID" }
+      { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
@@ -114,7 +133,7 @@ type Ticket
   @key(name: "byConcert", fields: ["concertID"])
   @auth(
     rules: [
-      { allow: owner, ownerField: "customerID" }
+      { allow: owner }
       { allow: groups, groups: ["Admin"] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
@@ -138,52 +157,32 @@ type TicketOrder
   @key(name: "byOrder", fields: ["orderID", "ticketID"])
   @auth(
     rules: [
-      { allow: owner, ownerField: "customerID" }
+      { allow: owner, ownerField: "userID" }
       { allow: groups, groups: ["Admin"] }
     ]
   ) {
   id: ID!
   ticketID: ID!
   orderID: ID!
-  customerID: ID!
+  userID: ID!
   ticket: Ticket @connection(fields: ["ticketID"])
   order: Order @connection(fields: ["orderID"])
 }
 
 type Order
   @model
-  @key(name: "ByCustomerByDate", fields: ["customer", "createdAt"])
-  @key(
-    name: "ByCustomerbyStatusByDate"
-    fields: ["customer", "status", "createdAt"]
-  )
+  @key(name: "ByUserByDate", fields: ["userID", "createdAt"])
+  @key(name: "ByUserbyStatusByDate", fields: ["userID", "status", "createdAt"])
   @auth(
     rules: [
-      { allow: owner, ownerField: "customerID" }
+      { allow: owner, ownerField: "userID" }
       { allow: groups, groups: ["Admin"] }
     ]
   ) {
   id: ID!
   customer: String!
-  customerID: ID!
+  userID: ID!
   status: String!
   createdAt: String!
   tickets: [TicketOrder] @connection(keyName: "byOrder", fields: ["id"])
-}
-
-type Customer
-  @model
-  @key(fields: ["email"])
-  @auth(
-    rules: [
-      { allow: owner, ownerField: "id" }
-      { allow: groups, groups: ["Admin"] }
-    ]
-  ) {
-  id: String!
-  name: String
-  email: String!
-  ordersByDate: [Order] @connection(keyName: "ByCustomerByDate", fields: ["id"])
-  ordersByStatus: [Order]
-    @connection(keyName: "ByCustomerbyStatusByDate", fields: ["id"])
 }
