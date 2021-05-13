@@ -1,5 +1,6 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-import { Auth } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
+import * as queries from "../../api/queries";
 
 import UserActionTypes from "./user.types";
 
@@ -18,6 +19,8 @@ import {
   newPasswordFailure,
   signOutSuccess,
   signOutFailure,
+  getUserSuccess,
+  getUserFailure,
 } from "./user.actions";
 
 export function* loadUser() {
@@ -144,6 +147,25 @@ export function* onSignOut() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
 }
 
+export function* getUser() {
+  try {
+    const authUser = yield Auth.currentAuthenticatedUser();
+    const user = yield API.graphql({
+      query: queries.getUser,
+      variables: {
+        id: authUser.attributes.sub,
+      },
+    });
+    yield put(getUserSuccess(user.data.getUser));
+  } catch (error) {
+    yield put(getUserFailure(error));
+  }
+}
+
+export function* onGetUser() {
+  yield takeLatest(UserActionTypes.GET_USER_START, getUser);
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
@@ -155,5 +177,6 @@ export function* userSagas() {
     call(onNewPasswordStart),
     call(onLoadUserStart),
     call(onSignOut),
+    call(onGetUser),
   ]);
 }

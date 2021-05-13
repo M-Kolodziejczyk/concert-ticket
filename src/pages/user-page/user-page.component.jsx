@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserStart } from "../../redux/user/user.actions";
 
 import Artist from "./components/artist/artist.component";
 
 import "./user-page.styles.scss";
 
 const UserPage = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    dispatch(getUserStart());
+  }, [dispatch]);
+
   return (
     <div className="user-page">
       <h1 className="heading">User Page</h1>
@@ -79,7 +88,7 @@ const UserPage = () => {
             role="tabpanel"
             aria-labelledby="v-pills-profile-tab"
           >
-            <Artist />
+            <Artist artistID={user.artistID} />
           </div>
           <div
             className="tab-pane fade"

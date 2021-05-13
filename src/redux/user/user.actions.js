@@ -111,3 +111,17 @@ export const signOutFailure = (error) => ({
   type: UserActionTypes.signOutFailure,
   payload: error,
 });
+
+export const getUserStart = () => ({
+  type: UserActionTypes.GET_USER_START,
+});
+
+export const getUserSuccess = (user) => ({
+  type: UserActionTypes.GET_USER_SUCCESS,
+  payload: user,
+});
+
+export const getUserFailure = (error) => ({
+  type: UserActionTypes.GET_USER_FAILURE,
+  payload: error,
+});

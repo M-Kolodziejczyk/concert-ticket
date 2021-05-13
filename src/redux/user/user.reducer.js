@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   isLogged: false,
   errorMessage: {},
   successMessage: {},
+  user: {},
   pushRoute: "",
 };
 
@@ -110,6 +111,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: { signout: action.payload.message },
         successMessage: {},
+      };
+    case UserActionTypes.GET_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        errorMessage: {},
+      };
+    case UserActionTypes.GET_USER_FAILURE:
+      return {
+        ...state,
+        user: {},
+        errorMessage: { getUser: "Get user failure" },
       };
     default:
       return state;
