@@ -12,6 +12,7 @@ import useForm from "../../../../hooks/useForm.js";
 import useFileForm from "../../../../hooks/useFileForm";
 
 import CustomButton from "../../../../components/custom-button/custom-button.component";
+import CustomInputButton from "../../../../components/custom-input-button/custom-input-button.component";
 import FormInput from "../../../../components/form-input/form-input.component";
 import SuccessMessage from "../../../../components/success-message/success-message.component";
 import ErrorMessage from "../../../../components/error-message/error-message.component";
@@ -118,21 +119,17 @@ const Artist = (id) => {
         <div className="form-image">
           {imageUrl && <img src={imageUrl} alt="artist img" />}
           <form onSubmit={handleSubmitImage}>
-            <input
-              className="img-input"
-              name="img"
-              type="file"
-              id="file"
+            <CustomInputButton
+              handleChange={handleChangeImage}
               label="Select image"
-              onChange={handleChangeImage}
+              name="img"
             />
-            <label htmlFor="file">Choose image</label>
-            {imageErrors && <div className="imageErrors">{imageErrors}</div>}
             <div className="form__button">
               <CustomButton type="submit" name="submit">
                 Upload Image
               </CustomButton>
             </div>
+            {imageErrors && <div className="imageErrors">{imageErrors}</div>}
           </form>
         </div>
       </div>
