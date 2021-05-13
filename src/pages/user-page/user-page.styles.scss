@@ -1,8 +1,18 @@
 .user-page {
   width: 1320px;
-  margin: 0 auto;
+  margin: 0 auto 300px;
 
   .heading {
     margin-bottom: 5rem;
+  }
+
+  .nav {
+    .nav-link {
+      min-width: 200px;
+    }
+  }
+
+  .tab-content {
+    width: 100%;
   }
 }

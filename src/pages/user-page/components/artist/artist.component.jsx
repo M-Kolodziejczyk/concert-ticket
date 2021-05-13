@@ -56,59 +56,86 @@ const Artist = (id) => {
 
   return (
     <div className="artist-tab">
-      {artistImageUrl && <img src={artistImageUrl} alt="artist img" />}
-      <form onSubmit={handleSubmitImage}>
-        <input
-          name="img"
-          type="file"
-          label="Select image"
-          onChange={handleChangeImage}
-        />
-        {imageErrors && <div className="imageErrors">{imageErrors}</div>}
-        {imageUrl && <img src={imageUrl} alt="artist img" />}
-        <div className="form__button">
-          <CustomButton type="submit" name="submit">
-            Upload Image
-          </CustomButton>
+      <div className="artist-details-container">
+        <div className="details">
+          <div className="group">
+            <p className="name">Name:</p>
+            <p>{artist.name}</p>
+          </div>
+          <div className="group">
+            <p className="name">Genre:</p>
+            <p>{artist.genre}</p>
+          </div>
+          <div className="group">
+            <p className="name">Role:</p>
+            <p>{artist.role}</p>
+          </div>
         </div>
-      </form>
-      <form className="form" onSubmit={handleSubmit}>
-        <FormInput
-          name="name"
-          type="text"
-          label="Name"
-          handleChange={handleChange}
-          value={values.name}
-          error={errors.name}
-        />
-        <FormInput
-          name="genre"
-          type="text"
-          label="Genre"
-          handleChange={handleChange}
-          value={values.genre}
-          error={errors.genre}
-        />
-        <FormInput
-          name="role"
-          type="text"
-          label="Role"
-          handleChange={handleChange}
-          value={values.role}
-          error={errors.role}
-        />
-        <div className="form__button">
-          <CustomButton type="submit" name="submit">
-            Create
-          </CustomButton>
+        <div className="image">
+          {artistImageUrl && <img src={artistImageUrl} alt="artist img" />}
         </div>
-        {errorMessage.createArtist && (
-          <ErrorMessage>{errorMessage.createArtist}</ErrorMessage>
-        )}
-        {successMessage?.createArtist && (
-          <SuccessMessage>{successMessage.createArtist}</SuccessMessage>
-        )}
-      </form>
+      </div>
+      <div className="forms-container">
+        <div className="form-details">
+          <form onSubmit={handleSubmit}>
+            <FormInput
+              name="name"
+              type="text"
+              label="Name"
+              handleChange={handleChange}
+              value={values.name}
+              error={errors.name}
+            />
+            <FormInput
+              name="genre"
+              type="text"
+              label="Genre"
+              handleChange={handleChange}
+              value={values.genre}
+              error={errors.genre}
+            />
+            <FormInput
+              name="role"
+              type="text"
+              label="Role"
+              handleChange={handleChange}
+              value={values.role}
+              error={errors.role}
+            />
+            <div className="form__button">
+              <CustomButton type="submit" name="submit">
+                Create
+              </CustomButton>
+            </div>
+            {errorMessage.createArtist && (
+              <ErrorMessage>{errorMessage.createArtist}</ErrorMessage>
+            )}
+            {successMessage?.createArtist && (
+              <SuccessMessage>{successMessage.createArtist}</SuccessMessage>
+            )}
+          </form>
+        </div>
+        <div className="form-image">
+          {imageUrl && <img src={imageUrl} alt="artist img" />}
+          <form onSubmit={handleSubmitImage}>
+            <input
+              className="img-input"
+              name="img"
+              type="file"
+              id="file"
+              label="Select image"
+              onChange={handleChangeImage}
+            />
+            <label htmlFor="file">Choose image</label>
+            {imageErrors && <div className="imageErrors">{imageErrors}</div>}
+            <div className="form__button">
+              <CustomButton type="submit" name="submit">
+                Upload Image
+              </CustomButton>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

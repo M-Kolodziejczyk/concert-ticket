@@ -1,0 +1,83 @@
+.artist-tab {
+  margin-left: 100px;
+  .artist-details-container {
+    display: flex;
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 40%;
+      .group {
+        display: flex;
+        font-size: 20px;
+
+        p {
+          margin: 0;
+        }
+
+        .name {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .image {
+      margin-left: 20px;
+      width: 400px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .forms-container {
+    display: flex;
+    margin-top: 100px;
+
+    .form-details {
+      width: 40%;
+    }
+
+    .form-image {
+      margin-top: 25px;
+      margin-left: 20px;
+
+      img {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .img-input {
+        height: 0;
+        overflow: hidden;
+        width: 0;
+
+        + label {
+          width: 200px;
+          height: 50px;
+          letter-spacing: 0.5px;
+          line-height: 50px;
+          padding: 0 30px;
+          font-size: 15px;
+          background-color: black;
+          color: white;
+          text-transform: uppercase;
+          font-family: "Roboto", sans-serif;
+          font-weight: bolder;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          border: 1px solid black;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: white;
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
