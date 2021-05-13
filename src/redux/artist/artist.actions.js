@@ -40,7 +40,6 @@ export const uploadArtistImageFailure = () => {
 };
 
 export const getArtistStart = (id) => {
-  console.log("ID0", id);
   return {
     type: ArtistActionTypes.GET_ARTIST_START,
     payload: id,
@@ -59,3 +58,18 @@ export const getArtistFailure = (error) => {
     payload: error,
   };
 };
+
+export const getArtistImageStart = (identityId) => ({
+  type: ArtistActionTypes.GET_ARTIST_IMAGE_START,
+  payload: identityId,
+});
+
+export const getArtistImageSuccess = (url) => ({
+  type: ArtistActionTypes.GET_ARTIST_IMAGE_SUCCESS,
+  payload: url,
+});
+
+export const getArtistImageFailure = (error) => ({
+  type: ArtistActionTypes.GET_ARTIST_IMAGE_FAILURE,
+  payload: error,
+});

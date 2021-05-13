@@ -4,6 +4,7 @@ import {
   createArtistStart,
   uploadArtistImageStart,
   getArtistStart,
+  getArtistImageStart,
 } from "../../../../redux/artist/artist.actions";
 import validate from "../../../../validators/artist";
 
@@ -19,10 +20,12 @@ import "./artist.styles.scss";
 
 const Artist = (id) => {
   const dispatch = useDispatch();
-  // const dispatch = useDispatch(getArtistStart());
   const errorMessage = useSelector((state) => state.artist.errorMessage);
   const successMessage = useSelector((state) => state.artist.successMessage);
   const artist = useSelector((state) => state.artist.userArtist);
+  const artistImageUrl = useSelector(
+    (state) => state.artist.userArtistImageUrl
+  );
 
   const { handleChange, handleSubmit, values, errors } = useForm(
     {
@@ -39,15 +42,21 @@ const Artist = (id) => {
 
   useEffect(() => {
     if (Object.keys(artist).length < 1 && id.artistID) {
-      console.log(id.artistID);
       dispatch(getArtistStart(id.artistID));
     }
 
     // eslint-disable-next-line
   }, [id]);
 
+  useEffect(() => {
+    if (artist.identityId) {
+      dispatch(getArtistImageStart(artist.identityId));
+    }
+  }, [artist, dispatch]);
+
   return (
     <div className="artist-tab">
+      {artistImageUrl && <img src={artistImageUrl} alt="artist img" />}
       <form onSubmit={handleSubmitImage}>
         <input
           name="img"

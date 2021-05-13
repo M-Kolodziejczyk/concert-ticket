@@ -52,6 +52,18 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         userArtist: {},
         errorMessage: { getArtist: "Get artist failure" },
       };
+    case ArtistActionTypes.GET_ARTIST_IMAGE_SUCCESS:
+      return {
+        ...state,
+        userArtistImageUrl: action.payload,
+        errorMessage: {},
+      };
+    case ArtistActionTypes.GET_ARTIST_IMAGE_FAILURE:
+      return {
+        ...state,
+        userArtistImageUrl: "",
+        errorMessage: { getArtistImage: "Get artist Image failure" },
+      };
     default:
       return state;
   }

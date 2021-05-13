@@ -12,6 +12,8 @@ import {
   uploadArtistImageFailure,
   getArtistSuccess,
   getArtistFailure,
+  getArtistImageSuccess,
+  getArtistImageFailure,
 } from "./artist.actions";
 
 export function* createArtist({ payload: artist }) {
@@ -87,10 +89,27 @@ export function* onGetArtistStart() {
   yield takeLatest(ArtistActionTypes.GET_ARTIST_START, getArtist);
 }
 
+export function* getArtistImage({ payload }) {
+  try {
+    const url = yield Storage.get("artist-image", {
+      level: "protected",
+      identityId: payload,
+    });
+    yield put(getArtistImageSuccess(url));
+  } catch (error) {
+    yield put(getArtistImageFailure(error));
+  }
+}
+
+export function* onGetArtistImageStart() {
+  yield takeLatest(ArtistActionTypes.GET_ARTIST_IMAGE_START, getArtistImage);
+}
+
 export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
     call(onUploadArtistImageStart),
     call(onGetArtistStart),
+    call(onGetArtistImageStart),
   ]);
 }
