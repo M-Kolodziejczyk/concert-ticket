@@ -40,6 +40,7 @@ export const uploadArtistImageFailure = () => {
 };
 
 export const getArtistStart = (id) => {
+  console.log("ID0", id);
   return {
     type: ArtistActionTypes.GET_ARTIST_START,
     payload: id,

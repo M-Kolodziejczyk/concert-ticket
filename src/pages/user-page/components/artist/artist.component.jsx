@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createArtistStart,
   uploadArtistImageStart,
+  getArtistStart,
 } from "../../../../redux/artist/artist.actions";
-import { useSelector } from "react-redux";
 import validate from "../../../../validators/artist";
-// import awsExports from "../../../../aws-exports";
 
 import useForm from "../../../../hooks/useForm.js";
 import useFileForm from "../../../../hooks/useFileForm";
@@ -18,8 +18,11 @@ import ErrorMessage from "../../../../components/error-message/error-message.com
 import "./artist.styles.scss";
 
 const Artist = (id) => {
+  const dispatch = useDispatch();
+  // const dispatch = useDispatch(getArtistStart());
   const errorMessage = useSelector((state) => state.artist.errorMessage);
   const successMessage = useSelector((state) => state.artist.successMessage);
+  const artist = useSelector((state) => state.artist.userArtist);
 
   const { handleChange, handleSubmit, values, errors } = useForm(
     {
@@ -33,6 +36,15 @@ const Artist = (id) => {
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
     useFileForm(id.artistID, ["image/jpeg"], uploadArtistImageStart);
+
+  useEffect(() => {
+    if (Object.keys(artist).length < 1 && id.artistID) {
+      console.log(id.artistID);
+      dispatch(getArtistStart(id.artistID));
+    }
+
+    // eslint-disable-next-line
+  }, [id]);
 
   return (
     <div className="artist-tab">

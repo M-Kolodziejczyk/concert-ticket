@@ -69,12 +69,12 @@ export function* onUploadArtistImageStart() {
   );
 }
 
-export function* getArtist({ payload: { id } }) {
+export function* getArtist({ payload }) {
   try {
-    const artist = API.graphql({
+    const artist = yield API.graphql({
       query: queries.getArtist,
-      input: {
-        id,
+      variables: {
+        id: payload,
       },
     });
     yield put(getArtistSuccess(artist.data.getArtist));
