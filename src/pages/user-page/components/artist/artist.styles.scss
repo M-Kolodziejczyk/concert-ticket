@@ -2,15 +2,14 @@
   margin-left: 100px;
   .artist-details-container {
     display: flex;
+    margin-bottom: 100px;
 
     .details {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
       width: 40%;
       .group {
         display: flex;
         font-size: 20px;
+        margin-bottom: 15px;
 
         p {
           margin: 0;
@@ -33,7 +32,6 @@
 
   .forms-container {
     display: flex;
-    margin-top: 100px;
 
     .form-details {
       width: 40%;

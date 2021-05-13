@@ -79,7 +79,12 @@ export function* getArtist({ payload }) {
         id: payload,
       },
     });
-    yield put(getArtistSuccess(artist.data.getArtist));
+
+    if (!artist.data.getArtist) {
+      yield put(getArtistSuccess({}));
+    } else {
+      yield put(getArtistSuccess(artist.data.getArtist));
+    }
   } catch (error) {
     yield put(getArtistFailure(error));
   }

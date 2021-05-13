@@ -7,9 +7,10 @@ export const createArtistStart = (artist) => {
   };
 };
 
-export const createArtistSuccess = () => {
+export const createArtistSuccess = (artist) => {
   return {
     type: ArtistActionTypes.CREATE_ARTIST_SUCCESS,
+    payload: artist,
   };
 };
 

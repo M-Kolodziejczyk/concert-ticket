@@ -31,14 +31,14 @@ const artistReducer = (state = INITIAL_STATE, action) => {
           identityId: action.payload,
         },
         errorMessage: {},
-        successMessage: { createArtist: "Upload complete" },
+        successMessage: { uploadArtistImage: "Upload complete" },
       };
     case ArtistActionTypes.UPLOAD_ARTIST_IMAGE_FAILURE:
       return {
         ...state,
         userArtistImageUrl: "",
         successMessage: {},
-        errorMessage: { createArtist: "Upload failure" },
+        errorMessage: { uploadArtistImage: "Upload failure" },
       };
     case ArtistActionTypes.GET_ARTIST_SUCCESS:
       return {
