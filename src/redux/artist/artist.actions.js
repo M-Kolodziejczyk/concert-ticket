@@ -37,3 +37,23 @@ export const uploadArtistImageFailure = () => {
     type: ArtistActionTypes.UPLOAD_ARTIST_IMAGE_FAILURE,
   };
 };
+
+export const getArtistStart = (id) => {
+  return {
+    type: ArtistActionTypes.GET_ARTIST_START,
+    payload: id,
+  };
+};
+
+export const getArtistSuccess = (artist) => {
+  return {
+    type: ArtistActionTypes.GET_ARTIST_SUCCESS,
+    payload: artist,
+  };
+};
+export const getArtistFailure = (error) => {
+  return {
+    type: ArtistActionTypes.GET_ARTIST_FAILURE,
+    payload: error,
+  };
+};

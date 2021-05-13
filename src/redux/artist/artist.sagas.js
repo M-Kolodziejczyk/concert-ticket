@@ -1,6 +1,7 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-import { Auth, API, Storage } from "aws-amplify";
+import { Auth, API } from "aws-amplify";
 import * as mutations from "../../api/mutations";
+import * as queries from "../../api/queries";
 
 import ArtistActionTypes from "./artist.types";
 
@@ -9,6 +10,8 @@ import {
   createArtistFailure,
   uploadArttistImageSuccess,
   uploadArtistImageFailure,
+  getArtistSuccess,
+  getArtistFailure,
 } from "./artist.actions";
 
 export function* createArtist({ payload: artist }) {
@@ -65,6 +68,28 @@ export function* onUploadArtistImageStart() {
   );
 }
 
+export function* getArtist({ payload: { id } }) {
+  try {
+    const artist = API.graphql({
+      query: queries.getArtist,
+      input: {
+        id,
+      },
+    });
+    yield put(getArtistSuccess(artist.data.getArtist));
+  } catch (error) {
+    yield put(getArtistFailure(error));
+  }
+}
+
+export function* onGetArtistStart() {
+  yield takeLatest(ArtistActionTypes.GET_ARTIST_START, getArtist);
+}
+
 export function* artistSagas() {
-  yield all([call(onCreateArtistStart), call(onUploadArtistImageStart)]);
+  yield all([
+    call(onCreateArtistStart),
+    call(onUploadArtistImageStart),
+    call(onGetArtistStart),
+  ]);
 }
