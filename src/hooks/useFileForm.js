@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-const useFileForm = (bucketInfo, format, callback) => {
+// PARAMETERS
+// id - String - element of dynamodb table, where we want to store user.identityID
+// format - Array - allow type format of file
+// callback - function - action function that we will use with redux to dispatch action
+
+const useFileForm = (id, format, callback) => {
   const dispatch = useDispatch();
-  const [values, setValues] = useState(bucketInfo);
   const [image, setImage] = useState({});
   const [imageUrl, setImageUrl] = useState("");
   const [imageErrors, setImageErrors] = useState("");
@@ -12,11 +16,6 @@ const useFileForm = (bucketInfo, format, callback) => {
   const handleChangeImage = (e) => {
     const file = e.target.files[0];
     if (format.includes(file.type)) {
-      setValues({
-        ...values,
-        key: values.key + file.name,
-        name: file.name,
-      });
       setImage(file);
       setImageUrl(URL.createObjectURL(file));
       setValidate(true);
@@ -31,7 +30,7 @@ const useFileForm = (bucketInfo, format, callback) => {
     e.preventDefault();
     if (!imageErrors && validate) {
       callback();
-      dispatch(callback(values, image));
+      dispatch(callback(id, image));
     }
   };
 

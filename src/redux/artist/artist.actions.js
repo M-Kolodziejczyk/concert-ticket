@@ -19,16 +19,17 @@ export const createArtistFailure = () => {
   };
 };
 
-export const uploadArtistImageStart = (values, image) => {
+export const uploadArtistImageStart = (id, image) => {
   return {
     type: ArtistActionTypes.UPLOAD_ARTIST_IMAGE_START,
-    payload: { values, image },
+    payload: { id, image },
   };
 };
 
-export const uploadArttistImageSuccess = () => {
+export const uploadArttistImageSuccess = (identityId) => {
   return {
     type: ArtistActionTypes.UPLOAD_ARTIST_IMAGE_SUCCESS,
+    payload: identityId,
   };
 };
 

@@ -26,7 +26,10 @@ const artistReducer = (state = INITIAL_STATE, action) => {
     case ArtistActionTypes.UPLOAD_ARTIST_IMAGE_SUCCESS:
       return {
         ...state,
-        userArtistImageUrl: "11",
+        userArtist: {
+          ...state.userArtist,
+          identityId: action.payload,
+        },
         errorMessage: {},
         successMessage: { createArtist: "Upload complete" },
       };

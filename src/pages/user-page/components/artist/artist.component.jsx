@@ -5,7 +5,7 @@ import {
 } from "../../../../redux/artist/artist.actions";
 import { useSelector } from "react-redux";
 import validate from "../../../../validators/artist";
-import awsExports from "../../../../aws-exports";
+// import awsExports from "../../../../aws-exports";
 
 import useForm from "../../../../hooks/useForm.js";
 import useFileForm from "../../../../hooks/useFileForm";
@@ -17,7 +17,7 @@ import ErrorMessage from "../../../../components/error-message/error-message.com
 
 import "./artist.styles.scss";
 
-const Artist = () => {
+const Artist = (id) => {
   const errorMessage = useSelector((state) => state.artist.errorMessage);
   const successMessage = useSelector((state) => state.artist.successMessage);
 
@@ -32,15 +32,7 @@ const Artist = () => {
   );
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
-    useFileForm(
-      {
-        bucket: awsExports.aws_user_files_s3_bucket,
-        region: awsExports.aws_user_files_s3_bucket_region,
-        key: "public/",
-      },
-      ["image/jpeg"],
-      uploadArtistImageStart
-    );
+    useFileForm(id.artistID, ["image/jpeg"], uploadArtistImageStart);
 
   return (
     <div className="artist-tab">

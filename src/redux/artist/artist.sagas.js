@@ -1,5 +1,5 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-import { Auth, API } from "aws-amplify";
+import { Auth, API, Storage } from "aws-amplify";
 import * as mutations from "../../api/mutations";
 import * as queries from "../../api/queries";
 
@@ -17,7 +17,6 @@ import {
 export function* createArtist({ payload: artist }) {
   try {
     const authUser = yield Auth.currentAuthenticatedUser();
-    console.log(authUser.attributes.sub);
     const res = yield API.graphql({
       query: mutations.createArtist,
       variables: { input: { ...artist } },
@@ -41,21 +40,23 @@ export function* onCreateArtistStart() {
   yield takeLatest(ArtistActionTypes.CREATE_ARTIST_START, createArtist);
 }
 
-export function* uploadArtistImage({ payload: { values, image } }) {
+export function* uploadArtistImage({ payload: { id, image } }) {
   try {
     const user = yield Auth.currentUserCredentials();
-    console.log(user.identityId);
-    // console.log(image);
-    // console.log(values);
-    // const res = yield Storage.put("artist-image", image, {
-    //   level: "protected",
-    //   contentType: image.type,
-    // });
-    // yield API.graphql({
-    //   query: mutations.updateA
-    // })
-    // console.log(res);
-    yield put(uploadArttistImageSuccess("success"));
+    yield Storage.put("artist-image", image, {
+      level: "protected",
+      contentType: image.type,
+    });
+    yield API.graphql({
+      query: mutations.updateArtist,
+      variables: {
+        input: {
+          id,
+          identityId: user.identityId,
+        },
+      },
+    });
+    yield put(uploadArttistImageSuccess(user.identityId));
   } catch (error) {
     yield put(uploadArtistImageFailure(error));
   }
