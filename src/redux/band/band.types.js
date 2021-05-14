@@ -1,0 +1,7 @@
+const BandActionTypes = {
+  CREATE_BAND_START: "CREATE_BAND_START",
+  CREATE_BAND_SUCCESS: "CREATE_BAND_SUCCESS",
+  CREATE_BAND_FAILURE: "CREATE_BAND_FAILURE",
+};
+
+export default BandActionTypes;
