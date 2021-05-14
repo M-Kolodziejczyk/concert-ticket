@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserStart } from "../../redux/user/user.actions";
 
 import Artist from "./components/artist/artist.component";
+import Band from "./components/band/band.component";
 
 import "./user-page.styles.scss";
 
@@ -83,7 +84,7 @@ const UserPage = () => {
             User Page
           </div>
           <div
-            className="tab-pane fade show active"
+            className="tab-pane fade"
             id="v-pills-profile"
             role="tabpanel"
             aria-labelledby="v-pills-profile-tab"
@@ -91,12 +92,12 @@ const UserPage = () => {
             <Artist artistID={user.artistID} />
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane fade  show active"
             id="v-pills-messages"
             role="tabpanel"
             aria-labelledby="v-pills-messages-tab"
           >
-            Bands Page
+            <Band userId={user.id} />
           </div>
           <div
             className="tab-pane fade"

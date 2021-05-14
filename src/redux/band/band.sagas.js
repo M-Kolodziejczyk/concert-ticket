@@ -5,7 +5,6 @@ import * as mutations from "../../api/mutations";
 import BandActionTypes from "./band.types";
 
 import { createBandSuccess, createBandFailure } from "./band.actions";
-import { onCreateArtistStart } from "../artist/artist.sagas";
 
 export function* createBand({ payload: band }) {
   try {
@@ -29,5 +28,5 @@ export function* onCreateBandStart() {
 }
 
 export function* bandSagas() {
-  yield all([call(onCreateArtistStart)]);
+  yield all([call(onCreateBandStart)]);
 }
