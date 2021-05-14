@@ -255,6 +255,7 @@ export const onCreateConcert = /* GraphQL */ `
     onCreateConcert {
       id
       userID
+      identityId
       name
       date
       venue
@@ -279,6 +280,7 @@ export const onUpdateConcert = /* GraphQL */ `
     onUpdateConcert {
       id
       userID
+      identityId
       name
       date
       venue
@@ -303,6 +305,7 @@ export const onDeleteConcert = /* GraphQL */ `
     onDeleteConcert {
       id
       userID
+      identityId
       name
       date
       venue
@@ -327,6 +330,7 @@ export const onCreateBand = /* GraphQL */ `
     onCreateBand {
       id
       userID
+      identityId
       name
       genre
       createdAt
@@ -343,6 +347,7 @@ export const onUpdateBand = /* GraphQL */ `
     onUpdateBand {
       id
       userID
+      identityId
       name
       genre
       createdAt
@@ -359,6 +364,7 @@ export const onDeleteBand = /* GraphQL */ `
     onDeleteBand {
       id
       userID
+      identityId
       name
       genre
       createdAt
@@ -432,6 +438,7 @@ export const onCreateArtistBandJoin = /* GraphQL */ `
       band {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -463,6 +470,7 @@ export const onUpdateArtistBandJoin = /* GraphQL */ `
       band {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -494,6 +502,7 @@ export const onDeleteArtistBandJoin = /* GraphQL */ `
       band {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -525,6 +534,7 @@ export const onCreateConcertBandJoin = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -536,6 +546,7 @@ export const onCreateConcertBandJoin = /* GraphQL */ `
       band {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -557,6 +568,7 @@ export const onUpdateConcertBandJoin = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -568,6 +580,7 @@ export const onUpdateConcertBandJoin = /* GraphQL */ `
       band {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -589,6 +602,7 @@ export const onDeleteConcertBandJoin = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -600,6 +614,7 @@ export const onDeleteConcertBandJoin = /* GraphQL */ `
       band {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -621,6 +636,7 @@ export const onCreateConcertArtistJoin = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -654,6 +670,7 @@ export const onUpdateConcertArtistJoin = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -687,6 +704,7 @@ export const onDeleteConcertArtistJoin = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -728,6 +746,7 @@ export const onCreateTicket = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -759,6 +778,7 @@ export const onUpdateTicket = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue
@@ -790,6 +810,7 @@ export const onDeleteTicket = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue

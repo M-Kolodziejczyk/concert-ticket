@@ -152,6 +152,7 @@ export const listConcerts = /* GraphQL */ `
       items {
         id
         userID
+        identityId
         name
         date
         venue
@@ -169,6 +170,7 @@ export const getConcert = /* GraphQL */ `
     getConcert(id: $id) {
       id
       userID
+      identityId
       name
       date
       venue
@@ -198,6 +200,7 @@ export const listBands = /* GraphQL */ `
       items {
         id
         userID
+        identityId
         name
         genre
         createdAt
@@ -213,6 +216,7 @@ export const getBand = /* GraphQL */ `
     getBand(id: $id) {
       id
       userID
+      identityId
       name
       genre
       createdAt
@@ -305,6 +309,7 @@ export const getTicket = /* GraphQL */ `
       concert {
         id
         userID
+        identityId
         name
         date
         venue

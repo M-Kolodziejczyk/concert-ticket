@@ -26,6 +26,7 @@ type Concert
   ) {
   id: ID!
   userID: ID!
+  identityId: ID!
   name: String!
   date: String!
   venue: String!
@@ -48,6 +49,7 @@ type Band
   ) {
   id: ID!
   userID: ID!
+  identityId: ID!
   name: String!
   genre: String!
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
