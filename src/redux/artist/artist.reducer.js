@@ -23,6 +23,33 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         successMessage: {},
         errorMessage: { createArtist: "Create artist failure" },
       };
+    case ArtistActionTypes.GET_ARTIST_SUCCESS:
+      return {
+        ...state,
+        userArtist: action.payload,
+        errorMessage: {},
+      };
+    case ArtistActionTypes.GET_ARTIST_FAILURE:
+      return {
+        ...state,
+        userArtist: {},
+        errorMessage: { getArtist: "Get artist failure" },
+      };
+    case ArtistActionTypes.UPDATE_ARTIST_SUCCESS:
+      return {
+        ...state,
+        userArtist: action.payload,
+        errorMessage: {},
+        successMessage: { updateArtist: "Artist upated successfully" },
+      };
+    case ArtistActionTypes.UPDATE_ARTIST_FAILURE:
+      return {
+        ...state,
+        userArtist: {},
+        successMessage: {},
+        errorMessage: { updateArtist: "Update artist failure" },
+      };
+
     case ArtistActionTypes.UPLOAD_ARTIST_IMAGE_SUCCESS:
       return {
         ...state,
@@ -39,18 +66,6 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         userArtistImageUrl: "",
         successMessage: {},
         errorMessage: { uploadArtistImage: "Upload failure" },
-      };
-    case ArtistActionTypes.GET_ARTIST_SUCCESS:
-      return {
-        ...state,
-        userArtist: action.payload,
-        errorMessage: {},
-      };
-    case ArtistActionTypes.GET_ARTIST_FAILURE:
-      return {
-        ...state,
-        userArtist: {},
-        errorMessage: { getArtist: "Get artist failure" },
       };
     case ArtistActionTypes.GET_ARTIST_IMAGE_SUCCESS:
       return {

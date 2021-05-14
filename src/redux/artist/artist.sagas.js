@@ -8,10 +8,12 @@ import ArtistActionTypes from "./artist.types";
 import {
   createArtistSuccess,
   createArtistFailure,
-  uploadArttistImageSuccess,
-  uploadArtistImageFailure,
   getArtistSuccess,
   getArtistFailure,
+  updateArtistSuccess,
+  updateArtistFailure,
+  uploadArttistImageSuccess,
+  uploadArtistImageFailure,
   getArtistImageSuccess,
   getArtistImageFailure,
 } from "./artist.actions";
@@ -40,6 +42,45 @@ export function* createArtist({ payload: artist }) {
 
 export function* onCreateArtistStart() {
   yield takeLatest(ArtistActionTypes.CREATE_ARTIST_START, createArtist);
+}
+
+export function* getArtist({ payload }) {
+  try {
+    const artist = yield API.graphql({
+      query: queries.getArtist,
+      variables: {
+        id: payload,
+      },
+    });
+
+    if (!artist.data.getArtist) {
+      yield put(getArtistSuccess({}));
+    } else {
+      yield put(getArtistSuccess(artist.data.getArtist));
+    }
+  } catch (error) {
+    yield put(getArtistFailure(error));
+  }
+}
+
+export function* onGetArtistStart() {
+  yield takeLatest(ArtistActionTypes.GET_ARTIST_START, getArtist);
+}
+
+export function* updateArtist({ payload: artist }) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.updateArtist,
+      variables: {
+        input: {
+          ...artist,
+        },
+      },
+    });
+    yield put(updateArtistSuccess(res.data.updateArtist));
+  } catch (error) {
+    yield put(updateArtistFailure(error));
+  }
 }
 
 export function* uploadArtistImage({ payload: { id, image } }) {
@@ -71,29 +112,6 @@ export function* onUploadArtistImageStart() {
   );
 }
 
-export function* getArtist({ payload }) {
-  try {
-    const artist = yield API.graphql({
-      query: queries.getArtist,
-      variables: {
-        id: payload,
-      },
-    });
-
-    if (!artist.data.getArtist) {
-      yield put(getArtistSuccess({}));
-    } else {
-      yield put(getArtistSuccess(artist.data.getArtist));
-    }
-  } catch (error) {
-    yield put(getArtistFailure(error));
-  }
-}
-
-export function* onGetArtistStart() {
-  yield takeLatest(ArtistActionTypes.GET_ARTIST_START, getArtist);
-}
-
 export function* getArtistImage({ payload }) {
   try {
     const url = yield Storage.get("artist-image", {
@@ -113,8 +131,8 @@ export function* onGetArtistImageStart() {
 export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
-    call(onUploadArtistImageStart),
     call(onGetArtistStart),
+    call(onUploadArtistImageStart),
     call(onGetArtistImageStart),
   ]);
 }
