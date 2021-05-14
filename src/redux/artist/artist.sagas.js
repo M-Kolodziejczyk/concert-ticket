@@ -83,6 +83,10 @@ export function* updateArtist({ payload: artist }) {
   }
 }
 
+export function* onUpdateArtistStart() {
+  yield takeLatest(ArtistActionTypes.UPDATE_ARTIST_START, updateArtist);
+}
+
 export function* uploadArtistImage({ payload: { id, image } }) {
   try {
     const user = yield Auth.currentUserCredentials();
@@ -132,6 +136,7 @@ export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
     call(onGetArtistStart),
+    call(onUpdateArtistStart),
     call(onUploadArtistImageStart),
     call(onGetArtistImageStart),
   ]);

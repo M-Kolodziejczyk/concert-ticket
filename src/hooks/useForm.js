@@ -3,15 +3,23 @@ import { useDispatch } from "react-redux";
 
 const useForm = (initialState, validate, callback) => {
   const dispatch = useDispatch();
-  const [values, setValues] = useState(initialState);
+  const [values = initialState, setValues] = useState();
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+    if (initialState.id && !values.id) {
+      setValues({
+        ...values,
+        id: initialState.id,
+        [name]: value,
+      });
+    } else {
+      setValues({
+        ...values,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {

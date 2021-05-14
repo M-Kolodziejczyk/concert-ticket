@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createArtistStart,
+  updateArtistStart,
   uploadArtistImageStart,
   getArtistStart,
   getArtistImageStart,
@@ -19,6 +20,7 @@ import ErrorMessage from "../../../../components/error-message/error-message.com
 import "./artist.styles.scss";
 
 const Artist = (id) => {
+  const [isCreateMode, setIsCreateMode] = useState(true);
   const dispatch = useDispatch();
   const errorMessage = useSelector((state) => state.artist.errorMessage);
   const artist = useSelector((state) => state.artist.userArtist);
@@ -27,13 +29,20 @@ const Artist = (id) => {
   );
 
   const { handleChange, handleSubmit, values, errors } = useForm(
-    {
-      name: "",
-      genre: "",
-      role: "",
-    },
+    isCreateMode
+      ? {
+          name: "",
+          genre: "",
+          role: "",
+        }
+      : {
+          id: artist.id,
+          name: "",
+          genre: "",
+          role: "",
+        },
     validate,
-    createArtistStart
+    isCreateMode ? createArtistStart : updateArtistStart
   );
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
@@ -48,6 +57,10 @@ const Artist = (id) => {
   useEffect(() => {
     if (artist.identityId) {
       dispatch(getArtistImageStart(artist.identityId));
+    }
+
+    if (Object.keys(artist).length > 0) {
+      setIsCreateMode(false);
     }
   }, [artist, dispatch]);
 
@@ -103,7 +116,7 @@ const Artist = (id) => {
             />
             <div className="form__button">
               <CustomButton type="submit" name="submit">
-                Create
+                {isCreateMode ? "Create" : "Update"}
               </CustomButton>
             </div>
             {errorMessage.createArtist && (
