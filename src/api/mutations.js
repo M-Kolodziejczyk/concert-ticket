@@ -10,6 +10,30 @@ export const createUser = /* GraphQL */ `
       email
       name
       artistID
+      ordersByDate {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
+      ordersByStatus {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -53,30 +77,6 @@ export const createUser = /* GraphQL */ `
         bands {
           nextToken
         }
-      }
-      ordersByDate {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
-      ordersByStatus {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
       }
     }
   }
@@ -90,6 +90,30 @@ export const updateUser = /* GraphQL */ `
       email
       name
       artistID
+      ordersByDate {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
+      ordersByStatus {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -133,30 +157,6 @@ export const updateUser = /* GraphQL */ `
         bands {
           nextToken
         }
-      }
-      ordersByDate {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
-      ordersByStatus {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
       }
     }
   }
@@ -170,6 +170,30 @@ export const deleteUser = /* GraphQL */ `
       email
       name
       artistID
+      ordersByDate {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
+      ordersByStatus {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -213,30 +237,6 @@ export const deleteUser = /* GraphQL */ `
         bands {
           nextToken
         }
-      }
-      ordersByDate {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
-      ordersByStatus {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
       }
     }
   }
@@ -1011,6 +1011,17 @@ export const createTicket = /* GraphQL */ `
       quantity
       amount
       concertID
+      orders {
+        items {
+          id
+          ticketID
+          orderID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       concert {
@@ -1035,17 +1046,6 @@ export const createTicket = /* GraphQL */ `
         }
       }
       owner
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -1063,6 +1063,17 @@ export const updateTicket = /* GraphQL */ `
       quantity
       amount
       concertID
+      orders {
+        items {
+          id
+          ticketID
+          orderID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       concert {
@@ -1087,17 +1098,6 @@ export const updateTicket = /* GraphQL */ `
         }
       }
       owner
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -1115,6 +1115,17 @@ export const deleteTicket = /* GraphQL */ `
       quantity
       amount
       concertID
+      orders {
+        items {
+          id
+          ticketID
+          orderID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       concert {
@@ -1139,17 +1150,6 @@ export const deleteTicket = /* GraphQL */ `
         }
       }
       owner
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -1163,6 +1163,18 @@ export const createTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      order {
+        id
+        customer
+        userName
+        status
+        createdAt
+        tickets {
+          nextToken
+        }
+        updatedAt
+        userID
+      }
       createdAt
       updatedAt
       ticket {
@@ -1174,6 +1186,9 @@ export const createTicketOrder = /* GraphQL */ `
         quantity
         amount
         concertID
+        orders {
+          nextToken
+        }
         createdAt
         updatedAt
         concert {
@@ -1189,21 +1204,6 @@ export const createTicketOrder = /* GraphQL */ `
           owner
         }
         owner
-        orders {
-          nextToken
-        }
-      }
-      order {
-        id
-        customer
-        userName
-        status
-        createdAt
-        updatedAt
-        tickets {
-          nextToken
-        }
-        userID
       }
     }
   }
@@ -1218,6 +1218,18 @@ export const updateTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      order {
+        id
+        customer
+        userName
+        status
+        createdAt
+        tickets {
+          nextToken
+        }
+        updatedAt
+        userID
+      }
       createdAt
       updatedAt
       ticket {
@@ -1229,6 +1241,9 @@ export const updateTicketOrder = /* GraphQL */ `
         quantity
         amount
         concertID
+        orders {
+          nextToken
+        }
         createdAt
         updatedAt
         concert {
@@ -1244,21 +1259,6 @@ export const updateTicketOrder = /* GraphQL */ `
           owner
         }
         owner
-        orders {
-          nextToken
-        }
-      }
-      order {
-        id
-        customer
-        userName
-        status
-        createdAt
-        updatedAt
-        tickets {
-          nextToken
-        }
-        userID
       }
     }
   }
@@ -1273,6 +1273,18 @@ export const deleteTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      order {
+        id
+        customer
+        userName
+        status
+        createdAt
+        tickets {
+          nextToken
+        }
+        updatedAt
+        userID
+      }
       createdAt
       updatedAt
       ticket {
@@ -1284,6 +1296,9 @@ export const deleteTicketOrder = /* GraphQL */ `
         quantity
         amount
         concertID
+        orders {
+          nextToken
+        }
         createdAt
         updatedAt
         concert {
@@ -1299,21 +1314,6 @@ export const deleteTicketOrder = /* GraphQL */ `
           owner
         }
         owner
-        orders {
-          nextToken
-        }
-      }
-      order {
-        id
-        customer
-        userName
-        status
-        createdAt
-        updatedAt
-        tickets {
-          nextToken
-        }
-        userID
       }
     }
   }
@@ -1329,7 +1329,6 @@ export const createOrder = /* GraphQL */ `
       userName
       status
       createdAt
-      updatedAt
       tickets {
         items {
           id
@@ -1341,6 +1340,7 @@ export const createOrder = /* GraphQL */ `
         }
         nextToken
       }
+      updatedAt
       userID
     }
   }
@@ -1356,7 +1356,6 @@ export const updateOrder = /* GraphQL */ `
       userName
       status
       createdAt
-      updatedAt
       tickets {
         items {
           id
@@ -1368,6 +1367,7 @@ export const updateOrder = /* GraphQL */ `
         }
         nextToken
       }
+      updatedAt
       userID
     }
   }
@@ -1383,7 +1383,6 @@ export const deleteOrder = /* GraphQL */ `
       userName
       status
       createdAt
-      updatedAt
       tickets {
         items {
           id
@@ -1395,6 +1394,7 @@ export const deleteOrder = /* GraphQL */ `
         }
         nextToken
       }
+      updatedAt
       userID
     }
   }

@@ -7,6 +7,30 @@ export const getUser = /* GraphQL */ `
       email
       name
       artistID
+      ordersByDate {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
+      ordersByStatus {
+        items {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       owner
@@ -51,30 +75,6 @@ export const getUser = /* GraphQL */ `
           nextToken
         }
       }
-      ordersByDate {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
-      ordersByStatus {
-        items {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -97,6 +97,12 @@ export const listUsers = /* GraphQL */ `
         email
         name
         artistID
+        ordersByDate {
+          nextToken
+        }
+        ordersByStatus {
+          nextToken
+        }
         createdAt
         updatedAt
         owner
@@ -116,12 +122,146 @@ export const listUsers = /* GraphQL */ `
           updatedAt
           owner
         }
-        ordersByDate {
+      }
+      nextToken
+    }
+  }
+`;
+export const getTicketOrder = /* GraphQL */ `
+  query GetTicketOrder($id: ID!) {
+    getTicketOrder(id: $id) {
+      id
+      ticketID
+      orderID
+      userID
+      order {
+        id
+        customer
+        userName
+        status
+        createdAt
+        tickets {
           nextToken
         }
-        ordersByStatus {
+        updatedAt
+        userID
+      }
+      createdAt
+      updatedAt
+      ticket {
+        id
+        description
+        price
+        startDate
+        endDate
+        quantity
+        amount
+        concertID
+        orders {
           nextToken
         }
+        createdAt
+        updatedAt
+        concert {
+          id
+          userName
+          identityId
+          name
+          date
+          venue
+          genres
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+    }
+  }
+`;
+export const listTicketOrders = /* GraphQL */ `
+  query ListTicketOrders(
+    $filter: ModelTicketOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTicketOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        ticketID
+        orderID
+        userID
+        order {
+          id
+          customer
+          userName
+          status
+          createdAt
+          updatedAt
+          userID
+        }
+        createdAt
+        updatedAt
+        ticket {
+          id
+          description
+          price
+          startDate
+          endDate
+          quantity
+          amount
+          concertID
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      customer
+      userName
+      status
+      createdAt
+      tickets {
+        items {
+          id
+          ticketID
+          orderID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      updatedAt
+      userID
+    }
+  }
+`;
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        customer
+        userName
+        status
+        createdAt
+        tickets {
+          nextToken
+        }
+        updatedAt
+        userID
       }
       nextToken
     }
@@ -327,6 +467,9 @@ export const listTickets = /* GraphQL */ `
         quantity
         amount
         concertID
+        orders {
+          nextToken
+        }
         createdAt
         updatedAt
         concert {
@@ -342,9 +485,6 @@ export const listTickets = /* GraphQL */ `
           owner
         }
         owner
-        orders {
-          nextToken
-        }
       }
       nextToken
     }
@@ -361,6 +501,17 @@ export const getTicket = /* GraphQL */ `
       quantity
       amount
       concertID
+      orders {
+        items {
+          id
+          ticketID
+          orderID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       concert {
@@ -385,157 +536,6 @@ export const getTicket = /* GraphQL */ `
         }
       }
       owner
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const getTicketOrder = /* GraphQL */ `
-  query GetTicketOrder($id: ID!) {
-    getTicketOrder(id: $id) {
-      id
-      ticketID
-      orderID
-      userID
-      createdAt
-      updatedAt
-      ticket {
-        id
-        description
-        price
-        startDate
-        endDate
-        quantity
-        amount
-        concertID
-        createdAt
-        updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-        orders {
-          nextToken
-        }
-      }
-      order {
-        id
-        customer
-        userName
-        status
-        createdAt
-        updatedAt
-        tickets {
-          nextToken
-        }
-        userID
-      }
-    }
-  }
-`;
-export const listTicketOrders = /* GraphQL */ `
-  query ListTicketOrders(
-    $filter: ModelTicketOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTicketOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        ticketID
-        orderID
-        userID
-        createdAt
-        updatedAt
-        ticket {
-          id
-          description
-          price
-          startDate
-          endDate
-          quantity
-          amount
-          concertID
-          createdAt
-          updatedAt
-          owner
-        }
-        order {
-          id
-          customer
-          userName
-          status
-          createdAt
-          updatedAt
-          userID
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const listOrders = /* GraphQL */ `
-  query ListOrders(
-    $filter: ModelOrderFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        customer
-        userName
-        status
-        createdAt
-        updatedAt
-        tickets {
-          nextToken
-        }
-        userID
-      }
-      nextToken
-    }
-  }
-`;
-export const getOrder = /* GraphQL */ `
-  query GetOrder($id: ID!) {
-    getOrder(id: $id) {
-      id
-      customer
-      userName
-      status
-      createdAt
-      updatedAt
-      tickets {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      userID
     }
   }
 `;

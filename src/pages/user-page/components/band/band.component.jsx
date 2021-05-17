@@ -9,7 +9,7 @@ import FormInput from "../../../../components/form-input/form-input.component";
 
 import "./band.styles.scss";
 
-const Band = ({ userId }) => {
+const Band = ({ userId, bands }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     { name: "", genre: "", userID: userId },
     validate,
@@ -26,6 +26,19 @@ const Band = ({ userId }) => {
       >
         Create Band
       </button>
+
+      <div className="band-container">
+        <h2>Bands Created By you</h2>
+        <div className="band-createdBands">
+          {bands &&
+            bands.items.map((band) => (
+              <div>
+                <p>{band.name}</p>
+                <p>{band.genre}</p>
+              </div>
+            ))}
+        </div>
+      </div>
 
       <div
         className="modal fade"

@@ -97,7 +97,7 @@ const UserPage = () => {
             role="tabpanel"
             aria-labelledby="v-pills-messages-tab"
           >
-            <Band userId={user.id} />
+            <Band userId={user.id} bands={user.bands} />
           </div>
           <div
             className="tab-pane fade"
