@@ -1,5 +1,5 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import * as mutations from "../../api/mutations";
 
 import BandActionTypes from "./band.types";
@@ -8,11 +8,14 @@ import { createBandSuccess, createBandFailure } from "./band.actions";
 
 export function* createBand({ payload: band }) {
   try {
+    const authUser = yield Auth.currentAuthenticatedUser();
     const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.createBand,
       variables: {
         input: {
           ...band,
+          userName: authUser.attributes.email,
         },
       },
     });
