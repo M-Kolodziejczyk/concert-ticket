@@ -20,7 +20,6 @@ exports.handler = async (event, context) => {
   if (event.request.userAttributes.sub) {
     let ddbParams = {
       Item: {
-        id: { S: event.request.userAttributes.sub },
         email: { S: event.request.userAttributes.email },
         owner: { S: event.request.userAttributes.sub },
         __typename: { S: "User" },

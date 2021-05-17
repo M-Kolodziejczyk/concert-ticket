@@ -51,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "concertTicketPostConfirm",
+            "concertTicketPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "concertTicketPostConfirm",
+                  "concertTicketPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -73,9 +73,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apiconcertticketGraphQLAPIIdOutput"
             },
             "API_CONCERTTICKET_USERTABLE_NAME": {
               "Fn::ImportValue": {
@@ -102,6 +99,9 @@
                   }
                 ]
               ]
+            },
+            "API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiconcertticketGraphQLAPIIdOutput"
             }
           }
         },
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "concertticketLambdaRoleff6473af",
+            "concertticketLambdaRole2530c483",
             {
               "Fn::Join": [
                 "",
                 [
-                  "concertticketLambdaRoleff6473af",
+                  "concertticketLambdaRole2530c483",
                   "-",
                   {
                     "Ref": "env"

@@ -165,10 +165,6 @@ Parameters:
   authProviders:
     Type: CommaDelimitedList
       
-  hostedUIProviderCreds:
-    Type: String
-  
-            
   
   thirdPartyAuth:
     Type: String
@@ -180,6 +176,10 @@ Parameters:
   
   adminQueries:
     Type: String
+            
+  hostedUIProviderCreds:
+    Type: String
+  
             
   oAuthMetadata:
     Type: String

@@ -1,21 +1,21 @@
 type User
   @model
+  @key(fields: ["email"])
   @auth(rules: [{ allow: owner }, { allow: groups, groups: ["Admin"] }]) {
-  id: ID!
-  name: String
   email: String!
+  name: String
   artistID: ID
   artist: Artist @connection(fields: ["artistID"])
-  bands: [Band] @connection(keyName: "byUser", fields: ["id"])
-  concerts: [Concert] @connection(keyName: "byUser", fields: ["id"])
-  ordersByDate: [Order] @connection(keyName: "ByUserByDate", fields: ["id"])
+  bands: [Band] @connection(keyName: "byUser", fields: ["email"])
+  concerts: [Concert] @connection(keyName: "byUser", fields: ["email"])
+  ordersByDate: [Order] @connection(keyName: "ByUserByDate", fields: ["email"])
   ordersByStatus: [Order]
-    @connection(keyName: "ByUserbyStatusByDate", fields: ["id"])
+    @connection(keyName: "ByUserbyStatusByDate", fields: ["email"])
 }
 
 type Concert
   @model
-  @key(name: "byUser", fields: ["userID"])
+  @key(name: "byUser", fields: ["userName"])
   @auth(
     rules: [
       { allow: owner }
@@ -25,7 +25,7 @@ type Concert
     ]
   ) {
   id: ID!
-  userID: ID!
+  userName: String!
   identityId: ID
   name: String!
   date: String!
@@ -38,7 +38,7 @@ type Concert
 
 type Band
   @model
-  @key(name: "byUser", fields: ["userID"])
+  @key(name: "byUser", fields: ["userName"])
   @auth(
     rules: [
       { allow: owner }
@@ -48,7 +48,7 @@ type Band
     ]
   ) {
   id: ID!
-  userID: ID!
+  userName: String!
   identityId: ID
   name: String!
   genre: String!
@@ -173,8 +173,11 @@ type TicketOrder
 
 type Order
   @model
-  @key(name: "ByUserByDate", fields: ["userID", "createdAt"])
-  @key(name: "ByUserbyStatusByDate", fields: ["userID", "status", "createdAt"])
+  @key(name: "ByUserByDate", fields: ["userName", "createdAt"])
+  @key(
+    name: "ByUserbyStatusByDate"
+    fields: ["userName", "status", "createdAt"]
+  )
   @auth(
     rules: [
       { allow: owner, ownerField: "userID" }
@@ -183,7 +186,7 @@ type Order
   ) {
   id: ID!
   customer: String!
-  userID: ID!
+  userName: String!
   status: String!
   createdAt: String!
   tickets: [TicketOrder] @connection(keyName: "byOrder", fields: ["id"])
