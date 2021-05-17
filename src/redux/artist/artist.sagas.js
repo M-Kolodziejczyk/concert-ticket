@@ -22,14 +22,16 @@ export function* createArtist({ payload: artist }) {
   try {
     const authUser = yield Auth.currentAuthenticatedUser();
     const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.createArtist,
       variables: { input: { ...artist } },
     });
     yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.updateUser,
       variables: {
         input: {
-          id: authUser.attributes.sub,
+          email: authUser.attributes.email,
           artistID: res.data.createArtist.id,
         },
       },
@@ -70,6 +72,7 @@ export function* onGetArtistStart() {
 export function* updateArtist({ payload: artist }) {
   try {
     const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.updateArtist,
       variables: {
         input: {
@@ -95,6 +98,7 @@ export function* uploadArtistImage({ payload: { id, image } }) {
       contentType: image.type,
     });
     yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.updateArtist,
       variables: {
         input: {

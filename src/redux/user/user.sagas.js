@@ -1,6 +1,7 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 import { Auth, API } from "aws-amplify";
 import * as queries from "../../api/queries";
+import * as mutations from "../../api/mutations";
 
 import UserActionTypes from "./user.types";
 
@@ -151,12 +152,28 @@ export function* getUser() {
   try {
     const authUser = yield Auth.currentAuthenticatedUser();
     const user = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: queries.getUser,
       variables: {
-        id: authUser.attributes.sub,
+        email: authUser.attributes.email,
       },
     });
-    yield put(getUserSuccess(user.data.getUser));
+
+    if (user.data.getUser === null) {
+      yield API.graphql({
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+        query: mutations.createUser,
+        variables: {
+          input: {
+            email: authUser.attributes.email,
+          },
+        },
+      });
+    }
+
+    yield put(
+      getUserSuccess(user.data.getUser || { email: authUser.attributes.email })
+    );
   } catch (error) {
     yield put(getUserFailure(error));
   }

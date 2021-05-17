@@ -10,9 +10,6 @@ export const createUser = /* GraphQL */ `
       email
       name
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -25,15 +22,11 @@ export const createUser = /* GraphQL */ `
           date
           venue
           genres
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       bands {
         items {
@@ -42,15 +35,11 @@ export const createUser = /* GraphQL */ `
           identityId
           name
           genre
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       artist {
         id
@@ -58,15 +47,11 @@ export const createUser = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       ordersByDate {
@@ -76,14 +61,10 @@ export const createUser = /* GraphQL */ `
           userName
           status
           createdAt
-          _version
-          _deleted
-          _lastChangedAt
           updatedAt
           userID
         }
         nextToken
-        startedAt
       }
       ordersByStatus {
         items {
@@ -92,14 +73,10 @@ export const createUser = /* GraphQL */ `
           userName
           status
           createdAt
-          _version
-          _deleted
-          _lastChangedAt
           updatedAt
           userID
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -113,9 +90,6 @@ export const updateUser = /* GraphQL */ `
       email
       name
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -128,15 +102,11 @@ export const updateUser = /* GraphQL */ `
           date
           venue
           genres
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       bands {
         items {
@@ -145,15 +115,11 @@ export const updateUser = /* GraphQL */ `
           identityId
           name
           genre
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       artist {
         id
@@ -161,15 +127,11 @@ export const updateUser = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       ordersByDate {
@@ -179,14 +141,10 @@ export const updateUser = /* GraphQL */ `
           userName
           status
           createdAt
-          _version
-          _deleted
-          _lastChangedAt
           updatedAt
           userID
         }
         nextToken
-        startedAt
       }
       ordersByStatus {
         items {
@@ -195,14 +153,10 @@ export const updateUser = /* GraphQL */ `
           userName
           status
           createdAt
-          _version
-          _deleted
-          _lastChangedAt
           updatedAt
           userID
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -216,9 +170,6 @@ export const deleteUser = /* GraphQL */ `
       email
       name
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -231,15 +182,11 @@ export const deleteUser = /* GraphQL */ `
           date
           venue
           genres
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       bands {
         items {
@@ -248,15 +195,11 @@ export const deleteUser = /* GraphQL */ `
           identityId
           name
           genre
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       artist {
         id
@@ -264,15 +207,11 @@ export const deleteUser = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       ordersByDate {
@@ -282,14 +221,10 @@ export const deleteUser = /* GraphQL */ `
           userName
           status
           createdAt
-          _version
-          _deleted
-          _lastChangedAt
           updatedAt
           userID
         }
         nextToken
-        startedAt
       }
       ordersByStatus {
         items {
@@ -298,14 +233,10 @@ export const deleteUser = /* GraphQL */ `
           userName
           status
           createdAt
-          _version
-          _deleted
-          _lastChangedAt
           updatedAt
           userID
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -323,9 +254,6 @@ export const createConcert = /* GraphQL */ `
       date
       venue
       genres
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -334,30 +262,22 @@ export const createConcert = /* GraphQL */ `
           id
           concertID
           bandID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       artists {
         items {
           id
           concertID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       tickets {
         items {
@@ -369,15 +289,11 @@ export const createConcert = /* GraphQL */ `
           quantity
           amount
           concertID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -395,9 +311,6 @@ export const updateConcert = /* GraphQL */ `
       date
       venue
       genres
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -406,30 +319,22 @@ export const updateConcert = /* GraphQL */ `
           id
           concertID
           bandID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       artists {
         items {
           id
           concertID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       tickets {
         items {
@@ -441,15 +346,11 @@ export const updateConcert = /* GraphQL */ `
           quantity
           amount
           concertID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -467,9 +368,6 @@ export const deleteConcert = /* GraphQL */ `
       date
       venue
       genres
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -478,30 +376,22 @@ export const deleteConcert = /* GraphQL */ `
           id
           concertID
           bandID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       artists {
         items {
           id
           concertID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
       tickets {
         items {
@@ -513,15 +403,11 @@ export const deleteConcert = /* GraphQL */ `
           quantity
           amount
           concertID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -537,9 +423,6 @@ export const createBand = /* GraphQL */ `
       identityId
       name
       genre
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -548,15 +431,11 @@ export const createBand = /* GraphQL */ `
           id
           bandID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -572,9 +451,6 @@ export const updateBand = /* GraphQL */ `
       identityId
       name
       genre
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -583,15 +459,11 @@ export const updateBand = /* GraphQL */ `
           id
           bandID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -607,9 +479,6 @@ export const deleteBand = /* GraphQL */ `
       identityId
       name
       genre
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -618,15 +487,11 @@ export const deleteBand = /* GraphQL */ `
           id
           bandID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -642,9 +507,6 @@ export const createArtist = /* GraphQL */ `
       name
       genre
       role
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -653,15 +515,11 @@ export const createArtist = /* GraphQL */ `
           id
           bandID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -677,9 +535,6 @@ export const updateArtist = /* GraphQL */ `
       name
       genre
       role
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -688,15 +543,11 @@ export const updateArtist = /* GraphQL */ `
           id
           bandID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -712,9 +563,6 @@ export const deleteArtist = /* GraphQL */ `
       name
       genre
       role
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -723,15 +571,11 @@ export const deleteArtist = /* GraphQL */ `
           id
           bandID
           artistID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -745,9 +589,6 @@ export const createArtistBandJoin = /* GraphQL */ `
       id
       bandID
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       band {
@@ -756,15 +597,11 @@ export const createArtistBandJoin = /* GraphQL */ `
         identityId
         name
         genre
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         members {
           nextToken
-          startedAt
         }
       }
       artist {
@@ -773,15 +610,11 @@ export const createArtistBandJoin = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       owner
@@ -797,9 +630,6 @@ export const updateArtistBandJoin = /* GraphQL */ `
       id
       bandID
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       band {
@@ -808,15 +638,11 @@ export const updateArtistBandJoin = /* GraphQL */ `
         identityId
         name
         genre
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         members {
           nextToken
-          startedAt
         }
       }
       artist {
@@ -825,15 +651,11 @@ export const updateArtistBandJoin = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       owner
@@ -849,9 +671,6 @@ export const deleteArtistBandJoin = /* GraphQL */ `
       id
       bandID
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       band {
@@ -860,15 +679,11 @@ export const deleteArtistBandJoin = /* GraphQL */ `
         identityId
         name
         genre
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         members {
           nextToken
-          startedAt
         }
       }
       artist {
@@ -877,15 +692,11 @@ export const deleteArtistBandJoin = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       owner
@@ -901,9 +712,6 @@ export const createConcertBandJoin = /* GraphQL */ `
       id
       concertID
       bandID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -914,23 +722,17 @@ export const createConcertBandJoin = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       band {
@@ -939,15 +741,11 @@ export const createConcertBandJoin = /* GraphQL */ `
         identityId
         name
         genre
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         members {
           nextToken
-          startedAt
         }
       }
       owner
@@ -963,9 +761,6 @@ export const updateConcertBandJoin = /* GraphQL */ `
       id
       concertID
       bandID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -976,23 +771,17 @@ export const updateConcertBandJoin = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       band {
@@ -1001,15 +790,11 @@ export const updateConcertBandJoin = /* GraphQL */ `
         identityId
         name
         genre
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         members {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1025,9 +810,6 @@ export const deleteConcertBandJoin = /* GraphQL */ `
       id
       concertID
       bandID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1038,23 +820,17 @@ export const deleteConcertBandJoin = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       band {
@@ -1063,15 +839,11 @@ export const deleteConcertBandJoin = /* GraphQL */ `
         identityId
         name
         genre
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         members {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1087,9 +859,6 @@ export const createConcertArtistJoin = /* GraphQL */ `
       id
       concertID
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1100,23 +869,17 @@ export const createConcertArtistJoin = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       artist {
@@ -1125,15 +888,11 @@ export const createConcertArtistJoin = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1149,9 +908,6 @@ export const updateConcertArtistJoin = /* GraphQL */ `
       id
       concertID
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1162,23 +918,17 @@ export const updateConcertArtistJoin = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       artist {
@@ -1187,15 +937,11 @@ export const updateConcertArtistJoin = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1211,9 +957,6 @@ export const deleteConcertArtistJoin = /* GraphQL */ `
       id
       concertID
       artistID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1224,23 +967,17 @@ export const deleteConcertArtistJoin = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       artist {
@@ -1249,15 +986,11 @@ export const deleteConcertArtistJoin = /* GraphQL */ `
         name
         genre
         role
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1278,9 +1011,6 @@ export const createTicket = /* GraphQL */ `
       quantity
       amount
       concertID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1291,23 +1021,17 @@ export const createTicket = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1317,14 +1041,10 @@ export const createTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -1343,9 +1063,6 @@ export const updateTicket = /* GraphQL */ `
       quantity
       amount
       concertID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1356,23 +1073,17 @@ export const updateTicket = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1382,14 +1093,10 @@ export const updateTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -1408,9 +1115,6 @@ export const deleteTicket = /* GraphQL */ `
       quantity
       amount
       concertID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       concert {
@@ -1421,23 +1125,17 @@ export const deleteTicket = /* GraphQL */ `
         date
         venue
         genres
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
         bands {
           nextToken
-          startedAt
         }
         artists {
           nextToken
-          startedAt
         }
         tickets {
           nextToken
-          startedAt
         }
       }
       owner
@@ -1447,14 +1145,10 @@ export const deleteTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -1469,9 +1163,6 @@ export const createTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       ticket {
@@ -1483,9 +1174,6 @@ export const createTicketOrder = /* GraphQL */ `
         quantity
         amount
         concertID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         concert {
@@ -1496,9 +1184,6 @@ export const createTicketOrder = /* GraphQL */ `
           date
           venue
           genres
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -1506,7 +1191,6 @@ export const createTicketOrder = /* GraphQL */ `
         owner
         orders {
           nextToken
-          startedAt
         }
       }
       order {
@@ -1515,13 +1199,9 @@ export const createTicketOrder = /* GraphQL */ `
         userName
         status
         createdAt
-        _version
-        _deleted
-        _lastChangedAt
         updatedAt
         tickets {
           nextToken
-          startedAt
         }
         userID
       }
@@ -1538,9 +1218,6 @@ export const updateTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       ticket {
@@ -1552,9 +1229,6 @@ export const updateTicketOrder = /* GraphQL */ `
         quantity
         amount
         concertID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         concert {
@@ -1565,9 +1239,6 @@ export const updateTicketOrder = /* GraphQL */ `
           date
           venue
           genres
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -1575,7 +1246,6 @@ export const updateTicketOrder = /* GraphQL */ `
         owner
         orders {
           nextToken
-          startedAt
         }
       }
       order {
@@ -1584,13 +1254,9 @@ export const updateTicketOrder = /* GraphQL */ `
         userName
         status
         createdAt
-        _version
-        _deleted
-        _lastChangedAt
         updatedAt
         tickets {
           nextToken
-          startedAt
         }
         userID
       }
@@ -1607,9 +1273,6 @@ export const deleteTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       ticket {
@@ -1621,9 +1284,6 @@ export const deleteTicketOrder = /* GraphQL */ `
         quantity
         amount
         concertID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         concert {
@@ -1634,9 +1294,6 @@ export const deleteTicketOrder = /* GraphQL */ `
           date
           venue
           genres
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -1644,7 +1301,6 @@ export const deleteTicketOrder = /* GraphQL */ `
         owner
         orders {
           nextToken
-          startedAt
         }
       }
       order {
@@ -1653,13 +1309,9 @@ export const deleteTicketOrder = /* GraphQL */ `
         userName
         status
         createdAt
-        _version
-        _deleted
-        _lastChangedAt
         updatedAt
         tickets {
           nextToken
-          startedAt
         }
         userID
       }
@@ -1677,9 +1329,6 @@ export const createOrder = /* GraphQL */ `
       userName
       status
       createdAt
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
       tickets {
         items {
@@ -1687,14 +1336,10 @@ export const createOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
       userID
     }
@@ -1711,9 +1356,6 @@ export const updateOrder = /* GraphQL */ `
       userName
       status
       createdAt
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
       tickets {
         items {
@@ -1721,14 +1363,10 @@ export const updateOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
       userID
     }
@@ -1745,9 +1383,6 @@ export const deleteOrder = /* GraphQL */ `
       userName
       status
       createdAt
-      _version
-      _deleted
-      _lastChangedAt
       updatedAt
       tickets {
         items {
@@ -1755,14 +1390,10 @@ export const deleteOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
       userID
     }

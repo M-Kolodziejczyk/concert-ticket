@@ -16,7 +16,6 @@ const Band = ({ userId }) => {
     createBandStart
   );
 
-  console.log("Values", values);
   return (
     <div className="band">
       <button
