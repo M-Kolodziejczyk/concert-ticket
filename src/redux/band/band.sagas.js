@@ -33,20 +33,18 @@ export function* createBand({ payload: band }) {
 
 export function* createInvitation({ payload: data }) {
   try {
-    const authUser = yield Auth.currentAuthenticatedUser();
     const res = yield API.graphql({
       authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.createInvitation,
       variables: {
         input: {
           ...data,
-          authorEmail: authUser.attributes.email,
         },
       },
     });
+
     yield put(createInvitationSuccess(res.data));
   } catch (error) {
-    console.log(error);
     yield put(createInvitationFailure);
   }
 }

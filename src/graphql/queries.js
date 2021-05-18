@@ -547,7 +547,8 @@ export const getInvitation = /* GraphQL */ `
       authorID
       authorEmail
       invitationTable
-      InvitationID
+      invitationID
+      status
       createdAt
       updatedAt
       owner
@@ -577,7 +578,8 @@ export const listInvitations = /* GraphQL */ `
         authorID
         authorEmail
         invitationTable
-        InvitationID
+        invitationID
+        status
         createdAt
         updatedAt
         owner

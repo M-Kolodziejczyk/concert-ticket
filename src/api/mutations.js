@@ -1410,7 +1410,8 @@ export const createInvitation = /* GraphQL */ `
       authorID
       authorEmail
       invitationTable
-      InvitationID
+      invitationID
+      status
       createdAt
       updatedAt
       owner
@@ -1428,7 +1429,8 @@ export const updateInvitation = /* GraphQL */ `
       authorID
       authorEmail
       invitationTable
-      InvitationID
+      invitationID
+      status
       createdAt
       updatedAt
       owner
@@ -1446,7 +1448,8 @@ export const deleteInvitation = /* GraphQL */ `
       authorID
       authorEmail
       invitationTable
-      InvitationID
+      invitationID
+      status
       createdAt
       updatedAt
       owner

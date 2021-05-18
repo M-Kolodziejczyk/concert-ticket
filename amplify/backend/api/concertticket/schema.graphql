@@ -208,6 +208,7 @@ type Invitation
   authorID: ID
   authorEmail: String
   invitationTable: String
-  InvitationID: ID
+  invitationID: ID
+  status: String
   createdAt: AWSDateTime!
 }

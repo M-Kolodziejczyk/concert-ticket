@@ -1,10 +1,15 @@
 import React from "react";
-import { createBandStart } from "../../../../redux/band/band.actions";
+import {
+  createBandStart,
+  createInvitationStart,
+} from "../../../../redux/band/band.actions";
 import validate from "../../../../validators/band";
+import validateInvite from "../../../../validators/send-invite";
 import useForm from "../../../../hooks/useForm.js";
 
 import CustomButton from "../../../../components/custom-button/custom-button.component";
 import FormInput from "../../../../components/form-input/form-input.component";
+import SendInvitation from "../../../../components/send-invitation/send-invitation.component";
 // import ErrorMessage from "../../../../components/error-message/error-message.component";
 
 import "./band.styles.scss";
@@ -32,9 +37,17 @@ const Band = ({ userId, bands }) => {
         <div className="band-createdBands">
           {bands &&
             bands.items.map((band) => (
-              <div>
+              <div key={band.id}>
                 <p>{band.name}</p>
                 <p>{band.genre}</p>
+
+                <SendInvitation
+                  authorEmail={band.userName}
+                  invitationID={band.id}
+                  invitationTable="band"
+                  callback={createInvitationStart}
+                  validate={validateInvite}
+                />
               </div>
             ))}
         </div>
