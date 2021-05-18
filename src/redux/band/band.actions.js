@@ -14,3 +14,18 @@ export const createBandFailure = (error) => ({
   type: BandActionTypes.CREATE_BAND_FAILURE,
   payload: error,
 });
+
+export const createInvitationStart = (data) => ({
+  type: BandActionTypes.CREATE_INVITATION_START,
+  payload: data,
+});
+
+export const createInvitationSuccess = (data) => ({
+  type: BandActionTypes.CREATE_INVITATION_SUCCESS,
+  payload: data,
+});
+
+export const createInvitationFailure = (error) => ({
+  type: BandActionTypes.CREATE_INVITATION_FAILURE,
+  payload: error,
+});

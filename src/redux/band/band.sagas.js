@@ -4,7 +4,12 @@ import * as mutations from "../../api/mutations";
 
 import BandActionTypes from "./band.types";
 
-import { createBandSuccess, createBandFailure } from "./band.actions";
+import {
+  createBandSuccess,
+  createBandFailure,
+  createInvitationSuccess,
+  createInvitationFailure,
+} from "./band.actions";
 
 export function* createBand({ payload: band }) {
   try {
@@ -26,10 +31,34 @@ export function* createBand({ payload: band }) {
   }
 }
 
+export function* createInvitation({ payload: data }) {
+  try {
+    const authUser = yield Auth.currentAuthenticatedUser();
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.createInvitation,
+      variables: {
+        input: {
+          ...data,
+          authorEmail: authUser.attributes.email,
+        },
+      },
+    });
+    yield put(createInvitationSuccess(res.data));
+  } catch (error) {
+    console.log(error);
+    yield put(createInvitationFailure);
+  }
+}
+
+export function* onCreateInvitationStart() {
+  yield takeLatest(BandActionTypes.CREATE_INVITATION_START, createInvitation);
+}
+
 export function* onCreateBandStart() {
   yield takeLatest(BandActionTypes.CREATE_BAND_START, createBand);
 }
 
 export function* bandSagas() {
-  yield all([call(onCreateBandStart)]);
+  yield all([call(onCreateBandStart), call(onCreateInvitationStart)]);
 }
