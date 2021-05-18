@@ -212,3 +212,8 @@ type Invitation
   status: String
   createdAt: AWSDateTime!
 }
+
+type Subscription {
+  onCreateInvitationByEmail(email: String!): Invitation
+    @aws_subscribe(mutations: ["createInvitation"])
+}

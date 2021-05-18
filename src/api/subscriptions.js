@@ -1,6 +1,22 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateInvitationByEmail = /* GraphQL */ `
+  subscription OnCreateInvitationByEmail($email: String!) {
+    onCreateInvitationByEmail(email: $email) {
+      email
+      message
+      authorID
+      authorEmail
+      invitationTable
+      invitationID
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
