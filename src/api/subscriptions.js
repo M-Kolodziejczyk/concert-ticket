@@ -1309,3 +1309,48 @@ export const onDeleteTicket = /* GraphQL */ `
     }
   }
 `;
+export const onCreateInvitation = /* GraphQL */ `
+  subscription OnCreateInvitation {
+    onCreateInvitation {
+      email
+      message
+      authorID
+      authorEmail
+      invitationTable
+      InvitationID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateInvitation = /* GraphQL */ `
+  subscription OnUpdateInvitation {
+    onUpdateInvitation {
+      email
+      message
+      authorID
+      authorEmail
+      invitationTable
+      InvitationID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteInvitation = /* GraphQL */ `
+  subscription OnDeleteInvitation {
+    onDeleteInvitation {
+      email
+      message
+      authorID
+      authorEmail
+      invitationTable
+      InvitationID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

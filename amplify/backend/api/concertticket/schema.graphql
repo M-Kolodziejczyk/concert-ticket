@@ -191,3 +191,23 @@ type Order
   createdAt: String!
   tickets: [TicketOrder] @connection(keyName: "byOrder", fields: ["id"])
 }
+
+type Invitation
+  @model
+  @key(fields: ["email", "createdAt"])
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groups: ["Admin"] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  email: String!
+  message: String
+  authorID: ID
+  authorEmail: String
+  invitationTable: String
+  InvitationID: ID
+  createdAt: AWSDateTime!
+}

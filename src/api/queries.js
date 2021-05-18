@@ -539,3 +539,50 @@ export const getTicket = /* GraphQL */ `
     }
   }
 `;
+export const getInvitation = /* GraphQL */ `
+  query GetInvitation($email: String!, $createdAt: AWSDateTime!) {
+    getInvitation(email: $email, createdAt: $createdAt) {
+      email
+      message
+      authorID
+      authorEmail
+      invitationTable
+      InvitationID
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listInvitations = /* GraphQL */ `
+  query ListInvitations(
+    $email: String
+    $createdAt: ModelStringKeyConditionInput
+    $filter: ModelInvitationFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listInvitations(
+      email: $email
+      createdAt: $createdAt
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        email
+        message
+        authorID
+        authorEmail
+        invitationTable
+        InvitationID
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
