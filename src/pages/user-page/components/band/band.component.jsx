@@ -45,9 +45,19 @@ const Band = ({ userId, bands }) => {
                   authorEmail={band.userName}
                   invitationID={band.id}
                   invitationTable="band"
+                  currentInvitations={band.invitations || []}
                   callback={createInvitationStart}
                   validate={validateInvite}
                 />
+                {band?.invitations &&
+                  band.invitations.map((invitation, i) => (
+                    <div key={i}>
+                      <div>
+                        <p>Email: {JSON.parse(invitation).email}</p>
+                        <p>Status: {JSON.parse(invitation).status}</p>
+                      </div>
+                    </div>
+                  ))}
               </div>
             ))}
         </div>
