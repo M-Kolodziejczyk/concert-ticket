@@ -15,9 +15,9 @@ export const createBandFailure = (error) => ({
   payload: error,
 });
 
-export const createInvitationStart = (data) => ({
+export const createInvitationStart = (values, invitations) => ({
   type: BandActionTypes.CREATE_INVITATION_START,
-  payload: data,
+  payload: { values, invitations },
 });
 
 export const createInvitationSuccess = (data) => ({

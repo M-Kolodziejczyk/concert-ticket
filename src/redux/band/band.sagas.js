@@ -31,18 +31,32 @@ export function* createBand({ payload: band }) {
   }
 }
 
-export function* createInvitation({ payload: data }) {
+export function* onCreateBandStart() {
+  yield takeLatest(BandActionTypes.CREATE_BAND_START, createBand);
+}
+
+export function* createInvitation({ payload: { values, invitations } }) {
   try {
-    const res = yield API.graphql({
+    yield API.graphql({
       authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.createInvitation,
       variables: {
         input: {
-          ...data,
+          ...values,
         },
       },
     });
 
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.updateBand,
+      variables: {
+        input: {
+          id: values.invitationID,
+          invitations: invitations,
+        },
+      },
+    });
     yield put(createInvitationSuccess(res.data));
   } catch (error) {
     yield put(createInvitationFailure);
@@ -51,10 +65,6 @@ export function* createInvitation({ payload: data }) {
 
 export function* onCreateInvitationStart() {
   yield takeLatest(BandActionTypes.CREATE_INVITATION_START, createInvitation);
-}
-
-export function* onCreateBandStart() {
-  yield takeLatest(BandActionTypes.CREATE_BAND_START, createBand);
 }
 
 export function* bandSagas() {
