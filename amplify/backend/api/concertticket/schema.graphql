@@ -53,7 +53,7 @@ type Band
   identityId: ID
   name: String!
   genre: String!
-  invitations: [String]
+  invitations: [AWSJSON]
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
 }
 
