@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { API } from "aws-amplify";
+
 import { loadUserStart } from "./redux/user/user.actions";
+import { createInviteNotificationStart } from "./redux/notification/notification.actions";
+import * as subscriptions from "./api/subscriptions";
 
 import PrivateRoute from "./components/private-route/private-route";
 
@@ -16,11 +20,30 @@ import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLogged = useSelector((state) => state.user.isLogged);
+  const user = useSelector((state) => state.user);
+  const isLogged = user.isLogged;
+  const email = user.currentUser?.email;
 
   useEffect(() => {
     dispatch(loadUserStart());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (email) {
+      const subs = API.graphql({
+        query: subscriptions.onCreateInvitationByEmail,
+        variables: {
+          email,
+        },
+      }).subscribe({
+        next: ({ provider, value }) =>
+          dispatch(createInviteNotificationStart(value)),
+        error: (error) => console.warn(error),
+      });
+
+      return () => subs.unsubscribe();
+    }
+  }, [email, dispatch]);
 
   return (
     <div>
