@@ -43,6 +43,7 @@ export const getUser = /* GraphQL */ `
           date
           venue
           genres
+          invitations
           createdAt
           updatedAt
           owner
@@ -56,6 +57,7 @@ export const getUser = /* GraphQL */ `
           identityId
           name
           genre
+          invitations
           createdAt
           updatedAt
           owner
@@ -170,6 +172,7 @@ export const getTicketOrder = /* GraphQL */ `
           date
           venue
           genres
+          invitations
           createdAt
           updatedAt
           owner
@@ -282,6 +285,7 @@ export const listConcerts = /* GraphQL */ `
         date
         venue
         genres
+        invitations
         createdAt
         updatedAt
         owner
@@ -309,6 +313,7 @@ export const getConcert = /* GraphQL */ `
       date
       venue
       genres
+      invitations
       createdAt
       updatedAt
       owner
@@ -366,6 +371,7 @@ export const listBands = /* GraphQL */ `
         identityId
         name
         genre
+        invitations
         createdAt
         updatedAt
         owner
@@ -385,6 +391,7 @@ export const getBand = /* GraphQL */ `
       identityId
       name
       genre
+      invitations
       createdAt
       updatedAt
       owner
@@ -480,6 +487,7 @@ export const listTickets = /* GraphQL */ `
           date
           venue
           genres
+          invitations
           createdAt
           updatedAt
           owner
@@ -522,6 +530,7 @@ export const getTicket = /* GraphQL */ `
         date
         venue
         genres
+        invitations
         createdAt
         updatedAt
         owner

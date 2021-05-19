@@ -31,6 +31,7 @@ type Concert
   date: String!
   venue: String!
   genres: String!
+  invitations: [String]
   tickets: [Ticket] @connection(keyName: "byConcert", fields: ["id"])
   bands: [ConcertBandJoin] @connection(keyName: "byConcert", fields: ["id"])
   artists: [ConcertArtistJoin] @connection(keyName: "byConcert", fields: ["id"])
@@ -52,6 +53,7 @@ type Band
   identityId: ID
   name: String!
   genre: String!
+  invitations: [String]
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
 }
 
