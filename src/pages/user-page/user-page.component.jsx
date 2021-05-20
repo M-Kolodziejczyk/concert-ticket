@@ -105,7 +105,7 @@ const UserPage = () => {
             <Artist artistID={user.artistID} />
           </div>
           <div
-            className="tab-pane fade  show active"
+            className="tab-pane fade"
             id="v-pills-messages"
             role="tabpanel"
             aria-labelledby="v-pills-messages-tab"
@@ -121,7 +121,7 @@ const UserPage = () => {
             Concert Page
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane fade show active"
             id="invitations"
             role="tabpanel"
             aria-labelledby="invitations-tab"
