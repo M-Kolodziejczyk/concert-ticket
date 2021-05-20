@@ -4,6 +4,7 @@ import { getUserStart } from "../../redux/user/user.actions";
 
 import Artist from "./components/artist/artist.component";
 import Band from "./components/band/band.component";
+import Invitation from "./components/invitation/invitation.component";
 
 import "./user-page.styles.scss";
 
@@ -73,6 +74,18 @@ const UserPage = () => {
           >
             Concerts
           </button>
+          <button
+            className="nav-link"
+            id="invitations-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#invitations"
+            type="button"
+            role="tab"
+            aria-controls="v-pills-settings"
+            aria-selected="false"
+          >
+            Invitations
+          </button>
         </div>
         <div className="tab-content" id="tabContent">
           <div
@@ -106,6 +119,14 @@ const UserPage = () => {
             aria-labelledby="v-pills-settings-tab"
           >
             Concert Page
+          </div>
+          <div
+            className="tab-pane fade"
+            id="invitations"
+            role="tabpanel"
+            aria-labelledby="invitations-tab"
+          >
+            <Invitation email={user.email} />
           </div>
         </div>
       </div>
