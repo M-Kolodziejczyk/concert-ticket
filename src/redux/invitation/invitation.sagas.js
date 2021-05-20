@@ -19,10 +19,8 @@ export function* listUserInvitation({ payload: email }) {
       },
     });
 
-    console.log("RES", res);
     yield put(listUserInvitationsSuccess(res.data.listInvitations.items));
   } catch (error) {
-    console.log("Error", error);
     yield put(listUserInvitationsFailure(error));
   }
 }
