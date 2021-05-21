@@ -219,3 +219,8 @@ type Subscription {
   onCreateInvitationByEmail(email: String!): Invitation
     @aws_subscribe(mutations: ["createInvitation"])
 }
+
+type Mutation {
+  acceptInvitation(bandID: ID, artistID: ID, invitationID: ID): String
+    @function(name: "acceptInvitation-${env}")
+}
