@@ -270,39 +270,6 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
-export const listConcerts = /* GraphQL */ `
-  query ListConcerts(
-    $filter: ModelConcertFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listConcerts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userName
-        identityId
-        name
-        date
-        venue
-        genres
-        invitations
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
 export const getConcert = /* GraphQL */ `
   query GetConcert($id: ID!) {
     getConcert(id: $id) {
@@ -358,24 +325,32 @@ export const getConcert = /* GraphQL */ `
     }
   }
 `;
-export const listBands = /* GraphQL */ `
-  query ListBands(
-    $filter: ModelBandFilterInput
+export const listConcerts = /* GraphQL */ `
+  query ListConcerts(
+    $filter: ModelConcertFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listConcerts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         userName
         identityId
         name
-        genre
+        date
+        venue
+        genres
         invitations
         createdAt
         updatedAt
         owner
-        members {
+        bands {
+          nextToken
+        }
+        artists {
+          nextToken
+        }
+        tickets {
           nextToken
         }
       }
@@ -409,23 +384,24 @@ export const getBand = /* GraphQL */ `
     }
   }
 `;
-export const listArtists = /* GraphQL */ `
-  query ListArtists(
-    $filter: ModelArtistFilterInput
+export const listBands = /* GraphQL */ `
+  query ListBands(
+    $filter: ModelBandFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listArtists(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listBands(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userName
         identityId
         name
         genre
-        role
+        invitations
         createdAt
         updatedAt
         owner
-        bands {
+        members {
           nextToken
         }
       }
@@ -458,41 +434,25 @@ export const getArtist = /* GraphQL */ `
     }
   }
 `;
-export const listTickets = /* GraphQL */ `
-  query ListTickets(
-    $filter: ModelTicketFilterInput
+export const listArtists = /* GraphQL */ `
+  query ListArtists(
+    $filter: ModelArtistFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listArtists(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        description
-        price
-        startDate
-        endDate
-        quantity
-        amount
-        concertID
-        orders {
-          nextToken
-        }
+        identityId
+        name
+        genre
+        role
         createdAt
         updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
         owner
+        bands {
+          nextToken
+        }
       }
       nextToken
     }
@@ -545,6 +505,46 @@ export const getTicket = /* GraphQL */ `
         }
       }
       owner
+    }
+  }
+`;
+export const listTickets = /* GraphQL */ `
+  query ListTickets(
+    $filter: ModelTicketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        description
+        price
+        startDate
+        endDate
+        quantity
+        amount
+        concertID
+        orders {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        concert {
+          id
+          userName
+          identityId
+          name
+          date
+          venue
+          genres
+          invitations
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
     }
   }
 `;
