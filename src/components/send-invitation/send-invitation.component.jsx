@@ -11,8 +11,9 @@ const SendInviation = (props) => {
   const {
     callback,
     validate,
-    invitationID,
-    invitationTable,
+    senderTableElementID,
+    senderTableElementName,
+    senderTable,
     authorEmail,
     currentInvitations,
   } = props;
@@ -21,8 +22,9 @@ const SendInviation = (props) => {
     email: "",
     message: "",
     status: "new",
-    invitationID,
-    invitationTable,
+    senderTableElementID,
+    senderTableElementName,
+    senderTable,
     authorEmail,
   };
   const [isSubmitting, setIsSubmitting] = useState(false);
