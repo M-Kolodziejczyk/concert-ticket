@@ -52,7 +52,7 @@ export function* createInvitation({ payload: { values, invitations } }) {
       query: mutations.updateBand,
       variables: {
         input: {
-          id: values.invitationID,
+          id: values.senderTableElementID,
           invitations: invitations,
         },
       },
