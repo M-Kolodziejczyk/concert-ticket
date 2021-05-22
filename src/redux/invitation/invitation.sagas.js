@@ -1,12 +1,15 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 import { API } from "aws-amplify";
 import * as queries from "../../api/queries";
+import * as mutations from "../../api/mutations";
 
 import InvitationActionTypes from "./invitation.type";
 
 import {
   listUserInvitationsSuccess,
   listUserInvitationsFailure,
+  acceptBandInvitationSuccess,
+  acceptBandInvitationFailure,
 } from "./invitation.actions";
 
 export function* listUserInvitation({ payload: email }) {
@@ -32,6 +35,31 @@ export function* onListUserInvitationsStart() {
   );
 }
 
+export function* acceptBandInvitation({
+  payload: { artistID, bandID, invitationID },
+}) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.acceptInvitation,
+      variables: {
+        bandID,
+        artistID,
+        invitationID,
+      },
+    });
+    yield put(acceptBandInvitationSuccess(res));
+  } catch (error) {
+    yield put(acceptBandInvitationFailure(error));
+  }
+}
+
+export function* onAcceptBandInvitation() {
+  yield takeLatest(
+    InvitationActionTypes.ACCEPT_BAND_INVITATION_START,
+    acceptBandInvitation
+  );
+}
+
 export function* invitationSagas() {
-  yield all([call(onListUserInvitationsStart)]);
+  yield all([call(onListUserInvitationsStart), call(onAcceptBandInvitation)]);
 }

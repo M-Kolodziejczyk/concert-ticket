@@ -14,3 +14,18 @@ export const listUserInvitationsFailure = (error) => ({
   type: InvitationActionTypes.LIST_USER_INVITATIONS_FAILURE,
   payload: error,
 });
+
+export const acceptBandInvitationStart = (data) => ({
+  type: InvitationActionTypes.ACCEPT_BAND_INVITATION_START,
+  payload: data,
+});
+
+export const acceptBandInvitationSuccess = (res) => ({
+  type: InvitationActionTypes.ACCEPT_BAND_INVITATION_SUCCESS,
+  payload: res,
+});
+
+export const acceptBandInvitationFailure = (error) => ({
+  type: InvitationActionTypes.LIST_USER_INVITATIONS_FAILURE,
+  payload: error,
+});

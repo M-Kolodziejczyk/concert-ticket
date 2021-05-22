@@ -3,6 +3,7 @@ import InvitationActionTypes from "./invitation.type";
 const INITIAL_STATE = {
   invitations: [],
   errorMessage: {},
+  successMessage: {},
   bandInvitations: [],
   concertInvitations: [],
 };
@@ -14,10 +15,10 @@ const invitationReducer = (state = INITIAL_STATE, action) => {
         ...state,
         invitations: action.payload,
         bandInvitations: action.payload.filter(
-          (item) => item.invitationTable === "band"
+          (item) => item.senderTable === "band"
         ),
         concertInvitations: action.payload.filter(
-          (item) => item.invitationTable === "concert"
+          (item) => item.senderTable === "concert"
         ),
         errorMessage: {},
       };
@@ -27,6 +28,22 @@ const invitationReducer = (state = INITIAL_STATE, action) => {
         error: action.payload,
         errorMessage: {
           listUserInvitations: "List User invittions failure",
+        },
+      };
+    case InvitationActionTypes.ACCEPT_BAND_INVITATION_SUCCESS:
+      return {
+        ...state,
+        errorMessage: {},
+        successMessage: {
+          acceptBandInvitation: "You accepted band invitation",
+        },
+      };
+    case InvitationActionTypes.ACCEPT_BAND_INVITATION_FAILURE:
+      return {
+        ...state,
+        successMessage: {},
+        errorMessage: {
+          acceptBandInvitation: "Accept invitation failure",
         },
       };
     default:
