@@ -11,6 +11,7 @@ import "./user-page.styles.scss";
 const UserPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  console.log("USER", user);
 
   useEffect(() => {
     dispatch(getUserStart());
@@ -126,7 +127,7 @@ const UserPage = () => {
             role="tabpanel"
             aria-labelledby="invitations-tab"
           >
-            <Invitation email={user.email} />
+            <Invitation email={user.email} artistID={user.artistID} />
           </div>
         </div>
       </div>

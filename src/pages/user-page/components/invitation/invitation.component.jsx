@@ -1,21 +1,34 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { listUserInvitationsStart } from "../../../../redux/invitation/invitation.actions";
+import {
+  listUserInvitationsStart,
+  acceptBandInvitationStart,
+} from "../../../../redux/invitation/invitation.actions";
 
 import "./invitation.styles.scss";
 
-const Invitation = ({ email }) => {
+const Invitation = ({ email, artistID }) => {
+  const dispatch = useDispatch();
   const bandInvitations = useSelector(
     (state) => state.invitation.bandInvitations
   );
 
-  const dispatch = useDispatch();
   useEffect(() => {
     if (email) {
       dispatch(listUserInvitationsStart(email));
     }
   }, [dispatch, email]);
+
+  const handleAcceptInvitation = (invitation) => {
+    dispatch(
+      acceptBandInvitationStart({
+        artistID,
+        bandID: invitation.senderTableElementID,
+        invitationID: invitation.email + invitation.createdAt,
+      })
+    );
+  };
 
   return (
     <div>
@@ -23,12 +36,14 @@ const Invitation = ({ email }) => {
         <h4>Band Invittions</h4>
         <div className="band-container">
           {bandInvitations.length > 0 &&
-            bandInvitations.map((band, id) => (
+            bandInvitations.map((invitation, id) => (
               <div key={id}>
-                <p>Sent By {band.authorEmail}</p>
-                <p></p>
-                <p>Message: {band.message}</p>
-                <button>Accept</button>
+                <p>Sent By {invitation.authorEmail}</p>
+                <p>Band: {invitation.senderTableElementName}</p>
+                <p>Message: {invitation.message}</p>
+                <button onClick={() => handleAcceptInvitation(invitation)}>
+                  Accept
+                </button>
                 <button>Discard</button>
               </div>
             ))}

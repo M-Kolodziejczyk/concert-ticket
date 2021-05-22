@@ -52,7 +52,8 @@ const Artist = (id) => {
     if (id.artistID && Object.keys(artist).length === 0) {
       dispatch(getArtistStart(id.artistID));
     }
-  }, [id, artist, dispatch]);
+    // eslint-disable-next-line
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (artist.identityId) {

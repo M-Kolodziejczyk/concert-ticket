@@ -21,6 +21,8 @@ const Band = ({ userId, bands }) => {
     createBandStart
   );
 
+  console.log(bands);
+
   return (
     <div className="band">
       <button
@@ -43,8 +45,9 @@ const Band = ({ userId, bands }) => {
 
                 <SendInvitation
                   authorEmail={band.userName}
-                  invitationID={band.id}
-                  invitationTable="band"
+                  senderTableElementID={band.id}
+                  senderTableElementName={band.name}
+                  senderTable="band"
                   currentInvitations={band.invitations || []}
                   callback={createInvitationStart}
                   validate={validateInvite}
