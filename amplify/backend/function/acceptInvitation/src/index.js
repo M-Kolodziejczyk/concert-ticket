@@ -21,14 +21,14 @@ async function createArtistBandJoin(params) {
 }
 
 exports.handler = async (event, context) => {
-  const dateObj = new Date();
+  const date = new Date().toISOString();
   const params = {
     TableName: process.env.API_CONCERTTICKET_ARTISTBANDJOINTABLE_NAME,
     Item: {
       id: context.awsRequestId,
       bandID: event.arguments.bandID,
       artistID: event.arguments.artistID,
-      createdAt: dateObj,
+      createdAt: date,
     },
   };
   try {

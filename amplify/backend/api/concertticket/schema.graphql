@@ -209,8 +209,9 @@ type Invitation
   message: String
   authorID: ID
   authorEmail: String
-  invitationTable: String
-  invitationID: ID
+  senderTable: String
+  senderTableElementID: ID
+  senderTableElementName: String
   status: String
   createdAt: AWSDateTime!
 }

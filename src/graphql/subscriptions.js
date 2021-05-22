@@ -8,8 +8,9 @@ export const onCreateInvitationByEmail = /* GraphQL */ `
       message
       authorID
       authorEmail
-      invitationTable
-      invitationID
+      senderTable
+      senderTableElementID
+      senderTableElementName
       status
       createdAt
       updatedAt
@@ -1362,8 +1363,9 @@ export const onCreateInvitation = /* GraphQL */ `
       message
       authorID
       authorEmail
-      invitationTable
-      invitationID
+      senderTable
+      senderTableElementID
+      senderTableElementName
       status
       createdAt
       updatedAt
@@ -1378,8 +1380,9 @@ export const onUpdateInvitation = /* GraphQL */ `
       message
       authorID
       authorEmail
-      invitationTable
-      invitationID
+      senderTable
+      senderTableElementID
+      senderTableElementName
       status
       createdAt
       updatedAt
@@ -1394,8 +1397,9 @@ export const onDeleteInvitation = /* GraphQL */ `
       message
       authorID
       authorEmail
-      invitationTable
-      invitationID
+      senderTable
+      senderTableElementID
+      senderTableElementName
       status
       createdAt
       updatedAt
