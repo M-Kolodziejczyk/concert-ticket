@@ -11,7 +11,6 @@ import "./user-page.styles.scss";
 const UserPage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  console.log("USER", user);
 
   useEffect(() => {
     dispatch(getUserStart());

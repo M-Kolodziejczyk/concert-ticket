@@ -25,7 +25,8 @@ const Invitation = ({ email, artistID }) => {
       acceptBandInvitationStart({
         artistID,
         bandID: invitation.senderTableElementID,
-        invitationID: invitation.email + invitation.createdAt,
+        invitationEmail: invitation.email,
+        invitationCreatedAt: invitation.createdAt,
       })
     );
   };

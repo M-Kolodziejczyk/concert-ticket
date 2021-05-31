@@ -21,8 +21,6 @@ const Band = ({ userId, bands }) => {
     createBandStart
   );
 
-  console.log(bands);
-
   return (
     <div className="band">
       <button
@@ -42,22 +40,22 @@ const Band = ({ userId, bands }) => {
               <div key={band.id}>
                 <p>{band.name}</p>
                 <p>{band.genre}</p>
-
+                <p>{typeof JSON.parse(band.invitations)}</p>
                 <SendInvitation
                   authorEmail={band.userName}
                   senderTableElementID={band.id}
                   senderTableElementName={band.name}
                   senderTable="band"
-                  currentInvitations={band.invitations || []}
+                  currentInvitations={band?.invitations || "[]"}
                   callback={createInvitationStart}
                   validate={validateInvite}
                 />
                 {band?.invitations &&
-                  band.invitations.map((invitation, i) => (
+                  JSON.parse(band?.invitations).map((invitation, i) => (
                     <div key={i}>
                       <div>
-                        <p>Email: {JSON.parse(invitation).email}</p>
-                        <p>Status: {JSON.parse(invitation).status}</p>
+                        <p>Email: {invitation.email}</p>
+                        <p>Status: {invitation.status}</p>
                       </div>
                     </div>
                   ))}
