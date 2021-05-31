@@ -53,7 +53,7 @@ type Band
   identityId: ID
   name: String!
   genre: String!
-  invitations: [AWSJSON]
+  invitations: AWSJSON
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
 }
 
@@ -222,6 +222,10 @@ type Subscription {
 }
 
 type Mutation {
-  acceptInvitation(bandID: ID, artistID: ID, invitationID: ID): String
-    @function(name: "acceptInvitation-${env}")
+  acceptInvitation(
+    bandID: ID
+    artistID: ID
+    invitationEmail: String
+    invitationCreatedAt: String
+  ): String @function(name: "acceptInvitation-${env}")
 }

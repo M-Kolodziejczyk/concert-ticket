@@ -40,7 +40,7 @@
         },
         "acceptInvitation": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
-          "s3Key": "amplify-builds/acceptInvitation-33485574595a7a367748-build.zip"
+          "s3Key": "amplify-builds/acceptInvitation-46467078487962797454-build.zip"
         }
       }
     }

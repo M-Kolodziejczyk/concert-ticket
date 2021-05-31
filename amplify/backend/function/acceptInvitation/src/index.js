@@ -12,30 +12,94 @@ Amplify Params - DO NOT EDIT */
 const AWS = require("aws-sdk");
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-async function createArtistBandJoin(params) {
+async function createArtistBandJoin(event, context) {
+  const date = new Date().toISOString();
   try {
-    await docClient.put(params).promise();
+    await docClient
+      .put({
+        TableName: process.env.API_CONCERTTICKET_ARTISTBANDJOINTABLE_NAME,
+        Item: {
+          id: context.awsRequestId,
+          bandID: event.arguments.bandID,
+          artistID: event.arguments.artistID,
+          createdAt: date,
+        },
+      })
+      .promise();
+  } catch (error) {
+    return error;
+  }
+}
+
+async function updateBand(event) {
+  try {
+    const res = await docClient
+      .get({
+        TableName: process.env.API_CONCERTTICKET_BANDTABLE_NAME,
+        Key: {
+          id: event.arguments.bandID,
+        },
+      })
+      .promise();
+
+    let indexToRemove = null;
+    res.Item.invitations.forEach((item, id) => {
+      if (item.email === event.arguments.invitationEmail) {
+        indexToRemove = id;
+      }
+    });
+
+    await docClient
+      .update({
+        TableName: process.env.API_CONCERTTICKET_BANDTABLE_NAME,
+        Key: {
+          id: event.arguments.bandID,
+        },
+        UpdateExpression: `REMOVE invitations[${indexToRemove}]`,
+        ConditionExpression: `invitations[${indexToRemove}] = :valueToRemove`,
+        ExpressionAttributeValues: {
+          ":valueToRemove": res.Item.invitations[indexToRemove],
+        },
+      })
+      .promise();
+
+    return {
+      body: "SUCCESS",
+    };
+  } catch (e) {
+    return e;
+  }
+}
+
+async function deleteInvitation(event) {
+  try {
+    await docClient
+      .delete({
+        TableName: process.env.API_CONCERTTICKET_INVITATIONTABLE_NAME,
+        Key: {
+          email: event.arguments.invitationEmail,
+          createdAt: event.arguments.invitationCreatedAt,
+        },
+      })
+      .promise();
   } catch (error) {
     return error;
   }
 }
 
 exports.handler = async (event, context) => {
-  const date = new Date().toISOString();
-  const params = {
-    TableName: process.env.API_CONCERTTICKET_ARTISTBANDJOINTABLE_NAME,
-    Item: {
-      id: context.awsRequestId,
-      bandID: event.arguments.bandID,
-      artistID: event.arguments.artistID,
-      createdAt: date,
-    },
-  };
   try {
-    const res = await createArtistBandJoin(params);
-    console.log("RES", res);
-    return { body: "SUCCESS" };
+    await createArtistBandJoin(event, context);
+
+    await updateBand(event);
+
+    await deleteInvitation(event);
+
+    return {
+      body: "SUCCESS",
+    };
   } catch (err) {
+    console.log("ERRRRRR", err);
     return { error: err };
   }
 };

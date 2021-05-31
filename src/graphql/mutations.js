@@ -2,11 +2,17 @@
 // this is an auto generated file. This will be overwritten
 
 export const acceptInvitation = /* GraphQL */ `
-  mutation AcceptInvitation($bandID: ID, $artistID: ID, $invitationID: ID) {
+  mutation AcceptInvitation(
+    $bandID: ID
+    $artistID: ID
+    $invitationEmail: String
+    $invitationCreatedAt: String
+  ) {
     acceptInvitation(
       bandID: $bandID
       artistID: $artistID
-      invitationID: $invitationID
+      invitationEmail: $invitationEmail
+      invitationCreatedAt: $invitationCreatedAt
     )
   }
 `;
