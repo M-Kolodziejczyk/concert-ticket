@@ -36,7 +36,7 @@ export function* onListUserInvitationsStart() {
 }
 
 export function* acceptBandInvitation({
-  payload: { artistID, bandID, invitationID },
+  payload: { artistID, bandID, invitationCreatedAt, invitationEmail },
 }) {
   try {
     const res = yield API.graphql({
@@ -44,7 +44,8 @@ export function* acceptBandInvitation({
       variables: {
         bandID,
         artistID,
-        invitationID,
+        invitationEmail,
+        invitationCreatedAt,
       },
     });
     yield put(acceptBandInvitationSuccess(res));
