@@ -88,3 +88,17 @@ export const getArtistImageFailure = (error) => ({
   type: ArtistActionTypes.GET_ARTIST_IMAGE_FAILURE,
   payload: error,
 });
+
+export const listArtistsStart = () => ({
+  type: ArtistActionTypes.LIST_ARTISTS_START,
+});
+
+export const listArtistsSuccess = (res) => ({
+  type: ArtistActionTypes.LIST_ARTISTS_SUCCESS,
+  payload: res,
+});
+
+export const listArtistsFailure = (error) => ({
+  type: ArtistActionTypes.LIST_ARTISTS_FAILURE,
+  payload: error,
+});

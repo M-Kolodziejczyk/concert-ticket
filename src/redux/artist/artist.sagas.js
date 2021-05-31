@@ -16,6 +16,8 @@ import {
   uploadArtistImageFailure,
   getArtistImageSuccess,
   getArtistImageFailure,
+  listArtistsSuccess,
+  listArtistsFailure,
 } from "./artist.actions";
 
 export function* createArtist({ payload: artist }) {
@@ -136,6 +138,24 @@ export function* onGetArtistImageStart() {
   yield takeLatest(ArtistActionTypes.GET_ARTIST_IMAGE_START, getArtistImage);
 }
 
+export function* listArtists() {
+  try {
+    const res = yield API.graphql({
+      authMode: "API_KEY",
+      query: queries.listArtists,
+    });
+
+    yield put(listArtistsSuccess(res.data.listArtists.items));
+  } catch (error) {
+    console.log(error);
+    yield put(listArtistsFailure(error));
+  }
+}
+
+export function* onListArtistsStart() {
+  yield takeLatest(ArtistActionTypes.LIST_ARTISTS_START, listArtists);
+}
+
 export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
@@ -143,5 +163,6 @@ export function* artistSagas() {
     call(onUpdateArtistStart),
     call(onUploadArtistImageStart),
     call(onGetArtistImageStart),
+    call(onListArtistsStart),
   ]);
 }

@@ -1,6 +1,7 @@
 import ArtistActionTypes from "./artist.types";
 
 const INITIAL_STATE = {
+  artists: [],
   userArtist: {},
   userArtistImageUrl: "",
   successMessage: {},
@@ -78,6 +79,21 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         ...state,
         userArtistImageUrl: "",
         errorMessage: { getArtistImage: "Get artist Image failure" },
+      };
+    case ArtistActionTypes.LIST_ARTISTS_SUCCESS:
+      return {
+        ...state,
+        artists: action.payload,
+        errorMessage: {},
+      };
+    case ArtistActionTypes.LIST_ARTISTS_FAILURE:
+      return {
+        ...state,
+        artists: [],
+        successMessage: {},
+        errorMessage: {
+          artists: "List artists failure",
+        },
       };
     default:
       return state;
