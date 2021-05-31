@@ -46,6 +46,22 @@ const invitationReducer = (state = INITIAL_STATE, action) => {
           acceptBandInvitation: "Accept invitation failure",
         },
       };
+    case InvitationActionTypes.REJECT_BAND_INVITATION_SUCCESS:
+      return {
+        ...state,
+        successMessage: {
+          rejectBandInvitation: "Band invitation rejected",
+        },
+        errorMessage: {},
+      };
+    case InvitationActionTypes.REJECT_BAND_INVITATION_FAILURE:
+      return {
+        ...state,
+        errorMessage: {
+          rejectBandInvitation: "Band invitation reject failure",
+        },
+        successMessage: {},
+      };
     default:
       return state;
   }
