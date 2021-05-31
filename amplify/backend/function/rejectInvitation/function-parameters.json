@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "storage": {
+      "Band:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "Invitation:@model(appsync)": [
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

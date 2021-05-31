@@ -16,6 +16,19 @@ export const acceptInvitation = /* GraphQL */ `
     )
   }
 `;
+export const rejectInvitation = /* GraphQL */ `
+  mutation RejectInvitation(
+    $bandID: ID
+    $invitationEmail: String
+    $invitationCreatedAt: String
+  ) {
+    rejectInvitation(
+      bandID: $bandID
+      invitationEmail: $invitationEmail
+      invitationCreatedAt: $invitationCreatedAt
+    )
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!

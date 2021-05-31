@@ -66,8 +66,8 @@ async function updateBand(event) {
     return {
       body: "SUCCESS",
     };
-  } catch (e) {
-    return e;
+  } catch (error) {
+    return error;
   }
 }
 
@@ -98,8 +98,7 @@ exports.handler = async (event, context) => {
     return {
       body: "SUCCESS",
     };
-  } catch (err) {
-    console.log("ERRRRRR", err);
-    return { error: err };
+  } catch (error) {
+    return error;
   }
 };
