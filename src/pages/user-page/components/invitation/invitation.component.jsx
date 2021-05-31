@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   listUserInvitationsStart,
   acceptBandInvitationStart,
+  rejectBandInvitationStart,
 } from "../../../../redux/invitation/invitation.actions";
 
 import "./invitation.styles.scss";
@@ -31,6 +32,16 @@ const Invitation = ({ email, artistID }) => {
     );
   };
 
+  const handleRejectInvitation = (invitation) => {
+    dispatch(
+      rejectBandInvitationStart({
+        bandID: invitation.senderTableElementID,
+        invitationEmail: invitation.email,
+        invitationCreatedAt: invitation.createdAt,
+      })
+    );
+  };
+
   return (
     <div>
       <div className="invitations-band">
@@ -45,7 +56,9 @@ const Invitation = ({ email, artistID }) => {
                 <button onClick={() => handleAcceptInvitation(invitation)}>
                   Accept
                 </button>
-                <button>Discard</button>
+                <button onClick={() => handleRejectInvitation(invitation)}>
+                  Discard
+                </button>
               </div>
             ))}
         </div>
