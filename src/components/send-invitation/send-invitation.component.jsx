@@ -31,12 +31,12 @@ const SendInviation = (props) => {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState("");
-  const invitations = [...currentInvitations];
+  const invitations = [...JSON.parse(currentInvitations)];
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting && !formError) {
-      invitations.push(JSON.stringify({ email: values.email, status: "new" }));
-      dispatch(callback(values, invitations));
+      invitations.push({ email: values.email, status: "new" });
+      dispatch(callback(values, JSON.stringify(invitations)));
       setValues(initialState);
     }
 
@@ -61,9 +61,9 @@ const SendInviation = (props) => {
 
   const validateForm = (currentInvitations, values) => {
     let errors = "";
-    if (currentInvitations) {
-      currentInvitations.forEach((invitation) => {
-        if (values.email === JSON.parse(invitation).email) {
+    if (JSON.parse(currentInvitations.length) > 0) {
+      JSON.parse(currentInvitations).forEach((invitation) => {
+        if (values.email === invitation.email) {
           errors = `You already sent an invitation to ${values.email}`;
         }
       });
