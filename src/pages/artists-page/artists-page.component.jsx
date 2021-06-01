@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listArtistsStart } from "../../redux/artist/artist.actions";
 
+import Artist from "./components/artist.component";
+
 import "./artists-page.style.scss";
 
 const ArtistsPage = () => {
   const artists = useSelector((state) => state.artist.artists);
   const dispatch = useDispatch();
-  console.log("Artists", artists);
 
   useEffect(() => {
     if (artists.length === 0) {
@@ -17,15 +18,14 @@ const ArtistsPage = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Artists</h1>
-      {artists &&
-        artists.map((artist) => (
-          <div key={artist.id}>
-            <p>Name: {artist.name}</p>
-            <p>Genre: {artist.genre}</p>
-          </div>
-        ))}
+    <div className="artists-page">
+      <h1 className="header">Artists</h1>
+      <div className="container">
+        {artists &&
+          artists.map((artist, i) => (
+            <Artist key={artist.id} {...artist} index={i} />
+          ))}
+      </div>
     </div>
   );
 };
