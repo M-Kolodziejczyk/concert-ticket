@@ -1,0 +1,26 @@
+.artist-page {
+  max-width: 1320px;
+  margin: 40px auto 0;
+  border: 1px solid lightgrey;
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 5px;
+  .image {
+    width: 400px;
+
+    img {
+      width: 100%;
+    }
+
+    .altImg {
+      width: 100%;
+    }
+  }
+
+  .artist__info {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
