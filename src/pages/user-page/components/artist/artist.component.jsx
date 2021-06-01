@@ -4,8 +4,8 @@ import {
   createArtistStart,
   updateArtistStart,
   uploadArtistImageStart,
-  getArtistStart,
-  getArtistImageStart,
+  getUserArtistStart,
+  getUserArtistImageStart,
 } from "../../../../redux/artist/artist.actions";
 import validate from "../../../../validators/artist";
 
@@ -50,14 +50,14 @@ const Artist = (id) => {
 
   useEffect(() => {
     if (id.artistID && Object.keys(artist).length === 0) {
-      dispatch(getArtistStart(id.artistID));
+      dispatch(getUserArtistStart(id.artistID));
     }
     // eslint-disable-next-line
   }, [id, dispatch]);
 
   useEffect(() => {
     if (artist.identityId) {
-      dispatch(getArtistImageStart(artist.identityId));
+      dispatch(getUserArtistImageStart(artist.identityId));
     }
 
     if (Object.keys(artist).length > 0) {
