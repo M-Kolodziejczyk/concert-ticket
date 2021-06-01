@@ -1,6 +1,7 @@
 import ArtistActionTypes from "./artist.types";
 
 const INITIAL_STATE = {
+  artist: {},
   artists: [],
   userArtist: {},
   userArtistImageUrl: "",
@@ -27,14 +28,26 @@ const artistReducer = (state = INITIAL_STATE, action) => {
     case ArtistActionTypes.GET_ARTIST_SUCCESS:
       return {
         ...state,
-        userArtist: action.payload,
+        artist: action.payload,
         errorMessage: {},
       };
     case ArtistActionTypes.GET_ARTIST_FAILURE:
       return {
         ...state,
-        userArtist: {},
+        artist: {},
         errorMessage: { getArtist: "Get artist failure" },
+      };
+    case ArtistActionTypes.GET_USER_ARTIST_SUCCESS:
+      return {
+        ...state,
+        userArtist: action.payload,
+        errorMessage: {},
+      };
+    case ArtistActionTypes.GET_USER_ARTIST_FAILURE:
+      return {
+        ...state,
+        userArtist: {},
+        errorMessage: { getUserArtist: "Get artist failure" },
       };
     case ArtistActionTypes.UPDATE_ARTIST_SUCCESS:
       return {
@@ -69,9 +82,10 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         errorMessage: { uploadArtistImage: "Upload failure" },
       };
     case ArtistActionTypes.GET_ARTIST_IMAGE_SUCCESS:
+      state.artists[action.payload.index].url = action.payload.url;
       return {
         ...state,
-        userArtistImageUrl: action.payload,
+        artists: state.artists,
         errorMessage: {},
       };
     case ArtistActionTypes.GET_ARTIST_IMAGE_FAILURE:
@@ -79,6 +93,18 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         ...state,
         userArtistImageUrl: "",
         errorMessage: { getArtistImage: "Get artist Image failure" },
+      };
+    case ArtistActionTypes.GET_USER_ARTIST_IMAGE_SUCCESS:
+      return {
+        ...state,
+        userArtistImageUrl: action.payload,
+        errorMessage: {},
+      };
+    case ArtistActionTypes.GET_USER_ARTIST_IMAGE_FAILURE:
+      return {
+        ...state,
+        userArtistImageUrl: "",
+        errorMessage: { getUserArtistImage: "Get user artist Image failure" },
       };
     case ArtistActionTypes.LIST_ARTISTS_SUCCESS:
       return {

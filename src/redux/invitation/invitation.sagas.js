@@ -77,7 +77,6 @@ export function* rejectBandInvitation({
     });
     yield put(rejectBandInvitationSuccess(res));
   } catch (error) {
-    console.log("ERROR", error);
     yield put(rejectBandInvitationFailure(error));
   }
 }

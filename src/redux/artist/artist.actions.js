@@ -40,6 +40,27 @@ export const getArtistFailure = (error) => {
   };
 };
 
+export const getUserArtistStart = (id) => {
+  return {
+    type: ArtistActionTypes.GET_USER_ARTIST_START,
+    payload: id,
+  };
+};
+
+export const getUserArtistSuccess = (artist) => {
+  return {
+    type: ArtistActionTypes.GET_USER_ARTIST_SUCCESS,
+    payload: artist,
+  };
+};
+
+export const getUserArtistFailure = (error) => {
+  return {
+    type: ArtistActionTypes.GET_USER_ARTIST_FAILURE,
+    payload: error,
+  };
+};
+
 export const updateArtistStart = (artist) => ({
   type: ArtistActionTypes.UPDATE_ARTIST_START,
   payload: artist,
@@ -74,9 +95,9 @@ export const uploadArtistImageFailure = () => {
   };
 };
 
-export const getArtistImageStart = (identityId) => ({
+export const getArtistImageStart = ({ ...payload }) => ({
   type: ArtistActionTypes.GET_ARTIST_IMAGE_START,
-  payload: identityId,
+  payload: payload,
 });
 
 export const getArtistImageSuccess = (url) => ({
@@ -86,6 +107,21 @@ export const getArtistImageSuccess = (url) => ({
 
 export const getArtistImageFailure = (error) => ({
   type: ArtistActionTypes.GET_ARTIST_IMAGE_FAILURE,
+  payload: error,
+});
+
+export const getUserArtistImageStart = (identityId) => ({
+  type: ArtistActionTypes.GET_USER_ARTIST_IMAGE_START,
+  payload: identityId,
+});
+
+export const getUserArtistImageSuccess = (url) => ({
+  type: ArtistActionTypes.GET_USER_ARTIST_IMAGE_SUCCESS,
+  payload: url,
+});
+
+export const getUserArtistImageFailure = (error) => ({
+  type: ArtistActionTypes.GET_USER_ARTIST_IMAGE_FAILURE,
   payload: error,
 });
 

@@ -1,4 +1,4 @@
-import { put, takeLatest, all, call } from "redux-saga/effects";
+import { put, takeLatest, takeEvery, all, call } from "redux-saga/effects";
 import { Auth, API, Storage } from "aws-amplify";
 import * as mutations from "../../api/mutations";
 import * as queries from "../../api/queries";
@@ -10,12 +10,16 @@ import {
   createArtistFailure,
   getArtistSuccess,
   getArtistFailure,
+  getUserArtistSuccess,
+  getUserArtistFailure,
   updateArtistSuccess,
   updateArtistFailure,
   uploadArttistImageSuccess,
   uploadArtistImageFailure,
   getArtistImageSuccess,
   getArtistImageFailure,
+  getUserArtistImageSuccess,
+  getUserArtistImageFailure,
   listArtistsSuccess,
   listArtistsFailure,
 } from "./artist.actions";
@@ -56,6 +60,12 @@ export function* getArtist({ payload }) {
         id: payload,
       },
     });
+    if (artist.data.getArtist.identityId) {
+      artist.data.getArtist.imageUrl = yield Storage.get("artist-image", {
+        level: "protected",
+        identityId: artist.data.getArtist.identityId,
+      });
+    }
 
     if (!artist.data.getArtist) {
       yield put(getArtistSuccess({}));
@@ -69,6 +79,29 @@ export function* getArtist({ payload }) {
 
 export function* onGetArtistStart() {
   yield takeLatest(ArtistActionTypes.GET_ARTIST_START, getArtist);
+}
+
+export function* getUserArtist({ payload }) {
+  try {
+    const artist = yield API.graphql({
+      query: queries.getArtist,
+      variables: {
+        id: payload,
+      },
+    });
+
+    if (!artist.data.getArtist) {
+      yield put(getUserArtistSuccess({}));
+    } else {
+      yield put(getUserArtistSuccess(artist.data.getArtist));
+    }
+  } catch (error) {
+    yield put(getUserArtistFailure(error));
+  }
+}
+
+export function* onGetUserArtistStart() {
+  yield takeLatest(ArtistActionTypes.GET_USER_ARTIST_START, getUserArtist);
 }
 
 export function* updateArtist({ payload: artist }) {
@@ -122,20 +155,39 @@ export function* onUploadArtistImageStart() {
   );
 }
 
-export function* getArtistImage({ payload }) {
+export function* getArtistImage({ payload: { identityId, index } }) {
   try {
     const url = yield Storage.get("artist-image", {
       level: "protected",
-      identityId: payload,
+      identityId: identityId,
     });
-    yield put(getArtistImageSuccess(url));
+    yield put(getArtistImageSuccess({ index, url }));
   } catch (error) {
     yield put(getArtistImageFailure(error));
   }
 }
 
 export function* onGetArtistImageStart() {
-  yield takeLatest(ArtistActionTypes.GET_ARTIST_IMAGE_START, getArtistImage);
+  yield takeEvery(ArtistActionTypes.GET_ARTIST_IMAGE_START, getArtistImage);
+}
+
+export function* getUserArtistImage({ payload }) {
+  try {
+    const url = yield Storage.get("artist-image", {
+      level: "protected",
+      identityId: payload,
+    });
+    yield put(getUserArtistImageSuccess(url));
+  } catch (error) {
+    yield put(getUserArtistImageFailure(error));
+  }
+}
+
+export function* onGetUserArtistImageStart() {
+  yield takeLatest(
+    ArtistActionTypes.GET_USER_ARTIST_IMAGE_START,
+    getUserArtistImage
+  );
 }
 
 export function* listArtists() {
@@ -147,7 +199,6 @@ export function* listArtists() {
 
     yield put(listArtistsSuccess(res.data.listArtists.items));
   } catch (error) {
-    console.log(error);
     yield put(listArtistsFailure(error));
   }
 }
@@ -160,9 +211,11 @@ export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
     call(onGetArtistStart),
+    call(onGetUserArtistStart),
     call(onUpdateArtistStart),
     call(onUploadArtistImageStart),
     call(onGetArtistImageStart),
+    call(onGetUserArtistImageStart),
     call(onListArtistsStart),
   ]);
 }
