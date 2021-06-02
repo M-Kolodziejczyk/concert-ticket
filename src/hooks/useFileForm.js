@@ -29,7 +29,6 @@ const useFileForm = (id, format, callback) => {
   const handleSubmitImage = (e) => {
     e.preventDefault();
     if (!imageErrors && validate) {
-      callback();
       dispatch(callback(id, image));
     }
   };
