@@ -132,7 +132,8 @@ const Artist = (id) => {
               <CustomInputButton
                 handleChange={handleChangeImage}
                 label="Select image"
-                name="img"
+                name="artistImg"
+                id="artistImg"
               />
               <div className="form__button">
                 <CustomButton type="submit" name="submit">
