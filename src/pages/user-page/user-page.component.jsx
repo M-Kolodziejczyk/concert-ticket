@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserStart } from "../../redux/user/user.actions";
 
 import Artist from "./components/artist/artist.component";
-import Band from "./components/band/band.component";
+import BandsTab from "./components/bands-tab/bands-tab.component";
 import Invitation from "./components/invitation/invitation.component";
 
 import "./user-page.styles.scss";
@@ -110,7 +110,7 @@ const UserPage = () => {
             role="tabpanel"
             aria-labelledby="v-pills-messages-tab"
           >
-            <Band userId={user.id} bands={user.bands} />
+            <BandsTab userId={user.id} bands={user.bands} />
           </div>
           <div
             className="tab-pane fade"
