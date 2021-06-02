@@ -451,7 +451,12 @@ export const listArtists = /* GraphQL */ `
         updatedAt
         owner
         bands {
-          nextToken
+          items {
+            bandID
+            band {
+              name
+            }
+          }
         }
       }
       nextToken
