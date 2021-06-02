@@ -29,3 +29,18 @@ export const createInvitationFailure = (error) => ({
   type: BandActionTypes.CREATE_INVITATION_FAILURE,
   payload: error,
 });
+
+export const uploadBandImageStart = (id, image) => ({
+  type: BandActionTypes.UPLOAD_BAND_IMAGE_START,
+  payload: { id, image },
+});
+
+export const uploadBandImageSuccess = (res) => ({
+  type: BandActionTypes.UPLOAD_BAND_IMAGE_SUCCESS,
+  payload: res,
+});
+
+export const uploadBandImageFailure = (error) => ({
+  type: BandActionTypes.UPLOAD_BAND_IMAGE_FAILURE,
+  payload: error,
+});

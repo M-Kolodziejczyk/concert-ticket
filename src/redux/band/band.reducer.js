@@ -28,6 +28,18 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         },
         successMessage: {},
       };
+    case BandActionTypes.UPLOAD_BAND_IMAGE_SUCCESS:
+      return {
+        ...state,
+        errorMessage: {},
+      };
+    case BandActionTypes.UPLOAD_BAND_IMAGE_FAILURE:
+      return {
+        ...state,
+        errorMessage: {
+          uploadBandImage: "Failed to upload Image",
+        },
+      };
     default:
       return state;
   }
