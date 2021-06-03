@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   uploadBandImageStart,
   createInvitationStart,
+  getBandImageStart,
 } from "../../../../redux/band/band.actions";
 
 import useFileForm from "../../../../hooks/useFileForm";
@@ -13,14 +15,29 @@ import SendInvitation from "../../../../components/send-invitation/send-invitati
 import "./band.styles.scss";
 
 const Band = ({ band }) => {
-  console.log("Band: ", band);
+  const dispatch = useDispatch();
+  const bandsImage = useSelector((state) => state.band.bandsImage);
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
     useFileForm(band.id, ["image/jpeg"], uploadBandImageStart);
+
+  useEffect(() => {
+    if (!bandsImage[band.id]) {
+      dispatch(getBandImageStart(band.id));
+      // debugger;
+    }
+
+    // eslint-disable-next-line
+  }, [dispatch, band.id]);
+
   return (
     <div className="band">
+      <button onClick={() => dispatch(getBandImageStart(band.id))}>GET</button>
       <div className="details">
         <p>Name: {band.name}</p>
         <p>Genre: {band.genre}</p>
+        <div className="img-container">
+          {bandsImage[band.id] && <img src={bandsImage[band.id]} alt="Band" />}
+        </div>
       </div>
       <SendInvitation
         authorEmail={band.userName}

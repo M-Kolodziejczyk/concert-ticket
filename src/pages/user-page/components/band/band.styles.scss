@@ -1,5 +1,16 @@
-.upload-image {
-  img {
-    width: 300px;
+.band {
+  .details {
+    .img-container {
+      width: 300px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .upload-image {
+    img {
+      width: 300px;
+    }
   }
 }
