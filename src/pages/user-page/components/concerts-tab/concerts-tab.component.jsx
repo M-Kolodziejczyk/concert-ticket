@@ -1,57 +1,42 @@
 import React from "react";
-import { createBandStart } from "../../../../redux/band/band.actions";
-import validate from "../../../../validators/band";
+import { createConcertStart } from "../../../../redux/concert/concert.actions";
 
-import useForm from "../../../../hooks/useForm.js";
+import validate from "../../../../validators/concert";
+import useForm from "../../../../hooks/useForm";
 
 import CustomButton from "../../../../components/custom-button/custom-button.component";
 import FormInput from "../../../../components/form-input/form-input.component";
-// import ErrorMessage from "../../../../components/error-message/error-message.component";
 
-import Band from "../band/band.component";
-
-import "./bands-tab.styles.scss";
-
-const BandsTab = ({ userId, bands }) => {
+const ConcertsTab = ({ userId, concerts }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
-    { name: "", genre: "", userID: userId },
+    { name: "", date: "", venue: "", genres: "", userID: userId },
     validate,
-    createBandStart
+    createConcertStart
   );
 
   return (
-    <div className="band-tab">
+    <div className="concert-tab">
       <button
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
-        data-bs-target="#bandModal"
+        data-bs-target="#concertModal"
       >
-        Create Band
+        Create Concert
       </button>
-
-      <div className="band-wrapper">
-        <h2>Bands Created By you</h2>
-        <div className="band-container">
-          {bands &&
-            bands.items.map((band) => (
-              <Band band={band} id={band.id} key={band.id} />
-            ))}
-        </div>
-      </div>
-
+      <h3>Concertss</h3>
       <div
         className="modal fade"
-        id="bandModal"
+        id="concertModal"
         tabIndex="-1"
-        aria-labelledby="bandModalLabel"
+        aria-labelledby="concertModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="bandModalLabel">
-                Create Band{" "}
+              <h5 className="modal-title" id="concertModalLabel">
+                Create Band
               </h5>
               <button
                 type="button"
@@ -71,13 +56,22 @@ const BandsTab = ({ userId, bands }) => {
                   error={errors.name}
                 />
                 <FormInput
-                  name="genre"
+                  name="venue"
                   type="text"
-                  label="Genre"
+                  label="Venue"
                   handleChange={handleChange}
-                  value={values.genre}
-                  error={errors.genre}
+                  value={values.venue}
+                  error={errors.venue}
                 />
+                <FormInput
+                  name="genres"
+                  type="text"
+                  label="Genres"
+                  handleChange={handleChange}
+                  value={values.genres}
+                  error={errors.genres}
+                />
+
                 <div className="form__button">
                   <CustomButton type="submit" name="submit">
                     Create
@@ -92,4 +86,4 @@ const BandsTab = ({ userId, bands }) => {
   );
 };
 
-export default BandsTab;
+export default ConcertsTab;

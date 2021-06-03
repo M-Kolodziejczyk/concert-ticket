@@ -5,6 +5,7 @@ import { getUserStart } from "../../redux/user/user.actions";
 import Artist from "./components/artist/artist.component";
 import BandsTab from "./components/bands-tab/bands-tab.component";
 import Invitation from "./components/invitation/invitation.component";
+import ConcertsTab from "./components/concerts-tab/concerts-tab.component";
 
 import "./user-page.styles.scss";
 
@@ -113,15 +114,15 @@ const UserPage = () => {
             <BandsTab userId={user.id} bands={user.bands} />
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane fade show active"
             id="v-pills-settings"
             role="tabpanel"
             aria-labelledby="v-pills-settings-tab"
           >
-            Concert Page
+            <ConcertsTab />
           </div>
           <div
-            className="tab-pane fade show active"
+            className="tab-pane fade"
             id="invitations"
             role="tabpanel"
             aria-labelledby="invitations-tab"
