@@ -5,6 +5,7 @@ import { artistSagas } from "./artist/artist.sagas";
 import { bandSagas } from "./band/band.sagas";
 import { notificationSagas } from "./notification/notification.sagas";
 import { invitationSagas } from "./invitation/invitation.sagas";
+import { concertSagas } from "./concert/concert.sagas";
 
 export default function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     call(bandSagas),
     call(notificationSagas),
     call(invitationSagas),
+    call(concertSagas),
   ]);
 }
