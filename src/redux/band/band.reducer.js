@@ -2,6 +2,7 @@ import BandActionTypes from "./band.types";
 
 const INITIAL_STATE = {
   band: {},
+  bandsImage: {},
   successMessage: {},
   errorMessage: {},
 };
@@ -38,6 +39,21 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: {
           uploadBandImage: "Failed to upload Image",
+        },
+      };
+    case BandActionTypes.GET_BAND_IMAGE_SUCCESS:
+      return {
+        ...state,
+        bandsImage: {
+          ...state.bandsImage,
+          [action.payload.id]: action.payload.url,
+        },
+      };
+    case BandActionTypes.GET_BAND_IMAGE_FAILURE:
+      return {
+        ...state,
+        errorMessage: {
+          getBandImage: "Get band image failure",
         },
       };
     default:

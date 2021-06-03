@@ -44,3 +44,18 @@ export const uploadBandImageFailure = (error) => ({
   type: BandActionTypes.UPLOAD_BAND_IMAGE_FAILURE,
   payload: error,
 });
+
+export const getBandImageStart = (id) => ({
+  type: BandActionTypes.GET_BAND_IMAGE_START,
+  payload: id,
+});
+
+export const getBandImageSuccess = (url) => ({
+  type: BandActionTypes.GET_BAND_IMAGE_SUCCESS,
+  payload: url,
+});
+
+export const getBandImageFailure = (error) => ({
+  type: BandActionTypes.GET_BAND_IMAGE_FAILURE,
+  payload: error,
+});

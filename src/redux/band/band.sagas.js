@@ -1,4 +1,4 @@
-import { put, takeLatest, all, call } from "redux-saga/effects";
+import { put, takeLatest, all, call, takeEvery } from "redux-saga/effects";
 import { API, Auth, Storage } from "aws-amplify";
 import * as mutations from "../../api/mutations";
 
@@ -11,6 +11,8 @@ import {
   createInvitationFailure,
   uploadBandImageSuccess,
   uploadBandImageFailure,
+  getBandImageSuccess,
+  getBandImageFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -75,7 +77,6 @@ export function* uploadBandImage({ payload: { id, image } }) {
       level: "public",
       contentType: image.type,
     });
-    console.log("RESS", res);
     yield put(uploadBandImageSuccess(res));
   } catch (error) {
     yield put(uploadBandImageFailure(error));
@@ -83,8 +84,23 @@ export function* uploadBandImage({ payload: { id, image } }) {
 }
 
 export function* onUploadBandImageStart() {
-  console.log("1");
   yield takeLatest(BandActionTypes.UPLOAD_BAND_IMAGE_START, uploadBandImage);
+}
+
+export function* getBandImage({ payload }) {
+  try {
+    const url = yield Storage.get(`${payload}/band-image`, {
+      level: "public",
+    });
+
+    yield put(getBandImageSuccess({ url, id: payload }));
+  } catch (error) {
+    yield put(getBandImageFailure(error));
+  }
+}
+
+export function* onGetBandImageStart() {
+  yield takeEvery(BandActionTypes.GET_BAND_IMAGE_START, getBandImage);
 }
 
 export function* bandSagas() {
@@ -92,5 +108,6 @@ export function* bandSagas() {
     call(onCreateBandStart),
     call(onCreateInvitationStart),
     call(onUploadBandImageStart),
+    call(onGetBandImageStart),
   ]);
 }
