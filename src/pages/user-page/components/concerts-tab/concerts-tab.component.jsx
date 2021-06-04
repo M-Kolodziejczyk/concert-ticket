@@ -1,4 +1,5 @@
 import React from "react";
+import DatePicker from "react-datepicker";
 import { createConcertStart } from "../../../../redux/concert/concert.actions";
 
 import validate from "../../../../validators/concert";
@@ -7,12 +8,19 @@ import useForm from "../../../../hooks/useForm";
 import CustomButton from "../../../../components/custom-button/custom-button.component";
 import FormInput from "../../../../components/form-input/form-input.component";
 
-const ConcertsTab = ({ userId, concerts }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
-    { name: "", date: "", venue: "", genres: "", userID: userId },
-    validate,
-    createConcertStart
-  );
+import Concert from "../concert/concert.component";
+
+import "react-datepicker/dist/react-datepicker.css";
+
+const ConcertsTab = ({ concerts }) => {
+  const { handleChange, handleSubmit, values, errors, handleChangeDate } =
+    useForm(
+      { name: "", date: new Date(), venue: "", genres: "" },
+      validate,
+      createConcertStart
+    );
+
+  console.log("CONCERTS: ", concerts);
 
   return (
     <div className="concert-tab">
@@ -24,7 +32,15 @@ const ConcertsTab = ({ userId, concerts }) => {
       >
         Create Concert
       </button>
-      <h3>Concertss</h3>
+      <div className="concert-wrapper">
+        <h3>Concerts created by you</h3>
+        <div className="concert-container">
+          {concerts &&
+            concerts.items.map((concert) => (
+              <Concert key={concert.id} {...concert} />
+            ))}
+        </div>
+      </div>
       <div
         className="modal fade"
         id="concertModal"
@@ -70,6 +86,15 @@ const ConcertsTab = ({ userId, concerts }) => {
                   handleChange={handleChange}
                   value={values.genres}
                   error={errors.genres}
+                />
+                <DatePicker
+                  selected={values.date}
+                  onChange={(e) => handleChangeDate(e, "date")}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  timeCaption="time"
+                  dateFormat="MMMM d, yyyy hh:mm aa"
                 />
 
                 <div className="form__button">

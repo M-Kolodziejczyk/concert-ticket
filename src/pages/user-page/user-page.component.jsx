@@ -119,7 +119,7 @@ const UserPage = () => {
             role="tabpanel"
             aria-labelledby="v-pills-settings-tab"
           >
-            <ConcertsTab />
+            <ConcertsTab concerts={user.concerts} />
           </div>
           <div
             className="tab-pane fade"
