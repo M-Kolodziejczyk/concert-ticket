@@ -12,6 +12,7 @@ import validateInvite from "../../../../validators/send-invite";
 import CustomInputButton from "../../../../components/custom-input-button/custom-input-button.component";
 import CustomButton from "../../../../components/custom-button/custom-button.component";
 import SendInvitation from "../../../../components/send-invitation/send-invitation.component";
+
 import "./band.styles.scss";
 
 const Band = ({ band }) => {
@@ -21,9 +22,8 @@ const Band = ({ band }) => {
     useFileForm(band.id, ["image/jpeg"], uploadBandImageStart);
 
   useEffect(() => {
-    if (!bandsImage[band.id]) {
+    if (!bandsImage[band.id] && band.keyImage) {
       dispatch(getBandImageStart(band.id));
-      // debugger;
     }
 
     // eslint-disable-next-line

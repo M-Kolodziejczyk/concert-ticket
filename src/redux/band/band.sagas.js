@@ -73,11 +73,27 @@ export function* onCreateInvitationStart() {
 
 export function* uploadBandImage({ payload: { id, image } }) {
   try {
-    const res = yield Storage.put(`${id}/band-image`, image, {
+    const res = yield Storage.put(`band-image/${id}-image`, image, {
       level: "public",
       contentType: image.type,
     });
-    yield put(uploadBandImageSuccess(res));
+
+    yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.updateBand,
+      variables: {
+        input: {
+          id: id,
+          keyImage: `concert-image/${id}-image`,
+        },
+      },
+    });
+
+    const url = yield Storage.get(res.key, {
+      level: "public",
+    });
+
+    yield put(uploadBandImageSuccess({ url, id }));
   } catch (error) {
     yield put(uploadBandImageFailure(error));
   }
@@ -89,7 +105,7 @@ export function* onUploadBandImageStart() {
 
 export function* getBandImage({ payload }) {
   try {
-    const url = yield Storage.get(`${payload}/band-image`, {
+    const url = yield Storage.get(`band-image/${payload}-image`, {
       level: "public",
     });
 

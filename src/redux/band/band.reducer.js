@@ -32,6 +32,10 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.UPLOAD_BAND_IMAGE_SUCCESS:
       return {
         ...state,
+        bandsImage: {
+          ...state.bandsImage,
+          [action.payload.id]: action.payload.url,
+        },
         errorMessage: {},
       };
     case BandActionTypes.UPLOAD_BAND_IMAGE_FAILURE:
