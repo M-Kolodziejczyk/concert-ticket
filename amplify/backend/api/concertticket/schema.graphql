@@ -31,6 +31,7 @@ type Concert
   date: String!
   venue: String!
   genres: String!
+  keyImage: String
   invitations: AWSJSON
   tickets: [Ticket] @connection(keyName: "byConcert", fields: ["id"])
   bands: [ConcertBandJoin] @connection(keyName: "byConcert", fields: ["id"])
@@ -53,6 +54,7 @@ type Band
   identityId: ID
   name: String!
   genre: String!
+  keyImage: String
   invitations: AWSJSON
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
 }
