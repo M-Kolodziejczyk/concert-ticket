@@ -1,4 +1,4 @@
-import { call, all, put, takeLatest } from "redux-saga/effects";
+import { call, all, put, takeLatest, takeEvery } from "redux-saga/effects";
 import { API, Auth, Storage } from "aws-amplify";
 import * as mutations from "../../api/mutations";
 
@@ -9,6 +9,8 @@ import {
   createConcertFailure,
   uploadConcertImageSuccess,
   uploadConcertImageFailure,
+  getConcertImageSuccess,
+  getConcertImageFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -36,11 +38,27 @@ export function* onCreateConcertStart() {
 
 export function* uploadConcertImage({ payload: { id, image } }) {
   try {
-    const res = yield Storage.put(`${id}/concert-image`, image, {
+    const res = yield Storage.put(`concert-image/${id}-image`, image, {
       level: "public",
       contentType: image.type,
     });
-    yield put(uploadConcertImageSuccess(res));
+
+    yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.updateConcert,
+      variables: {
+        input: {
+          id: id,
+          keyImage: `concert-image/${id}-image`,
+        },
+      },
+    });
+
+    const url = yield Storage.get(res.key, {
+      level: "public",
+    });
+
+    yield put(uploadConcertImageSuccess({ url, id }));
   } catch (error) {
     yield put(uploadConcertImageFailure(error));
   }
@@ -53,6 +71,26 @@ export function* onUploadConcertImageStart() {
   );
 }
 
+export function* getConcertImage({ payload }) {
+  try {
+    const url = yield Storage.get(`concert-image/${payload}-image`, {
+      level: "public",
+    });
+
+    yield put(getConcertImageSuccess({ url, id: payload }));
+  } catch (error) {
+    yield put(getConcertImageFailure(error));
+  }
+}
+
+export function* onGetConcertImageStart() {
+  yield takeEvery(ConcertActionTypes.GET_CONCERT_IMAGE_START, getConcertImage);
+}
+
 export function* concertSagas() {
-  yield all([call(onCreateConcertStart), call(onUploadConcertImageStart)]);
+  yield all([
+    call(onCreateConcertStart),
+    call(onUploadConcertImageStart),
+    call(onGetConcertImageStart),
+  ]);
 }
