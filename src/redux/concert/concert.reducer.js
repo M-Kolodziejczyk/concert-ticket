@@ -22,6 +22,22 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           createConcert: "Create concert failure",
         },
       };
+    case ConcertActionTypes.UPLOAD_CONCERT_IMAGE_SUCCESS:
+      return {
+        ...state,
+        successMessage: {
+          uploadImage: "Upload image success",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.UPLOAD_CONCERT_IMAGE_FAILURE:
+      return {
+        ...state,
+        successMessage: {},
+        errorMessage: {
+          uploadImage: "Upload image failure",
+        },
+      };
 
     default:
       return state;

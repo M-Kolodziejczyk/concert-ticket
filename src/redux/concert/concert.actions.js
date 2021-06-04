@@ -14,3 +14,18 @@ export const createConcertFailure = (error) => ({
   type: ConcertActionTypes.CREATE_CONCERT_FAILURE,
   payload: error,
 });
+
+export const uploadConcertImageStart = (id, image) => ({
+  type: ConcertActionTypes.UPLOAD_CONCERT_IMAGE_START,
+  payload: { id, image },
+});
+
+export const uploadConcertImageSuccess = (res) => ({
+  type: ConcertActionTypes.UPLOAD_CONCERT_IMAGE_SUCCESS,
+  payload: res,
+});
+
+export const uploadConcertImageFailure = (error) => ({
+  type: ConcertActionTypes.UPLOAD_CONCERT_IMAGE_FAILURE,
+  payload: error,
+});
