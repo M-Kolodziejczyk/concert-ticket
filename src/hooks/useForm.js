@@ -32,11 +32,19 @@ const useForm = (initialState, validate, callback) => {
     }
   };
 
+  const handleChangeDate = (e, name) => {
+    setValues({
+      ...values,
+      [name]: e,
+    });
+  };
+
   return {
     handleChange,
     handleSubmit,
     values,
     errors,
+    handleChangeDate,
   };
 };
 
