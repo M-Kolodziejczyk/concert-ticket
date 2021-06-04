@@ -9,7 +9,7 @@ const validate = (values) => {
     errors.date = "Date is required!";
   }
 
-  if (!values.venure) {
+  if (!values.venue) {
     errors.venue = "Venue is required!";
   }
 
