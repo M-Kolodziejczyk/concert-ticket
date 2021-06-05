@@ -59,3 +59,18 @@ export const acceptConcertInvitationFailure = (error) => ({
   type: InvitationActionTypes.ACCEPT_CONCERT_INVITATION_FAILURE,
   payload: error,
 });
+
+export const rejectConcertInvitationStart = (data) => ({
+  type: InvitationActionTypes.REJECT_CONCERT_INVITATION_START,
+  payload: data,
+});
+
+export const rejectConcertInvitationSucces = (res) => ({
+  type: InvitationActionTypes.REJECT_CONCERT_INVITATION_SUCCESS,
+  payload: res,
+});
+
+export const rejectConcertInvitationFailure = (error) => ({
+  type: InvitationActionTypes.REJECT_BAND_INVITATION_FAILURE,
+  payload: error,
+});
