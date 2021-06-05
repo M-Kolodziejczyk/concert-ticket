@@ -44,3 +44,18 @@ export const getConcertImageFailure = (error) => ({
   type: ConcertActionTypes.GET_CONCERT_IMAGE_FAILURE,
   payload: error,
 });
+
+export const createConcertInvitationStart = (values, invitations) => ({
+  type: ConcertActionTypes.CREATE_CONCERT_INVITATION_START,
+  payload: { values, invitations },
+});
+
+export const createConcertInvitationSuccess = (res) => ({
+  type: ConcertActionTypes.CREATE_CONCERT_INVITATION_SUCCESS,
+  payload: res,
+});
+
+export const createConcertInvitationFailure = (error) => ({
+  type: ConcertActionTypes.CREATE_CONCERT_INVITATION_FAILURE,
+  payload: error,
+});

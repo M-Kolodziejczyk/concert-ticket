@@ -59,7 +59,20 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           getConcertImage: "Get concert image failure",
         },
       };
-
+    case ConcertActionTypes.CREATE_CONCERT_INVITATION_SUCCESS:
+      return {
+        ...state,
+        successMessage: {
+          createInvitation: "Invitation send successfully",
+        },
+      };
+    case ConcertActionTypes.CREATE_CONCERT_INVITATION_FAILURE:
+      return {
+        ...state,
+        errorMessage: {
+          createInvitation: "Failed to send invitation",
+        },
+      };
     default:
       return state;
   }

@@ -11,6 +11,8 @@ import {
   uploadConcertImageFailure,
   getConcertImageSuccess,
   getConcertImageFailure,
+  createConcertInvitationSuccess,
+  createConcertInvitationFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -87,10 +89,46 @@ export function* onGetConcertImageStart() {
   yield takeEvery(ConcertActionTypes.GET_CONCERT_IMAGE_START, getConcertImage);
 }
 
+export function* createConcertInvitation({ payload: { values, invitations } }) {
+  try {
+    yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.createInvitation,
+      variables: {
+        input: {
+          ...values,
+        },
+      },
+    });
+
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.updateConcert,
+      variables: {
+        input: {
+          id: values.senderTableElementID,
+          invitations: invitations,
+        },
+      },
+    });
+    yield put(createConcertInvitationSuccess(res));
+  } catch (error) {
+    yield put(createConcertInvitationFailure(error));
+  }
+}
+
+export function* onCreateConcertInvitationStart() {
+  yield takeLatest(
+    ConcertActionTypes.CREATE_CONCERT_INVITATION_START,
+    createConcertInvitation
+  );
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
     call(onUploadConcertImageStart),
     call(onGetConcertImageStart),
+    call(onCreateConcertInvitationStart),
   ]);
 }
