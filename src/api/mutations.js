@@ -29,6 +29,34 @@ export const rejectInvitation = /* GraphQL */ `
     )
   }
 `;
+export const acceptConcertInvitation = /* GraphQL */ `
+  mutation AcceptConcertInvitation(
+    $concertID: ID
+    $bandID: ID
+    $invitationEmail: String
+    $invitationCreatedAt: String
+  ) {
+    acceptConcertInvitation(
+      concertID: $concertID
+      bandID: $bandID
+      invitationEmail: $invitationEmail
+      invitationCreatedAt: $invitationCreatedAt
+    )
+  }
+`;
+export const rejectConcertInvitation = /* GraphQL */ `
+  mutation RejectConcertInvitation(
+    $concertID: ID
+    $invitationEmail: String
+    $invitationCreatedAt: String
+  ) {
+    rejectConcertInvitation(
+      concertID: $concertID
+      invitationEmail: $invitationEmail
+      invitationCreatedAt: $invitationCreatedAt
+    )
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
