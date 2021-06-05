@@ -1,6 +1,6 @@
 /* Amplify Params - DO NOT EDIT
-	API_CONCERTTICKET_BANDTABLE_ARN
-	API_CONCERTTICKET_BANDTABLE_NAME
+	API_CONCERTTICKET_CONCERTTABLE_ARN
+	API_CONCERTTICKET_CONCERTTABLE_NAME
 	API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT
 	API_CONCERTTICKET_INVITATIONTABLE_ARN
 	API_CONCERTTICKET_INVITATIONTABLE_NAME
@@ -26,13 +26,13 @@ async function deleteInvitation(event) {
   }
 }
 
-async function updateBand(event) {
+async function updateConcert(event) {
   try {
     const res = await docClient
       .get({
-        TableName: process.env.API_CONCERTTICKET_BANDTABLE_NAME,
+        TableName: process.env.API_CONCERTTICKET_CONCERTTABLE_NAME,
         Key: {
-          id: event.arguments.bandID,
+          id: event.arguments.concertID,
         },
       })
       .promise();
@@ -46,9 +46,9 @@ async function updateBand(event) {
 
     await docClient
       .update({
-        TableName: process.env.API_CONCERTTICKET_BANDTABLE_NAME,
+        TableName: process.env.API_CONCERTTICKET_CONCERTTABLE_NAME,
         Key: {
-          id: event.arguments.bandID,
+          id: event.arguments.concertID,
         },
         UpdateExpression: `set #invitations[${indexToUpdate}].#status = :rejected`,
         ExpressionAttributeNames: {
@@ -67,7 +67,7 @@ async function updateBand(event) {
 
 exports.handler = async (event) => {
   try {
-    await updateBand(event);
+    await updateConcert(event);
 
     await deleteInvitation(event);
 
