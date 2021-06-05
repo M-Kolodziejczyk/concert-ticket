@@ -5,11 +5,15 @@ import { format } from "date-fns";
 import {
   uploadConcertImageStart,
   getConcertImageStart,
+  createConcertInvitationStart,
 } from "../../../../redux/concert/concert.actions";
 
 import useFileForm from "../../../../hooks/useFileForm";
+import validateInvite from "../../../../validators/send-invite";
+
 import CustomInputButton from "../../../../components/custom-input-button/custom-input-button.component";
 import CustomButton from "../../../../components/custom-button/custom-button.component";
+import SendInvitation from "../../../../components/send-invitation/send-invitation.component";
 
 import "./concert.styles.scss";
 
@@ -28,9 +32,6 @@ const Concert = (concert) => {
     // eslint-disable-next-line
   }, [dispatch, concert.id]);
 
-  console.log("img", concertsImage);
-
-  console.log("CONCERT------", concertsImage);
   return (
     <div className="concert">
       <div className="details">
@@ -44,6 +45,27 @@ const Concert = (concert) => {
             <img src={concertsImage[concert.id]} alt="concert" />
           )}
         </div>
+      </div>
+      <SendInvitation
+        authorEmail={concert.userName}
+        senderTableElementID={concert.id}
+        senderTableElementName={concert.name}
+        senderTable="concert"
+        currentInvitations={concert?.invitations || "[]"}
+        callback={createConcertInvitationStart}
+        validate={validateInvite}
+      />
+      <div className="invitation-container">
+        <p>Sent Invitation</p>
+        {concert?.invitations &&
+          JSON.parse(concert?.invitations).map((invitation, i) => (
+            <div key={i}>
+              <div>
+                <p>Email: {invitation.email}</p>
+                <p>Status: {invitation.status}</p>
+              </div>
+            </div>
+          ))}
       </div>
       <form className="upload-image" onSubmit={handleSubmitImage}>
         <CustomInputButton

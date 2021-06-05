@@ -20,8 +20,6 @@ const ConcertsTab = ({ concerts }) => {
       createConcertStart
     );
 
-  console.log("CONCERTS: ", concerts);
-
   return (
     <div className="concert-tab">
       <button
