@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "storage": {
+      "Concert:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "ConcertBandJoin:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Invitation:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

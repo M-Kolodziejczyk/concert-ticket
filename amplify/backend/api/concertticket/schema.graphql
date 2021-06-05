@@ -236,4 +236,17 @@ type Mutation {
     invitationEmail: String
     invitationCreatedAt: String
   ): String @function(name: "rejectInvitation-${env}")
+
+  acceptConcertInvitation(
+    concertID: ID
+    bandID: ID
+    invitationEmail: String
+    invitationCreatedAt: String
+  ): String @function(name: "acceptConcertInvitation-${env}")
+
+  rejectConcertInvitation(
+    concertID: ID
+    invitationEmail: String
+    invitationCreatedAt: String
+  ): String @function(name: "rejectConcertInvitation-${env}")
 }
