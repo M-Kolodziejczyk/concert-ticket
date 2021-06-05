@@ -31,7 +31,6 @@ const Band = ({ band }) => {
 
   return (
     <div className="band">
-      <button onClick={() => dispatch(getBandImageStart(band.id))}>GET</button>
       <div className="details">
         <p>Name: {band.name}</p>
         <p>Genre: {band.genre}</p>
