@@ -12,6 +12,8 @@ import {
   acceptBandInvitationFailure,
   rejectBandInvitationSuccess,
   rejectBandInvitationFailure,
+  acceptConcertInvitationSuccess,
+  acceptConcertInvitationFailure,
 } from "./invitation.actions";
 
 export function* listUserInvitation({ payload: email }) {
@@ -88,10 +90,37 @@ export function* onrejectBandInvitationStart() {
   );
 }
 
+export function* acceptConcertInvitation({
+  payload: { concertID, bandID, invitationCreatedAt, invitationEmail },
+}) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.acceptConcertInvitation,
+      variables: {
+        concertID,
+        bandID,
+        invitationCreatedAt,
+        invitationEmail,
+      },
+    });
+    yield put(acceptConcertInvitationSuccess(res));
+  } catch (error) {
+    yield put(acceptConcertInvitationFailure(error));
+  }
+}
+
+export function* onAcceptConcertInvitationStart() {
+  yield takeLatest(
+    InvitationActionTypes.ACCEPT_CONCERT_INVITATION_START,
+    acceptConcertInvitation
+  );
+}
+
 export function* invitationSagas() {
   yield all([
     call(onListUserInvitationsStart),
     call(onAcceptBandInvitationStart),
     call(onrejectBandInvitationStart),
+    call(onAcceptConcertInvitationStart),
   ]);
 }

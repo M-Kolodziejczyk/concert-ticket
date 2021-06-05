@@ -62,6 +62,22 @@ const invitationReducer = (state = INITIAL_STATE, action) => {
         },
         successMessage: {},
       };
+    case InvitationActionTypes.ACCEPT_CONCERT_INVITATION_SUCCESS:
+      return {
+        ...state,
+        errorMessage: {},
+        successMessage: {
+          acceptConcertInvitation: "You accepted concert invitation",
+        },
+      };
+    case InvitationActionTypes.ACCEPT_CONCERT_INVITATION_FAILURE:
+      return {
+        ...state,
+        successMessage: {},
+        errorMessage: {
+          acceptConcertInvitation: "Accept concert invitation failure",
+        },
+      };
     default:
       return state;
   }
