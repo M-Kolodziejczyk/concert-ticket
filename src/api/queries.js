@@ -382,7 +382,6 @@ export const getBand = /* GraphQL */ `
           bandID
           artistID
           createdAt
-          updatedAt
           owner
         }
         nextToken
