@@ -23,7 +23,7 @@ const Band = (props) => {
     <Link
       to={{
         pathname: `/bands/${id}`,
-        band: props,
+        band: { ...props, imageUrl: bandsImage[id] },
         bandImageUrl: bandsImage[id],
       }}
     >
