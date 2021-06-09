@@ -1,0 +1,18 @@
+.concert-page {
+  max-width: 1320px;
+  margin: 40px auto 0;
+  display: flex;
+
+  .image-container {
+    width: 50%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .description-container {
+    margin-left: 20px;
+    width: 50%;
+  }
+}
