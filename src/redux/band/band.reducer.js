@@ -1,6 +1,7 @@
 import BandActionTypes from "./band.types";
 
 const INITIAL_STATE = {
+  bands: [],
   band: {},
   bandsImage: {},
   successMessage: {},
@@ -58,6 +59,24 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorMessage: {
           getBandImage: "Get band image failure",
+        },
+      };
+    case BandActionTypes.LIST_BANDS_SUCCESS:
+      return {
+        ...state,
+        bands: action.payload,
+        successMessage: {
+          listBands: "List bands success",
+        },
+        errorMessage: {},
+      };
+    case BandActionTypes.LIST_BANDS_FAILURE:
+      return {
+        ...state,
+        bands: [],
+        successMessage: {},
+        errorMessage: {
+          listBands: "List bands failure",
         },
       };
     default:

@@ -59,3 +59,17 @@ export const getBandImageFailure = (error) => ({
   type: BandActionTypes.GET_BAND_IMAGE_FAILURE,
   payload: error,
 });
+
+export const listBandsStart = () => ({
+  type: BandActionTypes.LIST_BANDS_START,
+});
+
+export const listBandsSuccess = (res) => ({
+  type: BandActionTypes.LIST_BANDS_SUCCESS,
+  payload: res,
+});
+
+export const listBandsFailure = (error) => ({
+  type: BandActionTypes.LIST_BANDS_FAILURE,
+  payload: error,
+});

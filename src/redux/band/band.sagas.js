@@ -1,6 +1,7 @@
 import { put, takeLatest, all, call, takeEvery } from "redux-saga/effects";
 import { API, Auth, Storage } from "aws-amplify";
 import * as mutations from "../../api/mutations";
+import * as queries from "../../api/queries";
 
 import BandActionTypes from "./band.types";
 
@@ -13,6 +14,8 @@ import {
   uploadBandImageFailure,
   getBandImageSuccess,
   getBandImageFailure,
+  listBandsSuccess,
+  listBandsFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -119,11 +122,29 @@ export function* onGetBandImageStart() {
   yield takeEvery(BandActionTypes.GET_BAND_IMAGE_START, getBandImage);
 }
 
+export function* listBandsStart() {
+  try {
+    const res = yield API.graphql({
+      authMode: "API_KEY",
+      query: queries.listBands,
+    });
+
+    yield put(listBandsSuccess(res.data.listBands.items));
+  } catch (error) {
+    yield put(listBandsFailure(error));
+  }
+}
+
+export function* onListBandsStart() {
+  yield takeLatest(BandActionTypes.LIST_BANDS_START, listBandsStart);
+}
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
     call(onCreateInvitationStart),
     call(onUploadBandImageStart),
     call(onGetBandImageStart),
+    call(onListBandsStart),
   ]);
 }
