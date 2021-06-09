@@ -16,6 +16,8 @@ import {
   getBandImageFailure,
   listBandsSuccess,
   listBandsFailure,
+  getBandSuccess,
+  getBandFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -87,7 +89,7 @@ export function* uploadBandImage({ payload: { id, image } }) {
       variables: {
         input: {
           id: id,
-          keyImage: `concert-image/${id}-image`,
+          keyImage: `band-image/${id}-image`,
         },
       },
     });
@@ -139,6 +141,30 @@ export function* onListBandsStart() {
   yield takeLatest(BandActionTypes.LIST_BANDS_START, listBandsStart);
 }
 
+export function* getBandStart({ payload }) {
+  try {
+    console.log("payload: ", payload);
+    const band = yield API.graphql({
+      query: queries.getBand,
+      variables: {
+        id: payload,
+      },
+    });
+
+    if (band.data.getBand.keyImage) {
+      band.data.getBand.imageUrl = yield Storage.get(
+        band.data.getBand.keyImage,
+        { level: "public" }
+      );
+    }
+    yield put(getBandSuccess(band.data.getBand));
+  } catch (error) {
+    yield put(getBandFailure(error));
+  }
+}
+export function* onGetBandStart() {
+  yield takeLatest(BandActionTypes.GET_BAND_START, getBandStart);
+}
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
@@ -146,5 +172,6 @@ export function* bandSagas() {
     call(onUploadBandImageStart),
     call(onGetBandImageStart),
     call(onListBandsStart),
+    call(onGetBandStart),
   ]);
 }

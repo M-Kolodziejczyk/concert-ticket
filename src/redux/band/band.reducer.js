@@ -79,6 +79,28 @@ const bandReducer = (state = INITIAL_STATE, action) => {
           listBands: "List bands failure",
         },
       };
+    case BandActionTypes.UPDATE_BAND:
+      return {
+        ...state,
+        band: action.payload,
+      };
+    case BandActionTypes.GET_BAND_SUCCESS:
+      return {
+        ...state,
+        band: action.payload,
+        successMessage: {
+          getBand: "Get band success",
+        },
+        errorMessage: {},
+      };
+    case BandActionTypes.GET_BAND_FAILURE:
+      return {
+        ...state,
+        successMessage: {},
+        errorMessage: {
+          getBand: "Get band failure",
+        },
+      };
     default:
       return state;
   }
