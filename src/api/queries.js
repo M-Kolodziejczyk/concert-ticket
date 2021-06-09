@@ -294,7 +294,6 @@ export const getConcert = /* GraphQL */ `
           concertID
           bandID
           createdAt
-          updatedAt
           owner
         }
         nextToken

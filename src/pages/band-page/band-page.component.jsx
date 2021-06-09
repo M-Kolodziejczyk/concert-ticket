@@ -7,7 +7,6 @@ import { updateBand, getBandStart } from "../../redux/band/band.actions";
 import "./band-page.styles.scss";
 
 const BandPage = ({ location }) => {
-  console.log("Props: ", location);
   const dispatch = useDispatch();
   let { id } = useParams();
   const [band, setBand] = useState(location.band || {});
