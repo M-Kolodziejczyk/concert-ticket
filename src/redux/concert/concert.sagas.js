@@ -1,6 +1,7 @@
 import { call, all, put, takeLatest, takeEvery } from "redux-saga/effects";
 import { API, Auth, Storage } from "aws-amplify";
 import * as mutations from "../../api/mutations";
+import * as queries from "../../api/queries";
 
 import ConcertActionTypes from "./concert.types";
 
@@ -13,6 +14,10 @@ import {
   getConcertImageFailure,
   createConcertInvitationSuccess,
   createConcertInvitationFailure,
+  listConcertsSuccess,
+  listConcertsFailure,
+  getConcertSuccess,
+  getConcertFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -124,11 +129,54 @@ export function* onCreateConcertInvitationStart() {
   );
 }
 
+export function* listConcerts() {
+  try {
+    const res = yield API.graphql({
+      authMode: "API_KEY",
+      query: queries.listConcerts,
+    });
+    yield put(listConcertsSuccess(res.data.listConcerts.items));
+  } catch (error) {
+    yield put(listConcertsFailure(error));
+  }
+}
+
+export function* onListConcertsStart() {
+  yield takeLatest(ConcertActionTypes.LIST_CONCERTS_START, listConcerts);
+}
+
+export function* getConcertStart({ payload }) {
+  try {
+    const concert = yield API.graphql({
+      query: queries.getConcert,
+      variables: {
+        id: payload,
+      },
+    });
+
+    if (concert.data.getConcert.keyImage) {
+      concert.data.getConcert.imageUrl = yield Storage.get(
+        concert.data.getConcert.keyImage,
+        { level: "public" }
+      );
+    }
+    yield put(getConcertSuccess(concert.data.getConcert));
+  } catch (error) {
+    yield put(getConcertFailure(error));
+  }
+}
+
+export function* onGetConcertStart() {
+  yield takeLatest(ConcertActionTypes.GET_CONCERT_START, getConcertStart);
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
     call(onUploadConcertImageStart),
     call(onGetConcertImageStart),
     call(onCreateConcertInvitationStart),
+    call(onListConcertsStart),
+    call(onGetConcertStart),
   ]);
 }

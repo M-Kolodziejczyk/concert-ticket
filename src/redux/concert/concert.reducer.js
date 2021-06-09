@@ -1,7 +1,8 @@
 import ConcertActionTypes from "./concert.types";
 
 const INITIAL_STATE = {
-  concerts: {},
+  concerts: [],
+  concert: {},
   concertsImage: {},
   successMessage: {},
   errorMessage: {},
@@ -65,13 +66,52 @@ const concertReducer = (state = INITIAL_STATE, action) => {
         successMessage: {
           createInvitation: "Invitation send successfully",
         },
+        errorMessage: {},
       };
     case ConcertActionTypes.CREATE_CONCERT_INVITATION_FAILURE:
       return {
         ...state,
+        successMessage: {},
         errorMessage: {
           createInvitation: "Failed to send invitation",
         },
+      };
+    case ConcertActionTypes.LIST_CONCERTS_SUCCESS:
+      return {
+        ...state,
+        concerts: action.payload,
+        successMessage: { listConcerts: "List concerts success" },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.LIST_CONCERTS_FAILURE:
+      return {
+        ...state,
+        concerts: [],
+        successMessage: {},
+        errorMessage: {
+          listConcerts: "List concerts failure",
+        },
+      };
+    case ConcertActionTypes.GET_CONCERT_SUCCESS:
+      return {
+        ...state,
+        concert: action.payload,
+        successMessage: { listConcerts: "Get concert success" },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.GET_CONCERT_FAILURE:
+      return {
+        ...state,
+        concert: {},
+        successMessage: {},
+        errorMessage: {
+          listConcerts: "Get concert failure",
+        },
+      };
+    case ConcertActionTypes.UPDATE_CONCERT:
+      return {
+        ...state,
+        concert: action.payload,
       };
     default:
       return state;

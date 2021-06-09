@@ -143,7 +143,6 @@ export function* onListBandsStart() {
 
 export function* getBandStart({ payload }) {
   try {
-    console.log("payload: ", payload);
     const band = yield API.graphql({
       query: queries.getBand,
       variables: {

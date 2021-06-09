@@ -59,3 +59,37 @@ export const createConcertInvitationFailure = (error) => ({
   type: ConcertActionTypes.CREATE_CONCERT_INVITATION_FAILURE,
   payload: error,
 });
+
+export const listConcertsStart = () => ({
+  type: ConcertActionTypes.LIST_CONCERTS_START,
+});
+
+export const listConcertsSuccess = (res) => ({
+  type: ConcertActionTypes.LIST_CONCERTS_SUCCESS,
+  payload: res,
+});
+
+export const listConcertsFailure = (error) => ({
+  type: ConcertActionTypes.LIST_CONCERTS_FAILURE,
+  payload: error,
+});
+
+export const getConcertStart = (id) => ({
+  type: ConcertActionTypes.GET_CONCERT_START,
+  payload: id,
+});
+
+export const getConcertSuccess = (res) => ({
+  type: ConcertActionTypes.GET_CONCERT_SUCCESS,
+  payload: res,
+});
+
+export const getConcertFailure = (error) => ({
+  type: ConcertActionTypes.GET_CONCERT_FAILURE,
+  payload: error,
+});
+
+export const updateConcert = (concert) => ({
+  type: ConcertActionTypes.UPDATE_CONCERT,
+  payload: concert,
+});
