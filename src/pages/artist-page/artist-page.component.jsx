@@ -46,7 +46,7 @@ const ArtistPage = (props) => {
         <p>Genre: {artist.genre}</p>
       </div>
       <div className="artist__bands">
-        {artist.bands.items.length > 0 &&
+        {artist.bands?.items.length > 0 &&
           artist.bands.items.map((band, i) => <p>{band.bandID}</p>)}
       </div>
     </div>
