@@ -17,6 +17,7 @@ import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component"
 import UserPage from "./pages/user-page/user-page.component";
 import ArtistsPage from "./pages/artists-page/artists-page.component";
 import ArtistPage from "./pages/artist-page/artist-page.component";
+import BandsPage from "./pages/bands-page/bands-page.component";
 
 import "./App.css";
 
@@ -63,7 +64,7 @@ const App = () => {
         />
         <Route exact path="/artists/" component={ArtistsPage} />
         <Route exact path="/artists/:id" component={ArtistPage} />
-
+        <Route exact path="/bands" component={BandsPage} />
         <PrivateRoute exact path="/user" component={UserPage} />
       </Switch>
     </div>

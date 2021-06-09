@@ -27,6 +27,9 @@ const Header = () => {
         <Link to="/concerts" className="options__link">
           Concerts
         </Link>
+        <Link to="/bands" className="options__link">
+          Bands
+        </Link>
         <Link to="/artists" className="options__link">
           Artists
         </Link>
