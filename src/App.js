@@ -19,6 +19,7 @@ import ArtistsPage from "./pages/artists-page/artists-page.component";
 import ArtistPage from "./pages/artist-page/artist-page.component";
 import BandsPage from "./pages/bands-page/bands-page.component";
 import BandPage from "./pages/band-page/band-page.component";
+import ConcertsPage from "./pages/concerts-page/concerts-page.component";
 
 import "./App.css";
 
@@ -67,6 +68,7 @@ const App = () => {
         <Route exact path="/artists/:id" component={ArtistPage} />
         <Route exact path="/bands" component={BandsPage} />
         <Route exact path="/bands/:id" component={BandPage} />
+        <Route exact path="/concerts" component={ConcertsPage} />
         <PrivateRoute exact path="/user" component={UserPage} />
       </Switch>
     </div>

@@ -1,0 +1,11 @@
+.concerts-page__concert-component {
+  display: flex;
+  margin-bottom: 50px;
+  .image {
+    width: 400px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
