@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
+import { Link, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserStart } from "../../redux/user/user.actions";
 
 import Artist from "./components/artist/artist.component";
 import BandsTab from "./components/bands-tab/bands-tab.component";
 import InvitationsTab from "./components/invitations-tab/invitations-tab.component";
-import ConcertsTab from "./components/concerts-tab/concerts-tab.component";
+import UserConcertsPage from "../user-concerts-page/user-concerts-page.component";
+import UserConcertPage from "../user-concert-page/user-concert-page.component";
 
 import "./user-page.styles.scss";
 
@@ -21,118 +23,48 @@ const UserPage = () => {
     <div className="user-page">
       <h1 className="heading">User Page</h1>
       <div className="d-flex align-items-start">
-        <div
-          className="nav flex-column nav-pills me-3"
-          id="tab"
-          role="tablist"
-          aria-orientation="vertical"
-        >
-          <button
-            className="nav-link active"
-            id="user-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#user"
-            type="button"
-            role="tab"
-            aria-controls="user"
-            aria-selected="true"
-          >
-            User
-          </button>
-          <button
-            className="nav-link"
-            id="v-pills-profile-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-profile"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-profile"
-            aria-selected="false"
-          >
-            Artist
-          </button>
-          <button
-            className="nav-link"
-            id="v-pills-messages-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-messages"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-messages"
-            aria-selected="false"
-          >
-            Bands
-          </button>
-          <button
-            className="nav-link"
-            id="v-pills-settings-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-settings"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-settings"
-            aria-selected="false"
-          >
-            Concerts
-          </button>
-          <button
-            className="nav-link"
-            id="invitations-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#invitations"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-settings"
-            aria-selected="false"
-          >
-            Invitations
-          </button>
+        <div className="nav flex-column nav-pills me-3">
+          <Link to="/user">User</Link>
+          <Link to="/user/artist">Artist</Link>
+          <Link to="/user/bands">Bands</Link>
+          <Link to="/user/concerts">Concerts</Link>
+          <Link to="/user/invitations">Invitations</Link>
         </div>
-        <div className="tab-content" id="tabContent">
-          <div
-            className="tab-pane fade show active"
-            id="user"
-            role="tabpanel"
-            aria-labelledby="user-tab"
-          >
-            User Page
-          </div>
-          <div
-            className="tab-pane fade"
-            id="v-pills-profile"
-            role="tabpanel"
-            aria-labelledby="v-pills-profile-tab"
-          >
-            <Artist artistID={user.artistID} />
-          </div>
-          <div
-            className="tab-pane fade"
-            id="v-pills-messages"
-            role="tabpanel"
-            aria-labelledby="v-pills-messages-tab"
-          >
-            <BandsTab userId={user.id} bands={user.bands} />
-          </div>
-          <div
-            className="tab-pane fade"
-            id="v-pills-settings"
-            role="tabpanel"
-            aria-labelledby="v-pills-settings-tab"
-          >
-            <ConcertsTab concerts={user.concerts} />
-          </div>
-          <div
-            className="tab-pane fade"
-            id="invitations"
-            role="tabpanel"
-            aria-labelledby="invitations-tab"
-          >
-            <InvitationsTab
+        <div className="tab-content">
+          <Switch>
+            <Route exact path="/user">
+              USER
+            </Route>
+            <Route
+              exact
+              path="/user/artist"
+              component={Artist}
+              state={{
+                artistID: user.artistID,
+              }}
+            />
+            <Route
+              exact
+              path="/user/bands"
+              component={BandsTab}
+              userId={user.id}
+              bands={user.bands}
+            />
+            <Route exact path="/user/concerts" component={UserConcertsPage} />
+            <Route
+              exact
+              path="/user/concerts/:id"
+              component={UserConcertPage}
+            />
+            <Route
+              exact
+              path="/user/invitations"
+              component={InvitationsTab}
               email={user.email}
               artistID={user.artistID}
               bands={user.bands}
             />
-          </div>
+          </Switch>
         </div>
       </div>
     </div>

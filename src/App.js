@@ -71,7 +71,7 @@ const App = () => {
         <Route exact path="/bands/:id" component={BandPage} />
         <Route exact path="/concerts" component={ConcertsPage} />
         <Route exact path="/concerts/:id" component={ConcertPage} />
-        <PrivateRoute exact path="/user" component={UserPage} />
+        <PrivateRoute path="/user" component={UserPage} />
       </Switch>
     </div>
   );
