@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   errorMessage: {},
   successMessage: {},
   user: {},
+  userConcerts: {},
   pushRoute: "",
 };
 
@@ -116,6 +117,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: action.payload,
+        userConcerts: action.payload?.concerts?.items.reduce(
+          (obj, item) => ({ ...obj, [item.id]: item }),
+          {}
+        ),
         errorMessage: {},
       };
     case UserActionTypes.GET_USER_FAILURE:
