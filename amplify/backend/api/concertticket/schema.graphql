@@ -136,7 +136,11 @@ type ConcertArtistJoin
 
 type Ticket
   @model
-  @key(name: "byConcert", fields: ["concertID"])
+  @key(
+    name: "byConcert"
+    fields: ["concertID"]
+    queryField: "ticketsByConcertID"
+  )
   @auth(
     rules: [
       { allow: owner }
@@ -146,12 +150,15 @@ type Ticket
     ]
   ) {
   id: ID!
+  eventName: String!
   description: String
   price: String!
-  startDate: String!
-  endDate: String!
+  startDate: AWSDateTime! #the day when the sale begins
+  endDate: AWSDateTime! # the day when the sale ends
+  date: AWSDateTime!
+  venue: String!
+  type: String!
   quantity: Int!
-  amount: String!
   concertID: ID!
   concert: Concert @connection(fields: ["concertID"])
   orders: [TicketOrder] @connection(keyName: "byTicket", fields: ["id"])
@@ -171,6 +178,8 @@ type TicketOrder
   ticketID: ID!
   orderID: ID!
   userID: ID!
+  price: String!
+  fullName: String!
   ticket: Ticket @connection(fields: ["ticketID"])
   order: Order @connection(fields: ["orderID"])
 }

@@ -138,6 +138,8 @@ export const getTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      price
+      fullName
       order {
         id
         customer
@@ -154,12 +156,15 @@ export const getTicketOrder = /* GraphQL */ `
       updatedAt
       ticket {
         id
+        eventName
         description
         price
         startDate
         endDate
+        date
+        venue
+        type
         quantity
-        amount
         concertID
         orders {
           nextToken
@@ -197,6 +202,8 @@ export const listTicketOrders = /* GraphQL */ `
         ticketID
         orderID
         userID
+        price
+        fullName
         order {
           id
           customer
@@ -210,12 +217,15 @@ export const listTicketOrders = /* GraphQL */ `
         updatedAt
         ticket {
           id
+          eventName
           description
           price
           startDate
           endDate
+          date
+          venue
+          type
           quantity
-          amount
           concertID
           createdAt
           updatedAt
@@ -240,6 +250,8 @@ export const getOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -313,12 +325,15 @@ export const getConcert = /* GraphQL */ `
       tickets {
         items {
           id
+          eventName
           description
           price
           startDate
           endDate
+          date
+          venue
+          type
           quantity
-          amount
           concertID
           createdAt
           updatedAt
@@ -469,12 +484,15 @@ export const getTicket = /* GraphQL */ `
   query GetTicket($id: ID!) {
     getTicket(id: $id) {
       id
+      eventName
       description
       price
       startDate
       endDate
+      date
+      venue
+      type
       quantity
-      amount
       concertID
       orders {
         items {
@@ -482,6 +500,8 @@ export const getTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -525,12 +545,67 @@ export const listTickets = /* GraphQL */ `
     listTickets(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        eventName
         description
         price
         startDate
         endDate
+        date
+        venue
+        type
         quantity
-        amount
+        concertID
+        orders {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        concert {
+          id
+          userName
+          identityId
+          name
+          date
+          venue
+          genres
+          keyImage
+          invitations
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const ticketsByConcertID = /* GraphQL */ `
+  query TicketsByConcertID(
+    $concertID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelTicketFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ticketsByConcertID(
+      concertID: $concertID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        eventName
+        description
+        price
+        startDate
+        endDate
+        date
+        venue
+        type
+        quantity
         concertID
         orders {
           nextToken

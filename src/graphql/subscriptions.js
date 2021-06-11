@@ -268,6 +268,8 @@ export const onCreateTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      price
+      fullName
       order {
         id
         customer
@@ -284,12 +286,15 @@ export const onCreateTicketOrder = /* GraphQL */ `
       updatedAt
       ticket {
         id
+        eventName
         description
         price
         startDate
         endDate
+        date
+        venue
+        type
         quantity
-        amount
         concertID
         orders {
           nextToken
@@ -322,6 +327,8 @@ export const onUpdateTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      price
+      fullName
       order {
         id
         customer
@@ -338,12 +345,15 @@ export const onUpdateTicketOrder = /* GraphQL */ `
       updatedAt
       ticket {
         id
+        eventName
         description
         price
         startDate
         endDate
+        date
+        venue
+        type
         quantity
-        amount
         concertID
         orders {
           nextToken
@@ -376,6 +386,8 @@ export const onDeleteTicketOrder = /* GraphQL */ `
       ticketID
       orderID
       userID
+      price
+      fullName
       order {
         id
         customer
@@ -392,12 +404,15 @@ export const onDeleteTicketOrder = /* GraphQL */ `
       updatedAt
       ticket {
         id
+        eventName
         description
         price
         startDate
         endDate
+        date
+        venue
+        type
         quantity
-        amount
         concertID
         orders {
           nextToken
@@ -437,6 +452,8 @@ export const onCreateOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -461,6 +478,8 @@ export const onUpdateOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -485,6 +504,8 @@ export const onDeleteOrder = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -535,12 +556,15 @@ export const onCreateConcert = /* GraphQL */ `
       tickets {
         items {
           id
+          eventName
           description
           price
           startDate
           endDate
+          date
+          venue
+          type
           quantity
-          amount
           concertID
           createdAt
           updatedAt
@@ -591,12 +615,15 @@ export const onUpdateConcert = /* GraphQL */ `
       tickets {
         items {
           id
+          eventName
           description
           price
           startDate
           endDate
+          date
+          venue
+          type
           quantity
-          amount
           concertID
           createdAt
           updatedAt
@@ -647,12 +674,15 @@ export const onDeleteConcert = /* GraphQL */ `
       tickets {
         items {
           id
+          eventName
           description
           price
           startDate
           endDate
+          date
+          venue
+          type
           quantity
-          amount
           concertID
           createdAt
           updatedAt
@@ -1237,12 +1267,15 @@ export const onCreateTicket = /* GraphQL */ `
   subscription OnCreateTicket {
     onCreateTicket {
       id
+      eventName
       description
       price
       startDate
       endDate
+      date
+      venue
+      type
       quantity
-      amount
       concertID
       orders {
         items {
@@ -1250,6 +1283,8 @@ export const onCreateTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -1288,12 +1323,15 @@ export const onUpdateTicket = /* GraphQL */ `
   subscription OnUpdateTicket {
     onUpdateTicket {
       id
+      eventName
       description
       price
       startDate
       endDate
+      date
+      venue
+      type
       quantity
-      amount
       concertID
       orders {
         items {
@@ -1301,6 +1339,8 @@ export const onUpdateTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
@@ -1339,12 +1379,15 @@ export const onDeleteTicket = /* GraphQL */ `
   subscription OnDeleteTicket {
     onDeleteTicket {
       id
+      eventName
       description
       price
       startDate
       endDate
+      date
+      venue
+      type
       quantity
-      amount
       concertID
       orders {
         items {
@@ -1352,6 +1395,8 @@ export const onDeleteTicket = /* GraphQL */ `
           ticketID
           orderID
           userID
+          price
+          fullName
           createdAt
           updatedAt
         }
