@@ -7,6 +7,7 @@ import notificationReducer from "./notification/notification.reducer";
 import invitationReducer from "./invitation/invitation.reducer";
 import concertReducer from "./concert/concert.reducer";
 import ticketReducer from "./ticket/ticket.reducer";
+import cartReducer from "./cart/cart.reducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   invitation: invitationReducer,
   concert: concertReducer,
   ticket: ticketReducer,
+  cart: cartReducer,
 });
 
 export default rootReducer;
