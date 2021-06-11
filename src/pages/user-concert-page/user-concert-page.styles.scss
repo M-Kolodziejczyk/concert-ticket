@@ -1,0 +1,21 @@
+.user-concert-page {
+  .details {
+    .img-wrapper {
+      width: 500px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .tickets-container {
+    margin-top: 50px;
+
+    .ticket {
+      border: 1px solid lightslategray;
+      border-radius: 5px;
+      padding: 5px;
+    }
+  }
+}
