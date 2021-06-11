@@ -1,8 +1,8 @@
 import TicketActionTypes from "./ticket.types";
 
 const INITIAL_STATE = {
-  ticket: {},
   tickets: [],
+  concertTickets: {},
   successMessage: {},
   errrorMessage: {},
 };
@@ -24,6 +24,27 @@ const ticketReducer = (state = INITIAL_STATE, action) => {
           createTicket: "Create ticket failure",
         },
       };
+    case TicketActionTypes.GET_TICKETS_BY_CONCERTID_SUCCESS:
+      return {
+        ...state,
+        concertTickets: {
+          ...state.concertTickets,
+          [action.payload.concertID]: action.payload.tickets,
+        },
+        successMessage: {
+          getTicketsByConcertId: "GET tickets success",
+        },
+        errrorMessage: {},
+      };
+    case TicketActionTypes.GET_TICKETS_BY_CONCERTID_FAILURE:
+      return {
+        ...state,
+        successMessage: {},
+        errrorMessage: {
+          getTicketsByConcertId: "GET tickets failure",
+        },
+      };
+
     default:
       return state;
   }
