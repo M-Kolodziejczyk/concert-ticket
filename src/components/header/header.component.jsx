@@ -37,6 +37,9 @@ const Header = () => {
       <div className="auth__container">
         {isLogged ? (
           <div className="user">
+            <Link to="/cart" className="user__link">
+              Cart
+            </Link>
             <Link to="/user" className="user__link">
               Account
             </Link>
