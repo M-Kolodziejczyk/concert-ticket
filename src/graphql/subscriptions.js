@@ -30,6 +30,8 @@ export const onCreateUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -42,6 +44,8 @@ export const onCreateUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -111,6 +115,8 @@ export const onUpdateUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -123,6 +129,8 @@ export const onUpdateUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -192,6 +200,8 @@ export const onDeleteUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -204,6 +214,8 @@ export const onDeleteUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -275,6 +287,8 @@ export const onCreateTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -334,6 +348,8 @@ export const onUpdateTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -393,6 +409,8 @@ export const onDeleteTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -445,6 +463,8 @@ export const onCreateOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {
@@ -471,6 +491,8 @@ export const onUpdateOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {
@@ -497,6 +519,8 @@ export const onDeleteOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {

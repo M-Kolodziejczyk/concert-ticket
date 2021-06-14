@@ -13,6 +13,8 @@ export const getUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -25,6 +27,8 @@ export const getUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -145,6 +149,8 @@ export const getTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -209,6 +215,8 @@ export const listTicketOrders = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -243,6 +251,8 @@ export const getOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {
@@ -274,6 +284,8 @@ export const listOrders = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken

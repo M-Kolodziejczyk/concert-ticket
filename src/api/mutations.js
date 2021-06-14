@@ -57,6 +57,11 @@ export const rejectConcertInvitation = /* GraphQL */ `
     )
   }
 `;
+export const processOrder = /* GraphQL */ `
+  mutation ProcessOrder($input: ProcessOrderInput!) {
+    processOrder(input: $input)
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -72,6 +77,8 @@ export const createUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -84,6 +91,8 @@ export const createUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -156,6 +165,8 @@ export const updateUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -168,6 +179,8 @@ export const updateUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -240,6 +253,8 @@ export const deleteUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -252,6 +267,8 @@ export const deleteUser = /* GraphQL */ `
           customer
           userName
           status
+          stripeIntentID
+          total
           createdAt
           updatedAt
           userID
@@ -1304,6 +1321,8 @@ export const createTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -1366,6 +1385,8 @@ export const updateTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -1428,6 +1449,8 @@ export const deleteTicketOrder = /* GraphQL */ `
         customer
         userName
         status
+        stripeIntentID
+        total
         createdAt
         tickets {
           nextToken
@@ -1483,6 +1506,8 @@ export const createOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {
@@ -1512,6 +1537,8 @@ export const updateOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {
@@ -1541,6 +1568,8 @@ export const deleteOrder = /* GraphQL */ `
       customer
       userName
       status
+      stripeIntentID
+      total
       createdAt
       tickets {
         items {
