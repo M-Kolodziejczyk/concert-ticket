@@ -152,7 +152,7 @@ type Ticket
   id: ID!
   eventName: String
   description: String
-  price: String!
+  price: Float!
   startDate: AWSDateTime! #the day when the sale begins
   endDate: AWSDateTime! # the day when the sale ends
   date: AWSDateTime!
@@ -178,7 +178,7 @@ type TicketOrder
   ticketID: ID!
   orderID: ID!
   userID: ID!
-  price: String!
+  price: Float
   fullName: String!
   ticket: Ticket @connection(fields: ["ticketID"])
   order: Order @connection(fields: ["orderID"])
@@ -202,7 +202,7 @@ type Order
   userName: String!
   status: String!
   stripeIntentID: String
-  total: String
+  total: Float
   createdAt: String!
   tickets: [TicketOrder] @connection(keyName: "byOrder", fields: ["id"])
 }
@@ -242,7 +242,6 @@ input TicketItem {
 input ProcessOrderInput {
   userName: String!
   fullName: String!
-  stripeIntentID: String!
   tickets: [TicketItem]
 }
 

@@ -51,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "processPayment",
+            "createOrder",
             {
               "Fn::Join": [
                 "",
                 [
-                  "processPayment",
+                  "createOrder",
                   "-",
                   {
                     "Ref": "env"
@@ -73,6 +73,61 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "API_CONCERTTICKET_USERTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+              }
+            },
+            "API_CONCERTTICKET_USERTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiconcertticketGraphQLAPIIdOutput"
+            },
+            "API_CONCERTTICKET_TICKETTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:TicketTable:Name"
+              }
+            },
+            "API_CONCERTTICKET_TICKETTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:TicketTable:Name"
+                    }
+                  }
+                ]
+              ]
             },
             "API_CONCERTTICKET_TICKETORDERTABLE_NAME": {
               "Fn::ImportValue": {
@@ -99,9 +154,6 @@
                   }
                 ]
               ]
-            },
-            "API_CONCERTTICKET_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apiconcertticketGraphQLAPIIdOutput"
             },
             "API_CONCERTTICKET_ORDERTABLE_NAME": {
               "Fn::ImportValue": {
@@ -148,12 +200,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "concertticketLambdaRole16444e30",
+            "concertticketLambdaRole92e5cc25",
             {
               "Fn::Join": [
                 "",
                 [
-                  "concertticketLambdaRole16444e30",
+                  "concertticketLambdaRole92e5cc25",
                   "-",
                   {
                     "Ref": "env"
@@ -239,6 +291,120 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:TicketTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apiconcertticketGraphQLAPIIdOutput}:GetAtt:TicketTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
             {
               "Effect": "Allow",
               "Action": [

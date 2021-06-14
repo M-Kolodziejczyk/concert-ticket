@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "storage": {
+      "User:@model(appsync)": [
+        "read"
+      ],
+      "Ticket:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "TicketOrder:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Order:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
