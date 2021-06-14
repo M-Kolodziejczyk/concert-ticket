@@ -1,4 +1,11 @@
 .cart-page {
   max-width: 1320px;
   margin: 40px auto 0;
+
+  .cart {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
 }
