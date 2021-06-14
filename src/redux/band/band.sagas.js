@@ -161,9 +161,11 @@ export function* getBandStart({ payload }) {
     yield put(getBandFailure(error));
   }
 }
+
 export function* onGetBandStart() {
   yield takeLatest(BandActionTypes.GET_BAND_START, getBandStart);
 }
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
