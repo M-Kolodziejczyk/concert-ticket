@@ -30,7 +30,7 @@ const UserConcertPage = ({ match }) => {
         eventName: concert?.name,
         description: "",
         type: "",
-        price: "",
+        price: 0,
         startDate: new Date(),
         endDate: new Date(),
         date: concert?.date,
@@ -89,7 +89,7 @@ const UserConcertPage = ({ match }) => {
           />
           <FormInput
             name="price"
-            type="text"
+            type="number"
             label="Price"
             handleChange={handleChange}
             value={values.price}
