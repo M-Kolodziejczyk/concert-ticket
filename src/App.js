@@ -22,6 +22,7 @@ import BandPage from "./pages/band-page/band-page.component";
 import ConcertsPage from "./pages/concerts-page/concerts-page.component";
 import ConcertPage from "./pages/concert-page/concert-page.component";
 import CartPage from "./pages/cart-page/cart-page.component";
+import CartPaymentPage from "./pages/cart-payment/cart-payment.component";
 
 import "./App.css";
 
@@ -73,7 +74,12 @@ const App = () => {
         <Route exact path="/concerts" component={ConcertsPage} />
         <Route exact path="/concerts/:id" component={ConcertPage} />
         <PrivateRoute path="/user" component={UserPage} />
-        <PrivateRoute path="/cart" component={CartPage} />
+        <PrivateRoute exact path="/cart" component={CartPage} />
+        <PrivateRoute
+          exact
+          path="/cart/payment/:id"
+          component={CartPaymentPage}
+        />
       </Switch>
     </div>
   );
