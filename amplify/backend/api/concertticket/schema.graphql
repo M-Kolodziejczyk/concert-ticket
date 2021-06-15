@@ -245,6 +245,11 @@ input ProcessOrderInput {
   tickets: [TicketItem]
 }
 
+input ProcessPaymentInput {
+  paymentIntentID: String!
+  orderID: ID!
+}
+
 type Subscription {
   onCreateInvitationByEmail(email: String!): Invitation
     @aws_subscribe(mutations: ["createInvitation"])
@@ -279,4 +284,7 @@ type Mutation {
 
   processOrder(input: ProcessOrderInput!): String
     @function(name: "createOrder-${env}")
+
+  processPayment(input: ProcessPaymentInput!): String
+    @function(name: "processPayment-${env}")
 }
