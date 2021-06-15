@@ -29,3 +29,18 @@ export const getOrderFailure = (error) => ({
   type: OrderActionTypes.GET_ORDER_FAILURE,
   payload: error,
 });
+
+export const processPaymentStart = (data) => ({
+  type: OrderActionTypes.PROCESS_PAYMENT_START,
+  payload: data,
+});
+
+export const processPaymentSuccess = (res) => ({
+  type: OrderActionTypes.PROCESS_PAYMENT_SUCCESS,
+  payload: res,
+});
+
+export const processPaymentFailure = (error) => ({
+  type: OrderActionTypes.PROCESS_PAYMENT_FAILURE,
+  payload: error,
+});

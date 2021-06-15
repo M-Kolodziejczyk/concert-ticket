@@ -10,6 +10,8 @@ import {
   createOrderFailure,
   getOrderSuccess,
   getOrderFailure,
+  processPaymentSuccess,
+  processPaymentFailure,
 } from "./order.actions";
 
 export function* createOrder({ payload: { userName, fullName, tickets } }) {
@@ -51,10 +53,35 @@ export function* getOrder({ payload }) {
   }
 }
 
+export function* processPayment({ payload: { paymentIntentID, orderID } }) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.processPayment,
+      variables: {
+        input: {
+          paymentIntentID,
+          orderID,
+        },
+      },
+    });
+    yield put(processPaymentSuccess(JSON.parse(res.data.processPayment)));
+  } catch (error) {
+    yield put(processPaymentFailure(error));
+  }
+}
+
+export function* onProcessPaymentStart() {
+  yield takeLatest(OrderActionTypes.PROCESS_PAYMENT_START, processPayment);
+}
+
 export function* onGetOrderStart() {
   yield takeLatest(OrderActionTypes.GET_ORDER_START, getOrder);
 }
 
 export function* orderSagas() {
-  yield all([call(onCreateOrderStart), call(onGetOrderStart)]);
+  yield all([
+    call(onCreateOrderStart),
+    call(onGetOrderStart),
+    call(onProcessPaymentStart),
+  ]);
 }

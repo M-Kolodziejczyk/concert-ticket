@@ -7,6 +7,9 @@ const INITIAL_STATE = {
   successMessage: {},
   createOrderResponse: {},
   errorMessage: {},
+  processPayment: {
+    status: "",
+  },
   loading: false,
 };
 
@@ -55,6 +58,28 @@ const orderReducer = (state = INITIAL_STATE, action) => {
         successMessage: {},
         errorMessage: {
           getOrder: "GET order failure",
+        },
+      };
+    case OrderActionTypes.PROCESS_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        processPayment: {
+          status: action.payload.status,
+        },
+        successMessage: {
+          processPayment: "Process payment Success",
+        },
+        errorMessage: {},
+      };
+    case OrderActionTypes.PROCESS_PAYMENT_FAILURE:
+      return {
+        ...state,
+        processPayment: {
+          status: "FAILED",
+        },
+        successMessage: {},
+        errorMessage: {
+          processPayment: "Process payment failure",
         },
       };
     default:
