@@ -17,9 +17,10 @@ const stripe = require("stripe")(process.env.SK_TEST);
 const uuid = require("uuid");
 
 async function createPaymentIntent(id, total) {
+  const totalInt = parseInt(total * 100, 10);
   try {
     const stripeIntentID = await stripe.paymentIntents.create({
-      amount: total * 100,
+      amount: totalInt,
       currency: "usd",
     });
 
@@ -29,10 +30,11 @@ async function createPaymentIntent(id, total) {
         Key: {
           id,
         },
-        UpdateExpression: "set #s = :val",
-        ExpressionAttributeNames: { "#s": "stripeIntentID" },
+        UpdateExpression: "set #s = :val, #t = :total ",
+        ExpressionAttributeNames: { "#s": "stripeIntentID", "#t": "total" },
         ExpressionAttributeValues: {
           ":val": stripeIntentID.client_secret,
+          ":total": total,
         },
         ReturnValues: "ALL_NEW",
       })
@@ -56,9 +58,11 @@ async function createOrder(event, date) {
           __typename: "Order",
           id,
           customer: event.arguments.input.fullName,
-          username: event.arguments.input.userName,
+          userName: event.arguments.input.userName,
+          userID: event.identity.claims.username,
           status: "NEW",
           createdAt: date,
+          updatedAt: date,
         },
       })
       .promise();
@@ -76,7 +80,6 @@ async function createTicketOrder(event, date, orderID) {
   try {
     for (const ticket of event.arguments.input.tickets) {
       const res = await updateTicketIfAvailable(ticket.id);
-      console.log("Ticket order: ---", res);
 
       if (res.ConditionalCheckFailedException === false) {
         total = total + res.price;
@@ -89,7 +92,7 @@ async function createTicketOrder(event, date, orderID) {
               id: uuid.v4(),
               ticketID: res.ticketID,
               orderID: orderID,
-              userID: event.arguments.input.userName,
+              userID: event.identity.claims.username,
               price: res.price,
               fullName: event.arguments.input.fullName,
               createdAt: date,
@@ -100,9 +103,19 @@ async function createTicketOrder(event, date, orderID) {
       }
     }
 
+    if (total === 0) {
+      await docClient
+        .delete({
+          TableName: process.env.API_CONCERTTICKET_ORDERTABLE_NAME,
+          Key: {
+            id: orderID,
+          },
+        })
+        .promise();
+    }
+
     return total;
   } catch (error) {
-    console.log("Create ticket Order: ", error);
     return error;
   }
 }
@@ -142,27 +155,29 @@ async function updateTicketIfAvailable(id) {
 
 exports.handler = async (event) => {
   const date = new Date().toISOString();
-  const resBody = {};
+  const response = { body: {} };
 
   try {
     const id = await createOrder(event, date);
     const total = await createTicketOrder(event, date, id);
-    const intentSecret = await createPaymentIntent(id, total);
-    resBody.orderID = id;
-    resBody.total = total;
-    resBody.intentSecret = intentSecret;
+    if (total > 0) {
+      const intentSecret = await createPaymentIntent(id, total);
+      response.intentSecret = intentSecret;
+      response.body.orderID = id;
+      response.body.total = total;
+      response.body.isTicketAvailable = true;
+    } else {
+      response.body.message = "Ticket are not available anymore";
+      response.body.isTicketAvailable = false;
+    }
+
+    response.statusCode = 200;
   } catch (error) {
     console.log("ERROR: ", error);
+    response.statusCode = 500;
+    response.body.message = "Server Error";
     return error;
   }
-  const response = {
-    statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  },
-    body: { ...resBody },
-  };
-  return response;
+
+  return JSON.stringify(response);
 };
