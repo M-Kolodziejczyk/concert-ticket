@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
 import { createOrderStart } from "../../redux/order/order.actions";
@@ -6,10 +7,11 @@ import { createOrderStart } from "../../redux/order/order.actions";
 import "./cart-page.styles.scss";
 
 const CartPage = () => {
+  let history = useHistory();
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
   const cart = useSelector((state) => state.cart.cart);
-  const loading = useSelector((state) => state.order.loading);
+  const order = useSelector((state) => state.order);
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -33,9 +35,15 @@ const CartPage = () => {
     );
   };
 
+  useEffect(() => {
+    if (!order.loading && order.createOrderResponse?.body?.isTicketAvailable) {
+      history.push(`/cart/payment/${order.createOrderResponse.body.orderID}`);
+    }
+  }, [order, history]);
+
   return (
     <div className="cart-page">
-      {loading ? (
+      {order.loading ? (
         <h2>Loading....</h2>
       ) : (
         <div>
@@ -59,6 +67,9 @@ const CartPage = () => {
           {/* <Elements stripe={promise}>
         <CheckoutForm callback={createOrderStart} />
       </Elements> */}
+          {order.createOrderResponse?.body?.isTicketAvailable === false && (
+            <h2>No tickets Available</h2>
+          )}
         </div>
       )}
     </div>
