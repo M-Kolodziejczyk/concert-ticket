@@ -3,7 +3,9 @@ import OrderActionTypes from "./order.types";
 const INITIAL_STATE = {
   order: {},
   orders: [],
+  isCreateOrderSuccess: false,
   successMessage: {},
+  createOrderResponse: {},
   errorMessage: {},
   loading: false,
 };
@@ -18,7 +20,8 @@ const orderReducer = (state = INITIAL_STATE, action) => {
     case OrderActionTypes.CREATE_ORDER_SUCCESS:
       return {
         ...state,
-        order: action.payload,
+        createOrderResponse: action.payload,
+        isCreateOrderSuccess: true,
         successMessage: {
           createOrder: "Create order success",
         },
@@ -28,12 +31,31 @@ const orderReducer = (state = INITIAL_STATE, action) => {
     case OrderActionTypes.CREATE_ORDER_FAILURE:
       return {
         ...state,
-        order: {},
+        createOrderResponse: {},
+        isCreateOrderSuccess: false,
         successMessage: {},
         errorMessage: {
           createOrder: "Create order failure",
         },
         loading: false,
+      };
+    case OrderActionTypes.GET_ORDER_SUCCESS:
+      return {
+        ...state,
+        order: action.payload,
+        successMessage: {
+          getOrder: "GET order Success",
+        },
+        errorMessage: {},
+      };
+    case OrderActionTypes.GET_ORDER_FAILURE:
+      return {
+        ...state,
+        order: {},
+        successMessage: {},
+        errorMessage: {
+          getOrder: "GET order failure",
+        },
       };
     default:
       return state;
