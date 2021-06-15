@@ -62,6 +62,11 @@ export const processOrder = /* GraphQL */ `
     processOrder(input: $input)
   }
 `;
+export const processPayment = /* GraphQL */ `
+  mutation ProcessPayment($input: ProcessPaymentInput!) {
+    processPayment(input: $input)
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!

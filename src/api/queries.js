@@ -264,6 +264,14 @@ export const getOrder = /* GraphQL */ `
           fullName
           createdAt
           updatedAt
+          ticket {
+            eventName
+            description
+            date
+            venue
+            type
+            price
+          }
         }
         nextToken
       }
