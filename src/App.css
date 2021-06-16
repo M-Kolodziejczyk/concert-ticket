@@ -14,3 +14,11 @@ a {
   text-decoration: none;
   color: #000000;
 }
+
+button:focus {
+  outline: none;
+}
+
+svg:focus {
+  outline: none;
+}
