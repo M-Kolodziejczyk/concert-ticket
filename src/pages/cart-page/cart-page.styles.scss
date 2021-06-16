@@ -3,9 +3,49 @@
   margin: 40px auto 0;
 
   .cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border: 1px solid lightgray;
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 10px;
+
+    p {
+      flex: 1;
+      margin: 0;
+    }
+
+    .delete-ticket {
+      background: none;
+      border: none;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      &:hover {
+        svg {
+          fill: red;
+        }
+      }
+    }
+  }
+
+  .summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .error {
+    h2 {
+      color: red;
+    }
   }
 }
