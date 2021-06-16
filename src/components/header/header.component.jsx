@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { signOutStart } from "../../redux/user/user.actions";
 
 import { ReactComponent as Logo } from "../../assets/concert.svg";
+import { ReactComponent as Cart } from "../../assets/shopping-cart.svg";
 
 import "./header.styles.scss";
 
 const Header = () => {
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.user.isLogged);
+  const cart = useSelector((state) => state.cart.cart);
 
   const handleSignOut = () => {
     dispatch(signOutStart());
@@ -38,7 +40,10 @@ const Header = () => {
         {isLogged ? (
           <div className="user">
             <Link to="/cart" className="user__link">
-              Cart
+              <Cart className="cart-icon" />
+              <span className="cart-quantity">
+                <strong>{cart.length}</strong>
+              </span>
             </Link>
             <Link to="/user" className="user__link">
               Account
