@@ -22,19 +22,30 @@
     margin-top: 50px;
 
     .ticket {
+      margin-bottom: 10px;
       padding: 5px;
       border: 1px solid lightslategray;
       border-radius: 5px;
 
       .cart-btn {
-        padding: 0;
         border: none;
         background-color: transparent;
+        border: 1px solid black;
+        border-radius: 10px;
+
+        &:hover {
+          box-shadow: 2px 2px lightslategray;
+        }
 
         svg {
           width: 40px;
           height: 40px;
         }
+      }
+      .error {
+        margin: 0;
+        margin-top: 10px;
+        color: red;
       }
     }
   }

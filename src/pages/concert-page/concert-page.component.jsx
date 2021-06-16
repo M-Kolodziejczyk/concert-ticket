@@ -17,7 +17,9 @@ const ConcertPage = ({ location }) => {
   const dispatch = useDispatch();
   let { id } = useParams();
   const [concert, setConcert] = useState(location.concert || {});
+  const [error, setError] = useState({});
   const concertSelector = useSelector((state) => state.concert.concert);
+  const cart = useSelector((state) => state.cart.cart);
   const concertTickets = useSelector(
     (state) => state.ticket.concertTickets[id]
   );
@@ -51,7 +53,16 @@ const ConcertPage = ({ location }) => {
   }, [dispatch, concertTickets, id]);
 
   const addToCart = (ticket) => {
-    dispatch(addTicketToCart(ticket));
+    let isInCart = cart.find((item) => item.id === ticket.id);
+
+    if (!isInCart) {
+      dispatch(addTicketToCart(ticket));
+    } else {
+      setError({
+        ...error,
+        [ticket.id]: "Ticket already added!",
+      });
+    }
   };
 
   return (
@@ -86,16 +97,21 @@ const ConcertPage = ({ location }) => {
       <div className="tickets-container">
         <h3>Tickets:</h3>
         {concertTickets &&
-          concertTickets.map((ticket) => (
-            <div key={ticket.id} className="ticket">
-              <p>{ticket.description}</p>
-              <p>Ticket type: {ticket.type}</p>
-              <p>Price: {ticket.price}</p>
-              <button className="cart-btn" onClick={() => addToCart(ticket)}>
-                <Cart /> Add To Cart
-              </button>
-            </div>
-          ))}
+          concertTickets.map((ticket) => {
+            return (
+              <div key={ticket.id} className="ticket">
+                <p>{ticket.description}</p>
+                <p>Ticket type: {ticket.type}</p>
+                <p>Price: {ticket.price}</p>
+                <button className="cart-btn" onClick={() => addToCart(ticket)}>
+                  <Cart /> Add To Cart
+                </button>
+                {error[ticket.id] && (
+                  <p className="error">{error[ticket.id]}</p>
+                )}
+              </div>
+            );
+          })}
       </div>
     </div>
   );
