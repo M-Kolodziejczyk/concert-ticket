@@ -10,6 +10,8 @@ const INITIAL_STATE = {
   processPayment: {
     status: "",
   },
+  processPaymentLoading: false,
+  processPaymentStatus: "",
   loading: false,
 };
 
@@ -60,9 +62,16 @@ const orderReducer = (state = INITIAL_STATE, action) => {
           getOrder: "GET order failure",
         },
       };
+    case OrderActionTypes.PROCESS_PAYMENT_START:
+      return {
+        ...state,
+        processPaymentLoading: true,
+      };
     case OrderActionTypes.PROCESS_PAYMENT_SUCCESS:
       return {
         ...state,
+        processPaymentLoading: false,
+        processPaymentStatus: action.payload.status,
         processPayment: {
           status: action.payload.status,
         },
@@ -74,6 +83,8 @@ const orderReducer = (state = INITIAL_STATE, action) => {
     case OrderActionTypes.PROCESS_PAYMENT_FAILURE:
       return {
         ...state,
+        processPaymentLoading: false,
+        processPaymentStatus: "failed",
         processPayment: {
           status: "FAILED",
         },

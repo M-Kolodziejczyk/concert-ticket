@@ -53,18 +53,36 @@ export function* getOrder({ payload }) {
   }
 }
 
-export function* processPayment({ payload: { paymentIntentID, orderID } }) {
+export function* onGetOrderStart() {
+  yield takeLatest(OrderActionTypes.GET_ORDER_START, getOrder);
+}
+
+export function* processPayment({
+  payload: { orderID, clientSecret, card, stripe },
+}) {
   try {
-    const res = yield API.graphql({
-      query: mutations.processPayment,
-      variables: {
-        input: {
-          paymentIntentID,
-          orderID,
-        },
+    const stripePayload = yield stripe(clientSecret, {
+      payment_method: {
+        card: card,
       },
     });
-    yield put(processPaymentSuccess(JSON.parse(res.data.processPayment)));
+
+    if (stripePayload.error?.payment_intent?.status === "succeeded") {
+      yield put(processPaymentSuccess({ status: "paid" }));
+    } else if (stripePayload.error) {
+      yield put(processPaymentFailure(stripePayload.error.message));
+    } else if (stripePayload?.paymentIntent?.status === "succeeded") {
+      const res = yield API.graphql({
+        query: mutations.processPayment,
+        variables: {
+          input: {
+            paymentIntentID: stripePayload.paymentIntent.id,
+            orderID,
+          },
+        },
+      });
+      yield put(processPaymentSuccess(JSON.parse(res.data.processPayment)));
+    }
   } catch (error) {
     yield put(processPaymentFailure(error));
   }
@@ -72,10 +90,6 @@ export function* processPayment({ payload: { paymentIntentID, orderID } }) {
 
 export function* onProcessPaymentStart() {
   yield takeLatest(OrderActionTypes.PROCESS_PAYMENT_START, processPayment);
-}
-
-export function* onGetOrderStart() {
-  yield takeLatest(OrderActionTypes.GET_ORDER_START, getOrder);
 }
 
 export function* orderSagas() {
