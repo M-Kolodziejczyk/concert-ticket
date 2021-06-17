@@ -1,0 +1,25 @@
+.user-order-page {
+  .order-container {
+    display: flex;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    span {
+      flex: 1;
+    }
+  }
+
+  .tickets-container {
+    margin-top: 30px;
+
+    .ticket {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      padding: 10px;
+    }
+  }
+}

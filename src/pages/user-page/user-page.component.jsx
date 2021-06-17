@@ -8,6 +8,8 @@ import BandsTab from "./components/bands-tab/bands-tab.component";
 import InvitationsTab from "./components/invitations-tab/invitations-tab.component";
 import UserConcertsPage from "../user-concerts-page/user-concerts-page.component";
 import UserConcertPage from "../user-concert-page/user-concert-page.component";
+import UserOrdersPage from "../user-orders-page/user-orders.component";
+import UserOrderPage from "../user-order-page/user-order.component";
 
 import "./user-page.styles.scss";
 
@@ -29,6 +31,7 @@ const UserPage = () => {
           <Link to="/user/bands">Bands</Link>
           <Link to="/user/concerts">Concerts</Link>
           <Link to="/user/invitations">Invitations</Link>
+          <Link to="/user/orders">Orders</Link>
         </div>
         <div className="tab-content">
           <Switch>
@@ -64,6 +67,8 @@ const UserPage = () => {
               artistID={user.artistID}
               bands={user.bands}
             />
+            <Route exact path="/user/orders" component={UserOrdersPage} />
+            <Route exact path="/user/orders/:id" component={UserOrderPage} />
           </Switch>
         </div>
       </div>
