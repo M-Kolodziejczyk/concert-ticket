@@ -5,7 +5,10 @@ import millisecondsToSeconds from "date-fns/millisecondsToSeconds";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-import { getOrderStart } from "../../redux/order/order.actions";
+import {
+  getOrderStart,
+  clearOrderResponse,
+} from "../../redux/order/order.actions";
 
 import CheckoutForm from "../../components/checkout-form/checkout-form.component";
 import Spinner from "../../components/spinner/spinner.component";
@@ -19,10 +22,13 @@ const promise = loadStripe(
 const CartPaymentPage = (props) => {
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order.order);
+  const orderResponse = useSelector((state) => state.order.createOrderResponse);
   const loading = useSelector((state) => state.order.processPaymentLoading);
   const status = useSelector((state) => state.order.processPaymentStatus);
   const orderId = props.match.params.id;
   const [endTime, setEndTime] = useState("");
+  const [isClearOrderResponseLoading, setIsClearOrderResponseLoading] =
+    useState(false);
 
   useEffect(() => {
     if (Object.keys(order).length === 0 || order.id !== orderId) {
@@ -39,11 +45,25 @@ const CartPaymentPage = (props) => {
   }, [order]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setEndTime(endTime - 1);
-    }, 1000);
-    return () => clearTimeout(timer);
+    if (endTime > -1) {
+      const timer = setTimeout(() => {
+        setEndTime(endTime - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
   }, [endTime]);
+
+  useEffect(() => {
+    if (
+      endTime < 0 &&
+      !isClearOrderResponseLoading &&
+      orderResponse?.body?.isTicketAvailable === true
+    ) {
+      setIsClearOrderResponseLoading(true);
+      dispatch(clearOrderResponse());
+    }
+  }, [endTime, orderResponse, isClearOrderResponseLoading, dispatch]);
 
   return (
     <div className="cart-payment-page">
