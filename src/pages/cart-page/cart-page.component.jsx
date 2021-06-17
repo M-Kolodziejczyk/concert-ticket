@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 
 import { createOrderStart } from "../../redux/order/order.actions";
+import { clearCart } from "../../redux/cart/cart.actions";
 
 import { ReactComponent as Delete } from "../../assets/delete.svg";
 import CustomButon from "../../components/custom-button/custom-button.component";
@@ -50,9 +51,10 @@ const CartPage = () => {
 
   useEffect(() => {
     if (!order.loading && order.createOrderResponse?.body?.isTicketAvailable) {
+      dispatch(clearCart());
       history.push(`/cart/payment/${order.createOrderResponse.body.orderID}`);
     }
-  }, [order, history]);
+  }, [order, history, dispatch]);
 
   return (
     <div className="cart-page">
