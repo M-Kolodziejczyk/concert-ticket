@@ -21,20 +21,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      ordersByStatus {
-        items {
-          id
-          customer
-          userName
-          status
-          stripeIntentID
-          total
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       owner
