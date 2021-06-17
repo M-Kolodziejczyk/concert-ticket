@@ -9,3 +9,7 @@ export const removeTicket = (id) => ({
   type: CartActionTypes.REMOVE_TICKET_FROM_CART,
   payload: id,
 });
+
+export const clearCart = () => ({
+  type: CartActionTypes.CLEAR_CART,
+});
