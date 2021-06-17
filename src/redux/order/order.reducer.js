@@ -3,6 +3,7 @@ import OrderActionTypes from "./order.types";
 const INITIAL_STATE = {
   order: {},
   orders: [],
+  savedOrders: {},
   isCreateOrderSuccess: false,
   successMessage: {},
   createOrderResponse: {},
@@ -44,10 +45,20 @@ const orderReducer = (state = INITIAL_STATE, action) => {
         },
         loading: false,
       };
+    case OrderActionTypes.GET_ORDER_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case OrderActionTypes.GET_ORDER_SUCCESS:
       return {
         ...state,
+        loading: false,
         order: action.payload,
+        savedOrders: {
+          ...state.savedOrders,
+          [action.payload.id]: action.payload,
+        },
         successMessage: {
           getOrder: "GET order Success",
         },
@@ -56,11 +67,17 @@ const orderReducer = (state = INITIAL_STATE, action) => {
     case OrderActionTypes.GET_ORDER_FAILURE:
       return {
         ...state,
+        loading: false,
         order: {},
         successMessage: {},
         errorMessage: {
           getOrder: "GET order failure",
         },
+      };
+    case OrderActionTypes.CLEAR_ORDER:
+      return {
+        ...state,
+        order: {},
       };
     case OrderActionTypes.PROCESS_PAYMENT_START:
       return {
@@ -92,6 +109,11 @@ const orderReducer = (state = INITIAL_STATE, action) => {
         errorMessage: {
           processPayment: "Process payment failure",
         },
+      };
+    case OrderActionTypes.CLEAR_ORDER_RESPONSE:
+      return {
+        ...state,
+        createOrderResponse: {},
       };
     default:
       return state;

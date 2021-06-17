@@ -30,6 +30,10 @@ export const getOrderFailure = (error) => ({
   payload: error,
 });
 
+export const clearOrder = () => ({
+  type: OrderActionTypes.CLEAR_ORDER,
+});
+
 export const processPaymentStart = (data) => ({
   type: OrderActionTypes.PROCESS_PAYMENT_START,
   payload: data,
@@ -43,4 +47,8 @@ export const processPaymentSuccess = (res) => ({
 export const processPaymentFailure = (error) => ({
   type: OrderActionTypes.PROCESS_PAYMENT_FAILURE,
   payload: error,
+});
+
+export const clearOrderResponse = () => ({
+  type: OrderActionTypes.CLEAR_ORDER_RESPONSE,
 });
