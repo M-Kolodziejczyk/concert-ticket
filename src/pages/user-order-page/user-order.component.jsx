@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { getOrderStart, clearOrder } from "../../redux/order/order.actions";
 
 import Spinner from "../../components/spinner/spinner.component";
+import TicketGenerator from "../../components/ticket-generator/ticket-generatror.component";
 
 import "./user.order.styles.scss";
 
@@ -68,6 +69,7 @@ const UserOrderPage = ({ match }) => {
                   <span>Venue: {ticket.ticket.venue}</span>
                   <span>Type: {ticket.ticket.type}</span>
                   <span>price: {ticket.ticket.price}</span>
+                  <TicketGenerator ticket={ticket} />
                 </div>
               ))}
           </div>
