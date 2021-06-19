@@ -1,0 +1,25 @@
+.user-bands-band {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin-bottom: 10px;
+
+  p {
+    margin: 0;
+    padding: 10px;
+  }
+
+  .name {
+    flex: 1;
+  }
+
+  .genre {
+    flex: 1;
+  }
+
+  .date {
+    flex: 1;
+  }
+}

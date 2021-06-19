@@ -3,8 +3,9 @@ import { Link, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserStart } from "../../redux/user/user.actions";
 
-import Artist from "./components/artist/artist.component";
-import BandsTab from "./components/bands-tab/bands-tab.component";
+import UserArtistPage from "../user-artist-page/user-artist.component";
+import UserBandsPage from "../user-bands-page/user-bands-page.component";
+import UserBandPage from "../user-band-page/user-band-page.component";
 import InvitationsTab from "./components/invitations-tab/invitations-tab.component";
 import UserConcertsPage from "../user-concerts-page/user-concerts-page.component";
 import UserConcertPage from "../user-concert-page/user-concert-page.component";
@@ -38,21 +39,9 @@ const UserPage = () => {
             <Route exact path="/user">
               USER
             </Route>
-            <Route
-              exact
-              path="/user/artist"
-              component={Artist}
-              state={{
-                artistID: user.artistID,
-              }}
-            />
-            <Route
-              exact
-              path="/user/bands"
-              component={BandsTab}
-              userId={user.id}
-              bands={user.bands}
-            />
+            <Route exact path="/user/artist" component={UserArtistPage} />
+            <Route exact path="/user/bands" component={UserBandsPage} />
+            <Route exact path="/user/bands/:id" component={UserBandPage} />
             <Route exact path="/user/concerts" component={UserConcertsPage} />
             <Route
               exact
