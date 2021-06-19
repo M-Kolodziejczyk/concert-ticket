@@ -3,6 +3,7 @@ import UserActionTypes from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   userLoading: true,
+  getUserLoading: false,
   isLogged: false,
   errorMessage: {},
   successMessage: {},
@@ -113,9 +114,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
         errorMessage: { signout: action.payload.message },
         successMessage: {},
       };
+    case UserActionTypes.GET_USER_START:
+      return {
+        ...state,
+        getUserLoading: true,
+      };
     case UserActionTypes.GET_USER_SUCCESS:
       return {
         ...state,
+        getUserLoading: false,
         user: action.payload,
         userConcerts: action.payload?.concerts?.items.reduce(
           (obj, item) => ({ ...obj, [item.id]: item }),
@@ -126,6 +133,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.GET_USER_FAILURE:
       return {
         ...state,
+        getUserLoading: false,
         user: {},
         errorMessage: { getUser: "Get user failure" },
       };
