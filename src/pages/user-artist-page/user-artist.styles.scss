@@ -1,0 +1,70 @@
+.user-artist-page {
+  margin-left: 100px;
+  .artist-details-container {
+    display: flex;
+    margin-bottom: 100px;
+
+    .details {
+      width: 40%;
+      .group {
+        display: flex;
+        font-size: 20px;
+        margin-bottom: 15px;
+
+        p {
+          margin: 0;
+        }
+
+        .name {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .image {
+      margin-left: 20px;
+      width: 400px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .forms-container {
+    display: flex;
+
+    .form-details {
+      width: 40%;
+    }
+
+    .form-image {
+      margin-top: 25px;
+      margin-left: 20px;
+      width: 400px;
+
+      img {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      form {
+        width: 100%;
+
+        .btn-container {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          .form__button {
+            margin-left: 20px;
+          }
+        }
+
+        .imageErrors {
+          margin-top: 10px;
+          color: red;
+        }
+      }
+    }
+  }
+}
