@@ -18,6 +18,7 @@ import {
   uploadArtistImageFailure,
   getArtistImageSuccess,
   getArtistImageFailure,
+  getUserArtistImageStart,
   getUserArtistImageSuccess,
   getUserArtistImageFailure,
   listArtistsSuccess,
@@ -143,6 +144,7 @@ export function* uploadArtistImage({ payload: { id, image } }) {
       },
     });
     yield put(uploadArttistImageSuccess(user.identityId));
+    yield put(getUserArtistImageStart(user.identityId));
   } catch (error) {
     yield put(uploadArtistImageFailure(error));
   }

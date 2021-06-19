@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   artist: {},
   artists: [],
   userArtist: {},
+  formLoading: false,
   userArtistImageUrl: "",
   successMessage: {},
   errorMessage: {},
@@ -11,9 +12,15 @@ const INITIAL_STATE = {
 
 const artistReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case ArtistActionTypes.CREATE_ARTIST_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
     case ArtistActionTypes.CREATE_ARTIST_SUCCESS:
       return {
         ...state,
+        formLoading: false,
         userArtist: action.payload,
         errorMessage: {},
         successMessage: { createArtist: "Artist created successfully" },
@@ -21,6 +28,7 @@ const artistReducer = (state = INITIAL_STATE, action) => {
     case ArtistActionTypes.CREATE_ARTIST_FAILURE:
       return {
         ...state,
+        formLoading: false,
         userArtist: {},
         successMessage: {},
         errorMessage: { createArtist: "Create artist failure" },
@@ -49,9 +57,15 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         userArtist: {},
         errorMessage: { getUserArtist: "Get artist failure" },
       };
+    case ArtistActionTypes.UPDATE_ARTIST_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
     case ArtistActionTypes.UPDATE_ARTIST_SUCCESS:
       return {
         ...state,
+        formLoading: false,
         userArtist: action.payload,
         errorMessage: {},
         successMessage: { updateArtist: "Artist upated successfully" },
@@ -59,14 +73,20 @@ const artistReducer = (state = INITIAL_STATE, action) => {
     case ArtistActionTypes.UPDATE_ARTIST_FAILURE:
       return {
         ...state,
+        formLoading: false,
         userArtist: {},
         successMessage: {},
         errorMessage: { updateArtist: "Update artist failure" },
       };
-
+    case ArtistActionTypes.UPLOAD_ARTIST_IMAGE_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
     case ArtistActionTypes.UPLOAD_ARTIST_IMAGE_SUCCESS:
       return {
         ...state,
+        formLoading: false,
         userArtist: {
           ...state.userArtist,
           identityId: action.payload,
@@ -77,6 +97,7 @@ const artistReducer = (state = INITIAL_STATE, action) => {
     case ArtistActionTypes.UPLOAD_ARTIST_IMAGE_FAILURE:
       return {
         ...state,
+        formLoading: false,
         userArtistImageUrl: "",
         successMessage: {},
         errorMessage: { uploadArtistImage: "Upload failure" },
