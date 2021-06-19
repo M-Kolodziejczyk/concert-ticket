@@ -93,3 +93,18 @@ export const getBandFailure = (error) => ({
   type: BandActionTypes.GET_BAND_FAILURE,
   payload: error,
 });
+
+export const getUserBandsStart = (userName) => ({
+  type: BandActionTypes.GET_USER_BANDS_START,
+  payload: userName,
+});
+
+export const getUserBandsSuccess = (res) => ({
+  type: BandActionTypes.GET_USER_BANDS_SUCCESS,
+  payload: res,
+});
+
+export const getUserBandsFailure = (error) => ({
+  type: BandActionTypes.GET_USER_BANDS_FAILURE,
+  payload: error,
+});

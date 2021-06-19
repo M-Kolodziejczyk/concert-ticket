@@ -2,10 +2,14 @@ import BandActionTypes from "./band.types";
 
 const INITIAL_STATE = {
   bands: [],
+  userBands: {},
   band: {},
   bandsImage: {},
   successMessage: {},
   errorMessage: {},
+  isUserBandsEmpty: false,
+  formLoading: false,
+  loading: false,
 };
 
 const bandReducer = (state = INITIAL_STATE, action) => {
@@ -100,6 +104,29 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         errorMessage: {
           getBand: "Get band failure",
         },
+      };
+    case BandActionTypes.GET_USER_BANDS_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case BandActionTypes.GET_USER_BANDS_SUCCESS:
+      return {
+        ...state,
+        userBands: action.payload.reduce((obj, item) => {
+          return {
+            ...obj,
+            [item.id]: item,
+          };
+        }, {}),
+        isUserBandsEmpty: action.payload.length === 0 ? true : false,
+        loading: false,
+      };
+    case BandActionTypes.GET_USER_BANDS_FAILURE:
+      return {
+        ...state,
+        userBands: {},
+        loading: false,
       };
     default:
       return state;

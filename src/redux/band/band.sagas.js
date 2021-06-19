@@ -18,6 +18,8 @@ import {
   listBandsFailure,
   getBandSuccess,
   getBandFailure,
+  getUserBandsSuccess,
+  getUserBandsFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -166,6 +168,25 @@ export function* onGetBandStart() {
   yield takeLatest(BandActionTypes.GET_BAND_START, getBandStart);
 }
 
+export function* getUserBands({ payload }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: queries.bandsByUser,
+      variables: {
+        userName: payload,
+      },
+    });
+    yield put(getUserBandsSuccess(res.data.bandsByUser.items));
+  } catch (error) {
+    yield put(getUserBandsFailure(error));
+  }
+}
+
+export function* onGetUserBandsStart() {
+  yield takeLatest(BandActionTypes.GET_USER_BANDS_START, getUserBands);
+}
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
@@ -174,5 +195,6 @@ export function* bandSagas() {
     call(onGetBandImageStart),
     call(onListBandsStart),
     call(onGetBandStart),
+    call(onGetUserBandsStart),
   ]);
 }
