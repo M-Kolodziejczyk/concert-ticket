@@ -443,6 +443,40 @@ export const listBands = /* GraphQL */ `
     }
   }
 `;
+export const bandsByUser = /* GraphQL */ `
+  query BandsByUser(
+    $userName: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelBandFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    bandsByUser(
+      userName: $userName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userName
+        identityId
+        name
+        genre
+        keyImage
+        invitations
+        createdAt
+        updatedAt
+        owner
+        members {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getArtist = /* GraphQL */ `
   query GetArtist($id: ID!) {
     getArtist(id: $id) {
