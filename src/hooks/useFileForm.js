@@ -23,13 +23,17 @@ const useFileForm = (id, format, callback) => {
     } else {
       setValidate(false);
       setImageErrors("Invalid file type.");
+      setImageUrl("");
     }
   };
 
   const handleSubmitImage = (e) => {
     e.preventDefault();
+
     if (!imageErrors && validate) {
       dispatch(callback(id, image));
+    } else if (!imageUrl && !imageErrors) {
+      setImageErrors("Select image first!");
     }
   };
 
