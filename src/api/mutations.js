@@ -563,17 +563,6 @@ export const updateBand = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-      members {
-        items {
-          id
-          bandID
-          artistID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;

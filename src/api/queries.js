@@ -384,6 +384,11 @@ export const getBand = /* GraphQL */ `
           artistID
           createdAt
           owner
+          artist {
+            name
+            role
+            genre
+          }
         }
         nextToken
       }
@@ -443,7 +448,13 @@ export const bandsByUser = /* GraphQL */ `
         updatedAt
         owner
         members {
-          nextToken
+          items {
+            artist {
+              name
+              role
+              genre
+            }
+          }
         }
       }
       nextToken
