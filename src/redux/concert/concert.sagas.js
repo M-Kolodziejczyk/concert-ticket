@@ -18,6 +18,10 @@ import {
   listConcertsFailure,
   getConcertSuccess,
   getConcertFailure,
+  getUserConcertsSuccess,
+  getUserConcertsFailure,
+  getUserConcertSuccess,
+  getUserConcertFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -170,6 +174,45 @@ export function* onGetConcertStart() {
   yield takeLatest(ConcertActionTypes.GET_CONCERT_START, getConcertStart);
 }
 
+export function* getUserConcerts({ payload }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: queries.concertsByUser,
+      variables: {
+        userName: payload,
+      },
+    });
+    console.log("Res", res.data.concertsByUser.items);
+    yield put(getUserConcertsSuccess(res.data.concertsByUser.items));
+  } catch (error) {
+    yield put(getUserConcertsFailure(error));
+  }
+}
+
+export function* onGetUserConcertsStart() {
+  yield takeLatest(ConcertActionTypes.GET_USER_CONCERTS_START, getUserConcerts);
+}
+
+export function* getUserConcert({ payload }) {
+  try {
+    const res = yield API.graphql({
+      query: queries.getConcert,
+      variables: {
+        id: payload,
+      },
+    });
+    console.log(res.data.getConcert);
+    yield put(getUserConcertSuccess(res.data.getConcert));
+  } catch (error) {
+    yield put(getUserConcertFailure(error));
+  }
+}
+
+export function* onGetUserConcertStart() {
+  yield takeEvery(ConcertActionTypes.GET_USER_CONCERT_START, getUserConcert);
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
@@ -178,5 +221,7 @@ export function* concertSagas() {
     call(onCreateConcertInvitationStart),
     call(onListConcertsStart),
     call(onGetConcertStart),
+    call(onGetUserConcertsStart),
+    call(onGetUserConcertStart),
   ]);
 }

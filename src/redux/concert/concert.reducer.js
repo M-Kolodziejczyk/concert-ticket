@@ -6,6 +6,10 @@ const INITIAL_STATE = {
   concertsImage: {},
   successMessage: {},
   errorMessage: {},
+  userConcerts: {},
+  isUserConcertsEmpty: false,
+  loading: false,
+  loadingForm: false,
 };
 
 const concertReducer = (state = INITIAL_STATE, action) => {
@@ -24,9 +28,15 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           createConcert: "Create concert failure",
         },
       };
+    case ConcertActionTypes.UPLOAD_CONCERT_IMAGE_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
     case ConcertActionTypes.UPLOAD_CONCERT_IMAGE_SUCCESS:
       return {
         ...state,
+        loadingForm: false,
         concertsImage: {
           ...state.concertsImage,
           [action.payload.id]: action.payload.url,
@@ -39,6 +49,7 @@ const concertReducer = (state = INITIAL_STATE, action) => {
     case ConcertActionTypes.UPLOAD_CONCERT_IMAGE_FAILURE:
       return {
         ...state,
+        loadingForm: false,
         successMessage: {},
         errorMessage: {
           uploadImage: "Upload image failure",
@@ -112,6 +123,47 @@ const concertReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         concert: action.payload,
+      };
+    case ConcertActionTypes.GET_USER_CONCERTS_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ConcertActionTypes.GET_USER_CONCERTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userConcerts: action.payload.reduce((obj, item) => {
+          return {
+            ...obj,
+            [item.id]: item,
+          };
+        }, {}),
+        isUserConcertsEmpty: action.payload.length === 0 ? true : false,
+      };
+    case ConcertActionTypes.GET_USER_CONCERTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+    case ConcertActionTypes.GET_USER_CONCERT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ConcertActionTypes.GET_USER_CONCERT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.id]: action.payload,
+        },
+      };
+    case ConcertActionTypes.GET_USER_CONCERT_FAILURE:
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;

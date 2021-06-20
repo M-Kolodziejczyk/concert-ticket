@@ -93,3 +93,33 @@ export const updateConcert = (concert) => ({
   type: ConcertActionTypes.UPDATE_CONCERT,
   payload: concert,
 });
+
+export const getUserConcertsStart = (userName) => ({
+  type: ConcertActionTypes.GET_USER_CONCERTS_START,
+  payload: userName,
+});
+
+export const getUserConcertsSuccess = (res) => ({
+  type: ConcertActionTypes.GET_USER_CONCERTS_SUCCESS,
+  payload: res,
+});
+
+export const getUserConcertsFailure = (error) => ({
+  type: ConcertActionTypes.GET_USER_CONCERTS_FAILURE,
+  payload: error,
+});
+
+export const getUserConcertStart = (id) => ({
+  type: ConcertActionTypes.GET_USER_CONCERT_START,
+  payload: id,
+});
+
+export const getUserConcertSuccess = (res) => ({
+  type: ConcertActionTypes.GET_USER_CONCERT_SUCCESS,
+  payload: res,
+});
+
+export const getUserConcertFailure = (error) => ({
+  type: ConcertActionTypes.GET_USER_CONCERT_FAILURE,
+  payload: error,
+});
