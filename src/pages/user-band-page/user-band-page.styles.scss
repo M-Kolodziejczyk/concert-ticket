@@ -2,14 +2,54 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 10px;
-  .band {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 
-    p {
-      margin: 0;
-      flex: 1;
+  .container {
+    .details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .img-container {
+        width: 300px;
+        margin-right: 20px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      p {
+        margin: 0;
+        flex: 1;
+      }
+    }
+
+    .upload-form-container {
+      margin-top: 20px;
+      margin-bottom: 30px;
+
+      .img-container {
+        width: 300px;
+        margin-bottom: 20px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .button_container {
+        display: flex;
+        flex-direction: row;
+
+        .select-image {
+          margin-right: 20px;
+        }
+      }
+
+      .imageErrors {
+        margin-top: 5px;
+        color: red;
+      }
     }
   }
 }
