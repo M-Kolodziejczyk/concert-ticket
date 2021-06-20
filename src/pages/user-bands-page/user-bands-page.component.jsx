@@ -69,7 +69,7 @@ const UserBandsPage = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="bandModalLabel">
-                Create Band{" "}
+                Create Band
               </h5>
               <button
                 type="button"
