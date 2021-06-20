@@ -5,7 +5,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 import ErrorMessage from "../error-message/error-message.component";
 
-const SendInviation = (props) => {
+const SendInvitation = (props) => {
   const dispatch = useDispatch();
 
   const {
@@ -101,4 +101,4 @@ const SendInviation = (props) => {
   );
 };
 
-export default SendInviation;
+export default SendInvitation;
