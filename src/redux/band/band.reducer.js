@@ -190,10 +190,6 @@ const bandReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         bandLoading: false,
-        userBands: {
-          ...state.userBands.bands,
-          [action.payload.id]: action.payload,
-        },
       };
     default:
       return state;

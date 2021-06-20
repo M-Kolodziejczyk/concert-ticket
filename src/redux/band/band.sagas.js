@@ -12,7 +12,6 @@ import {
   createInvitationFailure,
   uploadBandImageSuccess,
   uploadBandImageFailure,
-  getBandImageStart,
   getBandImageSuccess,
   getBandImageFailure,
   listBandsSuccess,
@@ -224,10 +223,6 @@ export function* getUserBand({ payload }) {
       },
     });
 
-    // get bandImage url
-    if (band.data.getBand.keyImage) {
-      yield put(getBandImageStart(band.data.getBand.keyImage));
-    }
     yield put(getUserBandSuccess(band.data.getBand));
   } catch (error) {
     yield put(getuserBandFailure(error));
