@@ -15,7 +15,7 @@ type User
 
 type Concert
   @model
-  @key(name: "byUser", fields: ["userName"])
+  @key(name: "byUser", fields: ["userName"], queryField: "concertsByUser")
   @auth(
     rules: [
       { allow: owner }

@@ -412,44 +412,12 @@ export const updateConcert = /* GraphQL */ `
       updatedAt
       owner
       bands {
-        items {
-          id
-          concertID
-          bandID
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       artists {
-        items {
-          id
-          concertID
-          artistID
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
       tickets {
-        items {
-          id
-          eventName
-          description
-          price
-          startDate
-          endDate
-          date
-          venue
-          type
-          quantity
-          concertID
-          createdAt
-          updatedAt
-          owner
-        }
         nextToken
       }
     }

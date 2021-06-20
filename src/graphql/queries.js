@@ -390,6 +390,48 @@ export const listConcerts = /* GraphQL */ `
     }
   }
 `;
+export const concertsByUser = /* GraphQL */ `
+  query ConcertsByUser(
+    $userName: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelConcertFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    concertsByUser(
+      userName: $userName
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userName
+        identityId
+        name
+        date
+        venue
+        genres
+        keyImage
+        invitations
+        createdAt
+        updatedAt
+        owner
+        bands {
+          nextToken
+        }
+        artists {
+          nextToken
+        }
+        tickets {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getBand = /* GraphQL */ `
   query GetBand($id: ID!) {
     getBand(id: $id) {
