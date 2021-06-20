@@ -18,9 +18,22 @@ const bandReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
       };
+    case BandActionTypes.CREATE_INVITATION_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
     case BandActionTypes.CREATE_INVITATION_SUCCESS:
       return {
         ...state,
+        formLoading: false,
+        userBands: {
+          ...state.userBands,
+          [action.payload.id]: {
+            ...state.userBands[action.payload.id],
+            invitations: action.payload.invitations,
+          },
+        },
         successMessage: {
           createInvitation: "Invitation send successfully",
         },
@@ -29,14 +42,21 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.CREATE_INVITATION_FAILURE:
       return {
         ...state,
+        formLoading: false,
         errorMessage: {
           createInvitation: "Failed to send invitation",
         },
         successMessage: {},
       };
+    case BandActionTypes.UPLOAD_BAND_IMAGE_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
     case BandActionTypes.UPLOAD_BAND_IMAGE_SUCCESS:
       return {
         ...state,
+        formLoading: false,
         bandsImage: {
           ...state.bandsImage,
           [action.payload.id]: action.payload.url,
@@ -46,6 +66,7 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.UPLOAD_BAND_IMAGE_FAILURE:
       return {
         ...state,
+        formLoading: false,
         errorMessage: {
           uploadBandImage: "Failed to upload Image",
         },
@@ -127,6 +148,52 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         ...state,
         userBands: {},
         loading: false,
+      };
+    case BandActionTypes.UPDATE_USER_BAND_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
+    case BandActionTypes.UPDATE_USER_BAND_SUCCESS:
+      return {
+        ...state,
+        formLoading: false,
+        userBands: {
+          ...state.userBands,
+          [action.payload.id]: {
+            ...state.userBands[action.payload.id],
+            name: action.payload.name,
+            genre: action.payload.genre,
+          },
+        },
+      };
+    case BandActionTypes.UPDATE_USER_BAND_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+      };
+    case BandActionTypes.GET_USER_BAND_START:
+      return {
+        ...state,
+        bandLoading: true,
+      };
+    case BandActionTypes.GET_USER_BAND_SUCCESS:
+      return {
+        ...state,
+        bandLoading: false,
+        userBands: {
+          ...state.userBands.bands,
+          [action.payload.id]: action.payload,
+        },
+      };
+    case BandActionTypes.GET_USER_BAND_FAILURE:
+      return {
+        ...state,
+        bandLoading: false,
+        userBands: {
+          ...state.userBands.bands,
+          [action.payload.id]: action.payload,
+        },
       };
     default:
       return state;

@@ -12,6 +12,7 @@ import {
   createInvitationFailure,
   uploadBandImageSuccess,
   uploadBandImageFailure,
+  getBandImageStart,
   getBandImageSuccess,
   getBandImageFailure,
   listBandsSuccess,
@@ -20,6 +21,10 @@ import {
   getBandFailure,
   getUserBandsSuccess,
   getUserBandsFailure,
+  updateUserBandSuccess,
+  updateUserBandFailure,
+  getUserBandSuccess,
+  getuserBandFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -68,7 +73,8 @@ export function* createInvitation({ payload: { values, invitations } }) {
         },
       },
     });
-    yield put(createInvitationSuccess(res.data));
+
+    yield put(createInvitationSuccess(res.data.updateBand));
   } catch (error) {
     yield put(createInvitationFailure);
   }
@@ -152,6 +158,7 @@ export function* getBandStart({ payload }) {
       },
     });
 
+    // get bandImage url
     if (band.data.getBand.keyImage) {
       band.data.getBand.imageUrl = yield Storage.get(
         band.data.getBand.keyImage,
@@ -187,6 +194,50 @@ export function* onGetUserBandsStart() {
   yield takeLatest(BandActionTypes.GET_USER_BANDS_START, getUserBands);
 }
 
+export function* updateUserBand({ payload: band }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.updateBand,
+      variables: {
+        input: {
+          ...band,
+        },
+      },
+    });
+    yield put(updateUserBandSuccess(res.data.updateBand));
+  } catch (error) {
+    yield put(updateUserBandFailure(error));
+  }
+}
+
+export function* onUpdateUserBandStart() {
+  yield takeLatest(BandActionTypes.UPDATE_USER_BAND_START, updateUserBand);
+}
+
+export function* getUserBand({ payload }) {
+  try {
+    const band = yield API.graphql({
+      query: queries.getBand,
+      variables: {
+        id: payload,
+      },
+    });
+
+    // get bandImage url
+    if (band.data.getBand.keyImage) {
+      yield put(getBandImageStart(band.data.getBand.keyImage));
+    }
+    yield put(getUserBandSuccess(band.data.getBand));
+  } catch (error) {
+    yield put(getuserBandFailure(error));
+  }
+}
+
+export function* onGetUserBandStart() {
+  yield takeLatest(BandActionTypes.GET_USER_BAND_START, getUserBand);
+}
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
@@ -196,5 +247,7 @@ export function* bandSagas() {
     call(onListBandsStart),
     call(onGetBandStart),
     call(onGetUserBandsStart),
+    call(onUpdateUserBandStart),
+    call(onGetUserBandStart),
   ]);
 }

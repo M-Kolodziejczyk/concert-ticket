@@ -108,3 +108,33 @@ export const getUserBandsFailure = (error) => ({
   type: BandActionTypes.GET_USER_BANDS_FAILURE,
   payload: error,
 });
+
+export const updateUserBandStart = (data) => ({
+  type: BandActionTypes.UPDATE_USER_BAND_START,
+  payload: data,
+});
+
+export const updateUserBandSuccess = (res) => ({
+  type: BandActionTypes.UPDATE_USER_BAND_SUCCESS,
+  payload: res,
+});
+
+export const updateUserBandFailure = (error) => ({
+  type: BandActionTypes.UPDATE_USER_BAND_FAILURE,
+  payload: error,
+});
+
+export const getUserBandStart = (id) => ({
+  type: BandActionTypes.GET_USER_BAND_START,
+  payload: id,
+});
+
+export const getUserBandSuccess = (res) => ({
+  type: BandActionTypes.GET_USER_BAND_SUCCESS,
+  payload: res,
+});
+
+export const getuserBandFailure = (error) => ({
+  type: BandActionTypes.GET_USER_BAND_FAILURE,
+  payload: error,
+});
