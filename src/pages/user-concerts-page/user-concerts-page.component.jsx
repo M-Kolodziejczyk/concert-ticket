@@ -1,11 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
-import { createConcertStart } from "../../redux/concert/concert.actions";
+import {
+  createConcertStart,
+  getUserConcertsStart,
+} from "../../redux/concert/concert.actions";
 
 import validate from "../../validators/concert";
 import useForm from "../../hooks/useForm";
 
+import Spinner from "../../components/spinner/spinner.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
 import UserConcertsConcert from "./components/user-concerts-concert.component";
@@ -14,7 +18,14 @@ import "./user-concerts-page.styles.scss";
 import "react-datepicker/dist/react-datepicker.css";
 
 const UserConcertsPage = () => {
-  const concerts = useSelector((state) => state.user.user?.concerts?.items);
+  const dispatch = useDispatch();
+  const userName = useSelector((state) => state.user.user.email);
+  const userLoading = useSelector((state) => state.user.getUserLoading);
+  const loading = useSelector((state) => state.concert.loading);
+  const userConcerts = useSelector((state) => state.concert.userConcerts);
+  const isUserConcertsEmpty = useSelector(
+    (state) => state.concert.isUserConcertsEmpty
+  );
   const { handleChange, handleSubmit, values, errors, handleChangeDate } =
     useForm(
       { name: "", date: new Date(), venue: "", genres: "" },
@@ -22,8 +33,19 @@ const UserConcertsPage = () => {
       createConcertStart
     );
 
+  useEffect(() => {
+    if (
+      userName &&
+      (Object.keys(userConcerts).length === 0) & !isUserConcertsEmpty
+    ) {
+      dispatch(getUserConcertsStart(userName));
+    }
+  }, [userName, userConcerts, dispatch, isUserConcertsEmpty]);
+
+  console.log("cccc", userConcerts);
   return (
-    <div className="concert-tab">
+    <div className="user-concerts-page">
+      {(loading || userLoading) && <Spinner />}
       <button
         type="button"
         className="btn btn-primary"
@@ -35,9 +57,9 @@ const UserConcertsPage = () => {
       <div className="concert-wrapper">
         <h3>Concerts created by you</h3>
         <div className="concert-container">
-          {concerts &&
-            concerts.map((concert) => (
-              <UserConcertsConcert key={concert.id} {...concert} />
+          {Object.keys(userConcerts).length > 0 &&
+            Object.keys(userConcerts).map((id) => (
+              <UserConcertsConcert key={id} {...userConcerts[id]} />
             ))}
         </div>
       </div>

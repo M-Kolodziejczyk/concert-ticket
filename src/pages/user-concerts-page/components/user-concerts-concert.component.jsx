@@ -38,19 +38,19 @@ const UserConcertsConcert = (concert) => {
       to={{ pathname: `/user/concerts/${concert.id}`, concert }}
       className="user-concert"
     >
+      <div className="img-wrapper">
+        {concertsImage[concert.id] && (
+          <img src={concertsImage[concert.id]} alt="concert" />
+        )}
+      </div>
       <div className="details">
         <p>Name: {concert.name}</p>
         <p>Date: {format(date, "MMMM dd yyyy")}</p>
         <p>Time: {format(date, "hh:mm a")}</p>
         <p>Venue: {concert.venue}</p>
         <p> Genres: {concert.genres}</p>
-        <div className="img-wrapper">
-          {concertsImage[concert.id] && (
-            <img src={concertsImage[concert.id]} alt="concert" />
-          )}
-        </div>
       </div>
-      <SendInvitation
+      {/* <SendInvitation
         authorEmail={concert.userName}
         senderTableElementID={concert.id}
         senderTableElementName={concert.name}
@@ -89,7 +89,7 @@ const UserConcertsConcert = (concert) => {
           </CustomButton>
           {imageErrors && <div className="imageErrors">{imageErrors}</div>}
         </div>
-      </form>
+      </form> */}
     </Link>
   );
 };
