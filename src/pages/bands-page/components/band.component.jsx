@@ -27,7 +27,7 @@ const Band = (props) => {
         bandImageUrl: bandsImage[id],
       }}
     >
-      <div className="band-page">
+      <div className="bands-page-band">
         <div className="image">
           {bandsImage[id] ? (
             <img src={bandsImage[id]} alt="band" />
