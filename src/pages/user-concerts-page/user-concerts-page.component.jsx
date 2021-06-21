@@ -42,7 +42,6 @@ const UserConcertsPage = () => {
     }
   }, [userName, userConcerts, dispatch, isUserConcertsEmpty]);
 
-  console.log("cccc", userConcerts);
   return (
     <div className="user-concerts-page">
       {(loading || userLoading) && <Spinner />}
