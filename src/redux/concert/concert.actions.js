@@ -123,3 +123,21 @@ export const getUserConcertFailure = (error) => ({
   type: ConcertActionTypes.GET_USER_CONCERT_FAILURE,
   payload: error,
 });
+
+export const updateUserConcertStart = (formData) => {
+  console.log("action", formData);
+  return {
+    type: ConcertActionTypes.UPDATE_USER_CONCERT_START,
+    payload: formData,
+  };
+};
+
+export const updateUserConcertSuccess = (updatedConcert) => ({
+  type: ConcertActionTypes.UPDATE_USER_CONCERT_SUCCESS,
+  payload: updatedConcert,
+});
+
+export const updateUserConcertFailure = (error) => ({
+  type: ConcertActionTypes.UPDATE_USER_CONCERT_FAILURE,
+  payload: error,
+});

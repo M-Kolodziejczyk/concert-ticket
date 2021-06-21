@@ -165,6 +165,34 @@ const concertReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
       };
+    case ConcertActionTypes.UPDATE_USER_CONCERT_START:
+      return {
+        ...state,
+        loadingForm: true,
+        successMessage: {},
+      };
+    case ConcertActionTypes.UPDATE_USER_CONCERT_SUCCESS:
+      return {
+        ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.id]: action.payload,
+        },
+        successMessage: {
+          updateConcert: "Concert updated successfully",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.UPDATE_USER_CONCERT_FAILURE:
+      return {
+        ...state,
+        loadingForm: false,
+        errorMessage: {
+          updateConcert: "Concert updated failure",
+        },
+        successMessage: {},
+      };
     default:
       return state;
   }
