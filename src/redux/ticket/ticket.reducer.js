@@ -4,23 +4,40 @@ const INITIAL_STATE = {
   tickets: [],
   concertTickets: {},
   successMessage: {},
-  errrorMessage: {},
+  errorMessage: {},
+  formLoading: false,
 };
 
 const ticketReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TicketActionTypes.CREATE_TICKET_SUCCESS:
+    case TicketActionTypes.CREATE_TICKET_START:
       return {
         ...state,
+        formLoading: true,
+      };
+    case TicketActionTypes.CREATE_TICKET_SUCCESS:
+      console.log("reduce", action.payload);
+      return {
+        ...state,
+        formLoading: false,
         successMessage: {
           createTicket: "Create ticket success",
+        },
+        errorMessage: {},
+        concertTickets: {
+          ...state.concertTickets,
+          [action.payload.concertID]: [
+            ...state.concertTickets[action.payload.concertID],
+            action.payload,
+          ],
         },
       };
     case TicketActionTypes.CREATE_TICKET_FAILURE:
       return {
         ...state,
+        formLoading: false,
         successMessage: {},
-        errrorMessage: {
+        errorMessage: {
           createTicket: "Create ticket failure",
         },
       };
