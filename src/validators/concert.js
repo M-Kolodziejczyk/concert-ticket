@@ -14,7 +14,7 @@ const validate = (values) => {
   }
 
   if (!values.genres) {
-    errors.genres = "Name is required";
+    errors.genres = "Genre is required";
   }
 
   return errors;
