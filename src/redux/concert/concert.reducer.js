@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   successMessage: {},
   errorMessage: {},
   userConcerts: {},
+  userListConcerts: [],
   isUserConcertsEmpty: false,
   loading: false,
   loadingForm: false,
@@ -71,20 +72,31 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           getConcertImage: "Get concert image failure",
         },
       };
+    case ConcertActionTypes.CREATE_CONCERT_INVITATION_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
     case ConcertActionTypes.CREATE_CONCERT_INVITATION_SUCCESS:
       return {
         ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.id]: action.payload,
+        },
         successMessage: {
-          createInvitation: "Invitation send successfully",
+          createInvitation: "Invitation sent successfully",
         },
         errorMessage: {},
       };
     case ConcertActionTypes.CREATE_CONCERT_INVITATION_FAILURE:
       return {
         ...state,
+        loadingForm: false,
         successMessage: {},
         errorMessage: {
-          createInvitation: "Failed to send invitation",
+          createInvitation: "Failed to sent invitation",
         },
       };
     case ConcertActionTypes.LIST_CONCERTS_SUCCESS:
@@ -133,12 +145,7 @@ const concertReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        userConcerts: action.payload.reduce((obj, item) => {
-          return {
-            ...obj,
-            [item.id]: item,
-          };
-        }, {}),
+        userListConcerts: action.payload,
         isUserConcertsEmpty: action.payload.length === 0 ? true : false,
       };
     case ConcertActionTypes.GET_USER_CONCERTS_FAILURE:

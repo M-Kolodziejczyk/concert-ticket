@@ -122,7 +122,8 @@ export function* createConcertInvitation({ payload: { values, invitations } }) {
         },
       },
     });
-    yield put(createConcertInvitationSuccess(res));
+
+    yield put(createConcertInvitationSuccess(res.data.updateConcert));
   } catch (error) {
     yield put(createConcertInvitationFailure(error));
   }
@@ -185,7 +186,6 @@ export function* getUserConcerts({ payload }) {
         userName: payload,
       },
     });
-    console.log("Res", res.data.concertsByUser.items);
     yield put(getUserConcertsSuccess(res.data.concertsByUser.items));
   } catch (error) {
     yield put(getUserConcertsFailure(error));
@@ -199,12 +199,11 @@ export function* onGetUserConcertsStart() {
 export function* getUserConcert({ payload }) {
   try {
     const res = yield API.graphql({
-      query: queries.getConcert,
+      query: queries.getUserConcert,
       variables: {
         id: payload,
       },
     });
-    console.log(res.data.getConcert);
     yield put(getUserConcertSuccess(res.data.getConcert));
   } catch (error) {
     yield put(getUserConcertFailure(error));
