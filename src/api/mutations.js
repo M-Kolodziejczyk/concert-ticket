@@ -412,13 +412,37 @@ export const updateConcert = /* GraphQL */ `
       updatedAt
       owner
       bands {
-        nextToken
+        items {
+          band {
+            id
+            name
+            genre
+          }
+        }
       }
       artists {
-        nextToken
+        items {
+          artist {
+            id
+            name
+            genre
+            role
+          }
+        }
       }
       tickets {
-        nextToken
+        items {
+          id
+          eventName
+          description
+          price
+          startDate
+          endDate
+          date
+          venue
+          type
+          quantity
+        }
       }
     }
   }

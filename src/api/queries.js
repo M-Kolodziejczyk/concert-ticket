@@ -330,6 +330,57 @@ export const getConcert = /* GraphQL */ `
     }
   }
 `;
+export const getUserConcert = /* GraphQL */ `
+  query GetConcert($id: ID!) {
+    getConcert(id: $id) {
+      id
+      userName
+      identityId
+      name
+      date
+      venue
+      genres
+      keyImage
+      invitations
+      createdAt
+      updatedAt
+      owner
+      bands {
+        items {
+          band {
+            id
+            name
+            genre
+          }
+        }
+      }
+      artists {
+        items {
+          artist {
+            id
+            name
+            genre
+            role
+          }
+        }
+      }
+      tickets {
+        items {
+          id
+          eventName
+          description
+          price
+          startDate
+          endDate
+          date
+          venue
+          type
+          quantity
+        }
+      }
+    }
+  }
+`;
 export const listConcerts = /* GraphQL */ `
   query ListConcerts(
     $filter: ModelConcertFilterInput
@@ -393,6 +444,13 @@ export const concertsByUser = /* GraphQL */ `
         updatedAt
         owner
         bands {
+          items {
+            band {
+              id
+              name
+              genre
+            }
+          }
           nextToken
         }
         artists {
