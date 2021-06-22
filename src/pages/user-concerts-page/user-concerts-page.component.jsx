@@ -22,7 +22,9 @@ const UserConcertsPage = () => {
   const userName = useSelector((state) => state.user.user.email);
   const userLoading = useSelector((state) => state.user.getUserLoading);
   const loading = useSelector((state) => state.concert.loading);
-  const userConcerts = useSelector((state) => state.concert.userConcerts);
+  const userListConcerts = useSelector(
+    (state) => state.concert.userListConcerts
+  );
   const isUserConcertsEmpty = useSelector(
     (state) => state.concert.isUserConcertsEmpty
   );
@@ -34,13 +36,10 @@ const UserConcertsPage = () => {
     );
 
   useEffect(() => {
-    if (
-      userName &&
-      (Object.keys(userConcerts).length === 0) & !isUserConcertsEmpty
-    ) {
+    if (userName && (userListConcerts.length === 0) & !isUserConcertsEmpty) {
       dispatch(getUserConcertsStart(userName));
     }
-  }, [userName, userConcerts, dispatch, isUserConcertsEmpty]);
+  }, [userName, userListConcerts, dispatch, isUserConcertsEmpty]);
 
   return (
     <div className="user-concerts-page">
@@ -56,9 +55,9 @@ const UserConcertsPage = () => {
       <div className="concert-wrapper">
         <h3>Concerts created by you</h3>
         <div className="concert-container">
-          {Object.keys(userConcerts).length > 0 &&
-            Object.keys(userConcerts).map((id) => (
-              <UserConcertsConcert key={id} {...userConcerts[id]} />
+          {userListConcerts.length > 0 &&
+            userListConcerts.map((concert) => (
+              <UserConcertsConcert key={concert.id} {...concert} />
             ))}
         </div>
       </div>
