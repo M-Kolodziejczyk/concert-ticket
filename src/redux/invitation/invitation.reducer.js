@@ -1,19 +1,27 @@
 import InvitationActionTypes from "./invitation.type";
 
 const INITIAL_STATE = {
-  invitations: [],
   errorMessage: {},
   successMessage: {},
   bandInvitations: [],
   concertInvitations: [],
+  loadingInvitations: false,
+  loadingFormInvitations: false,
+  isListInvitationComplete: false,
 };
 
 const invitationReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case InvitationActionTypes.LIST_USER_INVITATIONS_START:
+      return {
+        ...state,
+        loadingInvitations: true,
+      };
     case InvitationActionTypes.LIST_USER_INVITATIONS_SUCCESS:
       return {
         ...state,
-        invitations: action.payload,
+        loadingInvitations: false,
+        isListInvitationComplete: true,
         bandInvitations: action.payload.filter(
           (item) => item.senderTable === "band"
         ),
@@ -25,7 +33,8 @@ const invitationReducer = (state = INITIAL_STATE, action) => {
     case InvitationActionTypes.LIST_USER_INVITATIONS_FAILURE:
       return {
         ...state,
-        error: action.payload,
+        loadingInvitations: false,
+        isListInvitationComplete: true,
         errorMessage: {
           listUserInvitations: "List User invittions failure",
         },
