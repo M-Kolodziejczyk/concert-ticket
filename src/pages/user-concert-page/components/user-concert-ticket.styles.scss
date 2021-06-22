@@ -19,6 +19,37 @@
       border: 1px solid lightslategray;
       border-radius: 5px;
       padding: 5px;
+      margin-bottom: 10px;
+
+      .ticket-row {
+        display: flex;
+        flex-direction: row;
+
+        p {
+          flex: 1;
+          margin: 0;
+        }
+      }
+
+      .date-container {
+        display: flex;
+        flex-direction: row;
+
+        .date {
+          margin: 0;
+          flex: 1;
+        }
+
+        .start {
+          margin: 0;
+          flex: 1;
+        }
+
+        .end {
+          margin: 0;
+          flex: 2;
+        }
+      }
     }
   }
 }

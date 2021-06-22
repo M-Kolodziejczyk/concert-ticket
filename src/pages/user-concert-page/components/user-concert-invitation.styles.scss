@@ -1,2 +1,40 @@
 .user-concert-invitation {
+  .form-container {
+    margin-bottom: 20px;
+
+    .messages {
+      margin-top: 20px;
+
+      .success {
+        color: green;
+      }
+
+      .error {
+        color: red;
+      }
+    }
+  }
+
+  .invitations-container {
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .invitation {
+      display: flex;
+      flex: row;
+      margin-bottom: 30px;
+
+      .email {
+        flex: 1;
+        margin-bottom: 0;
+      }
+
+      .status {
+        flex: 2;
+        margin-bottom: 0;
+      }
+    }
+  }
 }

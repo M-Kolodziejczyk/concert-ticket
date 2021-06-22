@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import { format } from "date-fns";
+import React from "react";
+import { useSelector } from "react-redux";
+import { format } from "date-fns";
 import DatePicker from "react-datepicker";
-import {
-  createTicketStart,
-  getTicketsByConcertIdStart,
-} from "../../../redux/ticket/ticket.actions";
+import { createTicketStart } from "../../../redux/ticket/ticket.actions";
 
 import validate from "../../../validators/ticket";
 import useForm from "../../../hooks/useForm";
@@ -17,7 +14,6 @@ import Spinner from "../../../components/spinner/spinner.component";
 import "./user-concert-ticket.styles.scss";
 
 const UserConcertTicket = ({ concertId }) => {
-  const dispatch = useDispatch();
   const successMessage = useSelector((state) => state.ticket.successMessage);
   const errorMessage = useSelector((state) => state.ticket.errorMessage);
   const formLoading = useSelector((state) => state.ticket.formLoading);
@@ -25,10 +21,8 @@ const UserConcertTicket = ({ concertId }) => {
     (state) => state.concert.userConcerts[concertId]
   );
   const tickets = useSelector(
-    (state) => state.ticket.concertTickets[concertId]
+    (state) => state.concert.userConcerts[concertId].tickets
   );
-
-  console.log("Success: ", successMessage.updateConcert);
 
   const { handleChange, handleSubmit, values, errors, handleChangeDate } =
     useForm(
@@ -47,12 +41,6 @@ const UserConcertTicket = ({ concertId }) => {
       validate,
       createTicketStart
     );
-
-  useEffect(() => {
-    if (!tickets) {
-      dispatch(getTicketsByConcertIdStart(concertId));
-    }
-  }, [concertId, dispatch, tickets]);
 
   return (
     <div className="user-concert-ticket">
@@ -130,16 +118,29 @@ const UserConcertTicket = ({ concertId }) => {
       </div>
       <div className="tickets-container">
         <h4>Tickets:</h4>
-        {tickets &&
-          tickets.map((ticket) => (
+        {tickets.items.length > 0 &&
+          tickets.items.map((ticket) => (
             <div key={ticket.id} className="ticket">
-              <p>Name: {ticket.eventName}</p>
+              <div className="ticket-row">
+                <p>Name: {ticket.eventName}</p>
+                <p>Type: {ticket.type}</p>
+                <p>Prrice: {ticket.price}</p>
+                <p>Quantity: {ticket.quantity}</p>
+              </div>
+              <div className="date-container">
+                <p className="date">
+                  Date: {format(new Date(ticket.date), "dd MMM yyy HH:mm")}
+                </p>
+                <p className="start">
+                  Start sale:{" "}
+                  {format(new Date(ticket.startDate), "dd MMM yyy HH:mm")}
+                </p>
+                <p className="end">
+                  End sale:{" "}
+                  {format(new Date(ticket.endDate), "dd MMM yyy HH:mm")}
+                </p>
+              </div>
               <p>Description: {ticket.description}</p>
-              <p>Type: {ticket.type}</p>
-              <p>Prrice: {ticket.price}</p>
-              <p>Quantity: {ticket.quantity}</p>
-              <p>Start sale: {ticket.startDate}</p>
-              <p>End sale: {ticket.endDate}</p>
             </div>
           ))}
       </div>
