@@ -16,7 +16,6 @@ const ticketReducer = (state = INITIAL_STATE, action) => {
         formLoading: true,
       };
     case TicketActionTypes.CREATE_TICKET_SUCCESS:
-      console.log("reduce", action.payload);
       return {
         ...state,
         formLoading: false,
