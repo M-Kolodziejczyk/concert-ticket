@@ -1,0 +1,40 @@
+.user-invitations-page {
+  .band-invitations {
+    .title {
+      font-size: 24px;
+    }
+    .details {
+      display: flex;
+      flex-direction: row;
+
+      .author {
+        flex: 1;
+      }
+
+      .band {
+        flex: 3;
+      }
+    }
+    .buttons {
+      display: flex;
+    }
+  }
+
+  .concert-invitations {
+    .title {
+      font-size: 24px;
+    }
+    .details {
+      display: flex;
+      flex-direction: row;
+
+      .author {
+        flex: 2;
+      }
+
+      .concert {
+        flex: 3;
+      }
+    }
+  }
+}
