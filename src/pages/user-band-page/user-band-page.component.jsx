@@ -30,6 +30,8 @@ const UserBandPage = ({ match }) => {
   const userLoading = useSelector((state) => state.user.getUserLoading);
   const bandImageUrl = useSelector((state) => state.band.bandsImage[bandId]);
   const formLoading = useSelector((state) => state.band.formLoading);
+  const successMessage = useSelector((state) => state.band.successMessage);
+  const errorMessage = useSelector((state) => state.band.errorMessage);
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
     useFileForm(bandId, ["image/jpeg"], uploadBandImageStart);
@@ -106,6 +108,25 @@ const UserBandPage = ({ match }) => {
               ))}
           </div>
           <div className="invitation-container">
+            <SendInvitation
+              authorEmail={userBand.userName}
+              senderTableElementID={userBand.id}
+              senderTableElementName={userBand.name}
+              senderTable="band"
+              currentInvitations={userBand?.invitations || "[]"}
+              callback={createInvitationStart}
+              validate={validateInvite}
+            />
+            <div className="messages">
+              {successMessage.createInvitation && (
+                <span className="success">
+                  {successMessage.createInvitation}
+                </span>
+              )}
+              {errorMessage.createInvitation && (
+                <span className="error">{errorMessage.createInvitation}</span>
+              )}
+            </div>
             <h3>Sent Invitations:</h3>
             {userBand?.invitations &&
               JSON.parse(userBand?.invitations).map((invitation, i) => (
@@ -116,15 +137,6 @@ const UserBandPage = ({ match }) => {
                   </div>
                 </div>
               ))}
-            <SendInvitation
-              authorEmail={userBand.userName}
-              senderTableElementID={userBand.id}
-              senderTableElementName={userBand.name}
-              senderTable="band"
-              currentInvitations={userBand?.invitations || "[]"}
-              callback={createInvitationStart}
-              validate={validateInvite}
-            />
           </div>
           <div
             className="modal fade"
@@ -168,6 +180,16 @@ const UserBandPage = ({ match }) => {
                       <CustomButton type="submit" name="submit">
                         Create
                       </CustomButton>
+                    </div>
+                    <div className="messages">
+                      {successMessage.updateBand && (
+                        <span className="success">
+                          {successMessage.updateBand}
+                        </span>
+                      )}
+                      {errorMessage.updateBand && (
+                        <span className="error">{errorMessage.updateBand}</span>
+                      )}
                     </div>
                   </form>
                 </div>
