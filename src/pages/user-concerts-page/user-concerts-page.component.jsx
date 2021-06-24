@@ -22,6 +22,9 @@ const UserConcertsPage = () => {
   const userName = useSelector((state) => state.user.user.email);
   const userLoading = useSelector((state) => state.user.getUserLoading);
   const loading = useSelector((state) => state.concert.loading);
+  const loadingForm = useSelector((state) => state.concert.loadingForm);
+  const successMessage = useSelector((state) => state.concert.successMessage);
+  const errorMessage = useSelector((state) => state.concert.errorMessage);
   const userListConcerts = useSelector(
     (state) => state.concert.userListConcerts
   );
@@ -30,7 +33,7 @@ const UserConcertsPage = () => {
   );
   const { handleChange, handleSubmit, values, errors, handleChangeDate } =
     useForm(
-      { name: "", date: new Date(), venue: "", genres: "" },
+      { name: "", description: "", date: new Date(), venue: "", genres: "" },
       validate,
       createConcertStart
     );
@@ -69,6 +72,7 @@ const UserConcertsPage = () => {
         aria-hidden="true"
       >
         <div className="modal-dialog">
+          {loadingForm && <Spinner />}
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="concertModalLabel">
@@ -90,6 +94,14 @@ const UserConcertsPage = () => {
                   handleChange={handleChange}
                   value={values.name}
                   error={errors.name}
+                />
+                <FormInput
+                  name="description"
+                  type="text"
+                  label="Description"
+                  handleChange={handleChange}
+                  value={values.description}
+                  error={errors.description}
                 />
                 <FormInput
                   name="venue"
@@ -121,6 +133,16 @@ const UserConcertsPage = () => {
                   <CustomButton type="submit" name="submit">
                     Create
                   </CustomButton>
+                </div>
+                <div className="messages">
+                  {successMessage.createConcert && (
+                    <span className="success">
+                      {successMessage.createConcert}
+                    </span>
+                  )}
+                  {errorMessage.createConcert && (
+                    <span className="error">{errorMessage.createConcert}</span>
+                  )}
                 </div>
               </form>
             </div>
