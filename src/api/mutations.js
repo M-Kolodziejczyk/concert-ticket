@@ -1142,45 +1142,8 @@ export const createTicket = /* GraphQL */ `
       type
       quantity
       concertID
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      concert {
-        id
-        userName
-        identityId
-        name
-        date
-        venue
-        genres
-        description
-        keyImage
-        invitations
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
-      }
       owner
     }
   }

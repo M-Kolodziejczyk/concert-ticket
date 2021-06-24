@@ -342,6 +342,7 @@ export const getUserConcert = /* GraphQL */ `
       date
       venue
       genres
+      description
       keyImage
       invitations
       createdAt
