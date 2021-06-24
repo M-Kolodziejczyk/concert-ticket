@@ -17,6 +17,29 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.CREATE_BAND_START:
       return {
         ...state,
+        formLoading: true,
+      };
+    case BandActionTypes.CREATE_BAND_SUCCESS:
+      return {
+        ...state,
+        formLoading: false,
+        userBands: {
+          ...state.userBands,
+          [action.payload.id]: action.payload,
+        },
+        successMessage: {
+          createBand: "Band created successfully",
+        },
+        errorMessage: {},
+      };
+    case BandActionTypes.CREATE_BAND_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          createBand: "Band create failure",
+        },
       };
     case BandActionTypes.CREATE_INVITATION_START:
       return {
@@ -166,11 +189,19 @@ const bandReducer = (state = INITIAL_STATE, action) => {
             genre: action.payload.genre,
           },
         },
+        successMessage: {
+          updateBand: "Band updated successfully",
+        },
+        errorMessage: {},
       };
     case BandActionTypes.UPDATE_USER_BAND_FAILURE:
       return {
         ...state,
         formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          updateBand: "Band update failure",
+        },
       };
     case BandActionTypes.GET_USER_BAND_START:
       return {

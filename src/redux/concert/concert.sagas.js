@@ -24,6 +24,8 @@ import {
   getUserConcertFailure,
   updateUserConcertSuccess,
   updateUserConcertFailure,
+  createConcertTicketSuccess,
+  createConcertTicketFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -238,6 +240,30 @@ export function* onUpdateUserConcertStart() {
   );
 }
 
+export function* createConcertTicket({ payload: data }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.createTicket,
+      variables: {
+        input: {
+          ...data,
+        },
+      },
+    });
+    yield put(createConcertTicketSuccess(res.data.createTicket));
+  } catch (error) {
+    yield put(createConcertTicketFailure(error));
+  }
+}
+
+export function* onCreatConcertTicketStart() {
+  yield takeLatest(
+    ConcertActionTypes.CREATE_CONCERT_TICKET_START,
+    createConcertTicket
+  );
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
@@ -249,5 +275,6 @@ export function* concertSagas() {
     call(onGetUserConcertsStart),
     call(onGetUserConcertStart),
     call(onUpdateUserConcertStart),
+    call(onCreatConcertTicketStart),
   ]);
 }

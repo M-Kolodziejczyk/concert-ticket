@@ -140,3 +140,18 @@ export const updateUserConcertFailure = (error) => ({
   type: ConcertActionTypes.UPDATE_USER_CONCERT_FAILURE,
   payload: error,
 });
+
+export const createConcertTicketStart = (formData) => ({
+  type: ConcertActionTypes.CREATE_CONCERT_TICKET_START,
+  payload: formData,
+});
+
+export const createConcertTicketSuccess = (res) => ({
+  type: ConcertActionTypes.CREATE_CONCERT_TICKET_SUCCESS,
+  payload: res,
+});
+
+export const createConcertTicketFailure = (error) => ({
+  type: ConcertActionTypes.CREATE_CONCERT_TICKET_FAILURE,
+  payload: error,
+});

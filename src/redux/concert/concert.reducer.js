@@ -11,20 +11,31 @@ const INITIAL_STATE = {
   isUserConcertsEmpty: false,
   loading: false,
   loadingForm: false,
+  isFormSuccess: false,
 };
 
 const concertReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case ConcertActionTypes.CREATE_CONCERT_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
     case ConcertActionTypes.CREATE_CONCERT_SUCCESS:
       return {
         ...state,
+        loadingForm: false,
+        userListConcerts: [...state.userListConcerts, action.payload],
         successMessage: {
-          createConcert: "Create concert success",
+          createConcert: "Concert created successfully",
         },
+        errorMessage: {},
       };
     case ConcertActionTypes.CREATE_CONCERT_FAILURE:
       return {
         ...state,
+        loadingForm: false,
+        successMessage: {},
         errorMessage: {
           createConcert: "Create concert failure",
         },
@@ -176,12 +187,14 @@ const concertReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loadingForm: true,
+        isFormSuccess: false,
         successMessage: {},
       };
     case ConcertActionTypes.UPDATE_USER_CONCERT_SUCCESS:
       return {
         ...state,
         loadingForm: false,
+        isFormSuccess: true,
         userConcerts: {
           ...state.userConcerts,
           [action.payload.id]: action.payload,
@@ -195,10 +208,46 @@ const concertReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loadingForm: false,
+        isFormSuccess: false,
+        successMessage: {},
         errorMessage: {
           updateConcert: "Concert updated failure",
         },
+      };
+    case ConcertActionTypes.CREATE_CONCERT_TICKET_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
+    case ConcertActionTypes.CREATE_CONCERT_TICKET_SUCCESS:
+      return {
+        ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.concertID]: {
+            ...state.userConcerts[action.payload.concertID],
+            tickets: {
+              items: [
+                ...state.userConcerts[action.payload.concertID].tickets.items,
+                action.payload,
+              ],
+            },
+          },
+        },
+        successMessage: {
+          createTicket: "Ticket created successfully",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.CREATE_CONCERT_TICKET_FAILURE:
+      return {
+        ...state,
+        loadingForm: false,
         successMessage: {},
+        errorMessage: {
+          createTicket: "ticket create failure",
+        },
       };
     default:
       return state;
