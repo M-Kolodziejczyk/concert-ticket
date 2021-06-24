@@ -18,5 +18,9 @@
     height: 100vw;
     background-color: #000000;
     opacity: 0.4;
+
+    &.bright {
+      background-color: transparent;
+    }
   }
 }

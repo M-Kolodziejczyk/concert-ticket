@@ -2,7 +2,7 @@ import React from "react";
 
 import "./spinner.styles.scss";
 
-const Spinner = () => {
+const Spinner = ({ bright }) => {
   return (
     <div className="spinner">
       <div className="d-flex justify-content-center">
@@ -10,7 +10,7 @@ const Spinner = () => {
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
-      <div className="spinner__modal"></div>
+      <div className={`spinner__modal ${bright ? "bright" : ""}`}></div>
     </div>
   );
 };
