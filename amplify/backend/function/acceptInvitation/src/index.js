@@ -95,9 +95,11 @@ exports.handler = async (event, context) => {
 
     await deleteInvitation(event);
 
-    return {
+    return JSON.stringify({
       body: "SUCCESS",
-    };
+      email: event.arguments.invitationEmail,
+      createdAt: event.arguments.invitationCreatedAt,
+    });
   } catch (error) {
     return error;
   }

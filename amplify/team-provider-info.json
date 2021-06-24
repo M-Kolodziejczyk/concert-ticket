@@ -40,19 +40,19 @@
         },
         "acceptInvitation": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
-          "s3Key": "amplify-builds/acceptInvitation-44705146523376415872-build.zip"
+          "s3Key": "amplify-builds/acceptInvitation-6645506d482f59564d38-build.zip"
         },
         "rejectInvitation": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
-          "s3Key": "amplify-builds/rejectInvitation-426171714d306b386463-build.zip"
+          "s3Key": "amplify-builds/rejectInvitation-427547332f754b567a57-build.zip"
         },
         "acceptConcertInvitation": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
-          "s3Key": "amplify-builds/acceptConcertInvitation-533244504d412f706833-build.zip"
+          "s3Key": "amplify-builds/acceptConcertInvitation-5a7a6434527259523838-build.zip"
         },
         "rejectConcertInvitation": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
-          "s3Key": "amplify-builds/rejectConcertInvitation-5747696a4b394b69534b-build.zip"
+          "s3Key": "amplify-builds/rejectConcertInvitation-416278306f386834346f-build.zip"
         },
         "createOrder": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
