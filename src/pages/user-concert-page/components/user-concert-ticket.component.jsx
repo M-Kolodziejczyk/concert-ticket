@@ -2,21 +2,19 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
-import { createTicketStart } from "../../../redux/ticket/ticket.actions";
+import { createConcertTicketStart } from "../../../redux/concert/concert.actions";
 
 import validate from "../../../validators/ticket";
 import useForm from "../../../hooks/useForm";
 
 import CustomButton from "../../../components/custom-button/custom-button.component";
 import FormInput from "../../../components/form-input/form-input.component";
-import Spinner from "../../../components/spinner/spinner.component";
 
 import "./user-concert-ticket.styles.scss";
 
 const UserConcertTicket = ({ concertId }) => {
-  const successMessage = useSelector((state) => state.ticket.successMessage);
-  const errorMessage = useSelector((state) => state.ticket.errorMessage);
-  const formLoading = useSelector((state) => state.ticket.formLoading);
+  const successMessage = useSelector((state) => state.concert.successMessage);
+  const errorMessage = useSelector((state) => state.concert.errorMessage);
   const userConcert = useSelector(
     (state) => state.concert.userConcerts[concertId]
   );
@@ -39,13 +37,11 @@ const UserConcertTicket = ({ concertId }) => {
         concertID: concertId,
       },
       validate,
-      createTicketStart
+      createConcertTicketStart
     );
 
   return (
     <div className="user-concert-ticket">
-      {formLoading && <Spinner />}
-
       <div className="ticket-form">
         <h3>Create ticket</h3>
         <form onSubmit={handleSubmit}>

@@ -60,12 +60,35 @@ const UserConcertPage = ({ match }) => {
               {concertImageUrl && <img src={concertImageUrl} alt="concert" />}
             </div>
             <div className="details">
-              <p>Name: {userConcert.name}</p>
-              <p>Date: {format(date, "MMMM dd yyyy")}</p>
-              <p>Time: {format(date, "hh:mm a")}</p>
-              <p>Venue: {userConcert.venue}</p>
-              <p> Genres: {userConcert.genres}</p>
-              <UserConcertEdit concertId={concertId} />
+              <div className="details-header">
+                <p>
+                  <strong>Name: </strong>
+                  {userConcert.name}
+                </p>
+                <UserConcertEdit concertId={concertId} />
+              </div>
+              <p className="description">
+                <strong>Description: </strong>
+                {userConcert.description}
+              </p>
+              <div className="date">
+                <p>
+                  <strong> Date: </strong>
+                  {format(date, "MMMM dd yyyy")}
+                </p>
+                <p>
+                  <strong>Time: </strong>
+                  {format(date, "hh:mm a")}
+                </p>
+              </div>
+              <p className="venue">
+                <strong>Venue: </strong>
+                {userConcert.venue}
+              </p>
+              <p className="genres">
+                <strong>Genres: </strong>
+                {userConcert.genres}
+              </p>
             </div>
           </div>
           <div className="upload-image-container">

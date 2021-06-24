@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { createConcertInvitationStart } from "../../../redux/concert/concert.actions";
 import validateInvite from "../../../validators/send-invite";
 
-import Spinner from "../../../components/spinner/spinner.component";
 import SendInvitation from "../../../components/send-invitation/send-invitation.component";
 
 import "./user-concert-invitation.styles.scss";
@@ -12,7 +11,6 @@ const UserConcertInvitation = ({ concertId }) => {
   const userConcert = useSelector(
     (state) => state.concert.userConcerts[concertId]
   );
-  const loadingForm = useSelector((state) => state.concert.loadingForm);
   const successMessage = useSelector(
     (state) => state.concert.successMessage.createInvitation
   );
@@ -22,7 +20,6 @@ const UserConcertInvitation = ({ concertId }) => {
 
   return (
     <div className="user-concert-invitation">
-      {loadingForm && <Spinner />}
       <div className="form-container">
         <SendInvitation
           authorEmail={userConcert.userName}

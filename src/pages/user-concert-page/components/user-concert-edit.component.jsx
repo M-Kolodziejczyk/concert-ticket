@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import { updateUserConcertStart } from "../../../redux/concert/concert.actions";
@@ -14,14 +14,47 @@ import "./user-concert-edit.styles.scss";
 
 const UserConcertEdit = ({ concertId }) => {
   const loadingForm = useSelector((state) => state.concert.loadingForm);
+  const isFormSuccess = useSelector((state) => state.concert.isFormSuccess);
   const successMessage = useSelector((state) => state.concert.successMessage);
   const errorMessage = useSelector((state) => state.concert.errorMessage);
-  const { handleChange, handleSubmit, values, errors, handleChangeDate } =
-    useForm(
-      { id: concertId, name: "", date: new Date(), venue: "", genres: "" },
-      validate,
-      updateUserConcertStart
-    );
+  const userConcert = useSelector(
+    (state) => state.concert.userConcerts[concertId]
+  );
+
+  const {
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    handleChangeDate,
+    handleInitialValues,
+  } = useForm(
+    {
+      id: concertId,
+      name: userConcert.name,
+      date: new Date(userConcert.date),
+      venue: userConcert.venue,
+      genres: userConcert.genres,
+      description: userConcert.description,
+    },
+    validate,
+    updateUserConcertStart
+  );
+
+  useEffect(() => {
+    if (isFormSuccess) {
+      handleInitialValues({
+        id: concertId,
+        name: userConcert.name,
+        date: new Date(userConcert.date),
+        venue: userConcert.venue,
+        genres: userConcert.genres,
+        description: userConcert.description,
+      });
+    }
+
+    // eslint-disable-next-line
+  }, [isFormSuccess]);
 
   return (
     <div className="user-concert-edit">
@@ -40,8 +73,9 @@ const UserConcertEdit = ({ concertId }) => {
         aria-labelledby="bandModalLabel"
         aria-hidden="true"
       >
-        {loadingForm && <Spinner />}
         <div className="modal-dialog">
+          {loadingForm && <Spinner bright={true} />}
+          {/* <Spinner /> */}
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="bandModalLabel">
@@ -79,6 +113,14 @@ const UserConcertEdit = ({ concertId }) => {
                   handleChange={handleChange}
                   value={values.genres}
                   error={errors.genres}
+                />
+                <FormInput
+                  name="description"
+                  type="text"
+                  label="Description"
+                  handleChange={handleChange}
+                  value={values.description}
+                  error={errors.description}
                 />
                 <DatePicker
                   selected={values.date}
