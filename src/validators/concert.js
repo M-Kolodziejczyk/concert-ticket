@@ -17,6 +17,10 @@ const validate = (values) => {
     errors.genres = "Genre is required";
   }
 
+  if (!values.description) {
+    errors.description = "Description is required";
+  }
+
   return errors;
 };
 
