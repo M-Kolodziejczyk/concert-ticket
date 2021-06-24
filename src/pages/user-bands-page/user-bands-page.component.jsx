@@ -21,8 +21,11 @@ const UserBandsPage = () => {
   const userName = useSelector((state) => state.user.user.email);
   const bands = useSelector((state) => state.band.userBands);
   const loading = useSelector((state) => state.band.loading);
+  const formLoading = useSelector((state) => state.band.formLoading);
   const userLoading = useSelector((state) => state.user.getUserLoading);
   const isUserBandsEmpty = useSelector((state) => state.band.isUserBandsEmpty);
+  const successMessage = useSelector((state) => state.band.successMessage);
+  const errorMessage = useSelector((state) => state.band.errorMessage);
 
   const { handleChange, handleSubmit, values, errors } = useForm(
     { name: "", genre: "" },
@@ -66,6 +69,7 @@ const UserBandsPage = () => {
         aria-hidden="true"
       >
         <div className="modal-dialog">
+          {formLoading && <Spinner />}
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="bandModalLabel">
@@ -100,6 +104,14 @@ const UserBandsPage = () => {
                   <CustomButton type="submit" name="submit">
                     Create
                   </CustomButton>
+                </div>
+                <div className="messages">
+                  {successMessage.createBand && (
+                    <span className="success">{successMessage.createBand}</span>
+                  )}
+                  {errorMessage.createBand && (
+                    <span className="error">{errorMessage.createBand}</span>
+                  )}
                 </div>
               </form>
             </div>

@@ -11,4 +11,24 @@
       }
     }
   }
+
+  .modal {
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          .messages {
+            margin-top: 10px;
+
+            .success {
+              color: green;
+            }
+
+            .error {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
 }
