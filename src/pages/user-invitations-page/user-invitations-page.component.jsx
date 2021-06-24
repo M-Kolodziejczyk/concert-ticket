@@ -15,12 +15,16 @@ import "./user-invitations-page.styles.scss";
 
 const UserInvitationsPage = () => {
   const dispatch = useDispatch();
-  const userEmail = useSelector((state) => state.user.currentUser.email);
-  const artistId = useSelector((state) => state.user.artistID);
-  const userBands = useSelector((state) => state.band.userBands);
-  const isUserBandsEmpty = useSelector((state) => state.band.isUserBandsEmpty);
   const [formBandId, setFormBandId] = useState("");
   const [formBandError, setFormBandError] = useState("");
+  const userEmail = useSelector((state) => state.user.currentUser.email);
+  const artistID = useSelector((state) => state.user.user.artistID);
+  const userBands = useSelector((state) => state.band.userBands);
+  const isUserBandsEmpty = useSelector((state) => state.band.isUserBandsEmpty);
+  const successMessage = useSelector(
+    (state) => state.invitation.successMessage
+  );
+  const errorMessage = useSelector((state) => state.invitation.errorMessage);
 
   const bandInvitations = useSelector(
     (state) => state.invitation.bandInvitations
@@ -53,7 +57,7 @@ const UserInvitationsPage = () => {
   const acceptBandInvitation = (invitation) => {
     dispatch(
       acceptBandInvitationStart({
-        artistId,
+        artistID,
         bandID: invitation.senderTableElementID,
         invitationEmail: invitation.email,
         invitationCreatedAt: invitation.createdAt,
@@ -126,8 +130,18 @@ const UserInvitationsPage = () => {
                   Accept
                 </button>
                 <button onClick={() => rejectBandInvitation(invitation)}>
-                  Discard
+                  Reject
                 </button>
+              </div>
+              <div className="messages">
+                {successMessage.bandInvitation && (
+                  <span className="success">
+                    {successMessage.bandInvitation}
+                  </span>
+                )}
+                {errorMessage.bandInvitation && (
+                  <span className="error">{errorMessage.bandInvitation}</span>
+                )}
               </div>
             </div>
           ))}
@@ -176,8 +190,20 @@ const UserInvitationsPage = () => {
                     handleRejectConcertInvitation(concertInvitation)
                   }
                 >
-                  Discard
+                  Reject
                 </button>
+                <div className="messages">
+                  {successMessage.concertInvitation && (
+                    <span className="success">
+                      {successMessage.concertInvitation}
+                    </span>
+                  )}
+                  {errorMessage.concertInvitation && (
+                    <span className="error">
+                      {errorMessage.concertInvitation}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}

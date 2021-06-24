@@ -18,6 +18,16 @@
     .buttons {
       display: flex;
     }
+    .messages {
+      .success {
+        margin-top: 10px;
+        color: green;
+      }
+      .error {
+        margin-top: 5px;
+        color: red;
+      }
+    }
   }
 
   .concert-invitations {
@@ -34,6 +44,17 @@
 
       .concert {
         flex: 3;
+      }
+    }
+
+    .messages {
+      .success {
+        margin-top: 10px;
+        color: green;
+      }
+      .error {
+        margin-top: 5px;
+        color: red;
       }
     }
   }
