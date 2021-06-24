@@ -64,6 +64,7 @@ export const onCreateUser = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -149,6 +150,7 @@ export const onUpdateUser = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -234,6 +236,7 @@ export const onDeleteUser = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -323,6 +326,7 @@ export const onCreateTicketOrder = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -384,6 +388,7 @@ export const onUpdateTicketOrder = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -445,6 +450,7 @@ export const onDeleteTicketOrder = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -550,6 +556,7 @@ export const onCreateConcert = /* GraphQL */ `
       date
       venue
       genres
+      description
       keyImage
       invitations
       createdAt
@@ -609,6 +616,7 @@ export const onUpdateConcert = /* GraphQL */ `
       date
       venue
       genres
+      description
       keyImage
       invitations
       createdAt
@@ -668,6 +676,7 @@ export const onDeleteConcert = /* GraphQL */ `
       date
       venue
       genres
+      description
       keyImage
       invitations
       createdAt
@@ -1009,6 +1018,7 @@ export const onCreateConcertBandJoin = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1059,6 +1069,7 @@ export const onUpdateConcertBandJoin = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1109,6 +1120,7 @@ export const onDeleteConcertBandJoin = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1159,6 +1171,7 @@ export const onCreateConcertArtistJoin = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1207,6 +1220,7 @@ export const onUpdateConcertArtistJoin = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1255,6 +1269,7 @@ export const onDeleteConcertArtistJoin = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1324,6 +1339,7 @@ export const onCreateTicket = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1380,6 +1396,7 @@ export const onUpdateTicket = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -1436,6 +1453,7 @@ export const onDeleteTicket = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt

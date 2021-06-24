@@ -171,6 +171,7 @@ export const getTicketOrder = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -301,6 +302,7 @@ export const getConcert = /* GraphQL */ `
       date
       venue
       genres
+      description
       keyImage
       invitations
       createdAt
@@ -396,6 +398,7 @@ export const listConcerts = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -438,6 +441,7 @@ export const concertsByUser = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -652,6 +656,7 @@ export const getTicket = /* GraphQL */ `
         date
         venue
         genres
+        description
         keyImage
         invitations
         createdAt
@@ -703,6 +708,7 @@ export const listTickets = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt
@@ -755,6 +761,7 @@ export const ticketsByConcertID = /* GraphQL */ `
           date
           venue
           genres
+          description
           keyImage
           invitations
           createdAt

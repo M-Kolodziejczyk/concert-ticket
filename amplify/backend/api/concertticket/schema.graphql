@@ -31,6 +31,7 @@ type Concert
   date: String!
   venue: String!
   genres: String!
+  description: String!
   keyImage: String
   invitations: AWSJSON
   tickets: [Ticket] @connection(keyName: "byConcert", fields: ["id"])
