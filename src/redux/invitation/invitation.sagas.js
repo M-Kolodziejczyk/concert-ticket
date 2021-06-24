@@ -54,7 +54,9 @@ export function* acceptBandInvitation({
         invitationCreatedAt,
       },
     });
-    yield put(acceptBandInvitationSuccess(res));
+    yield put(
+      acceptBandInvitationSuccess(JSON.parse(res.data.acceptInvitation))
+    );
   } catch (error) {
     yield put(acceptBandInvitationFailure(error));
   }
@@ -79,7 +81,10 @@ export function* rejectBandInvitation({
         invitationCreatedAt,
       },
     });
-    yield put(rejectBandInvitationSuccess(res));
+
+    yield put(
+      rejectBandInvitationSuccess(JSON.parse(res.data.rejectInvitation))
+    );
   } catch (error) {
     yield put(rejectBandInvitationFailure(error));
   }
@@ -105,7 +110,11 @@ export function* acceptConcertInvitation({
         invitationEmail,
       },
     });
-    yield put(acceptConcertInvitationSuccess(res));
+    yield put(
+      acceptConcertInvitationSuccess(
+        JSON.parse(res.data.acceptConcertInvitation)
+      )
+    );
   } catch (error) {
     yield put(acceptConcertInvitationFailure(error));
   }
@@ -130,7 +139,11 @@ export function* rejectConcertInvitation({
         invitationCreatedAt,
       },
     });
-    yield put(rejectConcertInvitationSucces(res));
+    yield put(
+      rejectConcertInvitationSucces(
+        JSON.parse(res.data.rejectConcertInvitation)
+      )
+    );
   } catch (error) {
     yield put(rejectConcertInvitationFailure(error));
   }
