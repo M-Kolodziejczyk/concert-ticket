@@ -39,12 +39,17 @@ const useForm = (initialState, validate, callback) => {
     });
   };
 
+  const handleInitialValues = (initialValues) => {
+    setValues(initialValues);
+  };
+
   return {
     handleChange,
     handleSubmit,
     values,
     errors,
     handleChangeDate,
+    handleInitialValues,
   };
 };
 
