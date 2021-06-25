@@ -11,6 +11,7 @@ import UserConcertPage from "../user-concert-page/user-concert-page.component";
 import UserOrdersPage from "../user-orders-page/user-orders.component";
 import UserOrderPage from "../user-order-page/user-order.component";
 import UserInvitationsPage from "../user-invitations-page/user-invitations-page.component";
+import UserDetailsPage from "../user-details-page/user-details-page.component";
 
 import "./user-page.styles.scss";
 
@@ -35,9 +36,7 @@ const UserPage = () => {
         </div>
         <div className="tab-content">
           <Switch>
-            <Route exact path="/user">
-              USER
-            </Route>
+            <Route exact path="/user" component={UserDetailsPage} />
             <Route exact path="/user/artist" component={UserArtistPage} />
             <Route exact path="/user/bands" component={UserBandsPage} />
             <Route exact path="/user/bands/:id" component={UserBandPage} />

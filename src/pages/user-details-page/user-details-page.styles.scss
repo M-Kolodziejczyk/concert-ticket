@@ -1,0 +1,26 @@
+.user-details-page {
+  h1 {
+    font-size: 30px;
+  }
+
+  .details {
+    .email {
+      font-size: 20px;
+    }
+  }
+
+  .form-container {
+    margin-top: 40px;
+    .messages {
+      margin-top: 10px;
+
+      .success {
+        color: green;
+      }
+
+      .error {
+        color: red;
+      }
+    }
+  }
+}
