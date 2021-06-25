@@ -23,6 +23,8 @@ import {
   signOutFailure,
   getUserSuccess,
   getUserFailure,
+  changePasswordSuccess,
+  changePasswordFailure,
 } from "./user.actions";
 
 export function* loadUser() {
@@ -184,6 +186,21 @@ export function* onGetUser() {
   yield takeLatest(UserActionTypes.GET_USER_START, getUser);
 }
 
+export function* changePassword({ payload: { oldPassword, newPassword } }) {
+  try {
+    const user = yield Auth.currentAuthenticatedUser();
+    const res = yield Auth.changePassword(user, oldPassword, newPassword);
+
+    yield put(changePasswordSuccess(res));
+  } catch (error) {
+    yield put(changePasswordFailure(error));
+  }
+}
+
+export function* onChangePasswordStart() {
+  yield takeLatest(UserActionTypes.CHANGE_PASSWORD_START, changePassword);
+}
+
 export function* onCreateArtistSucces() {
   yield takeLatest(ArtistActionTypes.CREATE_ARTIST_SUCCESS, getUser);
 }
@@ -206,5 +223,6 @@ export function* userSagas() {
     call(onGetUser),
     call(onCreateArtistSucces),
     call(onUpdateArtistSucces),
+    call(onChangePasswordStart),
   ]);
 }

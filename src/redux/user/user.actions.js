@@ -125,3 +125,18 @@ export const getUserFailure = (error) => ({
   type: UserActionTypes.GET_USER_FAILURE,
   payload: error,
 });
+
+export const changePasswordStart = (formData) => ({
+  type: UserActionTypes.CHANGE_PASSWORD_START,
+  payload: formData,
+});
+
+export const changePasswordSuccess = (res) => ({
+  type: UserActionTypes.CHANGE_PASSWORD_SUCCESS,
+  payload: res,
+});
+
+export const changePasswordFailure = (error) => ({
+  typr: UserActionTypes.CHANGE_PASSWORD_FAILURE,
+  payload: error,
+});

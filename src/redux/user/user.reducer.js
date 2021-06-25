@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   user: {},
   userConcerts: {},
   pushRoute: "",
+  formLoading: false,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -136,6 +137,29 @@ const userReducer = (state = INITIAL_STATE, action) => {
         getUserLoading: false,
         user: {},
         errorMessage: { getUser: "Get user failure" },
+      };
+    case UserActionTypes.CHANGE_PASSWORD_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
+    case UserActionTypes.CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {
+          changePassword: "Your password has been successfully changed.",
+        },
+        errorMessage: {},
+      };
+    case UserActionTypes.CHANGE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          changePassword: "Unable to change password",
+        },
       };
     default:
       return state;
