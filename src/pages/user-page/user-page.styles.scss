@@ -1,18 +1,57 @@
 .user-page {
-  width: 1320px;
-  margin: 0 auto 300px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
 
-  .heading {
-    margin-bottom: 5rem;
-  }
+  .user-page__nav {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .nav {
-    .nav-link {
-      min-width: 200px;
+    .link {
+      color: #868788;
+      border: 1px solid #868788;
+      border-radius: 20px;
+      width: 50%;
+      text-align: center;
+      margin: 5px;
+      font-size: 1.5rem;
     }
   }
+}
 
-  .tab-content {
-    width: 100%;
+@media screen and (min-width: 768px) {
+  .user-page {
+    .user-page__nav {
+      flex-direction: row;
+      .link {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .user-page {
+    margin-top: 50px;
+    flex-direction: row;
+    .user-page__nav {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-right: 40px;
+      width: 140px;
+      .link {
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1rem;
+      }
+    }
+
+    .user-page__content {
+    }
   }
 }

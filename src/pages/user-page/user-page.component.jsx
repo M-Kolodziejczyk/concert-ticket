@@ -24,37 +24,42 @@ const UserPage = () => {
 
   return (
     <div className="user-page">
-      <h1 className="heading">User Page</h1>
-      <div className="d-flex align-items-start">
-        <div className="nav flex-column nav-pills me-3">
-          <Link to="/user">User</Link>
-          <Link to="/user/artist">Artist</Link>
-          <Link to="/user/bands">Bands</Link>
-          <Link to="/user/concerts">Concerts</Link>
-          <Link to="/user/invitations">Invitations</Link>
-          <Link to="/user/orders">Orders</Link>
-        </div>
-        <div className="tab-content">
-          <Switch>
-            <Route exact path="/user" component={UserDetailsPage} />
-            <Route exact path="/user/artist" component={UserArtistPage} />
-            <Route exact path="/user/bands" component={UserBandsPage} />
-            <Route exact path="/user/bands/:id" component={UserBandPage} />
-            <Route exact path="/user/concerts" component={UserConcertsPage} />
-            <Route
-              exact
-              path="/user/concerts/:id"
-              component={UserConcertPage}
-            />
-            <Route exact path="/user/orders" component={UserOrdersPage} />
-            <Route exact path="/user/orders/:id" component={UserOrderPage} />
-            <Route
-              exact
-              path="/user/invitations"
-              component={UserInvitationsPage}
-            />
-          </Switch>
-        </div>
+      <div className="user-page__nav">
+        <Link className="link" to="/user">
+          User
+        </Link>
+        <Link className="link" to="/user/artist">
+          Artist
+        </Link>
+        <Link className="link" to="/user/bands">
+          Bands
+        </Link>
+        <Link className="link" to="/user/concerts">
+          Concerts
+        </Link>
+        <Link className="link" to="/user/invitations">
+          Invitations
+        </Link>
+        <Link className="link" to="/user/orders">
+          Orders
+        </Link>
+      </div>
+      <div className="user-page__content">
+        <Switch>
+          <Route exact path="/user" component={UserDetailsPage} />
+          <Route exact path="/user/artist" component={UserArtistPage} />
+          <Route exact path="/user/bands" component={UserBandsPage} />
+          <Route exact path="/user/bands/:id" component={UserBandPage} />
+          <Route exact path="/user/concerts" component={UserConcertsPage} />
+          <Route exact path="/user/concerts/:id" component={UserConcertPage} />
+          <Route exact path="/user/orders" component={UserOrdersPage} />
+          <Route exact path="/user/orders/:id" component={UserOrderPage} />
+          <Route
+            exact
+            path="/user/invitations"
+            component={UserInvitationsPage}
+          />
+        </Switch>
       </div>
     </div>
   );
