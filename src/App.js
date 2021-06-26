@@ -24,6 +24,7 @@ import ConcertsPage from "./pages/concerts-page/concerts-page.component";
 import ConcertPage from "./pages/concert-page/concert-page.component";
 import CartPage from "./pages/cart-page/cart-page.component";
 import CartPaymentPage from "./pages/cart-payment/cart-payment.component";
+import ScrollToTop from "./components/scroll-to-top/scroll-to-top";
 
 import "./App.css";
 
@@ -57,6 +58,7 @@ const App = () => {
   return (
     <div className="h-100 d-flex flex-column">
       <Header />
+      <ScrollToTop />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/signin">

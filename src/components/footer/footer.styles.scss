@@ -7,11 +7,14 @@
   .wrapper {
     max-width: 1320px;
     margin: 0 auto;
+    padding: 0 10px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 
     .logo-link {
+      margin: 10px 0;
       .logo {
         height: 40px;
       }
@@ -22,16 +25,44 @@
     }
 
     .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       .phone {
-        margin-right: 50px;
+        margin: 10px 0;
         &:hover {
           color: black;
         }
       }
 
       .mail {
+        margin: 10px 0;
         &:hover {
           color: black;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .footer {
+    .wrapper {
+      flex-direction: row;
+      .logo-link {
+        margin: 0;
+      }
+
+      .info {
+        flex-direction: row;
+        .phone {
+          margin: 0;
+          margin-right: 50px;
+        }
+
+        .mail {
+          margin: 0;
         }
       }
     }

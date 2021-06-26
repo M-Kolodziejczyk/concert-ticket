@@ -18,47 +18,62 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
-      <Link className="logo__container" to="/">
-        <Logo className="logo" />
-      </Link>
-      <div className="options__container">
-        <Link to="/" className="options__link">
-          Home
+    <nav className="navbar navbar-expand-lg navbar-light header">
+      <div className="container-xl">
+        <Link className="navbar-brand" to="/">
+          <Logo className="logo" />
         </Link>
-        <Link to="/concerts" className="options__link">
-          Concerts
-        </Link>
-        <Link to="/bands" className="options__link">
-          Bands
-        </Link>
-        <Link to="/artists" className="options__link">
-          Artists
-        </Link>
-      </div>
-      <div className="auth__container">
-        {isLogged ? (
-          <div className="user">
-            <Link to="/cart" className="user__link">
-              <Cart className="cart-icon" />
-              <span className="cart-quantity">
-                <strong>{cart.length}</strong>
-              </span>
+        <button
+          className="navbar-toggler collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar"
+          aria-controls="navbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="navbar-collapse collapse" id="navbar">
+          <div className="options__container">
+            <Link to="/" className="options__link">
+              Home
             </Link>
-            <Link to="/user" className="user__link">
-              Account
+            <Link to="/concerts" className="options__link">
+              Concerts
             </Link>
-            <button onClick={handleSignOut} className="sign-out">
-              Sign Out
-            </button>
+            <Link to="/bands" className="options__link">
+              Bands
+            </Link>
+            <Link to="/artists" className="options__link">
+              Artists
+            </Link>
           </div>
-        ) : (
-          <Link to="/signin" className="sign-in">
-            Sign In
-          </Link>
-        )}
+          <div className="auth__container">
+            {isLogged ? (
+              <div className="user">
+                <Link to="/cart" className="user__link">
+                  <Cart className="cart-icon" />
+                  <span className="cart-quantity">
+                    <strong>{cart.length}</strong>
+                  </span>
+                </Link>
+                <Link to="/user" className="user__link">
+                  Account
+                </Link>
+                <button onClick={handleSignOut} className="sign-out">
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <Link to="/signin" className="sign-in">
+                Sign In
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
