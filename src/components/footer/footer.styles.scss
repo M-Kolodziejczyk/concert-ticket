@@ -1,0 +1,39 @@
+.footer {
+  background-color: #eff0f3;
+  margin-top: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .wrapper {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-link {
+      .logo {
+        height: 40px;
+      }
+
+      &:hover {
+        color: black;
+      }
+    }
+
+    .info {
+      .phone {
+        margin-right: 50px;
+        &:hover {
+          color: black;
+        }
+      }
+
+      .mail {
+        &:hover {
+          color: black;
+        }
+      }
+    }
+  }
+}

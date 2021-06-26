@@ -10,7 +10,8 @@ import * as subscriptions from "./api/subscriptions";
 import PrivateRoute from "./components/private-route/private-route";
 
 import Header from "./components/header/header.component";
-import HomePage from "./pages/homepage/homepage.component";
+import Footer from "./components/footer/footer.component";
+import HomePage from "./pages/home-page/home-page.component";
 import ForgotNewPasswordPage from "./pages/forgot-new-password/forgot-new-password.component";
 import ConfirmSignUpPage from "./pages/confirm-sign-up/confirm-sign-up.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
@@ -54,7 +55,7 @@ const App = () => {
   }, [email, dispatch]);
 
   return (
-    <div>
+    <div className="h-100 d-flex flex-column">
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -81,6 +82,7 @@ const App = () => {
           component={CartPaymentPage}
         />
       </Switch>
+      <Footer />
     </div>
   );
 };
