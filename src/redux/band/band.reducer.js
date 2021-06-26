@@ -2,6 +2,7 @@ import BandActionTypes from "./band.types";
 
 const INITIAL_STATE = {
   bands: [],
+  userListBands: [],
   userBands: {},
   band: {},
   bandsImage: {},
@@ -157,19 +158,14 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.GET_USER_BANDS_SUCCESS:
       return {
         ...state,
-        userBands: action.payload.reduce((obj, item) => {
-          return {
-            ...obj,
-            [item.id]: item,
-          };
-        }, {}),
+        userListBands: action.payload,
         isUserBandsEmpty: action.payload.length === 0 ? true : false,
         loading: false,
       };
     case BandActionTypes.GET_USER_BANDS_FAILURE:
       return {
         ...state,
-        userBands: {},
+        userListBands: [],
         loading: false,
       };
     case BandActionTypes.UPDATE_USER_BAND_START:

@@ -19,7 +19,7 @@ import "./user-bands-page.styles.scss";
 const UserBandsPage = () => {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.user.email);
-  const bands = useSelector((state) => state.band.userBands);
+  const bands = useSelector((state) => state.band.userListBands);
   const loading = useSelector((state) => state.band.loading);
   const formLoading = useSelector((state) => state.band.formLoading);
   const userLoading = useSelector((state) => state.user.getUserLoading);
@@ -34,7 +34,7 @@ const UserBandsPage = () => {
   );
 
   useEffect(() => {
-    if (userName && Object.keys(bands).length === 0 && !isUserBandsEmpty) {
+    if (userName && bands.length === 0 && !isUserBandsEmpty) {
       dispatch(getUserBandsStart(userName));
     }
   }, [userName, bands, dispatch, isUserBandsEmpty]);
@@ -55,8 +55,8 @@ const UserBandsPage = () => {
         <h2>Bands Created By you</h2>
         <div className="band-container">
           {bands &&
-            Object.keys(bands).map((id) => (
-              <UserBandsBand band={bands[id]} id={id} key={id} />
+            bands.map((band) => (
+              <UserBandsBand band={band} id={band.id} key={band.id} />
             ))}
         </div>
       </div>
