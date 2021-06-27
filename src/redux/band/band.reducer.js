@@ -59,7 +59,7 @@ const bandReducer = (state = INITIAL_STATE, action) => {
           },
         },
         successMessage: {
-          createInvitation: "Invitation send successfully",
+          createInvitation: "Invitation sent successfully",
         },
         errorMessage: {},
       };
