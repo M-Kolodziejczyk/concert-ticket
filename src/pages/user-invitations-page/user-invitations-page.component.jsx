@@ -10,6 +10,7 @@ import {
 import { getUserBandsStart } from "../../redux/band/band.actions";
 
 import Spinner from "../../components/spinner/spinner.component";
+import CustomButton from "../../components/custom-button/custom-button.component";
 
 import "./user-invitations-page.styles.scss";
 
@@ -19,7 +20,7 @@ const UserInvitationsPage = () => {
   const [formBandError, setFormBandError] = useState("");
   const userEmail = useSelector((state) => state.user.currentUser.email);
   const artistID = useSelector((state) => state.user.user.artistID);
-  const userBands = useSelector((state) => state.band.userBands);
+  const userListBands = useSelector((state) => state.band.userListBands);
   const isUserBandsEmpty = useSelector((state) => state.band.isUserBandsEmpty);
   const successMessage = useSelector(
     (state) => state.invitation.successMessage
@@ -49,10 +50,10 @@ const UserInvitationsPage = () => {
   }, [dispatch, userEmail, isListInvitationComplete]);
 
   useEffect(() => {
-    if (userEmail && Object.keys(userBands).length === 0 && !isUserBandsEmpty) {
+    if (userEmail && userListBands.length === 0 && !isUserBandsEmpty) {
       dispatch(getUserBandsStart(userEmail));
     }
-  }, [userEmail, userBands, dispatch, isUserBandsEmpty]);
+  }, [userEmail, userListBands, dispatch, isUserBandsEmpty]);
 
   const acceptBandInvitation = (invitation) => {
     dispatch(
@@ -116,94 +117,120 @@ const UserInvitationsPage = () => {
         {bandInvitations.length > 0 &&
           bandInvitations.map((invitation, id) => (
             <div key={id} className="band">
-              <div className="details">
-                <span className="author">
-                  Sent by: {invitation.authorEmail}
-                </span>
-                <span className="band">
-                  Band: {invitation.senderTableElementName}
-                </span>
-              </div>
-              <span className="message">Message: {invitation.message}</span>
-              <div className="buttons">
-                <button onClick={() => acceptBandInvitation(invitation)}>
-                  Accept
-                </button>
-                <button onClick={() => rejectBandInvitation(invitation)}>
-                  Reject
-                </button>
+              <div className="band-container">
+                <div className="details">
+                  <p className="author">
+                    <strong>Sent by: </strong>
+                    {invitation.authorEmail}
+                  </p>
+                  <p className="band-author">
+                    <strong>Band: </strong>
+                    {invitation.senderTableElementName}
+                  </p>
+                  <p className="message">
+                    <strong>Message: </strong>
+                    {invitation.message}
+                  </p>
+                </div>
+                <div className="buttons">
+                  <div className="accept">
+                    <CustomButton
+                      onClick={() => acceptBandInvitation(invitation)}
+                    >
+                      Accept
+                    </CustomButton>
+                  </div>
+                  <div className="reject">
+                    <CustomButton
+                      onClick={() => rejectBandInvitation(invitation)}
+                    >
+                      Reject
+                    </CustomButton>
+                  </div>
+                </div>
               </div>
               <div className="messages">
                 {successMessage.bandInvitation && (
-                  <span className="success">
-                    {successMessage.bandInvitation}
-                  </span>
+                  <p className="success">{successMessage.bandInvitation}</p>
                 )}
                 {errorMessage.bandInvitation && (
-                  <span className="error">{errorMessage.bandInvitation}</span>
+                  <p className="error">{errorMessage.bandInvitation}</p>
                 )}
               </div>
             </div>
           ))}
       </div>
       <div className="concert-invitations">
-        <span className="title">Concert invitations:</span>
+        <p className="title">Concert invitations:</p>
         {concertInvitations.length > 0 &&
           concertInvitations.map((concertInvitation, id) => (
             <div className="concert" key={id}>
-              <div className="details">
-                <span className="author">
-                  Sent By: {concertInvitation.authorEmail}
-                </span>
-                <span className="concert">
-                  Concert: {concertInvitation.senderTableElementName}
-                </span>
-              </div>
-              <span className="message">
-                Message: {concertInvitation.message}
-              </span>
-              <div className="form">
-                <form
-                  onSubmit={(e) =>
-                    handleAcceptConcertInvitation(e, concertInvitation)
-                  }
-                >
-                  <select
-                    className="form-select"
-                    aria-label="Default select band"
-                    value={formBandId}
-                    onChange={handleChangeConcertInvitation}
-                  >
-                    <option value="selected">Select band</option>
-                    {userBands &&
-                      Object.keys(userBands).map((id) => (
-                        <option key={userBands[id].id} value={userBands[id].id}>
-                          {userBands[id].name}
-                        </option>
-                      ))}
-                  </select>
-                  <button type="submit">Accept</button>
-                  {formBandError && <p>{formBandError}</p>}
-                </form>
-                <button
-                  onClick={() =>
-                    handleRejectConcertInvitation(concertInvitation)
-                  }
-                >
-                  Reject
-                </button>
-                <div className="messages">
-                  {successMessage.concertInvitation && (
-                    <span className="success">
-                      {successMessage.concertInvitation}
-                    </span>
-                  )}
-                  {errorMessage.concertInvitation && (
-                    <span className="error">
-                      {errorMessage.concertInvitation}
-                    </span>
-                  )}
+              <div className="concert-container">
+                <div className="details">
+                  <p className="author">
+                    <strong>Sent By: </strong>
+                    {concertInvitation.authorEmail}
+                  </p>
+                  <p className="concert-name">
+                    <strong>Concert: </strong>
+                    {concertInvitation.senderTableElementName}
+                  </p>
+                  <p className="message">
+                    <strong>Message: </strong>
+                    amet consectetur adipisicing elit. Id architecto dolor
+                    minima inventore eveniet sed fuga pariatur praesentium velit
+                    quisquam et recusandae suscipit laborum perferendis
+                    voluptate, cupiditate illum ipsum fugit.
+                    {concertInvitation.message}
+                  </p>
                 </div>
+                <div className="form">
+                  <form
+                    onSubmit={(e) =>
+                      handleAcceptConcertInvitation(e, concertInvitation)
+                    }
+                  >
+                    <select
+                      className="form-select"
+                      aria-label="Default select band"
+                      value={formBandId}
+                      onChange={handleChangeConcertInvitation}
+                    >
+                      <option value="selected">Select band</option>
+                      {userListBands.length > 0 &&
+                        userListBands.map((band) => (
+                          <option key={band.id} value={band.id}>
+                            {band.name}
+                          </option>
+                        ))}
+                    </select>
+                    <div className="btn-container">
+                      <div className="accept">
+                        <CustomButton type="submit">Accept</CustomButton>
+                      </div>
+                      <div className="reject">
+                        <CustomButton
+                          onClick={() =>
+                            handleRejectConcertInvitation(concertInvitation)
+                          }
+                        >
+                          Reject
+                        </CustomButton>
+                      </div>
+                    </div>
+                    {formBandError && (
+                      <p className="form-error">{formBandError}</p>
+                    )}
+                  </form>
+                </div>
+              </div>
+              <div className="messages">
+                {successMessage.concertInvitation && (
+                  <p className="success">{successMessage.concertInvitation}</p>
+                )}
+                {errorMessage.concertInvitation && (
+                  <p className="error">{errorMessage.concertInvitation}</p>
+                )}
               </div>
             </div>
           ))}

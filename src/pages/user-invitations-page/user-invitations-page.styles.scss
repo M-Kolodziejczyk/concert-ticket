@@ -1,61 +1,244 @@
 .user-invitations-page {
+  margin-top: 30px;
+  margin-bottom: 100px;
+
   .band-invitations {
+    margin: 0 10px;
+
     .title {
-      font-size: 24px;
+      font-size: 2rem;
+      font-weight: 700;
     }
-    .details {
-      display: flex;
-      flex-direction: row;
 
-      .author {
-        flex: 1;
+    .band {
+      margin-bottom: 20px;
+      border-bottom: 1px solid gray;
+      padding-bottom: 20px;
+
+      .band-container {
+        .details {
+          display: flex;
+          flex-direction: column;
+
+          .author {
+            font-size: 1rem;
+            margin: 0;
+          }
+
+          .band-author {
+            font-size: 1rem;
+            margin: 0;
+          }
+          .message {
+            margin: 0;
+            text-align: justify;
+            font-size: 1rem;
+          }
+        }
+
+        .buttons {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .accept {
+            margin-bottom: 10px;
+          }
+        }
       }
 
-      .band {
-        flex: 3;
-      }
-    }
-    .buttons {
-      display: flex;
-    }
-    .messages {
-      .success {
+      .messages {
         margin-top: 10px;
-        color: green;
-      }
-      .error {
-        margin-top: 5px;
-        color: red;
+
+        .success {
+          margin: 0;
+          text-align: justify;
+          color: green;
+        }
+        .error {
+          margin: 0;
+          text-align: justify;
+          color: red;
+        }
       }
     }
   }
 
   .concert-invitations {
+    margin: 0 10px;
+
     .title {
-      font-size: 24px;
-    }
-    .details {
-      display: flex;
-      flex-direction: row;
-
-      .author {
-        flex: 2;
-      }
-
-      .concert {
-        flex: 3;
-      }
+      font-size: 2rem;
+      font-weight: 700;
     }
 
-    .messages {
-      .success {
+    .concert {
+      margin-bottom: 20px;
+      border-bottom: 1px solid gray;
+      padding-bottom: 20px;
+
+      .concert-container {
+        .details {
+          display: flex;
+          flex-direction: column;
+
+          .author {
+            flex: 2;
+          }
+
+          .concert-name {
+            flex: 3;
+          }
+
+          .message {
+            text-align: justify;
+          }
+        }
+
+        .form {
+          .form-select {
+            &:active {
+              box-shadow: none;
+              border-color: gray;
+            }
+          }
+
+          .btn-container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .accept {
+              margin-bottom: 10px;
+            }
+          }
+
+          .form-error {
+            margin-top: 10px;
+            color: red;
+          }
+        }
+      }
+      .messages {
         margin-top: 10px;
-        color: green;
-      }
-      .error {
-        margin-top: 5px;
-        color: red;
+        .success {
+          margin: 0;
+          text-align: justify;
+          color: green;
+        }
+        .error {
+          margin: 0;
+          text-align: justify;
+          color: red;
+        }
       }
     }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-invitations-page {
+    .band-invitations {
+      .band {
+        .band-container {
+          .buttons {
+            flex-direction: row;
+            align-items: center;
+
+            .accept {
+              margin-bottom: 0;
+            }
+            .reject {
+              margin-left: 50px;
+            }
+          }
+        }
+      }
+    }
+    .concert-invitations {
+      .concert {
+        .concert-container {
+          .form {
+            .btn-container {
+              flex-direction: row;
+
+              .accept {
+                margin: 0;
+              }
+
+              .reject {
+                margin-left: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-invitations-page {
+    .band-invitations {
+      .band {
+        .band-container {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .details {
+            margin-right: 40px;
+          }
+
+          .buttons {
+            margin-top: 0;
+            margin-left: auto;
+            flex-direction: column;
+            .accept {
+              margin-bottom: 10px;
+            }
+            .reject {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+    .concert-invitations {
+      .concert {
+        .concert-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+
+          .details {
+            margin-right: 40px;
+          }
+          .form {
+            .btn-container {
+              flex-direction: row;
+
+              .accept {
+                margin: 0;
+              }
+
+              .reject {
+                margin-left: 50px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .user-invitations-page {
+    margin-top: 10px;
   }
 }
