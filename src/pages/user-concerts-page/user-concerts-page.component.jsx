@@ -47,16 +47,15 @@ const UserConcertsPage = () => {
   return (
     <div className="user-concerts-page">
       {(loading || userLoading) && <Spinner />}
-      <button
+      <CustomButton
         type="button"
-        className="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#concertModal"
       >
         Create Concert
-      </button>
+      </CustomButton>
       <div className="concert-wrapper">
-        <h3>Concerts created by you</h3>
+        <h2>Concerts created by you</h2>
         <div className="concert-container">
           {userListConcerts.length > 0 &&
             userListConcerts.map((concert) => (
