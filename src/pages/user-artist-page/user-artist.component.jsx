@@ -66,6 +66,9 @@ const UserArtistPage = (props) => {
       {(getUserLoading || formLoading) && <Spinner />}
       {userArtist && Object.keys(userArtist).length > 0 && (
         <div className="artist-details-container">
+          <div className="image">
+            {artistImageUrl && <img src={artistImageUrl} alt="artist img" />}
+          </div>
           <div className="details">
             <div className="group">
               <p className="name">Name:</p>
@@ -80,12 +83,30 @@ const UserArtistPage = (props) => {
               <p>{userArtist.role}</p>
             </div>
           </div>
-          <div className="image">
-            {artistImageUrl && <img src={artistImageUrl} alt="artist img" />}
-          </div>
         </div>
       )}
       <div className="forms-container">
+        {userArtist && Object.keys(userArtist).length > 0 && (
+          <div className="form-image">
+            {imageUrl && <img src={imageUrl} alt="artist img" />}
+            <form onSubmit={handleSubmitImage}>
+              <div className="btn-container">
+                <CustomInputButton
+                  handleChange={handleChangeImage}
+                  label="Select image"
+                  name="artistImg"
+                  id="artistImg"
+                />
+                <div className="form__button">
+                  <CustomButton type="submit" name="submit">
+                    Upload Image
+                  </CustomButton>
+                </div>
+              </div>
+              {imageErrors && <div className="imageErrors">{imageErrors}</div>}
+            </form>
+          </div>
+        )}
         <div className="form-details">
           <form onSubmit={handleSubmit}>
             <FormInput
@@ -122,27 +143,6 @@ const UserArtistPage = (props) => {
             )}
           </form>
         </div>
-        {userArtist && Object.keys(userArtist).length > 0 && (
-          <div className="form-image">
-            {imageUrl && <img src={imageUrl} alt="artist img" />}
-            <form onSubmit={handleSubmitImage}>
-              <div className="btn-container">
-                <CustomInputButton
-                  handleChange={handleChangeImage}
-                  label="Select image"
-                  name="artistImg"
-                  id="artistImg"
-                />
-                <div className="form__button">
-                  <CustomButton type="submit" name="submit">
-                    Upload Image
-                  </CustomButton>
-                </div>
-              </div>
-              {imageErrors && <div className="imageErrors">{imageErrors}</div>}
-            </form>
-          </div>
-        )}
       </div>
     </div>
   );
