@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
+import { ReactComponent as Edit } from "../../../assets/edit.svg";
+
 import "./user-bands-band.styles.scss";
 
 const UserBandsBand = ({ band }) => {
@@ -12,6 +14,7 @@ const UserBandsBand = ({ band }) => {
       <p className="date">
         Created: {format(new Date(band.createdAt), "dd MMM y")}{" "}
       </p>
+      <Edit className="edit" />
     </Link>
   );
 };

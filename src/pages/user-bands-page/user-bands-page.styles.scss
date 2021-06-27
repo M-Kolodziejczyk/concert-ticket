@@ -1,5 +1,18 @@
 .user-bands-page {
+  margin-top: 30px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   .band-wrapper {
+    width: 100%;
+
+    h2 {
+      margin: 15px 0;
+      text-align: center;
+    }
+
     .band-container {
       .band {
         margin: 10px 0;
@@ -28,6 +41,19 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .user-bands-page {
+    align-items: flex-start;
+    margin-top: 10px;
+
+    .band-wrapper {
+      h2 {
+        text-align: left;
       }
     }
   }

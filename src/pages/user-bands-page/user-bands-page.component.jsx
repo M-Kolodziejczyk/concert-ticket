@@ -42,17 +42,16 @@ const UserBandsPage = () => {
   return (
     <div className="user-bands-page">
       {(loading || userLoading) && <Spinner />}
-      <button
+      <CustomButton
         type="button"
-        className="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#bandModal"
       >
         Create Band
-      </button>
+      </CustomButton>
 
       <div className="band-wrapper">
-        <h2>Bands Created By you</h2>
+        <h2>Bands Created By You</h2>
         <div className="band-container">
           {bands &&
             bands.map((band) => (
