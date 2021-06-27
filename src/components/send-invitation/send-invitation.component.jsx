@@ -74,7 +74,6 @@ const SendInvitation = (props) => {
 
   return (
     <div>
-      <h6>Send Invitation</h6>
       <form onSubmit={handleSubmit}>
         <FormInput
           name="email"
