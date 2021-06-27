@@ -58,28 +58,37 @@ const UserBandPage = ({ match }) => {
     <div className="user-band-page">
       {(bandLoading || userLoading || formLoading) && <Spinner />}
       {userBand && (
-        <div className="container">
-          <div className="details">
-            <div className="img-container">
-              {bandImageUrl && <img src={bandImageUrl} alt="Band" />}
+        <div className="user-band-container">
+          <div className="details-container">
+            {bandImageUrl && (
+              <div className="img-container">
+                <img src={bandImageUrl} alt="Band" />
+              </div>
+            )}
+            <div className="details">
+              <p>Name: {userBand.name}</p>
+              <p>Genre: {userBand.genre}</p>
+              <p>
+                Created: {format(new Date(userBand.createdAt), "dd MMM y")}{" "}
+              </p>
+              <div className="btn-wrapper">
+                <CustomButton
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#bandModal"
+                >
+                  Edit Band
+                </CustomButton>
+              </div>
             </div>
-            <p>Name: {userBand.name}</p>
-            <p>Genre: {userBand.genre}</p>
-            <p>Created: {format(new Date(userBand.createdAt), "dd MMM y")} </p>
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#bandModal"
-            >
-              Edit Band
-            </button>
           </div>
           <div className="upload-form-container">
             <form className="upload-image" onSubmit={handleSubmitImage}>
-              <div className="img-container">
-                {imageUrl && <img src={imageUrl} alt="artist img" />}
-              </div>
+              {imageUrl && (
+                <div className="img-container">
+                  <img src={imageUrl} alt="artist img" />
+                </div>
+              )}
               <div className="button_container">
                 <div className="select-image">
                   <CustomInputButton
@@ -100,7 +109,7 @@ const UserBandPage = ({ match }) => {
             <h4>Band members:</h4>
             {userBand.members.items.length > 0 &&
               userBand.members.items.map((member, i) => (
-                <div key={i}>
+                <div className="band" key={i}>
                   <p>Name: {member.artist.name}</p>
                   <p>Role: {member.artist.role}</p>
                   <p>Genre: {member.artist.genre}</p>
@@ -108,6 +117,7 @@ const UserBandPage = ({ match }) => {
               ))}
           </div>
           <div className="invitation-container">
+            <span className="invitation-header">Send Invitation</span>
             <SendInvitation
               authorEmail={userBand.userName}
               senderTableElementID={userBand.id}
@@ -127,16 +137,16 @@ const UserBandPage = ({ match }) => {
                 <span className="error">{errorMessage.createInvitation}</span>
               )}
             </div>
-            <h3>Sent Invitations:</h3>
-            {userBand?.invitations &&
-              JSON.parse(userBand?.invitations).map((invitation, i) => (
-                <div key={i}>
-                  <div>
+            <div className="list-invitations">
+              <span className="list-invitations-header">Sent Invitations:</span>
+              {userBand?.invitations &&
+                JSON.parse(userBand?.invitations).map((invitation, i) => (
+                  <div className="invitation" key={i}>
                     <p>Email: {invitation.email}</p>
                     <p>Status: {invitation.status}</p>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
           <div
             className="modal fade"
@@ -149,7 +159,7 @@ const UserBandPage = ({ match }) => {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="bandModalLabel">
-                    Create Band
+                    Edit Band
                   </h5>
                   <button
                     type="button"
@@ -178,7 +188,7 @@ const UserBandPage = ({ match }) => {
                     />
                     <div className="form__button">
                       <CustomButton type="submit" name="submit">
-                        Create
+                        Edit
                       </CustomButton>
                     </div>
                     <div className="messages">
