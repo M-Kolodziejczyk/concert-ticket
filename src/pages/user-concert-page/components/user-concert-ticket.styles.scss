@@ -1,5 +1,35 @@
 .user-concert-ticket {
+  margin-top: 40px;
   .ticket-form {
+    .ticket-form-header {
+      font-size: 2rem;
+    }
+
+    .start-date {
+      display: flex;
+      flex-direction: column;
+      color: gray;
+
+      label {
+        margin-bottom: 5px;
+        margin-right: 10px;
+        font-size: 1.1rem;
+      }
+    }
+
+    .end-date {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      color: gray;
+
+      label {
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+        margin-right: 10px;
+      }
+    }
+
     .messages {
       margin-top: 10px;
       .success {
@@ -15,15 +45,20 @@
   .tickets-container {
     margin-top: 50px;
 
+    h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
     .ticket {
       border: 1px solid lightslategray;
       border-radius: 5px;
       padding: 5px;
       margin-bottom: 10px;
 
-      .ticket-row {
+      .ticket-header {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
 
         p {
           flex: 1;
@@ -33,7 +68,7 @@
 
       .date-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
 
         .date {
           margin: 0;
@@ -48,6 +83,67 @@
         .end {
           margin: 0;
           flex: 2;
+        }
+      }
+      .description {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-concert-ticket {
+    .ticket-form {
+      .start-date {
+        flex-direction: row;
+        justify-content: space-between;
+
+        label {
+          margin: 0;
+        }
+      }
+
+      .end-date {
+        flex-direction: row;
+        justify-content: space-between;
+
+        label {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-concert-ticket {
+    .ticket-form {
+      .start-date {
+        justify-content: flex-start;
+
+        label {
+          min-width: 300px;
+        }
+      }
+
+      .end-date {
+        justify-content: flex-start;
+
+        label {
+          min-width: 300px;
+        }
+      }
+    }
+
+    .tickets-container {
+      .ticket {
+        .ticket-header {
+          flex-direction: row;
+        }
+
+        .date-container {
+          flex-direction: row;
         }
       }
     }

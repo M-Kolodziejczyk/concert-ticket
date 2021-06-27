@@ -20,6 +20,7 @@ const UserConcertInvitation = ({ concertId }) => {
 
   return (
     <div className="user-concert-invitation">
+      <span className="user-concert-invitation-header">Send Invitation:</span>
       <div className="form-container">
         <SendInvitation
           authorEmail={userConcert.userName}

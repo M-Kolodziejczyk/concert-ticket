@@ -1,12 +1,15 @@
 .user-concert-page {
+  margin-top: 30px;
+  margin-bottom: 100px;
+
   .details-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-bottom: 40px;
 
     .img-wrapper {
-      min-width: 300px;
-      margin-right: 20px;
+      max-width: 300px;
+      margin: 0 auto;
 
       img {
         width: 100%;
@@ -14,18 +17,23 @@
     }
 
     .details {
+      margin-top: 10px;
+      width: 100%;
+
       .details-header {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
 
-        p {
+        .name {
+          order: 2;
           margin: 0;
         }
       }
 
       .description {
         margin: 0;
+        text-align: justify;
       }
 
       .date {
@@ -48,12 +56,10 @@
   }
 
   .upload-image-container {
-    margin-bottom: 40px;
     margin-bottom: 20px;
     .img-container {
-      width: 300px;
-      margin-right: 20px;
-      margin-bottom: 20px;
+      max-width: 300px;
+      margin: 0 auto;
 
       img {
         width: 100%;
@@ -61,11 +67,14 @@
     }
 
     .button_container {
+      margin-top: 20px;
+      align-items: center;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
 
       .select-image {
-        margin-right: 40px;
+        margin-bottom: 20px;
+        // margin-right: 40px;
       }
     }
 
@@ -73,5 +82,65 @@
       margin-top: 5px;
       color: red;
     }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-concert-page {
+    .upload-image-container {
+      .button_container {
+        flex-direction: row;
+        justify-content: space-around;
+
+        .select-image {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-concert-page {
+    .details-container {
+      flex-direction: row;
+      align-items: center;
+
+      .img-wrapper {
+        margin-right: 10px;
+      }
+
+      .details {
+        .details-header {
+          align-items: center;
+          flex-direction: row;
+          .name {
+            order: unset;
+          }
+        }
+      }
+    }
+
+    .upload-image-container {
+      .upload-image {
+        display: flex;
+        flex-direction: row;
+
+        .img-container {
+          margin: 0;
+          margin-right: 10px;
+        }
+      }
+
+      .button_container {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .user-concert-page {
+    margin-top: 10px;
   }
 }

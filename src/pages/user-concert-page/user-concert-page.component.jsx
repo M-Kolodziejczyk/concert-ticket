@@ -56,12 +56,14 @@ const UserConcertPage = ({ match }) => {
       {userConcert && (
         <div className="container">
           <div className="details-container">
-            <div className="img-wrapper">
-              {concertImageUrl && <img src={concertImageUrl} alt="concert" />}
-            </div>
+            {concertImageUrl && (
+              <div className="img-wrapper">
+                <img src={concertImageUrl} alt="concert" />
+              </div>
+            )}
             <div className="details">
               <div className="details-header">
-                <p>
+                <p className="name">
                   <strong>Name: </strong>
                   {userConcert.name}
                 </p>
@@ -93,9 +95,11 @@ const UserConcertPage = ({ match }) => {
           </div>
           <div className="upload-image-container">
             <form className="upload-image" onSubmit={handleSubmitImage}>
-              <div className="img-container">
-                {imageUrl && <img src={imageUrl} alt="artist img" />}
-              </div>
+              {imageUrl && (
+                <div className="img-container">
+                  <img src={imageUrl} alt="artist img" />
+                </div>
+              )}
               <div className="button_container">
                 <div className="select-image">
                   <CustomInputButton

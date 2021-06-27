@@ -1,4 +1,11 @@
 .user-concert-invitation {
+  margin-top: 30px;
+
+  .user-concert-invitation-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
   .form-container {
     margin-bottom: 20px;
 
@@ -17,23 +24,35 @@
 
   .invitations-container {
     .title {
-      font-size: 24px;
+      font-size: 1.5rem;
       font-weight: 700;
     }
 
     .invitation {
+      border: 1px solid lightgray;
+      border-radius: 10px;
       display: flex;
-      flex: row;
-      margin-bottom: 30px;
+      flex-direction: column;
+      margin-bottom: 10px;
+      padding: 5px;
 
       .email {
-        flex: 1;
         margin-bottom: 0;
       }
 
       .status {
-        flex: 2;
         margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-concert-invitation {
+    .invitations-container {
+      .invitation {
+        flex-direction: row;
+        justify-content: space-between;
       }
     }
   }

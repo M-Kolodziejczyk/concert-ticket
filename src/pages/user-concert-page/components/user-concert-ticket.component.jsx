@@ -43,7 +43,7 @@ const UserConcertTicket = ({ concertId }) => {
   return (
     <div className="user-concert-ticket">
       <div className="ticket-form">
-        <h3>Create ticket</h3>
+        <span className="ticket-form-header">Create ticket</span>
         <form onSubmit={handleSubmit}>
           <FormInput
             name="description"
@@ -66,35 +66,40 @@ const UserConcertTicket = ({ concertId }) => {
             type="number"
             label="Price"
             handleChange={handleChange}
-            value={values.price}
+            value={values.price || ""}
             error={errors.price}
           />
-          <label htmlFor="startDate">Select the day of startnig sale</label>
-          <DatePicker
-            selected={values.startDate}
-            onChange={(e) => handleChangeDate(e, "startDate")}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="time"
-            dateFormat="MMMM d, yyyy hh:mm aa"
-          />
-          <label htmlFor="startDate">Select the day of ending sale</label>
-          <DatePicker
-            selected={values.endDate}
-            onChange={(e) => handleChangeDate(e, "endDate")}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="time"
-            dateFormat="MMMM d, yyyy hh:mm aa"
-          />
+          <div className="start-date">
+            <label htmlFor="startDate">Select the day of startnig sale</label>
+            <DatePicker
+              selected={values.startDate}
+              onChange={(e) => handleChangeDate(e, "startDate")}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy hh:mm aa"
+              color="red"
+            />
+          </div>
+          <div className="end-date">
+            <label htmlFor="startDate">Select the day of ending sale</label>
+            <DatePicker
+              selected={values.endDate}
+              onChange={(e) => handleChangeDate(e, "endDate")}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy hh:mm aa"
+            />
+          </div>
           <FormInput
             name="quantity"
             type="number"
             label="Quantity"
             handleChange={handleChange}
-            value={values.quantity}
+            value={values.quantity || ""}
             error={errors.quantity}
           />
           <div className="form__button">
@@ -117,26 +122,42 @@ const UserConcertTicket = ({ concertId }) => {
         {tickets.items.length > 0 &&
           tickets.items.map((ticket) => (
             <div key={ticket.id} className="ticket">
-              <div className="ticket-row">
-                <p>Name: {ticket.eventName}</p>
-                <p>Type: {ticket.type}</p>
-                <p>Prrice: {ticket.price}</p>
-                <p>Quantity: {ticket.quantity}</p>
+              <div className="ticket-header">
+                <p>
+                  <strong>Name: </strong>
+                  {ticket.eventName}
+                </p>
+                <p>
+                  <strong>Type: </strong>
+                  {ticket.type}
+                </p>
+                <p>
+                  <strong>Prrice: </strong>
+                  {ticket.price}
+                </p>
+                <p>
+                  <strong>Quantity: </strong>
+                  {ticket.quantity}
+                </p>
               </div>
               <div className="date-container">
                 <p className="date">
-                  Date: {format(new Date(ticket.date), "dd MMM yyy HH:mm")}
+                  <strong>Date: </strong>
+                  {format(new Date(ticket.date), "dd MMM yyy HH:mm")}
                 </p>
                 <p className="start">
-                  Start sale:{" "}
+                  <strong>Start sale: </strong>
                   {format(new Date(ticket.startDate), "dd MMM yyy HH:mm")}
                 </p>
                 <p className="end">
-                  End sale:{" "}
+                  <strong>End sale: </strong>
                   {format(new Date(ticket.endDate), "dd MMM yyy HH:mm")}
                 </p>
               </div>
-              <p>Description: {ticket.description}</p>
+              <p className="description">
+                <strong>Description: </strong>
+                {ticket.description}
+              </p>
             </div>
           ))}
       </div>

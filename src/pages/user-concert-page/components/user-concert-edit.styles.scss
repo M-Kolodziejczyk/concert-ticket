@@ -1,8 +1,27 @@
 .user-concert-edit {
+  .btn-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
   .modal {
     .modal-dialog {
       .modal-content {
         .modal-body {
+          .date {
+            display: flex;
+            flex-direction: column;
+
+            label {
+              color: gray;
+              margin-bottom: 5px;
+              font-size: 1.1rem;
+              margin-right: 10px;
+            }
+          }
+
           .submit {
             margin-top: 10px;
           }
@@ -17,6 +36,31 @@
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-concert-edit {
+    .modal {
+      .modal-dialog {
+        .modal-content {
+          .modal-body {
+            .date {
+              flex-direction: row;
+              justify-content: space-between;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-concert-edit {
+    .btn-container {
+      margin-bottom: 0;
     }
   }
 }

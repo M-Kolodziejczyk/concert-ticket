@@ -58,14 +58,15 @@ const UserConcertEdit = ({ concertId }) => {
 
   return (
     <div className="user-concert-edit">
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#concertEditModal"
-      >
-        Edit Band
-      </button>
+      <div className="btn-container">
+        <CustomButton
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#concertEditModal"
+        >
+          Edit Concert
+        </CustomButton>
+      </div>
       <div
         className="modal fade"
         id="concertEditModal"
@@ -75,11 +76,10 @@ const UserConcertEdit = ({ concertId }) => {
       >
         <div className="modal-dialog">
           {loadingForm && <Spinner bright={true} />}
-          {/* <Spinner /> */}
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="bandModalLabel">
-                Create Band
+                Edit Concert
               </h5>
               <button
                 type="button"
@@ -122,15 +122,18 @@ const UserConcertEdit = ({ concertId }) => {
                   value={values.description}
                   error={errors.description}
                 />
-                <DatePicker
-                  selected={values.date}
-                  onChange={(e) => handleChangeDate(e, "date")}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  timeCaption="time"
-                  dateFormat="MMMM d, yyyy hh:mm aa"
-                />
+                <div className="date">
+                  <label htmlFor="date">Select concert date:</label>
+                  <DatePicker
+                    selected={values.date}
+                    onChange={(e) => handleChangeDate(e, "date")}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy hh:mm aa"
+                  />
+                </div>
 
                 <div className="submit">
                   <CustomButton type="submit" name="submit">
