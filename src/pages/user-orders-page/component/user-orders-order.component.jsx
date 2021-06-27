@@ -10,10 +10,22 @@ const UserOrdersOrder = ({ order }) => {
       to={{ pathname: `/user/orders/${order.id}`, order }}
       className="user-orders-order"
     >
-      <span>{order.customer}</span>
-      <span>{format(new Date(order.createdAt), "MMM d Y")}</span>
-      <span>Total: {order.total}$</span>
-      <span>Status: {order.status}</span>
+      <p>
+        <strong>Name: </strong>
+        {order.customer}
+      </p>
+      <p>
+        <strong>Date: </strong>
+        {format(new Date(order.createdAt), "d MMM Y")}
+      </p>
+      <p>
+        <strong>Total: </strong>
+        {order.total}$
+      </p>
+      <p>
+        <strong>Status: </strong>
+        {order.status}
+      </p>
     </Link>
   );
 };

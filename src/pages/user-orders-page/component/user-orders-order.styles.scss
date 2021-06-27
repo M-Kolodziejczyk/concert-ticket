@@ -1,11 +1,25 @@
 .user-orders-order {
   display: flex;
+  flex-direction: column;
   border: 1px solid lightgrey;
   border-radius: 10px;
-  padding: 10px;
+  padding: 0 10px;
   margin-bottom: 10px;
 
-  span {
+  p {
+    margin: 5px 0;
     flex: 1;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-orders-order {
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-orders-order {
+    flex-direction: row;
   }
 }
