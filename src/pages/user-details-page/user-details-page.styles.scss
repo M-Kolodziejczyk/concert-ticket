@@ -26,3 +26,11 @@
     }
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .user-details-page {
+    .form-container {
+      max-width: 500px;
+    }
+  }
+}
