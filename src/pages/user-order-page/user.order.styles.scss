@@ -1,25 +1,148 @@
 .user-order-page {
-  .order-container {
-    display: flex;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 100px;
 
-    span {
-      flex: 1;
+  .order-container {
+    margin: 0 10px;
+    .details {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid lightgrey;
+      border-radius: 10px;
+      padding: 0 10px;
+
+      p {
+        flex: 1;
+        margin: 5px 0;
+      }
+    }
+
+    .tickets-container {
+      margin-top: 30px;
+
+      h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .ticket {
+        margin-bottom: 10px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        padding: 0 10px;
+
+        .ticket-header {
+          display: flex;
+          flex-direction: column;
+          p {
+            margin: 5px 0;
+          }
+        }
+
+        .ticket-body {
+          display: flex;
+          flex-direction: column;
+          p {
+            margin: 5px 0;
+          }
+
+          .ticket-generator {
+            margin-bottom: 2px;
+          }
+        }
+      }
     }
   }
+}
 
-  .tickets-container {
-    margin-top: 30px;
+@media screen and (min-width: 576px) {
+  .user-order-page {
+    .order-container {
+      .details {
+        align-items: center;
+      }
 
-    .ticket {
-      display: flex;
-      justify-content: space-between;
-      border: 1px solid lightgray;
-      border-radius: 10px;
-      padding: 10px;
+      .tickets-container {
+        .ticket {
+          .ticket-header {
+            align-items: center;
+          }
+
+          .ticket-body {
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-order-page {
+    .order-container {
+      .details {
+        flex-direction: row;
+
+        p {
+          flex: 1;
+          margin: 5px 0;
+        }
+      }
+
+      .tickets-container {
+        h2 {
+          text-align: left;
+        }
+
+        .ticket {
+          .ticket-header {
+            flex-direction: row;
+            .name {
+              flex: 2;
+            }
+            p {
+              flex: 1;
+            }
+          }
+
+          .ticket-body {
+            flex-direction: row;
+            .type {
+              flex: 2;
+            }
+
+            p {
+              flex: 1;
+            }
+            .ticket-generator {
+              flex: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .user-order-page {
+    .order-container {
+      .tickets-container {
+        .ticket {
+          flex-direction: row;
+          // justify-content: space-between;
+
+          p {
+            flex: 1;
+            // margin: 5px 0;
+          }
+
+          .ticket-generator {
+            margin-bottom: 2px;
+          }
+        }
+      }
     }
   }
 }

@@ -47,12 +47,24 @@ const UserOrderPage = ({ match }) => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="container">
-          <div className="order-container">
-            <span>{order.customer}</span>
-            <span>{format(new Date(order.createdAt), "MMM d Y")}</span>
-            <span>Total: {order.total}$</span>
-            <span>Status: {order.status}</span>
+        <div className="order-container">
+          <div className="details">
+            <p>
+              <strong>Name: </strong>
+              {order.customer}
+            </p>
+            <p>
+              <strong>Date: </strong>
+              {format(new Date(order.createdAt), "d MMM Y")}
+            </p>
+            <p>
+              <strong>Total: </strong>
+              {order.total}$
+            </p>
+            <p>
+              <strong>Status: </strong>
+              {order.status}
+            </p>
           </div>
           {order.status === "NEW" && (
             <Link to={`/cart/payment/${order.id}`}> Go to Pay</Link>
@@ -62,14 +74,33 @@ const UserOrderPage = ({ match }) => {
             {order.tickets &&
               order.tickets.items.map((ticket) => (
                 <div className="ticket" key={ticket.id}>
-                  <span>Event: {ticket.ticket.eventName}</span>
-                  <span>
-                    Date: {format(new Date(ticket.ticket.date), "MMM d Y")}
-                  </span>
-                  <span>Venue: {ticket.ticket.venue}</span>
-                  <span>Type: {ticket.ticket.type}</span>
-                  <span>price: {ticket.ticket.price}</span>
-                  <TicketGenerator ticket={ticket} />
+                  <div className="ticket-header">
+                    <p className="name">
+                      <strong>Event: </strong>
+                      {ticket.ticket.eventName}
+                    </p>
+                    <p>
+                      <strong>Date: </strong>
+                      {format(new Date(ticket.ticket.date), "MMM d Y")}
+                    </p>
+                    <p>
+                      <strong>Venue: </strong>
+                      {ticket.ticket.venue}
+                    </p>
+                  </div>
+                  <div className="ticket-body">
+                    <p className="type">
+                      <strong>Type: </strong>
+                      {ticket.ticket.type}
+                    </p>
+                    <p>
+                      <strong>price: </strong>
+                      {ticket.ticket.price}
+                    </p>
+                    <div className="ticket-generator">
+                      <TicketGenerator ticket={ticket} />
+                    </div>
+                  </div>
                 </div>
               ))}
           </div>
