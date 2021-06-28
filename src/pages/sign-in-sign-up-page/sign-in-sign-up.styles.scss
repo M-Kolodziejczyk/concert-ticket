@@ -1,0 +1,13 @@
+.signIn-signUp-page {
+  max-width: 1320px;
+  margin: 50px auto 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 1400px) {
+  .signIn-signUp-page {
+    flex-direction: row;
+  }
+}
