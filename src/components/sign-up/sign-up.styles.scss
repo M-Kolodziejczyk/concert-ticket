@@ -1,23 +1,25 @@
 .signupPage {
-  margin: 0 auto;
+  margin: 50px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   h2 {
-    margin: 10px 0;
+    font-size: 1.5rem;
   }
 
-  .container {
-    margin: 0 auto;
-    width: 400px;
+  .subtitle {
+    font-size: 1rem;
+  }
 
-    .form__buttons {
+  .signup-container {
+    .form-buttons {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      flex-direction: column;
 
-      .form__link {
+      .confirm-link {
+        margin-top: 20px;
         color: #000000;
 
         &:hover {
@@ -25,5 +27,51 @@
         }
       }
     }
+
+    .form-messages {
+      margin-top: 15px;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .signupPage {
+    .signup-container {
+      .form-buttons {
+        flex-direction: row;
+
+        .confirm-link {
+          margin-top: 0;
+          margin-left: 50px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .signupPage {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .signup-container {
+      .form-buttons {
+        flex-direction: row;
+
+        .confirm-link {
+          margin-top: 0;
+          margin-left: 50px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .signupPage {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 0;
   }
 }

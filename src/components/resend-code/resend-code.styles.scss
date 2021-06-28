@@ -1,4 +1,37 @@
 .resend {
-  width: 400px;
-  margin: 0 auto;
+  margin: 50px 10px;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .form__buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-messages {
+    margin-top: 15px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .resend {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+
+    .form__buttons {
+      display: flex;
+      justify-content: unset;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .resend {
+    margin-top: 0;
+  }
 }

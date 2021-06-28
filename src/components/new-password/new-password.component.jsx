@@ -23,7 +23,7 @@ const NewPassword = () => {
   return (
     <div className="new-password">
       <h2>New Password</h2>
-      <div className="container">
+      <div className="new-password-container">
         <form onSubmit={handleSubmit}>
           <FormInput
             name="email"
@@ -54,12 +54,14 @@ const NewPassword = () => {
               Change password
             </CustomButton>
           </div>
-          {errorMessage?.newPassword && (
-            <ErrorMessage>{errorMessage.newPassword}</ErrorMessage>
-          )}
-          {successMessage?.newPassword && (
-            <SuccessMessage>{successMessage.newPassword}</SuccessMessage>
-          )}
+          <div className="form-messages">
+            {errorMessage?.newPassword && (
+              <ErrorMessage>{errorMessage.newPassword}</ErrorMessage>
+            )}
+            {successMessage?.newPassword && (
+              <SuccessMessage>{successMessage.newPassword}</SuccessMessage>
+            )}
+          </div>
         </form>
       </div>
     </div>

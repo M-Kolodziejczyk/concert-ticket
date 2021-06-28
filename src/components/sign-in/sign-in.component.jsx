@@ -34,8 +34,8 @@ const SignIn = () => {
   return (
     <div className="signinPage">
       <h2>I already have an account</h2>
-      <span className="span">Sign in with your email and password</span>
-      <div className="signin__container">
+      <span className="subtitle">Sign in with your email and password</span>
+      <div className="signin-container">
         <form className="form" onSubmit={handleSubmit}>
           <FormInput
             name="email"
@@ -53,23 +53,33 @@ const SignIn = () => {
             value={values.password}
             error={errors.password}
           />
-          <Link className="form__link" to="/forgot-password">
+          <Link className="password-link" to="/forgot-password">
             Forgot password?
           </Link>
-          <div className="form__btnGroup">
-            <CustomButton type="submit" name="submit">
-              Signin
-            </CustomButton>
-            <CustomButton type="button" isGoogleBtn onClick={handleGoogleStart}>
-              Sign in with Google
-            </CustomButton>
+          <div className="btn-group">
+            <div className="signin-btn">
+              <CustomButton type="submit" name="submit">
+                Signin
+              </CustomButton>
+            </div>
+            <div className="google-btn">
+              <CustomButton
+                type="button"
+                isGoogleBtn
+                onClick={handleGoogleStart}
+              >
+                Sign in with Google
+              </CustomButton>
+            </div>
           </div>
-          {errorMessage?.signin && (
-            <ErrorMessage>{errorMessage.signin}</ErrorMessage>
-          )}
-          {successMessage?.signin && (
-            <SuccessMessage>{successMessage.signin}</SuccessMessage>
-          )}
+          <div className="form-messages">
+            {errorMessage?.signin && (
+              <ErrorMessage>{errorMessage.signin}</ErrorMessage>
+            )}
+            {successMessage?.signin && (
+              <SuccessMessage>{successMessage.signin}</SuccessMessage>
+            )}
+          </div>
         </form>
       </div>
     </div>

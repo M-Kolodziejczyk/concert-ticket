@@ -25,9 +25,9 @@ const SignUp = () => {
 
   return (
     <div className="signupPage">
-      <h2>I do not have a account</h2>
-      <span>Sign up with your email and password</span>
-      <div className="container">
+      <h2>I do not have an account</h2>
+      <span className="subtitle">Sign up with your email and password</span>
+      <div className="signup-container">
         <form onSubmit={handleSubmit} className="signupPage__form">
           <FormInput
             name="email"
@@ -53,20 +53,25 @@ const SignUp = () => {
             value={values.password2}
             error={errors.password2}
           />
-          <div className="form__buttons">
-            <CustomButton type="submit" name="submit">
-              Signup
-            </CustomButton>
-            <Link to="/confirm-account" className="form__link">
+          <div className="form-buttons">
+            <div className="signup-btn">
+              <CustomButton type="submit" name="submit">
+                Signup
+              </CustomButton>
+            </div>
+
+            <Link to="/confirm-account" className="confirm-link">
               Go to confirm account
             </Link>
           </div>
-          {errorMessage?.signup && (
-            <ErrorMessage>{errorMessage.signup}</ErrorMessage>
-          )}
-          {successMessage?.signup && (
-            <SuccessMessage>{successMessage.signup}</SuccessMessage>
-          )}
+          <div className="form-messages">
+            {errorMessage?.signup && (
+              <ErrorMessage>{errorMessage.signup}</ErrorMessage>
+            )}
+            {successMessage?.signup && (
+              <SuccessMessage>{successMessage.signup}</SuccessMessage>
+            )}
+          </div>
         </form>
       </div>
     </div>

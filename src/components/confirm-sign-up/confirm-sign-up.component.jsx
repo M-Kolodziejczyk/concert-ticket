@@ -46,16 +46,18 @@ const ConfirmSignUp = () => {
           <CustomButton type="submit" name="submit">
             Confirm Email
           </CustomButton>
-          <Link to="/signin" className="form__link">
+          <Link to="/signin" className="signin-link">
             Go to sign in
           </Link>
         </div>
-        {errorMessage.confirmSignup && (
-          <ErrorMessage>{errorMessage.confirmSignup}</ErrorMessage>
-        )}
-        {successMessage?.confirmSignup && (
-          <SuccessMessage>{successMessage.confirmSignup}</SuccessMessage>
-        )}
+        <div className="form-messages">
+          {errorMessage.confirmSignup && (
+            <ErrorMessage>{errorMessage.confirmSignup}</ErrorMessage>
+          )}
+          {successMessage?.confirmSignup && (
+            <SuccessMessage>{successMessage.confirmSignup}</SuccessMessage>
+          )}
+        </div>
       </form>
     </div>
   );

@@ -38,12 +38,14 @@ const ResendCode = () => {
             Resend Code
           </CustomButton>
         </div>
-        {errorMessage.resendCode && (
-          <ErrorMessage>{errorMessage.resendCode}</ErrorMessage>
-        )}
-        {successMessage?.resendCode && (
-          <SuccessMessage>{successMessage.resendCode}</SuccessMessage>
-        )}
+        <div className="form-messages">
+          {errorMessage.resendCode && (
+            <ErrorMessage>{errorMessage.resendCode}</ErrorMessage>
+          )}
+          {successMessage?.resendCode && (
+            <SuccessMessage>{successMessage.resendCode}</SuccessMessage>
+          )}
+        </div>
       </form>
     </div>
   );

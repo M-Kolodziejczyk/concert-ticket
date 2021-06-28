@@ -24,7 +24,7 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password">
       <h2>Forgot Password</h2>
-      <div className="container">
+      <div className="forgot-password-container">
         <form onSubmit={handleSubmit}>
           <FormInput
             name="email"
@@ -39,12 +39,14 @@ const ForgotPassword = () => {
               Send
             </CustomButton>
           </div>
-          {errorMessage.forgotPassword && (
-            <ErrorMessage>{errorMessage.forgotPassword}</ErrorMessage>
-          )}
-          {successMessage?.forgotPassword && (
-            <SuccessMessage>{successMessage.forgotPassword}</SuccessMessage>
-          )}
+          <div className="form-messages">
+            {errorMessage.forgotPassword && (
+              <ErrorMessage>{errorMessage.forgotPassword}</ErrorMessage>
+            )}
+            {successMessage?.forgotPassword && (
+              <SuccessMessage>{successMessage.forgotPassword}</SuccessMessage>
+            )}
+          </div>
         </form>
       </div>
     </div>

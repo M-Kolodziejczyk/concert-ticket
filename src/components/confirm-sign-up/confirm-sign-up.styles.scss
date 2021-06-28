@@ -1,18 +1,43 @@
 .confirm {
-  width: 400px;
-  margin: 0 auto;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1.5rem;
+  }
 
   .form__buttons {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
 
-    .form__link {
+    .signin-link {
+      margin-top: 20px;
       color: #000000;
-      margin-right: 10px;
 
       &:hover {
         color: grey;
+      }
+    }
+  }
+  .form-messages {
+    margin-top: 15px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .confirm {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+
+    .form__buttons {
+      flex-direction: row;
+
+      .signin-link {
+        margin-top: 0;
+        margin-left: 50px;
       }
     }
   }
