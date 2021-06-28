@@ -22,8 +22,11 @@ const Artist = (props) => {
   }, [dispatch, identityId, index, artistImageUrl]);
 
   return (
-    <Link to={{ pathname: `/artists/${id}`, artist: props, artistImageUrl }}>
-      <div className="artist">
+    <Link
+      className="artists-page-artist"
+      to={{ pathname: `/artists/${id}`, artist: props, artistImageUrl }}
+    >
+      <div className="artists-page-artist-container">
         <div className="image">
           {artistImageUrl ? (
             <img src={artistImageUrl} alt="artist img" />
@@ -31,10 +34,19 @@ const Artist = (props) => {
             <Person className="altImg" />
           )}
         </div>
-        <div className="artist__info">
-          <p>Name: {name}</p>
-          <p>Role: {role}</p>
-          <p>Genre: {genre}</p>
+        <div className="description">
+          <p>
+            <strong>Name: </strong>
+            {name}
+          </p>
+          <p>
+            <strong>Role: </strong>
+            {role}
+          </p>
+          <p>
+            <strong>Genre: </strong>
+            {genre}
+          </p>
         </div>
       </div>
     </Link>
