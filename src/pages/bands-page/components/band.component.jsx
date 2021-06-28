@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getBandImageStart } from "../../../redux/band/band.actions";
+import { ReactComponent as BandImg } from "../../../assets/band.svg";
 
 import "./band.styles.scss";
 
@@ -21,35 +22,38 @@ const Band = (props) => {
 
   return (
     <Link
+      className="bands-page-band"
       to={{
         pathname: `/bands/${id}`,
         band: { ...props, imageUrl: bandsImage[id] },
         bandImageUrl: bandsImage[id],
       }}
     >
-      <div className="bands-page-band">
+      <div className="bands-page-band-container">
         <div className="image">
           {bandsImage[id] ? (
             <img src={bandsImage[id]} alt="band" />
           ) : (
-            <p>no Image</p>
+            <BandImg />
           )}
         </div>
-        <p>
-          <strong>Name: </strong>
-          {name}
-        </p>
-        <p>
-          <strong>Genre: </strong>
-          {genre}
-        </p>
-        <p>
-          <strong>Description: </strong>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim sequi
-          libero expedita quos, sapiente dolorem odio ipsam nemo praesentium
-          corporis tempora fugiat veritatis est ad officia optio, accusamus
-          officiis cupiditate.
-        </p>
+        <div className="description">
+          <p>
+            <strong>Name: </strong>
+            {name}
+          </p>
+          <p>
+            <strong>Genre: </strong>
+            {genre}
+          </p>
+          <p>
+            <strong>Description: </strong>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim sequi
+            libero expedita quos, sapiente dolorem odio ipsam nemo praesentium
+            corporis tempora fugiat veritatis est ad officia optio, accusamus
+            officiis cupiditate.
+          </p>
+        </div>
       </div>
     </Link>
   );

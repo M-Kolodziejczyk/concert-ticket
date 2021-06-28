@@ -1,4 +1,13 @@
 .bands-page {
   max-width: 1320px;
-  margin: 40px auto 0;
+  margin: 40px auto 100px;
+
+  .bands-page-container {
+    margin: 0 10px;
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
 }

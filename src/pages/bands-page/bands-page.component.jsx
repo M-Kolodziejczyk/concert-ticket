@@ -20,8 +20,8 @@ const BandsPage = () => {
 
   return (
     <div className="bands-page">
-      <h1>BANDS</h1>
-      <div className="container">
+      <div className="bands-page-container">
+        <h1>BANDS</h1>
         {bands && bands.map((band, i) => <Band {...band} key={i} />)}
       </div>
     </div>
