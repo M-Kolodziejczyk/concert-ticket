@@ -76,7 +76,7 @@ const UserConcertPage = ({ match }) => {
               <div className="date">
                 <p>
                   <strong> Date: </strong>
-                  {format(date, "MMMM dd yyyy")}
+                  {format(date, "dd MMMM yyyy")}
                 </p>
                 <p>
                   <strong>Time: </strong>
