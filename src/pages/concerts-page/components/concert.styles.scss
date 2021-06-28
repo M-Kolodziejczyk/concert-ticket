@@ -1,11 +1,72 @@
-.concerts-page__concert-component {
+.concerts-page-concert {
   display: flex;
-  margin-bottom: 50px;
-  .image {
-    width: 400px;
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  padding: 5px;
+  border-radius: 10px;
+  width: 100%;
 
-    img {
-      width: 100%;
+  &:hover {
+    color: lightslategray;
+  }
+
+  .concert-container {
+    width: 100%;
+
+    .image {
+      max-width: 300px;
+      max-height: 200px;
+      min-height: 150px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        object-fit: scale-down;
+      }
+    }
+
+    // .description {
+    //   margin-top: 10px;
+
+    //   .event-name {
+    //     font-size: 1.5rem;
+    //     font-weight: 600;
+    //   }
+
+    //   p {
+    //     margin: 5px 0;
+    //   }
+    // }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .concerts-page-concert {
+    .concert-container {
+      display: flex;
+
+      .image {
+        flex: 1;
+      }
+
+      .description {
+        flex: 1;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .concerts-page-concert {
+    .concert-container {
+      display: flex;
+
+      .image {
+        max-width: 400px;
+      }
     }
   }
 }

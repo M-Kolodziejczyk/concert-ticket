@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getConcertImageStart } from "../../../redux/concert/concert.actions";
 
+import { ReactComponent as Band } from "../../../assets/band.svg";
+
 import "./concert.styles.scss";
 
 const Concert = (props) => {
@@ -28,17 +30,26 @@ const Concert = (props) => {
         pathname: `/concerts/${id}`,
         concert: { ...props, imageUrl: concertsImage[id] },
       }}
-      className="concerts-page__concert-component"
+      className="concerts-page-concert"
     >
-      <div className="container">
+      <div className="concert-container">
         <div className="image">
-          {imageUrl ? <img src={imageUrl} alt="concert" /> : <p>No image</p>}
+          {imageUrl ? <img src={imageUrl} alt="concert" /> : <Band />}
         </div>
         <div className="description">
-          <h1>{name}</h1>
-          <p>Genres: {genres}</p>
-          <p>Venue: {venue}</p>
-          <p>Date: {date}</p>
+          <p className="event-name">{name}</p>
+          <p>
+            <strong>Genres: </strong>
+            {genres}
+          </p>
+          <p>
+            <strong>Venue: </strong>
+            {venue}
+          </p>
+          <p>
+            <strong>Date: </strong>
+            {date}
+          </p>
         </div>
       </div>
     </Link>

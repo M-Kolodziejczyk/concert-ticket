@@ -18,8 +18,8 @@ const ConcertsPage = () => {
 
   return (
     <div className="concerts-page">
-      <h1>Concerts</h1>
-      <div className="containers">
+      <div className="concerts-page-container">
+        <h1>Concerts</h1>
         {concerts &&
           concerts.map((concert, i) => <Concert {...concert} key={i} />)}
       </div>
