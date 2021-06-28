@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { format } from "date-fns";
 
 import {
   updateConcert,
@@ -67,7 +68,7 @@ const ConcertPage = ({ location }) => {
 
   return (
     <div className="concert-page">
-      <div className="container">
+      <div className="concert-page-container">
         <div className="image-container">
           {concert.imageUrl && <img src={concert.imageUrl} alt="Band" />}
         </div>
@@ -83,7 +84,8 @@ const ConcertPage = ({ location }) => {
           </p>
           <p>
             <strong>Date: </strong>
-            {concert.date}
+            {concert.date &&
+              format(new Date(concert.date), "dd MMMM yyyy hh:mm a")}
           </p>
           <p>
             <strong>Description: </strong>Lorem ipsum dolor sit amet,
@@ -100,9 +102,13 @@ const ConcertPage = ({ location }) => {
           concertTickets.map((ticket) => {
             return (
               <div key={ticket.id} className="ticket">
-                <p>{ticket.description}</p>
-                <p>Ticket type: {ticket.type}</p>
-                <p>Price: {ticket.price}</p>
+                <p className="desc">{ticket.description}</p>
+                <p>
+                  <strong>Type: </strong> {ticket.type}
+                </p>
+                <p>
+                  <strong>Price:</strong> {ticket.price}
+                </p>
                 <button className="cart-btn" onClick={() => addToCart(ticket)}>
                   <Cart /> Add To Cart
                 </button>

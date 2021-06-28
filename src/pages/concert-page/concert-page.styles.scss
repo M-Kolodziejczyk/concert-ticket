@@ -1,11 +1,15 @@
 .concert-page {
   max-width: 1320px;
-  margin: 40px auto 0;
-  .container {
+  margin: 40px auto 100px;
+
+  .concert-page-container {
     display: flex;
+    flex-direction: column;
+    margin: 0 10px;
 
     .image-container {
-      width: 50%;
+      max-width: 350px;
+      margin: 0 auto;
 
       img {
         width: 100%;
@@ -13,12 +17,16 @@
     }
 
     .description-container {
-      margin-left: 20px;
-      width: 50%;
+      margin-top: 20px;
+
+      p {
+        margin: 5px 0;
+      }
     }
   }
 
   .tickets-container {
+    margin: 50px 10px;
     margin-top: 50px;
 
     .ticket {
@@ -26,6 +34,11 @@
       padding: 5px;
       border: 1px solid lightslategray;
       border-radius: 5px;
+
+      .desc {
+        font-size: 1rem;
+        font-weight: 500;
+      }
 
       .cart-btn {
         border: none;
@@ -46,6 +59,33 @@
         margin: 0;
         margin-top: 10px;
         color: red;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .concert-page {
+    max-width: 550px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .concert-page {
+    max-width: 700px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .concert-page {
+    max-width: 900px;
+
+    .concert-page-container {
+      flex-direction: row;
+
+      .description-container {
+        margin-top: 0;
+        margin-left: 15px;
       }
     }
   }
