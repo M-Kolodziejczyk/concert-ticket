@@ -65,22 +65,23 @@
         width: 100%;
       }
     }
+    .form-container {
+      .button_container {
+        margin-top: 20px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
 
-    .button_container {
-      margin-top: 20px;
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-
-      .select-image {
-        margin-bottom: 20px;
-        // margin-right: 40px;
+        .select-image {
+          margin-bottom: 20px;
+          // margin-right: 40px;
+        }
       }
-    }
 
-    .imageErrors {
-      margin-top: 5px;
-      color: red;
+      .imageErrors {
+        margin-top: 5px;
+        color: red;
+      }
     }
   }
 }
@@ -88,12 +89,14 @@
 @media screen and (min-width: 576px) {
   .user-concert-page {
     .upload-image-container {
-      .button_container {
-        flex-direction: row;
-        justify-content: space-around;
+      .form-container {
+        .button_container {
+          flex-direction: row;
+          justify-content: space-around;
 
-        .select-image {
-          margin-bottom: 0;
+          .select-image {
+            margin-bottom: 0;
+          }
         }
       }
     }
@@ -132,8 +135,13 @@
         }
       }
 
-      .button_container {
+      .form-container {
         width: 100%;
+
+        .button_container {
+          width: 100%;
+          margin: 0;
+        }
       }
     }
   }

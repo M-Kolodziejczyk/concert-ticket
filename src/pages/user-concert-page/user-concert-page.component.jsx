@@ -100,20 +100,24 @@ const UserConcertPage = ({ match }) => {
                   <img src={imageUrl} alt="artist img" />
                 </div>
               )}
-              <div className="button_container">
-                <div className="select-image">
-                  <CustomInputButton
-                    onChange={handleChangeImage}
-                    label="Select image"
-                    name={concertId}
-                    id={concertId}
-                  />
+              <div className="form-container">
+                <div className="button_container">
+                  <div className="select-image">
+                    <CustomInputButton
+                      onChange={handleChangeImage}
+                      label="Select image"
+                      name={concertId}
+                      id={concertId}
+                    />
+                  </div>
+                  <CustomButton type="submit" name="submit">
+                    Upload Image
+                  </CustomButton>
                 </div>
-                <CustomButton type="submit" name="submit">
-                  Upload Image
-                </CustomButton>
+                {imageErrors && (
+                  <div className="imageErrors">{imageErrors}</div>
+                )}
               </div>
-              {imageErrors && <div className="imageErrors">{imageErrors}</div>}
             </form>
           </div>
           <UserConcertTicket concertId={concertId} />
