@@ -1,0 +1,134 @@
+.cart-payment-page {
+  max-width: 1320px;
+  margin: 40px 10px 100px;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .success {
+    margin-top: 150px;
+    font-size: 20px;
+  }
+
+  .timer {
+    margin: 0;
+    color: red;
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
+
+  .ticket-container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    .ticket {
+      display: flex;
+      flex-direction: column;
+      // justify-content: space-between;
+      border: 1px solid lightgrey;
+      border-radius: 5px;
+      padding: 5px;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .summary {
+    .total {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  }
+
+  .helper {
+    p {
+      margin: 5px 0;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .cart-payment-page {
+    .ticket-container {
+      .ticket {
+        .ticket-header {
+          display: flex;
+
+          .event {
+            flex: 3;
+          }
+
+          .type {
+            flex: 1;
+          }
+        }
+
+        .ticket-body {
+          display: flex;
+
+          .venue {
+            flex: 3;
+          }
+
+          .price {
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .cart-payment-page {
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cart-payment-page {
+    max-width: 1100px;
+
+    .ticket-container {
+      .ticket {
+        flex-direction: row;
+        align-items: center;
+        .ticket-header {
+          flex: 1;
+          .event {
+            flex: 1;
+          }
+
+          .type {
+            flex: 1;
+          }
+        }
+
+        .ticket-body {
+          flex: 1;
+          .venue {
+            flex: 1;
+          }
+
+          .price {
+            flex: 1;
+          }
+        }
+
+        .delete-ticket {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

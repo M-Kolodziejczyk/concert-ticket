@@ -13,7 +13,7 @@ import {
 import CheckoutForm from "../../components/checkout-form/checkout-form.component";
 import Spinner from "../../components/spinner/spinner.component";
 
-import "./cart-payment.styles.scss";
+import "./cart-payment-page.styles.scss";
 
 const promise = loadStripe(
   "pk_test_51HwVilIT5kXxcCpHU34AGuIjYmXG9dBwhuLmA2nMOEs9qkqVNNXRDHHUJF22ctEawAZFUVsV6t6i1sgMHuzFnygD00jzGSqetL"
@@ -96,22 +96,26 @@ const CartPaymentPage = (props) => {
               <div className="ticket-container">
                 {order?.tickets?.items.map((ticket) => (
                   <div className="ticket" key={ticket.id}>
-                    <p>
-                      <strong>Event: </strong>
-                      {ticket.ticket.eventName}
-                    </p>
-                    <p>
-                      <strong>Type: </strong>
-                      {ticket.ticket.type}
-                    </p>
-                    <p>
-                      <strong>Price: </strong>
-                      {ticket.ticket.price}
-                    </p>
-                    <p>
-                      <strong>Venue: </strong>
-                      {ticket.ticket.venue}
-                    </p>
+                    <div className="ticket-header">
+                      <p className="event">
+                        <strong>Event: </strong>
+                        {ticket.ticket.eventName}
+                      </p>
+                      <p className="type">
+                        <strong>Type: </strong>
+                        {ticket.ticket.type}
+                      </p>
+                    </div>
+                    <div className="ticket-body">
+                      <p className="venue">
+                        <strong>Venue: </strong>
+                        {ticket.ticket.venue}
+                      </p>
+                      <p className="price">
+                        <strong>Price: </strong>
+                        {ticket.ticket.price}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -128,6 +132,13 @@ const CartPaymentPage = (props) => {
                     />
                   </Elements>
                 )}
+              </div>
+              <div className="helper">
+                <h2>To process payment type:</h2>
+                <p>Credit card number: 4242 4242 4242 4242</p>
+                <p>MM/RR: future expiry date e.g. 01/22</p>
+                <p>CVC: any 3 numbers</p>
+                <p>Postal code: any 5 numbers</p>
               </div>
             </div>
           )}
