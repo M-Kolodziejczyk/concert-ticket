@@ -36,19 +36,24 @@ const BandPage = ({ location }) => {
 
   return (
     <div className="band-page">
-      <div className="image-container">
-        {band.imageUrl && <img src={band.imageUrl} alt="Band" />}
-      </div>
-      <div className="description-container">
-        <h1>{band.name}</h1>
-        <h2>Genre: {band.genre}</h2>
-        <p>
-          <strong>Description: </strong>Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Facere recusandae, doloribus facilis veniam
-          voluptatem nam itaque rerum magnam consequatur, blanditiis quam quae
-          minima iusto aspernatur necessitatibus, cumque odit repellat
-          molestias!
-        </p>
+      <div className="band-page-container">
+        <div className="image-container">
+          {band.imageUrl && <img src={band.imageUrl} alt="Band" />}
+        </div>
+        <div className="description-container">
+          <h1>{band.name}</h1>
+          <p>
+            <strong>Genre: </strong>
+            {band.genre}
+          </p>
+          <p>
+            <strong>Description: </strong>Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Facere recusandae, doloribus facilis veniam
+            voluptatem nam itaque rerum magnam consequatur, blanditiis quam quae
+            minima iusto aspernatur necessitatibus, cumque odit repellat
+            molestias!
+          </p>
+        </div>
       </div>
     </div>
   );
