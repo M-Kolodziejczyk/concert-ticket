@@ -64,10 +64,26 @@ const CartPage = () => {
           <h2>Tickets:</h2>
           {cart.map((item) => (
             <div key={item.id} className="cart">
-              <p>Event: {item.eventName}</p>
-              <p>Type: {item.type}</p>
-              <p>Price: {item.price}</p>
-              <p>Venue: {item.venue}</p>
+              <div className="cart-header">
+                <p className="event">
+                  <strong>Event: </strong>
+                  {item.eventName}
+                </p>
+                <p className="type">
+                  <strong>Type: </strong>
+                  {item.type}
+                </p>
+              </div>
+              <div className="cart-body">
+                <p className="venue">
+                  <strong>Venue: </strong>
+                  {item.venue}
+                </p>
+                <p className="price">
+                  <strong>Price: </strong>
+                  {item.price.toFixed(2)}$
+                </p>
+              </div>
               <button className="delete-ticket">
                 <Delete />
               </button>
@@ -82,12 +98,13 @@ const CartPage = () => {
             error={fullNameError}
           />
           <div className="summary">
-            <p>
+            <p className="total">
               <strong>Total Price: </strong>
               {total.toFixed(2)}$
             </p>
-            <CustomButon onClick={handlePurchase}>Purchase</CustomButon>
-            {/* <button onClick={handlePurchase}>Purchase</button> */}
+            <div className="purchase-btn">
+              <CustomButon onClick={handlePurchase}>Purchase</CustomButon>
+            </div>
           </div>
         </div>
       ) : (
