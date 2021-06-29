@@ -28,6 +28,7 @@ const bandReducer = (state = INITIAL_STATE, action) => {
           ...state.userBands,
           [action.payload.id]: action.payload,
         },
+        userListBands: [...state.userListBands, action.payload],
         successMessage: {
           createBand: "Band created successfully",
         },
@@ -209,7 +210,7 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         ...state,
         bandLoading: false,
         userBands: {
-          ...state.userBands.bands,
+          ...state.userBands,
           [action.payload.id]: action.payload,
         },
       };
