@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createArtistStart,
+  getUserArtistStart,
   updateArtistStart,
   uploadArtistImageStart,
   getUserArtistImageStart,
@@ -19,11 +21,11 @@ import Spinner from "../../components/spinner/spinner.component";
 
 import "./user-artist.styles.scss";
 
-const UserArtistPage = (props) => {
+const UserArtistPage = () => {
   const dispatch = useDispatch();
   const [isCreateMode, setIsCreateMode] = useState(true);
-  const getUserLoading = useSelector((state) => state.user.getUserLoading);
-  const userArtist = useSelector((state) => state.user.user.artist);
+  const artistLoading = useSelector((state) => state.artist.loading);
+  const userArtist = useSelector((state) => state.artist.userArtist);
   const artistID = useSelector((state) => state.user.user.artistID);
   const errorMessage = useSelector((state) => state.artist.errorMessage);
   const formLoading = useSelector((state) => state.artist.formLoading);
@@ -61,9 +63,19 @@ const UserArtistPage = (props) => {
     }
   }, [userArtist, dispatch, artistImageUrl]);
 
+  useEffect(() => {
+    if (
+      userArtist !== null &&
+      Object.keys(userArtist).length === 0 &&
+      artistID
+    ) {
+      dispatch(getUserArtistStart(artistID));
+    }
+  }, [dispatch, userArtist, artistID]);
+
   return (
     <div className="user-artist-page">
-      {(getUserLoading || formLoading) && <Spinner />}
+      {(artistLoading || formLoading) && <Spinner />}
       {userArtist && Object.keys(userArtist).length > 0 && (
         <div className="artist-details-container">
           <div className="image">
@@ -143,6 +155,19 @@ const UserArtistPage = (props) => {
             )}
           </form>
         </div>
+      </div>
+      <div className="band-container">
+        {userArtist?.bands?.items.length > 0 &&
+          userArtist?.bands?.items.map((item) => (
+            <Link
+              to={`/artists/${item.band.id}`}
+              className="band"
+              key={item.band.id}
+            >
+              <p>Name: {item.band.name}</p>
+              <p>Genre: {item.band.genre}</p>
+            </Link>
+          ))}
       </div>
     </div>
   );

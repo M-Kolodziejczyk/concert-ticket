@@ -91,12 +91,9 @@ export function* getUserArtist({ payload }) {
       },
     });
 
-    if (!artist.data.getArtist) {
-      yield put(getUserArtistSuccess({}));
-    } else {
-      yield put(getUserArtistSuccess(artist.data.getArtist));
-    }
+    yield put(getUserArtistSuccess(artist.data.getArtist));
   } catch (error) {
+    console.log("ERROR ", error);
     yield put(getUserArtistFailure(error));
   }
 }

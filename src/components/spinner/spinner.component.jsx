@@ -7,7 +7,7 @@ const Spinner = ({ bright }) => {
     <div className="spinner">
       <div className="d-flex justify-content-center">
         <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
+          <span className="visually-hidden"></span>
         </div>
       </div>
       <div className={`spinner__modal ${bright ? "bright" : ""}`}></div>

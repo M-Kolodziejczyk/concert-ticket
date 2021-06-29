@@ -520,12 +520,11 @@ export const getArtist = /* GraphQL */ `
       owner
       bands {
         items {
-          id
-          bandID
-          artistID
-          createdAt
-          updatedAt
-          owner
+          band {
+            id
+            name
+            genre
+          }
         }
         nextToken
       }

@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   artists: [],
   userArtist: {},
   formLoading: false,
+  loading: false,
   userArtistImageUrl: "",
   successMessage: {},
   errorMessage: {},
@@ -45,16 +46,23 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         artist: {},
         errorMessage: { getArtist: "Get artist failure" },
       };
+    case ArtistActionTypes.GET_USER_ARTIST_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case ArtistActionTypes.GET_USER_ARTIST_SUCCESS:
       return {
         ...state,
+        loading: false,
         userArtist: action.payload,
         errorMessage: {},
       };
     case ArtistActionTypes.GET_USER_ARTIST_FAILURE:
       return {
         ...state,
-        userArtist: {},
+        loading: false,
+        userArtist: null,
         errorMessage: { getUserArtist: "Get artist failure" },
       };
     case ArtistActionTypes.UPDATE_ARTIST_START:
@@ -67,8 +75,8 @@ const artistReducer = (state = INITIAL_STATE, action) => {
         ...state,
         formLoading: false,
         userArtist: action.payload,
-        errorMessage: {},
         successMessage: { updateArtist: "Artist upated successfully" },
+        errorMessage: {},
       };
     case ArtistActionTypes.UPDATE_ARTIST_FAILURE:
       return {
