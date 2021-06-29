@@ -9,27 +9,22 @@ import { ReactComponent as Person } from "../../../assets/singer.svg";
 import "./artist.styles.scss";
 
 const Artist = (props) => {
-  const { name, role, genre, identityId, index, id } = props;
+  const { name, role, genre, identityId, id } = props;
   const dispatch = useDispatch();
-  const artistImageUrl = useSelector(
-    (state) => state.artist.artists[index].url
-  );
+  const artistImgUrl = useSelector((state) => state.artist.artistsImgUrl?.[id]);
 
   useEffect(() => {
-    if (!artistImageUrl && identityId) {
-      dispatch(getArtistImageStart({ identityId, index }));
+    if (artistImgUrl !== null && !artistImgUrl && identityId) {
+      dispatch(getArtistImageStart({ identityId, id }));
     }
-  }, [dispatch, identityId, index, artistImageUrl]);
+  }, [dispatch, identityId, artistImgUrl, id]);
 
   return (
-    <Link
-      className="artists-page-artist"
-      to={{ pathname: `/artists/${id}`, artist: props, artistImageUrl }}
-    >
+    <Link className="artists-page-artist" to={`/artists/${id}`}>
       <div className="artists-page-artist-container">
         <div className="image">
-          {artistImageUrl ? (
-            <img src={artistImageUrl} alt="artist img" />
+          {artistImgUrl ? (
+            <img src={artistImgUrl} alt="artist img" />
           ) : (
             <Person className="altImg" />
           )}

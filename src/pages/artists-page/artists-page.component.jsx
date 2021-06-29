@@ -7,11 +7,11 @@ import Artist from "./components/artist.component";
 import "./artists-page.style.scss";
 
 const ArtistsPage = () => {
-  const artists = useSelector((state) => state.artist.artists);
+  const listArtists = useSelector((state) => state.artist.listArtists);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (artists.length === 0) {
+    if (listArtists !== null && listArtists.length === 0) {
       dispatch(listArtistsStart());
     }
     // eslint-disable-next-line
@@ -21,9 +21,9 @@ const ArtistsPage = () => {
     <div className="artists-page">
       <div className="artists-page-container">
         <h1>Artists</h1>
-        {artists &&
-          artists.map((artist, i) => (
-            <Artist key={artist.id} {...artist} index={i} />
+        {listArtists &&
+          listArtists.map((artist, i) => (
+            <Artist key={artist.id} {...artist} />
           ))}
       </div>
     </div>

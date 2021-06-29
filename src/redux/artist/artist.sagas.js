@@ -61,20 +61,10 @@ export function* getArtist({ payload }) {
         id: payload,
       },
     });
-    if (artist.data.getArtist.identityId) {
-      artist.data.getArtist.imageUrl = yield Storage.get("artist-image", {
-        level: "protected",
-        identityId: artist.data.getArtist.identityId,
-      });
-    }
 
-    if (!artist.data.getArtist) {
-      yield put(getArtistSuccess({}));
-    } else {
-      yield put(getArtistSuccess(artist.data.getArtist));
-    }
+    yield put(getArtistSuccess(artist.data.getArtist));
   } catch (error) {
-    yield put(getArtistFailure(error));
+    yield put(getArtistFailure({ error, id: payload }));
   }
 }
 
@@ -154,13 +144,14 @@ export function* onUploadArtistImageStart() {
   );
 }
 
-export function* getArtistImage({ payload: { identityId, index } }) {
+export function* getArtistImage({ payload: { identityId, id } }) {
   try {
     const url = yield Storage.get("artist-image", {
       level: "protected",
       identityId: identityId,
     });
-    yield put(getArtistImageSuccess({ index, url }));
+
+    yield put(getArtistImageSuccess({ url, id }));
   } catch (error) {
     yield put(getArtistImageFailure(error));
   }
