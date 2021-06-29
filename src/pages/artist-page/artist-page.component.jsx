@@ -33,21 +33,28 @@ const ArtistPage = (props) => {
 
   return (
     <div className="artist-page">
-      <div className="image">
-        {imageUrl ? (
-          <img src={imageUrl} alt="artist img" />
-        ) : (
-          <Person className="altImg" />
-        )}
-      </div>
-      <div className="artist__info">
-        <p>Name: {artist.name}</p>
-        <p>Role: {artist.role}</p>
-        <p>Genre: {artist.genre}</p>
-      </div>
-      <div className="artist__bands">
-        {artist.bands?.items.length > 0 &&
-          artist.bands.items.map((band, i) => <p>{band.bandID}</p>)}
+      <div className="artist-page-container">
+        <div className="image">
+          {imageUrl ? (
+            <img src={imageUrl} alt="artist img" />
+          ) : (
+            <Person className="altImg" />
+          )}
+        </div>
+        <div className="artist-info">
+          <p>
+            <strong>Name: </strong>
+            {artist.name}
+          </p>
+          <p>
+            <strong>Role: </strong>
+            {artist.role}
+          </p>
+          <p>
+            <strong>Genre: </strong>
+            {artist.genre}
+          </p>
+        </div>
       </div>
     </div>
   );

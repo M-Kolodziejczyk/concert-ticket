@@ -1,26 +1,77 @@
 .artist-page {
-  max-width: 1320px;
   margin: 40px auto 0;
-  border: 1px solid lightgrey;
   display: flex;
-  padding: 10px 20px;
-  border-radius: 5px;
-  .image {
-    width: 400px;
+  width: 100%;
 
-    img {
-      width: 100%;
+  .artist-page-container {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    width: 100%;
+    margin: 0 10px;
+
+    .image {
+      max-width: 300px;
+      max-height: 200px;
+      min-height: 150px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        object-fit: scale-down;
+      }
+
+      .altImg {
+        width: 100%;
+      }
     }
 
-    .altImg {
-      width: 100%;
+    .artist-info {
+      margin-top: 10px;
+      margin-left: 10px;
+      p {
+        margin: 5px 0;
+      }
     }
   }
+}
 
-  .artist__info {
-    margin-left: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+@media screen and (min-width: 576px) {
+  .artist-page {
+    max-width: 500px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .artist-page {
+    max-width: 100%;
+
+    .artist-page-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      .image {
+        margin: 0;
+        max-width: 400px;
+      }
+
+      .artist-info {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .artist-page {
+    max-width: 900px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .artist-page {
+    max-width: 1000px;
   }
 }
