@@ -233,6 +233,41 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
+export const ordersByUserByDate = /* GraphQL */ `
+  query OrdersByUserByDate(
+    $userName: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ordersByUserByDate(
+      userName: $userName
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        customer
+        userName
+        status
+        stripeIntentID
+        total
+        createdAt
+        tickets {
+          nextToken
+        }
+        updatedAt
+        userID
+      }
+      nextToken
+    }
+  }
+`;
 export const getConcert = /* GraphQL */ `
   query GetConcert($id: ID!) {
     getConcert(id: $id) {
