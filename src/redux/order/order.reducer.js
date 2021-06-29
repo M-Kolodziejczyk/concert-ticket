@@ -1,7 +1,6 @@
 import OrderActionTypes from "./order.types";
 
 const INITIAL_STATE = {
-  order: {},
   listUserOrders: [],
   userOrders: {},
   savedOrders: {},
@@ -55,13 +54,9 @@ const orderReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        order: action.payload,
-        savedOrders: {
-          ...state.savedOrders,
+        userOrders: {
+          ...state.userOrders,
           [action.payload.id]: action.payload,
-        },
-        successMessage: {
-          getOrder: "GET order Success",
         },
         errorMessage: {},
       };
@@ -69,7 +64,7 @@ const orderReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        order: {},
+        userOrders: null,
         successMessage: {},
         errorMessage: {
           getOrder: "GET order failure",
