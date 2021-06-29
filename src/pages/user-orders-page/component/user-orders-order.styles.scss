@@ -6,6 +6,10 @@
   padding: 0 10px;
   margin-bottom: 10px;
 
+  &:hover {
+    color: slategray;
+  }
+
   p {
     margin: 5px 0;
     flex: 1;

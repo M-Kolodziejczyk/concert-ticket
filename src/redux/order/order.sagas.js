@@ -12,6 +12,8 @@ import {
   getOrderFailure,
   processPaymentSuccess,
   processPaymentFailure,
+  listUserOrdersByDateSuccess,
+  listUserOrdersByDateFailure,
 } from "./order.actions";
 
 export function* createOrder({ payload: { userName, fullName, tickets } }) {
@@ -92,10 +94,34 @@ export function* onProcessPaymentStart() {
   yield takeLatest(OrderActionTypes.PROCESS_PAYMENT_START, processPayment);
 }
 
+export function* listUserOrdersByDateStart({ payload }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: queries.ordersByUserByDate,
+      variables: {
+        userName: payload,
+      },
+    });
+
+    yield put(listUserOrdersByDateSuccess(res.data.ordersByUserByDate));
+  } catch (error) {
+    yield put(listUserOrdersByDateFailure(error));
+  }
+}
+
+export function* onListUserOrdersByDate() {
+  yield takeLatest(
+    OrderActionTypes.LIST_USER_ORDERS_BY_DATE_START,
+    listUserOrdersByDateStart
+  );
+}
+
 export function* orderSagas() {
   yield all([
     call(onCreateOrderStart),
     call(onGetOrderStart),
     call(onProcessPaymentStart),
+    call(onListUserOrdersByDate),
   ]);
 }

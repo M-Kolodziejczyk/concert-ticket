@@ -2,7 +2,8 @@ import OrderActionTypes from "./order.types";
 
 const INITIAL_STATE = {
   order: {},
-  orders: [],
+  listUserOrders: [],
+  userOrders: {},
   savedOrders: {},
   isCreateOrderSuccess: false,
   successMessage: {},
@@ -114,6 +115,23 @@ const orderReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         createOrderResponse: {},
+      };
+    case OrderActionTypes.LIST_USER_ORDERS_BY_DATE_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case OrderActionTypes.LIST_USER_ORDERS_BY_DATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        listUserOrders: action.payload,
+      };
+    case OrderActionTypes.LIST_USER_ORDERS_BY_DATE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        listUserOrders: null,
       };
     default:
       return state;
