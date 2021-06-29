@@ -7,68 +7,9 @@ export const getUser = /* GraphQL */ `
       email
       name
       artistID
-      ordersByDate {
-        items {
-          id
-          customer
-          userName
-          status
-          stripeIntentID
-          total
-          createdAt
-          updatedAt
-          userID
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       owner
-      concerts {
-        items {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      bands {
-        items {
-          id
-          userName
-          identityId
-          name
-          genre
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      artist {
-        id
-        identityId
-        name
-        genre
-        role
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-      }
     }
   }
 `;
