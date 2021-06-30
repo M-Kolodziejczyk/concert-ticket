@@ -11,6 +11,10 @@ const validate = (values) => {
 
   if (!values.description) {
     errors.description = "Description is required";
+  } else if (values.description.split(" ").length > 200) {
+    errors.description = `Maximum 200 words! You have ${
+      values.description.split(" ").length
+    } words now.`;
   }
 
   return errors;

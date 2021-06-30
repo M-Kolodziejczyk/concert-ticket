@@ -19,6 +19,7 @@ import SendInvitation from "../../components/send-invitation/send-invitation.com
 import CustomInputButton from "../../components/custom-input-button/custom-input-button.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
+import FormTextarea from "../../components/form-textarea/form-textarea.component";
 
 import "./user-band-page.styles.scss";
 
@@ -37,7 +38,7 @@ const UserBandPage = ({ match }) => {
     useFileForm(bandId, ["image/jpeg"], uploadBandImageStart);
 
   const { handleChange, handleSubmit, values, errors } = useForm(
-    { id: bandId, name: "", genre: "" },
+    { id: bandId, name: "", genre: "", description: "" },
     validateEditBand,
     updateUserBandStart
   );
@@ -66,11 +67,23 @@ const UserBandPage = ({ match }) => {
               </div>
             )}
             <div className="details">
-              <p>Name: {userBand.name}</p>
-              <p>Genre: {userBand.genre}</p>
               <p>
-                Created: {format(new Date(userBand.createdAt), "dd MMM y")}{" "}
+                <strong>Name: </strong>
+                {userBand.name}
               </p>
+              <p>
+                <strong>Genre: </strong>
+                {userBand.genre}
+              </p>
+              <p>
+                <strong>Created: </strong>
+                {format(new Date(userBand.createdAt), "dd MMM y")}{" "}
+              </p>
+              <p className="description">
+                <strong>Description: </strong>
+                {userBand.description}
+              </p>
+
               <div className="btn-wrapper">
                 <CustomButton
                   type="button"
@@ -186,6 +199,15 @@ const UserBandPage = ({ match }) => {
                       value={values.genre}
                       error={errors.genre}
                     />
+                    <FormTextarea
+                      name="description"
+                      type="text"
+                      label="Description"
+                      handleChange={handleChange}
+                      value={values.description}
+                      error={errors.description}
+                    />
+
                     <div className="form__button">
                       <CustomButton type="submit" name="submit">
                         Edit
