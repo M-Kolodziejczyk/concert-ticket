@@ -13,6 +13,10 @@ const validate = (values) => {
     errors.role = "Role is required!";
   }
 
+  if (!values.description) {
+    errors.description = "Description is required!";
+  }
+
   return errors;
 };
 
