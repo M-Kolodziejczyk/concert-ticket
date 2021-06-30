@@ -287,24 +287,36 @@ export const getConcert = /* GraphQL */ `
       owner
       bands {
         items {
-          id
-          concertID
-          bandID
-          createdAt
-          owner
+          band {
+            id
+            name
+            genre
+          }
         }
-        nextToken
       }
       artists {
         items {
-          id
-          concertID
-          artistID
-          createdAt
-          updatedAt
-          owner
+          artist {
+            id
+            name
+            genre
+            role
+          }
         }
-        nextToken
+      }
+      tickets {
+        items {
+          id
+          eventName
+          description
+          price
+          startDate
+          endDate
+          date
+          venue
+          type
+          quantity
+        }
       }
     }
   }
@@ -382,15 +394,6 @@ export const listConcerts = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
       }
       nextToken
     }
