@@ -1,59 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { updateBand, getBandStart } from "../../redux/band/band.actions";
+import { getBandImageStart, getBandStart } from "../../redux/band/band.actions";
+import { ReactComponent as BandImg } from "../../assets/band.svg";
+
+import Spinner from "../../components/spinner/spinner.component";
 
 import "./band-page.styles.scss";
 
-const BandPage = ({ location }) => {
+const BandPage = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
-  const [band, setBand] = useState(location.band || {});
-  const bandSelector = useSelector((state) => state.band.band);
+  const loading = useSelector((state) => state.band.loading);
+  const band = useSelector((state) => state.band.bands?.[id]);
+  const bandsImage = useSelector((state) => state.band.bandsImage);
 
   useEffect(() => {
-    if (
-      (Object.keys(bandSelector).length === 0 &&
-        Object.keys(band).length > 0) ||
-      (Object.keys(bandSelector).length > 0 &&
-        Object.keys(band).length > 0 &&
-        bandSelector.id !== id)
-    ) {
-      dispatch(updateBand(band));
-    } else if (
-      Object.keys(bandSelector).length > 0 &&
-      Object.keys(band).length === 0
-    ) {
-      setBand(bandSelector);
-    } else if (
-      Object.keys(bandSelector).length === 0 &&
-      Object.keys(band).length === 0
-    ) {
+    if (band !== null && !band) {
       dispatch(getBandStart(id));
     }
-  }, [bandSelector, id, band, dispatch]);
+  }, [band, dispatch, id]);
+
+  useEffect(() => {
+    if (!bandsImage[id] && band?.keyImage) {
+      dispatch(getBandImageStart(id));
+    }
+  }, [dispatch, bandsImage, band, id]);
 
   return (
     <div className="band-page">
+      {loading && <Spinner />}
       <div className="band-page-container">
         <div className="image-container">
-          {band.imageUrl && <img src={band.imageUrl} alt="Band" />}
+          {bandsImage[id] && !loading && (
+            <img src={bandsImage[id]} alt="Band" />
+          )}
+          {!bandsImage[id] && !loading && <BandImg />}
         </div>
-        <div className="description-container">
-          <h1>{band.name}</h1>
-          <p>
-            <strong>Genre: </strong>
-            {band.genre}
-          </p>
-          <p>
-            <strong>Description: </strong>Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Facere recusandae, doloribus facilis veniam
-            voluptatem nam itaque rerum magnam consequatur, blanditiis quam quae
-            minima iusto aspernatur necessitatibus, cumque odit repellat
-            molestias!
-          </p>
-        </div>
+
+        {band && (
+          <div className="description-container">
+            <h1>{band.name}</h1>
+            <p>
+              <strong>Genre: </strong>
+              {band.genre}
+            </p>
+            <p className="description">
+              <strong>Description: </strong>
+              {band.description}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

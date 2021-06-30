@@ -26,6 +26,16 @@
         object-fit: scale-down;
       }
     }
+
+    .details-container {
+      .description {
+        text-align: justify;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+      }
+    }
   }
 }
 
@@ -38,7 +48,8 @@
         flex: 1;
       }
 
-      .description {
+      .details-container {
+        padding-right: 10px;
         flex: 1;
         margin-left: 10px;
       }

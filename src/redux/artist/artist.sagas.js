@@ -83,7 +83,6 @@ export function* getUserArtist({ payload }) {
 
     yield put(getUserArtistSuccess(artist.data.getArtist));
   } catch (error) {
-    console.log("ERROR ", error);
     yield put(getUserArtistFailure(error));
   }
 }

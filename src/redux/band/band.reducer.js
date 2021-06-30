@@ -1,7 +1,8 @@
 import BandActionTypes from "./band.types";
 
 const INITIAL_STATE = {
-  bands: [],
+  listBands: [],
+  bands: {},
   userListBands: [],
   userBands: {},
   band: {},
@@ -96,9 +97,15 @@ const bandReducer = (state = INITIAL_STATE, action) => {
           uploadBandImage: "Failed to upload Image",
         },
       };
+    case BandActionTypes.GET_BAND_IMAGE_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case BandActionTypes.GET_BAND_IMAGE_SUCCESS:
       return {
         ...state,
+        loading: false,
         bandsImage: {
           ...state.bandsImage,
           [action.payload.id]: action.payload.url,
@@ -107,14 +114,21 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.GET_BAND_IMAGE_FAILURE:
       return {
         ...state,
+        loading: false,
         errorMessage: {
           getBandImage: "Get band image failure",
         },
       };
+    case BandActionTypes.LIST_BANDS_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case BandActionTypes.LIST_BANDS_SUCCESS:
       return {
         ...state,
-        bands: action.payload,
+        loading: false,
+        listBands: action.payload,
         successMessage: {
           listBands: "List bands success",
         },
@@ -123,7 +137,8 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.LIST_BANDS_FAILURE:
       return {
         ...state,
-        bands: [],
+        loading: false,
+        listBands: null,
         successMessage: {},
         errorMessage: {
           listBands: "List bands failure",
@@ -134,10 +149,19 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         ...state,
         band: action.payload,
       };
+    case BandActionTypes.GET_BAND_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case BandActionTypes.GET_BAND_SUCCESS:
       return {
         ...state,
-        band: action.payload,
+        loading: false,
+        bands: {
+          ...state.bands,
+          [action.payload.id]: action.payload,
+        },
         successMessage: {
           getBand: "Get band success",
         },
@@ -146,6 +170,11 @@ const bandReducer = (state = INITIAL_STATE, action) => {
     case BandActionTypes.GET_BAND_FAILURE:
       return {
         ...state,
+        loading: false,
+        bands: {
+          ...state.bands,
+          [action.payload.id]: null,
+        },
         successMessage: {},
         errorMessage: {
           getBand: "Get band failure",

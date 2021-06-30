@@ -157,16 +157,9 @@ export function* getBandStart({ payload }) {
       },
     });
 
-    // get bandImage url
-    if (band.data.getBand.keyImage) {
-      band.data.getBand.imageUrl = yield Storage.get(
-        band.data.getBand.keyImage,
-        { level: "public" }
-      );
-    }
     yield put(getBandSuccess(band.data.getBand));
   } catch (error) {
-    yield put(getBandFailure(error));
+    yield put(getBandFailure({ id: payload, error }));
   }
 }
 

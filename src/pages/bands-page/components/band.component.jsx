@@ -8,7 +8,7 @@ import { ReactComponent as BandImg } from "../../../assets/band.svg";
 import "./band.styles.scss";
 
 const Band = (props) => {
-  const { name, genre, id, keyImage } = props;
+  const { name, genre, id, keyImage, description } = props;
   const dispatch = useDispatch();
   const bandsImage = useSelector((state) => state.band.bandsImage);
 
@@ -21,14 +21,7 @@ const Band = (props) => {
   }, []);
 
   return (
-    <Link
-      className="bands-page-band"
-      to={{
-        pathname: `/bands/${id}`,
-        band: { ...props, imageUrl: bandsImage[id] },
-        bandImageUrl: bandsImage[id],
-      }}
-    >
+    <Link className="bands-page-band" to={`/bands/${id}`}>
       <div className="bands-page-band-container">
         <div className="image">
           {bandsImage[id] ? (
@@ -37,7 +30,7 @@ const Band = (props) => {
             <BandImg />
           )}
         </div>
-        <div className="description">
+        <div className="details-container">
           <p>
             <strong>Name: </strong>
             {name}
@@ -46,12 +39,9 @@ const Band = (props) => {
             <strong>Genre: </strong>
             {genre}
           </p>
-          <p>
+          <p className="description">
             <strong>Description: </strong>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim sequi
-            libero expedita quos, sapiente dolorem odio ipsam nemo praesentium
-            corporis tempora fugiat veritatis est ad officia optio, accusamus
-            officiis cupiditate.
+            {description}
           </p>
         </div>
       </div>
