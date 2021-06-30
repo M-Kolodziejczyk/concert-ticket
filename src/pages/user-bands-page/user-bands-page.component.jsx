@@ -12,6 +12,7 @@ import useForm from "../../hooks/useForm.js";
 import UserBandsBand from "./components/user-bands-band.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
+import FormTextarea from "../../components/form-textarea/form-textarea.component";
 import Spinner from "../../components/spinner/spinner.component";
 
 import "./user-bands-page.styles.scss";
@@ -28,7 +29,7 @@ const UserBandsPage = () => {
   const errorMessage = useSelector((state) => state.band.errorMessage);
 
   const { handleChange, handleSubmit, values, errors } = useForm(
-    { name: "", genre: "" },
+    { name: "", genre: "", description: "" },
     validate,
     createBandStart
   );
@@ -98,6 +99,14 @@ const UserBandsPage = () => {
                   handleChange={handleChange}
                   value={values.genre}
                   error={errors.genre}
+                />
+                <FormTextarea
+                  name="description"
+                  type="text"
+                  label="Description"
+                  handleChange={handleChange}
+                  value={values.description}
+                  error={errors.description}
                 />
                 <div className="form__button">
                   <CustomButton type="submit" name="submit">
