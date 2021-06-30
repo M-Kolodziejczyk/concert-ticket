@@ -4,54 +4,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 
 import {
-  updateConcert,
   getConcertStart,
+  getConcertImageStart,
 } from "../../redux/concert/concert.actions";
 import { addTicketToCart } from "../../redux/cart/cart.actions";
-import { getTicketsByConcertIdStart } from "../../redux/ticket/ticket.actions";
 
 import { ReactComponent as Cart } from "../../assets/shopping-cart.svg";
+import { ReactComponent as Festival } from "../../assets/festival.svg";
+import Spinner from "../../components/spinner/spinner.component";
 
 import "./concert-page.styles.scss";
 
-const ConcertPage = ({ location }) => {
+const ConcertPage = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
-  const [concert, setConcert] = useState(location.concert || {});
   const [error, setError] = useState({});
-  const concertSelector = useSelector((state) => state.concert.concert);
   const cart = useSelector((state) => state.cart.cart);
+  const concert = useSelector((state) => state.concert.concerts?.[id]);
   const concertTickets = useSelector(
-    (state) => state.ticket.concertTickets[id]
+    (state) => state.concert.concerts?.[id]?.tickets?.items
   );
+  const concertImage = useSelector(
+    (state) => state.concert.concertsImage?.[id]
+  );
+  const loading = useSelector((state) => state.concert.loading);
+  const loadingImg = useSelector((state) => state.concert.loadingImg);
 
   useEffect(() => {
-    if (
-      (Object.keys(concertSelector).length === 0 &&
-        Object.keys(concert).length > 0) ||
-      (Object.keys(concertSelector).length > 0 &&
-        Object.keys(concert).length > 0 &&
-        concertSelector.id !== id)
-    ) {
-      dispatch(updateConcert(concert));
-    } else if (
-      Object.keys(concertSelector).length > 0 &&
-      Object.keys(concert).length === 0
-    ) {
-      setConcert(concertSelector);
-    } else if (
-      Object.keys(concertSelector).length === 0 &&
-      Object.keys(concert).length === 0
-    ) {
+    if (concert !== null && !concert) {
       dispatch(getConcertStart(id));
     }
-  }, [concertSelector, concert, id, dispatch]);
+  }, [concert, dispatch, id]);
 
   useEffect(() => {
-    if (!concertTickets) {
-      dispatch(getTicketsByConcertIdStart(id));
+    if (concertImage !== null && !concertImage && concert?.keyImage) {
+      dispatch(getConcertImageStart(id));
     }
-  }, [dispatch, concertTickets, id]);
+  }, [concertImage, concert, dispatch, id]);
 
   const addToCart = (ticket) => {
     let isInCart = cart.find((item) => item.id === ticket.id);
@@ -68,33 +57,34 @@ const ConcertPage = ({ location }) => {
 
   return (
     <div className="concert-page">
+      {loading && <Spinner />}
       <div className="concert-page-container">
         <div className="image-container">
-          {concert.imageUrl && <img src={concert.imageUrl} alt="Band" />}
+          {concertImage && <img src={concertImage} alt="concert" />}
+          {!concertImage && !loading && !loadingImg && <Festival />}
         </div>
-        <div className="description-container">
-          <h1>{concert.name}</h1>
-          <p>
-            <strong>Genres: </strong>
-            {concert.genres}
-          </p>
-          <p>
-            <strong>Venue: </strong>
-            {concert.venue}
-          </p>
-          <p>
-            <strong>Date: </strong>
-            {concert.date &&
-              format(new Date(concert.date), "dd MMMM yyyy hh:mm a")}
-          </p>
-          <p>
-            <strong>Description: </strong>Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit. Tenetur eaque reiciendis fugiat.
-            Perferendis, similique. Deleniti animi nam praesentium est quam fuga
-            consequatur? Deleniti laboriosam rerum, alias aliquam provident
-            perferendis quo.
-          </p>
-        </div>
+        {concert && (
+          <div className="description-container">
+            <h1>{concert.name}</h1>
+            <p>
+              <strong>Genres: </strong>
+              {concert.genres}
+            </p>
+            <p>
+              <strong>Venue: </strong>
+              {concert.venue}
+            </p>
+            <p>
+              <strong>Date: </strong>
+              {concert.date &&
+                format(new Date(concert.date), "dd MMMM yyyy hh:mm a")}
+            </p>
+            <p>
+              <strong>Description: </strong>
+              {concert.description}
+            </p>
+          </div>
+        )}
       </div>
       <div className="tickets-container">
         <h3>Tickets:</h3>

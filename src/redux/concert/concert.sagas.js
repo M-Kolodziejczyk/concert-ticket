@@ -163,15 +163,9 @@ export function* getConcertStart({ payload }) {
       },
     });
 
-    if (concert.data.getConcert.keyImage) {
-      concert.data.getConcert.imageUrl = yield Storage.get(
-        concert.data.getConcert.keyImage,
-        { level: "public" }
-      );
-    }
     yield put(getConcertSuccess(concert.data.getConcert));
   } catch (error) {
-    yield put(getConcertFailure(error));
+    yield put(getConcertFailure({ id: payload, error }));
   }
 }
 

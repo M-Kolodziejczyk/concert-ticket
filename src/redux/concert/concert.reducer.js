@@ -1,7 +1,8 @@
 import ConcertActionTypes from "./concert.types";
 
 const INITIAL_STATE = {
-  concerts: [],
+  listConcerts: [],
+  concerts: {},
   concert: {},
   concertsImage: {},
   successMessage: {},
@@ -10,6 +11,7 @@ const INITIAL_STATE = {
   userListConcerts: [],
   isUserConcertsEmpty: false,
   loading: false,
+  loadingImg: false,
   loadingForm: false,
   isFormSuccess: false,
 };
@@ -67,18 +69,25 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           uploadImage: "Upload image failure",
         },
       };
+    case ConcertActionTypes.GET_CONCERT_IMAGE_START:
+      return {
+        ...state,
+        loadingImg: true,
+      };
     case ConcertActionTypes.GET_CONCERT_IMAGE_SUCCESS:
       return {
         ...state,
-        errorMessage: {},
+        loadingImg: false,
         concertsImage: {
           ...state.concertsImage,
           [action.payload.id]: action.payload.url,
         },
+        errorMessage: {},
       };
     case ConcertActionTypes.GET_CONCERT_IMAGE_FAILURE:
       return {
         ...state,
+        loadingImg: false,
         errorMessage: {
           getConcertImage: "Get concert image failure",
         },
@@ -110,33 +119,52 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           createInvitation: "Failed to sent invitation",
         },
       };
+    case ConcertActionTypes.LIST_CONCERTS_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case ConcertActionTypes.LIST_CONCERTS_SUCCESS:
       return {
         ...state,
-        concerts: action.payload,
+        loading: false,
+        listConcerts: action.payload,
         successMessage: { listConcerts: "List concerts success" },
         errorMessage: {},
       };
     case ConcertActionTypes.LIST_CONCERTS_FAILURE:
       return {
         ...state,
-        concerts: [],
+        loading: false,
+        listConcerts: null,
         successMessage: {},
         errorMessage: {
           listConcerts: "List concerts failure",
         },
       };
+    case ConcertActionTypes.GET_CONCERT_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case ConcertActionTypes.GET_CONCERT_SUCCESS:
       return {
         ...state,
-        concert: action.payload,
+        loading: false,
+        concerts: {
+          ...state.concerts,
+          [action.payload.id]: action.payload,
+        },
         successMessage: { listConcerts: "Get concert success" },
         errorMessage: {},
       };
     case ConcertActionTypes.GET_CONCERT_FAILURE:
       return {
         ...state,
-        concert: {},
+        loading: false,
+        concerts: {
+          [action.payload.id]: null,
+        },
         successMessage: {},
         errorMessage: {
           listConcerts: "Get concert failure",
