@@ -55,6 +55,7 @@ type Band
   identityId: ID
   name: String!
   genre: String!
+  description: String
   keyImage: String
   invitations: AWSJSON
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
@@ -73,6 +74,7 @@ type Artist
   id: ID!
   identityId: String
   name: String!
+  description: String
   genre: [String!]
   role: [String!]
   bands: [ArtistBandJoin] @connection(keyName: "byArtist", fields: ["id"])

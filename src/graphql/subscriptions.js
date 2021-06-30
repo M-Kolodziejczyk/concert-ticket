@@ -80,6 +80,7 @@ export const onCreateUser = /* GraphQL */ `
           identityId
           name
           genre
+          description
           keyImage
           invitations
           createdAt
@@ -92,6 +93,7 @@ export const onCreateUser = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -166,6 +168,7 @@ export const onUpdateUser = /* GraphQL */ `
           identityId
           name
           genre
+          description
           keyImage
           invitations
           createdAt
@@ -178,6 +181,7 @@ export const onUpdateUser = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -252,6 +256,7 @@ export const onDeleteUser = /* GraphQL */ `
           identityId
           name
           genre
+          description
           keyImage
           invitations
           createdAt
@@ -264,6 +269,7 @@ export const onDeleteUser = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -734,6 +740,7 @@ export const onCreateBand = /* GraphQL */ `
       identityId
       name
       genre
+      description
       keyImage
       invitations
       createdAt
@@ -761,6 +768,7 @@ export const onUpdateBand = /* GraphQL */ `
       identityId
       name
       genre
+      description
       keyImage
       invitations
       createdAt
@@ -788,6 +796,7 @@ export const onDeleteBand = /* GraphQL */ `
       identityId
       name
       genre
+      description
       keyImage
       invitations
       createdAt
@@ -813,6 +822,7 @@ export const onCreateArtist = /* GraphQL */ `
       id
       identityId
       name
+      description
       genre
       role
       createdAt
@@ -838,6 +848,7 @@ export const onUpdateArtist = /* GraphQL */ `
       id
       identityId
       name
+      description
       genre
       role
       createdAt
@@ -863,6 +874,7 @@ export const onDeleteArtist = /* GraphQL */ `
       id
       identityId
       name
+      description
       genre
       role
       createdAt
@@ -896,6 +908,7 @@ export const onCreateArtistBandJoin = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -909,6 +922,7 @@ export const onCreateArtistBandJoin = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -936,6 +950,7 @@ export const onUpdateArtistBandJoin = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -949,6 +964,7 @@ export const onUpdateArtistBandJoin = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -976,6 +992,7 @@ export const onDeleteArtistBandJoin = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -989,6 +1006,7 @@ export const onDeleteArtistBandJoin = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -1040,6 +1058,7 @@ export const onCreateConcertBandJoin = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -1091,6 +1110,7 @@ export const onUpdateConcertBandJoin = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -1142,6 +1162,7 @@ export const onDeleteConcertBandJoin = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -1191,6 +1212,7 @@ export const onCreateConcertArtistJoin = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -1240,6 +1262,7 @@ export const onUpdateConcertArtistJoin = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -1289,6 +1312,7 @@ export const onDeleteConcertArtistJoin = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt

@@ -63,6 +63,7 @@ export const getUser = /* GraphQL */ `
           identityId
           name
           genre
+          description
           keyImage
           invitations
           createdAt
@@ -75,6 +76,7 @@ export const getUser = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
@@ -125,6 +127,7 @@ export const listUsers = /* GraphQL */ `
           id
           identityId
           name
+          description
           genre
           role
           createdAt
@@ -480,6 +483,7 @@ export const getBand = /* GraphQL */ `
       identityId
       name
       genre
+      description
       keyImage
       invitations
       createdAt
@@ -512,6 +516,7 @@ export const listBands = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -546,6 +551,7 @@ export const bandsByUser = /* GraphQL */ `
         identityId
         name
         genre
+        description
         keyImage
         invitations
         createdAt
@@ -565,6 +571,7 @@ export const getArtist = /* GraphQL */ `
       id
       identityId
       name
+      description
       genre
       role
       createdAt
@@ -595,6 +602,7 @@ export const listArtists = /* GraphQL */ `
         id
         identityId
         name
+        description
         genre
         role
         createdAt
