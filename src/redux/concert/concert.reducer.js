@@ -2,6 +2,7 @@ import ConcertActionTypes from "./concert.types";
 
 const INITIAL_STATE = {
   listConcerts: [],
+  listConcertsLimit: [],
   concerts: {},
   concert: {},
   concertsImage: {},
@@ -275,6 +276,29 @@ const concertReducer = (state = INITIAL_STATE, action) => {
         successMessage: {},
         errorMessage: {
           createTicket: "ticket create failure",
+        },
+      };
+    case ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        listConcertsLimit: action.payload,
+        successMessage: { listConcertsLimit: "List concerts success" },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        listConcertsLimit: null,
+        successMessage: {},
+        errorMessage: {
+          listConcertsLimit: "List concerts failure",
         },
       };
     default:

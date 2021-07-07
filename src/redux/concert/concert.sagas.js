@@ -26,6 +26,8 @@ import {
   updateUserConcertFailure,
   createConcertTicketSuccess,
   createConcertTicketFailure,
+  listConcertsWithLimitSuccess,
+  listConcertsWithLimitFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -258,6 +260,28 @@ export function* onCreatConcertTicketStart() {
   );
 }
 
+export function* listConcertsWithLimit({ payload }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "API_KEY",
+      query: queries.listConcerts,
+      variables: {
+        limit: payload,
+      },
+    });
+    yield put(listConcertsWithLimitSuccess(res.data.listConcerts.items));
+  } catch (error) {
+    yield put(listConcertsWithLimitFailure(error));
+  }
+}
+
+export function* onListConcertsWithLimitStart() {
+  yield takeLatest(
+    ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_START,
+    listConcertsWithLimit
+  );
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
@@ -270,5 +294,6 @@ export function* concertSagas() {
     call(onGetUserConcertStart),
     call(onUpdateUserConcertStart),
     call(onCreatConcertTicketStart),
+    call(onListConcertsWithLimitStart),
   ]);
 }
