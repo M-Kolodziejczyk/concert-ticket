@@ -1,8 +1,14 @@
 .home-page-concert {
-  width: calc(50% - 10px);
+  // width: calc(50% - 10px);
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+
   .concert-container {
+    margin: 0 auto;
+
     .image {
-      width: 400px;
+      max-width: 400px;
 
       img {
         width: 100%;
@@ -12,6 +18,33 @@
       svg {
         width: 100%;
         height: auto;
+      }
+    }
+
+    .description {
+      .venue {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .home-page-concert {
+    width: calc(50% - 10px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .home-page-concert {
+    .concert-container {
+      .image {
+        max-width: 550px;
+        height: 310px;
+        img {
+          height: 100%;
+          object-fit: cover;
+        }
       }
     }
   }

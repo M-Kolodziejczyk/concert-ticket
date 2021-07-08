@@ -32,7 +32,7 @@ const HomePageConcert = (props) => {
           {!concertImage && !loading && !loadingImg && <Festival />}
         </div>
         <div className="description">
-          <p>
+          <p className="venue">
             {venue} - {format(new Date(date), "dd MMMM yyyy")}
           </p>
           <p className="event-name">

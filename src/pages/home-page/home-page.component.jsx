@@ -13,12 +13,17 @@ const HomePage = () => {
     (state) => state.concert.listConcertsLimit
   );
   const loading = useSelector((state) => state.concert.loading);
+  const successMessage = useSelector((state) => state.concert.successMessage);
 
   useEffect(() => {
-    if (listConcertsLimit.length === 0 && listConcertsLimit !== null) {
+    if (
+      listConcertsLimit.length === 0 &&
+      listConcertsLimit !== null &&
+      !successMessage.listConcertsLimit
+    ) {
       dispatch(listConcertsWithLimitStart(4));
     }
-  }, [listConcertsLimit, dispatch]);
+  }, [listConcertsLimit, dispatch, successMessage]);
 
   return (
     <div className="home-page">
@@ -32,10 +37,7 @@ const HomePage = () => {
           consectetur quo enim aliquid. Lorem ipsum dolor, sit amet consectetur
           adipisicing elit. Consequatur tenetur voluptates temporibus culpa
           nostrum sunt rem iste, sed maiores, id cupiditate laudantium numquam
-          ad, assumenda nulla repellendus quam eos a! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Necessitatibus, quidem beatae! Nisi
-          repellat blanditiis rerum alias odio ut tenetur ad maxime earum
-          molestiae laudantium, laborum temporibus magni quas, optio dolor.
+          ad.
         </p>
       </div>
 

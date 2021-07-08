@@ -1,5 +1,4 @@
 .home-page {
-  // max-width: 1320px;
   margin: 0 auto;
 
   .img-container {
@@ -20,25 +19,61 @@
 
     .description {
       color: white;
-      width: 50%;
+      width: 100%;
       text-align: center;
       margin: 20px auto;
     }
   }
 
   .concerts-container {
-    max-width: 1320px;
     margin: 0 auto;
 
     h2 {
-      margin: 20px auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 5px;
     }
 
     .wrapper {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
       flex-wrap: wrap;
+      margin: 0 5px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .home-page {
+    .img-container {
+      .description {
+        width: 60%;
+      }
+    }
+    .concerts-container {
+      h2 {
+        margin-left: 20px;
+      }
+
+      .wrapper {
+        flex-direction: row;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .home-page {
+    .img-container {
+      .description {
+        width: 60%;
+      }
+    }
+    .concerts-container {
+      max-width: 1200px;
+      .wrapper {
+        flex-direction: row;
+      }
     }
   }
 }
