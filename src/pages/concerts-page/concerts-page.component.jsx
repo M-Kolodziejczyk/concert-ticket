@@ -11,12 +11,17 @@ const ConcertsPage = () => {
   const dispatch = useDispatch();
   const listConcerts = useSelector((state) => state.concert.listConcerts);
   const loading = useSelector((state) => state.concert.loading);
+  const successMessage = useSelector((state) => state.concert.successMessage);
 
   useEffect(() => {
-    if (listConcerts.length === 0) {
+    if (
+      listConcerts !== null &&
+      listConcerts.length === 0 &&
+      !successMessage.listConcerts
+    ) {
       dispatch(listConcertsStart());
     }
-  }, [listConcerts, dispatch]);
+  }, [listConcerts, dispatch, successMessage]);
 
   return (
     <div className="concerts-page">
