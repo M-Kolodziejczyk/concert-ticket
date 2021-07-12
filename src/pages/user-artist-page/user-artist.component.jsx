@@ -16,6 +16,7 @@ import useFileForm from "../../hooks/useFileForm";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import CustomInputButton from "../../components/custom-input-button/custom-input-button.component";
 import FormInput from "../../components/form-input/form-input.component";
+import FormTextarea from "../../components/form-textarea/form-textarea.component";
 import ErrorMessage from "../../components/error-message/error-message.component";
 import Spinner from "../../components/spinner/spinner.component";
 
@@ -39,12 +40,14 @@ const UserArtistPage = () => {
           name: "",
           genre: "",
           role: "",
+          description: "",
         }
       : {
           id: artistID,
           name: "",
           genre: "",
           role: "",
+          description: "",
         },
     validate,
     isCreateMode ? createArtistStart : updateArtistStart
@@ -93,6 +96,10 @@ const UserArtistPage = () => {
             <div className="group">
               <p className="name">Role:</p>
               <p>{userArtist.role}</p>
+            </div>
+            <div className="group">
+              <p className="name">Description:</p>
+              <p className="description">{userArtist.description}</p>
             </div>
           </div>
         </div>
@@ -145,6 +152,15 @@ const UserArtistPage = () => {
               value={values.role}
               error={errors.role}
             />
+            <FormTextarea
+              name="description"
+              type="text"
+              label="Description"
+              handleChange={handleChange}
+              value={values.description}
+              error={errors.description}
+            />
+
             <div className="form__button">
               <CustomButton type="submit" name="submit">
                 {isCreateMode ? "Create" : "Update"}
