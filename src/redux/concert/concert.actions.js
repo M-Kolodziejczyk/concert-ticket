@@ -170,3 +170,18 @@ export const listConcertsWithLimitFailure = (error) => ({
   type: ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_FAILURE,
   payload: error,
 });
+
+export const addBandToConcertStart = (data) => ({
+  type: ConcertActionTypes.ADD_BAND_TO_CONCERT_START,
+  payload: data,
+});
+
+export const addBandToConcertSuccess = (res) => ({
+  type: ConcertActionTypes.ADD_BAND_TO_CONCERT_SUCCESS,
+  payload: res,
+});
+
+export const addBandToConcertFailure = (error) => ({
+  type: ConcertActionTypes.ADD_BAND_TO_CONCERT_FAILURE,
+  payload: error,
+});

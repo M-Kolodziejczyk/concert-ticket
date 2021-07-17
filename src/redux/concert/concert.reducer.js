@@ -301,6 +301,41 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           listConcertsLimit: "List concerts failure",
         },
       };
+    case ConcertActionTypes.ADD_BAND_TO_CONCERT_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
+    case ConcertActionTypes.ADD_BAND_TO_CONCERT_SUCCESS:
+      return {
+        ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.concertID]: {
+            ...state.userConcerts[action.payload.concertID],
+            bands: {
+              items: [
+                ...state.userConcerts[action.payload.concertID]?.bands?.items,
+                action.payload,
+              ],
+            },
+          },
+        },
+        successMessage: {
+          addBandToConcert: "Band added to concert successfully",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.ADD_BAND_TO_CONCERT_FAILURE:
+      return {
+        ...state,
+        loadingForm: false,
+        successMessage: {},
+        errorMessage: {
+          addBandToConcert: "Failed to add Band to Concert",
+        },
+      };
     default:
       return state;
   }
