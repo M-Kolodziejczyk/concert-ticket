@@ -24,6 +24,8 @@ import {
   updateUserBandFailure,
   getUserBandSuccess,
   getuserBandFailure,
+  addArtistToBandSuccess,
+  addArtistToBandFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -226,6 +228,27 @@ export function* onGetUserBandStart() {
   yield takeLatest(BandActionTypes.GET_USER_BAND_START, getUserBand);
 }
 
+export function* addArtistToBand({ payload: { bandId, artistId } }) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.createArtistBandJoin,
+      variables: {
+        input: {
+          bandID: bandId,
+          artistID: artistId,
+        },
+      },
+    });
+    yield put(addArtistToBandSuccess(res.data.createArtistBandJoin));
+  } catch (error) {
+    yield put(addArtistToBandFailure(error));
+  }
+}
+
+export function* onAddArtistToBandStart() {
+  yield takeLatest(BandActionTypes.ADD_ARTIST_TO_BAND_START, addArtistToBand);
+}
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
@@ -237,5 +260,6 @@ export function* bandSagas() {
     call(onGetUserBandsStart),
     call(onUpdateUserBandStart),
     call(onGetUserBandStart),
+    call(onAddArtistToBandStart),
   ]);
 }

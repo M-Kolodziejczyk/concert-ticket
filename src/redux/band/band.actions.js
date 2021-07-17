@@ -138,3 +138,18 @@ export const getuserBandFailure = (error) => ({
   type: BandActionTypes.GET_USER_BAND_FAILURE,
   payload: error,
 });
+
+export const addArtistToBandStart = (data) => ({
+  type: BandActionTypes.ADD_ARTIST_TO_BAND_START,
+  payload: data,
+});
+
+export const addArtistToBandSuccess = (res) => ({
+  type: BandActionTypes.ADD_ARTIST_TO_BAND_SUCCESS,
+  payload: res,
+});
+
+export const addArtistToBandFailure = (error) => ({
+  type: BandActionTypes.ADD_ARTIST_TO_BAND_FAILURE,
+  payload: error,
+});

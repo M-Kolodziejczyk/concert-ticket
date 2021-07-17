@@ -196,6 +196,7 @@ const bandReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userListBands: [],
+        isUserBandsEmpty: true,
         loading: false,
       };
     case BandActionTypes.UPDATE_USER_BAND_START:
@@ -247,6 +248,41 @@ const bandReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         bandLoading: false,
+      };
+    case BandActionTypes.ADD_ARTIST_TO_BAND_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
+    case BandActionTypes.ADD_ARTIST_TO_BAND_SUCCESS:
+      return {
+        ...state,
+        userBands: {
+          ...state.userBands,
+          [action.payload.bandID]: {
+            ...state.userBands[action.payload.bandID],
+            members: {
+              items: [
+                ...state.userBands[action.payload.bandID]?.members?.items,
+                action.payload,
+              ],
+            },
+          },
+        },
+        formLoading: false,
+        successMessage: {
+          addArtistToBand: "Artist added to band successfully",
+        },
+        errorMessage: {},
+      };
+    case BandActionTypes.ADD_ARTIST_TO_BAND_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          addArtistToBand: "Failure to add artist to band",
+        },
       };
     default:
       return state;
