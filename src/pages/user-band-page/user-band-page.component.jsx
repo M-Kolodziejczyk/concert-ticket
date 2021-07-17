@@ -57,21 +57,6 @@ const UserBandPage = ({ match }) => {
     }
   }, [dispatch, bandImageUrl, userBand]);
 
-  //   <select
-  //   className="form-select"
-  //   aria-label="Default select band"
-  //   value={formBandId}
-  //   onChange={handleChangeConcertInvitation}
-  // >
-  //   <option value="selected">Select band</option>
-  //   {userListBands.length > 0 &&
-  //     userListBands.map((band) => (
-  //       <option key={band.id} value={band.id}>
-  //         {band.name}
-  //       </option>
-  //     ))}
-  // </select>
-
   function checkIfArtistIsBandMember(members, artistId) {
     let isMember = false;
 
