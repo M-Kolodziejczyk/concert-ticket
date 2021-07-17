@@ -137,6 +137,11 @@ export const changePasswordSuccess = (res) => ({
 });
 
 export const changePasswordFailure = (error) => ({
-  typr: UserActionTypes.CHANGE_PASSWORD_FAILURE,
+  type: UserActionTypes.CHANGE_PASSWORD_FAILURE,
   payload: error,
+});
+
+export const addArtistId = (id) => ({
+  type: UserActionTypes.ADD_ARTIST_ID,
+  payload: id,
 });

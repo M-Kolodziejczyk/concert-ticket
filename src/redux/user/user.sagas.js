@@ -4,6 +4,7 @@ import * as queries from "../../api/queries";
 import * as mutations from "../../api/mutations";
 
 import UserActionTypes from "./user.types";
+import ArtistActionTypes from "../artist/artist.types";
 
 import {
   signUpSuccess,
@@ -24,6 +25,7 @@ import {
   getUserFailure,
   changePasswordSuccess,
   changePasswordFailure,
+  addArtistId,
 } from "./user.actions";
 
 export function* loadUser() {
@@ -200,6 +202,14 @@ export function* onChangePasswordStart() {
   yield takeLatest(UserActionTypes.CHANGE_PASSWORD_START, changePassword);
 }
 
+export function* addArtistIdToUser({ payload }) {
+  yield put(addArtistId(payload.id));
+}
+
+export function* onCreateArtistSuccess() {
+  yield takeLatest(ArtistActionTypes.CREATE_ARTIST_SUCCESS, addArtistIdToUser);
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
@@ -213,5 +223,6 @@ export function* userSagas() {
     call(onSignOut),
     call(onGetUser),
     call(onChangePasswordStart),
+    call(onCreateArtistSuccess),
   ]);
 }

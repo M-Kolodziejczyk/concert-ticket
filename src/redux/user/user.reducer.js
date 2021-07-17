@@ -214,6 +214,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
           changePassword: "Unable to change password",
         },
       };
+    case UserActionTypes.ADD_ARTIST_ID:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          artistID: action.payload,
+        },
+      };
     default:
       return state;
   }
