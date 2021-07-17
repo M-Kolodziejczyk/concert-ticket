@@ -20,6 +20,7 @@ import CustomInputButton from "../../components/custom-input-button/custom-input
 import CustomButton from "../../components/custom-button/custom-button.component";
 import FormInput from "../../components/form-input/form-input.component";
 import FormTextarea from "../../components/form-textarea/form-textarea.component";
+import AddArtist from "./components/add-artist.component";
 
 import "./user-band-page.styles.scss";
 
@@ -33,6 +34,7 @@ const UserBandPage = ({ match }) => {
   const formLoading = useSelector((state) => state.band.formLoading);
   const successMessage = useSelector((state) => state.band.successMessage);
   const errorMessage = useSelector((state) => state.band.errorMessage);
+  const userArtistId = useSelector((state) => state.user.user.artistID);
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
     useFileForm(bandId, ["image/jpeg"], uploadBandImageStart);
@@ -55,6 +57,32 @@ const UserBandPage = ({ match }) => {
     }
   }, [dispatch, bandImageUrl, userBand]);
 
+  //   <select
+  //   className="form-select"
+  //   aria-label="Default select band"
+  //   value={formBandId}
+  //   onChange={handleChangeConcertInvitation}
+  // >
+  //   <option value="selected">Select band</option>
+  //   {userListBands.length > 0 &&
+  //     userListBands.map((band) => (
+  //       <option key={band.id} value={band.id}>
+  //         {band.name}
+  //       </option>
+  //     ))}
+  // </select>
+
+  function checkIfArtistIsBandMember(members, artistId) {
+    let isMember = false;
+
+    members.forEach((member) => {
+      if (member.artistID === artistId) {
+        isMember = true;
+      }
+    });
+
+    return isMember;
+  }
   return (
     <div className="user-band-page">
       {(bandLoading || userLoading || formLoading) && <Spinner />}
@@ -117,6 +145,13 @@ const UserBandPage = ({ match }) => {
               </div>
               {imageErrors && <div className="imageErrors">{imageErrors}</div>}
             </form>
+          </div>
+          <div className="add-artist-container">
+            {(userBand.members.items.length === 0 ||
+              !checkIfArtistIsBandMember(
+                userBand.members.items,
+                userArtistId
+              )) && <AddArtist />}
           </div>
           <div className="members">
             <h4>Band members:</h4>
