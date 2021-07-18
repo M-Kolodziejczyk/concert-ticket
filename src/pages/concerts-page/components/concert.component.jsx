@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { format } from "date-fns";
 
 import { getConcertImageStart } from "../../../redux/concert/concert.actions";
 
@@ -42,7 +43,7 @@ const Concert = (props) => {
           </p>
           <p>
             <strong>Date: </strong>
-            {date}
+            {format(new Date(date), "dd MMMM yyyy - hh:mm a")}
           </p>
         </div>
       </div>

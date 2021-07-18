@@ -11,15 +11,16 @@
   }
 
   .concert-container {
-    width: 100%;
+    // width: 100%;
+    margin: 0 auto;
 
     .image {
       max-width: 300px;
-      max-height: 200px;
-      min-height: 150px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
+      // max-height: 200px;
+      // min-height: 150px;
+      // margin: 0 auto;
+      // display: flex;
+      // justify-content: center;
 
       img {
         width: 100%;
@@ -28,22 +29,23 @@
 
       svg {
         width: 100%;
-        height: auto;
+        height: 100%;
       }
     }
 
-    // .description {
-    //   margin-top: 10px;
+    .description {
+      margin-top: 5px;
 
-    //   .event-name {
-    //     font-size: 1.5rem;
-    //     font-weight: 600;
-    //   }
+      .event-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1;
+      }
 
-    //   p {
-    //     margin: 5px 0;
-    //   }
-    // }
+      p {
+        margin: 5px 0;
+      }
+    }
   }
 }
 
