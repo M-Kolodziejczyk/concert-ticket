@@ -153,6 +153,7 @@ export function* onListBandsStart() {
 export function* getBandStart({ payload }) {
   try {
     const band = yield API.graphql({
+      authMode: "API_KEY",
       query: queries.getBand,
       variables: {
         id: payload,
@@ -212,6 +213,7 @@ export function* onUpdateUserBandStart() {
 export function* getUserBand({ payload }) {
   try {
     const band = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: queries.getBand,
       variables: {
         id: payload,
@@ -231,6 +233,7 @@ export function* onGetUserBandStart() {
 export function* addArtistToBand({ payload: { bandId, artistId } }) {
   try {
     const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.createArtistBandJoin,
       variables: {
         input: {
