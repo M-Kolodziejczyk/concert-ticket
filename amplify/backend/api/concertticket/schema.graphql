@@ -59,6 +59,7 @@ type Band
   keyImage: String
   invitations: AWSJSON
   members: [ArtistBandJoin] @connection(keyName: "byBand", fields: ["id"])
+  concerts: [ConcertBandJoin] @connection(keyName: "byBand", fields: ["id"])
 }
 
 type Artist

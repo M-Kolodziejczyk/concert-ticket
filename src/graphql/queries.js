@@ -500,6 +500,17 @@ export const getBand = /* GraphQL */ `
         }
         nextToken
       }
+      concerts {
+        items {
+          id
+          concertID
+          bandID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -523,6 +534,9 @@ export const listBands = /* GraphQL */ `
         updatedAt
         owner
         members {
+          nextToken
+        }
+        concerts {
           nextToken
         }
       }
@@ -558,6 +572,9 @@ export const bandsByUser = /* GraphQL */ `
         updatedAt
         owner
         members {
+          nextToken
+        }
+        concerts {
           nextToken
         }
       }

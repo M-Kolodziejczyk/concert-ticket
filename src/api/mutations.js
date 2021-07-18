@@ -549,6 +549,17 @@ export const createBand = /* GraphQL */ `
         }
         nextToken
       }
+      concerts {
+        items {
+          id
+          concertID
+          bandID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -569,6 +580,28 @@ export const updateBand = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+      members {
+        items {
+          id
+          bandID
+          artistID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      concerts {
+        items {
+          id
+          concertID
+          bandID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -594,6 +627,17 @@ export const deleteBand = /* GraphQL */ `
           id
           bandID
           artistID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      concerts {
+        items {
+          id
+          concertID
+          bandID
           createdAt
           updatedAt
           owner
@@ -716,6 +760,9 @@ export const createArtistBandJoin = /* GraphQL */ `
         members {
           nextToken
         }
+        concerts {
+          nextToken
+        }
       }
       artist {
         id
@@ -761,6 +808,9 @@ export const updateArtistBandJoin = /* GraphQL */ `
         members {
           nextToken
         }
+        concerts {
+          nextToken
+        }
       }
       artist {
         id
@@ -804,6 +854,9 @@ export const deleteArtistBandJoin = /* GraphQL */ `
         updatedAt
         owner
         members {
+          nextToken
+        }
+        concerts {
           nextToken
         }
       }
@@ -875,6 +928,9 @@ export const createConcertBandJoin = /* GraphQL */ `
         members {
           nextToken
         }
+        concerts {
+          nextToken
+        }
       }
       owner
     }
@@ -930,6 +986,9 @@ export const updateConcertBandJoin = /* GraphQL */ `
         members {
           nextToken
         }
+        concerts {
+          nextToken
+        }
       }
       owner
     }
@@ -983,6 +1042,9 @@ export const deleteConcertBandJoin = /* GraphQL */ `
         updatedAt
         owner
         members {
+          nextToken
+        }
+        concerts {
           nextToken
         }
       }
