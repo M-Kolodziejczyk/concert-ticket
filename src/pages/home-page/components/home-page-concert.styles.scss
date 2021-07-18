@@ -8,7 +8,7 @@
     margin: 0 auto;
 
     .image {
-      max-width: 400px;
+      max-width: 390px;
 
       img {
         width: 100%;
@@ -17,13 +17,18 @@
 
       svg {
         width: 100%;
-        height: auto;
+        height: 100%;
       }
     }
 
     .description {
       .venue {
+        margin-top: 5px;
         margin-bottom: 0;
+        font-size: 1rem;
+      }
+      .event-name {
+        font-size: 1.2rem;
       }
     }
   }
