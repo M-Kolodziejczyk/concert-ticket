@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 
@@ -86,6 +86,27 @@ const ConcertPage = () => {
           </div>
         )}
       </div>
+      {concert?.bands?.items.length > 0 && (
+        <div className="band-container">
+          <h3>Bands:</h3>
+          {concert.bands.items.map((band) => (
+            <Link
+              to={`/bands/${band.band.id}`}
+              className="band"
+              key={band.band.id}
+            >
+              <p>
+                <strong>Name: </strong>
+                {band.band.name}
+              </p>
+              <p>
+                <strong>Genre: </strong>
+                {band.band.genre}
+              </p>
+            </Link>
+          ))}
+        </div>
+      )}
       <div className="tickets-container">
         <h3>Tickets:</h3>
         {concertTickets &&
