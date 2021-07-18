@@ -1,0 +1,18 @@
+.user-concert-add-band {
+  .add-band-form {
+    .form__button {
+      margin-top: 10px;
+    }
+  }
+
+  .messages {
+    margin-top: 10px;
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+  }
+}

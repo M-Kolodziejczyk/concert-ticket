@@ -17,6 +17,7 @@ import UserConcertTicket from "./components/user-concert-ticket.component";
 import UserConcertEdit from "./components/user-concert-edit.component";
 import UserConcertInvitation from "./components/user-concert-invitation.component";
 import UserConcertArtistsBands from "./components/user-concert-artists-bands.component";
+import UserConcertAddBand from "./components/user-concert-add-band.component";
 
 import "./user-concert-page.styles.scss";
 
@@ -120,8 +121,9 @@ const UserConcertPage = ({ match }) => {
               </div>
             </form>
           </div>
-          <UserConcertTicket concertId={concertId} />
+          <UserConcertAddBand />
           <UserConcertArtistsBands concertId={concertId} />
+          <UserConcertTicket concertId={concertId} />
           <UserConcertInvitation concertId={concertId} />
         </div>
       )}
