@@ -161,6 +161,7 @@ export function* onListConcertsStart() {
 export function* getConcertStart({ payload }) {
   try {
     const concert = yield API.graphql({
+      authMode: "API_KEY",
       query: queries.getConcert,
       variables: {
         id: payload,
