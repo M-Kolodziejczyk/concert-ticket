@@ -53,6 +53,33 @@ const BandPage = () => {
             </p>
           </div>
         )}
+        {band?.members && (
+          <div className="artist-container">
+            <h3>Artists:</h3>
+            {band.members.items.map((artist) => (
+              <Link
+                to={`/artists/${artist.artistID}`}
+                key={artist.artistID}
+                className="artist-link"
+              >
+                <p>
+                  <strong>Name: </strong>
+                  {artist.artist.name}
+                </p>
+                <div className="role-genre">
+                  <p>
+                    <strong>Role: </strong>
+                    {artist.artist.role}
+                  </p>
+                  <p>
+                    <strong>Genre: </strong>
+                    {artist.artist.genre}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
         {band?.concerts && (
           <div className="concert-container">
             <h3>Concerts:</h3>

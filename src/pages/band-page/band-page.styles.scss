@@ -34,6 +34,28 @@
       }
     }
 
+    .artist-container {
+      margin-top: 20px;
+
+      .artist-link {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        border: 1px solid grey;
+        border-radius: 5px;
+        margin-bottom: 10px;
+
+        p {
+          margin: 0;
+        }
+
+        &:hover {
+          color: slategray;
+          border-color: slategray;
+        }
+      }
+    }
+
     .concert-container {
       margin-top: 20px;
       margin-bottom: 100px;
@@ -44,6 +66,7 @@
         padding: 5px;
         border: 1px solid grey;
         border-radius: 5px;
+        margin-bottom: 10px;
 
         p {
           margin: 0;
@@ -74,6 +97,20 @@
           margin-bottom: 10px;
 
           .date-time {
+            display: flex;
+
+            p {
+              flex: 1;
+            }
+          }
+        }
+      }
+
+      .artist-container {
+        .artist-link {
+          margin-bottom: 10px;
+
+          .role-genre {
             display: flex;
 
             p {
