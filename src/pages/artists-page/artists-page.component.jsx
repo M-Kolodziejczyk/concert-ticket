@@ -19,8 +19,10 @@ const ArtistsPage = () => {
 
   return (
     <div className="artists-page">
-      <div className="artists-page-container">
+      <div className="artist-page-header">
         <h1>Artists</h1>
+      </div>
+      <div className="artists-page-container">
         {listArtists &&
           listArtists.map((artist, i) => (
             <Artist key={artist.id} {...artist} />

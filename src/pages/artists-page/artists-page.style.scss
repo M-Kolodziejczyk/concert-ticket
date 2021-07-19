@@ -2,7 +2,27 @@
   max-width: 1200px;
   margin: 50px auto 100px;
 
-  .artists-page-container {
+  .artist-page-header {
     margin: 0 10px;
+
+    h1 {
+      text-align: center;
+    }
+  }
+
+  .artists-page-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .artists-page {
+    .artists-page-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
   }
 }
