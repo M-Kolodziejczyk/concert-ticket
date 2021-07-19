@@ -56,6 +56,7 @@ export function* onCreateArtistStart() {
 export function* getArtist({ payload }) {
   try {
     const artist = yield API.graphql({
+      authMode: "API_KEY",
       query: queries.getArtist,
       variables: {
         id: payload,
@@ -75,6 +76,7 @@ export function* onGetArtistStart() {
 export function* getUserArtist({ payload }) {
   try {
     const artist = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
       query: queries.getArtist,
       variables: {
         id: payload,

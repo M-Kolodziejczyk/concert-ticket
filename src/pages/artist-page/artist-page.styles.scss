@@ -1,25 +1,23 @@
 .artist-page {
-  margin: 40px auto 0;
+  margin: 40px auto 100px;
   display: flex;
   width: 100%;
+  flex-direction: column;
 
   .artist-page-container {
-    border: 1px solid lightgrey;
     border-radius: 5px;
-    width: 100%;
     margin: 0 10px;
 
     .image {
-      max-width: 300px;
-      max-height: 200px;
-      min-height: 150px;
+      width: 300px;
+      height: 450px;
       margin: 0 auto;
       display: flex;
       justify-content: center;
 
       img {
         width: 100%;
-        object-fit: scale-down;
+        object-fit: cover;
       }
 
       .altImg {
@@ -29,9 +27,48 @@
 
     .artist-info {
       margin-top: 10px;
-      margin-left: 10px;
+
+      .artist-name {
+        font-size: 3rem;
+        line-height: 1;
+      }
+
+      .artist-role {
+        font-size: 1.5rem;
+        line-height: 1;
+        margin-top: 10px;
+      }
+
+      .artist-genre {
+        margin-top: 5px;
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+
+      .artist-description {
+        margin-top: 5px;
+        text-align: justify;
+      }
+    }
+  }
+
+  .artist-bands-container {
+    margin: 20px 10px 100px;
+
+    .band {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 10px;
+
+      &:hover {
+        color: slategray;
+      }
+
       p {
-        margin: 5px 0;
+        margin: 0;
       }
     }
   }
@@ -45,20 +82,29 @@
 
 @media screen and (min-width: 768px) {
   .artist-page {
-    max-width: 100%;
+    max-width: 90%;
 
     .artist-page-container {
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
-
-      .image {
-        margin: 0;
-        max-width: 400px;
-      }
+      justify-content: space-between;
 
       .artist-info {
-        margin-top: 0;
+        margin: 0;
+        margin-left: 20px;
+        flex: 1;
+      }
+    }
+
+    .artist-bands-container {
+      margin-top: 20px;
+
+      .band {
+        flex-direction: row;
+
+        p {
+          flex: 1;
+        }
       }
     }
   }
