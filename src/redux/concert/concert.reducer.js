@@ -156,7 +156,7 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           ...state.concerts,
           [action.payload.id]: action.payload,
         },
-        successMessage: { listConcerts: "Get concert success" },
+        successMessage: { getConcert: "Get concert success" },
         errorMessage: {},
       };
     case ConcertActionTypes.GET_CONCERT_FAILURE:
