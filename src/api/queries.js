@@ -483,9 +483,12 @@ export const getBand = /* GraphQL */ `
           id
           concertID
           bandID
-          createdAt
-          updatedAt
-          owner
+          concert {
+            id
+            name
+            venue
+            date
+          }
         }
         nextToken
       }
