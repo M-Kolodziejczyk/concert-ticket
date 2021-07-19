@@ -25,9 +25,19 @@
         width: 100%;
         object-fit: scale-down;
       }
+
+      svg {
+        max-height: 170px;
+      }
     }
 
     .details-container {
+      margin-top: 10px;
+
+      p {
+        margin: 0;
+      }
+
       .description {
         text-align: justify;
         overflow: hidden;
@@ -46,9 +56,14 @@
 
       .image {
         flex: 1;
+
+        svg {
+          max-height: 200px;
+        }
       }
 
       .details-container {
+        margin-top: 0;
         padding-right: 10px;
         flex: 1;
         margin-left: 10px;
@@ -64,6 +79,12 @@
 
       .image {
         max-width: 400px;
+      }
+
+      .details-container {
+        .description {
+          -webkit-line-clamp: 6;
+        }
       }
     }
   }
