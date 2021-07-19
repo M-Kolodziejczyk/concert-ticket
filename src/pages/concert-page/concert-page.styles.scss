@@ -38,6 +38,7 @@
       border-radius: 5px;
       display: flex;
       flex-direction: column;
+      margin-bottom: 10px;
 
       &:hover {
         color: lightslategray;
@@ -78,10 +79,17 @@
           height: 40px;
         }
       }
+
       .error {
         margin: 0;
         margin-top: 10px;
         color: red;
+      }
+
+      .success {
+        margin: 0;
+        margin-top: 10px;
+        color: green;
       }
     }
   }

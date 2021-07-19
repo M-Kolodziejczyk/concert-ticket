@@ -19,7 +19,6 @@ const ConcertPage = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
   const [error, setError] = useState({});
-  const cart = useSelector((state) => state.cart.cart);
   const concert = useSelector((state) => state.concert.concerts?.[id]);
   const concertTickets = useSelector(
     (state) => state.concert.concerts?.[id]?.tickets?.items
@@ -29,6 +28,9 @@ const ConcertPage = () => {
   );
   const loading = useSelector((state) => state.concert.loading);
   const loadingImg = useSelector((state) => state.concert.loadingImg);
+  const addToCartMessage = useSelector((state) => state.cart.addToCartMessage);
+  const errorMessage = useSelector((state) => state.cart.errorMessage);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
     if (concert !== null && !concert) {
@@ -43,14 +45,13 @@ const ConcertPage = () => {
   }, [concertImage, concert, dispatch, id]);
 
   const addToCart = (ticket) => {
-    let isInCart = cart.find((item) => item.id === ticket.id);
-
-    if (!isInCart) {
+    if (currentUser !== null) {
       dispatch(addTicketToCart(ticket));
+      setError({});
     } else {
       setError({
         ...error,
-        [ticket.id]: "Ticket already added!",
+        [ticket.id]: "You need to sigin in first!",
       });
     }
   };
@@ -114,6 +115,7 @@ const ConcertPage = () => {
             return (
               <div key={ticket.id} className="ticket">
                 <p className="desc">{ticket.description}</p>
+                <p>ID: {ticket.id}</p>
                 <p>
                   <strong>Type: </strong> {ticket.type}
                 </p>
@@ -123,8 +125,14 @@ const ConcertPage = () => {
                 <button className="cart-btn" onClick={() => addToCart(ticket)}>
                   <Cart /> Add To Cart
                 </button>
+                {errorMessage[ticket.id] && (
+                  <p className="error">{errorMessage[ticket.id]}</p>
+                )}
                 {error[ticket.id] && (
                   <p className="error">{error[ticket.id]}</p>
+                )}
+                {addToCartMessage[ticket.id] && (
+                  <p className="success">{addToCartMessage[ticket.id]}</p>
                 )}
               </div>
             );

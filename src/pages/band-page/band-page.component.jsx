@@ -29,8 +29,6 @@ const BandPage = () => {
     }
   }, [dispatch, bandsImage, band, id]);
 
-  console.log("band: ", band);
-
   return (
     <div className="band-page">
       {loading && <Spinner />}
