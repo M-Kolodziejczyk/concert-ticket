@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { format } from "date-fns";
 
 import { getBandImageStart, getBandStart } from "../../redux/band/band.actions";
 import { ReactComponent as BandImg } from "../../assets/band.svg";
@@ -28,6 +29,8 @@ const BandPage = () => {
     }
   }, [dispatch, bandsImage, band, id]);
 
+  console.log("band: ", band);
+
   return (
     <div className="band-page">
       {loading && <Spinner />}
@@ -50,6 +53,36 @@ const BandPage = () => {
               <strong>Description: </strong>
               {band.description}
             </p>
+          </div>
+        )}
+        {band?.concerts && (
+          <div className="concert-container">
+            <h3>Concerts:</h3>
+            {band.concerts.items.map((concert) => (
+              <Link
+                to={`/concerts/${concert.concert.id}`}
+                key={concert.id}
+                className="concert-link"
+              >
+                <p>
+                  <strong>Event name: </strong>
+                  {concert.concert.name}
+                </p>
+                <div className="date-time">
+                  <p>
+                    <strong>Date: </strong>
+                    {format(
+                      new Date(concert.concert.date),
+                      "dd MMMM yyyy - hh:mm aa"
+                    )}
+                  </p>
+                  <p>
+                    <strong>Venue: </strong>
+                    {concert.concert.venue}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
         )}
       </div>
