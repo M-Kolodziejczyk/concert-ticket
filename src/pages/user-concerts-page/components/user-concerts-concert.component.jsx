@@ -31,11 +31,26 @@ const UserConcertsConcert = (concert) => {
         )}
       </div>
       <div className="details">
-        <p>Name: {concert.name}</p>
-        <p>Date: {format(date, "MMMM dd yyyy")}</p>
-        <p>Time: {format(date, "hh:mm a")}</p>
-        <p>Venue: {concert.venue}</p>
-        <p> Genres: {concert.genres}</p>
+        <p>
+          <strong>Name: </strong>
+          {concert.name}
+        </p>
+        <p>
+          <strong>Date: </strong>
+          {format(date, "MMMM dd yyyy")}
+        </p>
+        <p>
+          <strong>Time: </strong>
+          {format(date, "hh:mm a")}
+        </p>
+        <p>
+          <strong>Venue: </strong>
+          {concert.venue}
+        </p>
+        <p>
+          <strong>Genres: </strong>
+          {concert.genres}
+        </p>
       </div>
     </Link>
   );

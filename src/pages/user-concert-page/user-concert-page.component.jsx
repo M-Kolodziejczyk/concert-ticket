@@ -65,15 +65,10 @@ const UserConcertPage = ({ match }) => {
             <div className="details">
               <div className="details-header">
                 <p className="name">
-                  <strong>Name: </strong>
-                  {userConcert.name}
+                  <strong>{userConcert.name}</strong>
                 </p>
                 <UserConcertEdit concertId={concertId} />
               </div>
-              <p className="description">
-                <strong>Description: </strong>
-                {userConcert.description}
-              </p>
               <div className="date">
                 <p>
                   <strong> Date: </strong>
@@ -92,6 +87,7 @@ const UserConcertPage = ({ match }) => {
                 <strong>Genres: </strong>
                 {userConcert.genres}
               </p>
+              <p className="description">{userConcert.description}</p>
             </div>
           </div>
           <div className="upload-image-container">

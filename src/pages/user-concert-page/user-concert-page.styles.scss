@@ -26,8 +26,10 @@
         justify-content: space-between;
 
         .name {
+          line-height: 1;
           order: 2;
           margin: 0;
+          font-size: 2.3rem;
         }
       }
 
@@ -115,7 +117,7 @@
 
       .details {
         .details-header {
-          align-items: center;
+          align-items: flex-end;
           flex-direction: row;
           .name {
             order: unset;
