@@ -1,14 +1,16 @@
 .user-artist-page {
   margin-top: 30px;
   margin-bottom: 100px;
+
   .artist-details-container {
     display: flex;
     margin: 0 20px 50px;
     flex-direction: column;
-    align-items: center;
 
     .image {
       max-width: 400px;
+      margin: 0 auto;
+
       img {
         width: 100%;
       }
@@ -20,7 +22,6 @@
       .group {
         display: flex;
         font-size: 2rem;
-        margin-bottom: 15px;
 
         .name {
           font-weight: 700;
@@ -28,11 +29,14 @@
         }
 
         .description {
-          font-size: 1rem;
+          margin-top: 5px;
+          font-size: 1.2rem;
+          text-align: justify;
         }
 
         p {
           margin: 0;
+          line-height: 1;
         }
       }
     }
@@ -77,6 +81,27 @@
       width: 100%;
     }
   }
+
+  .band-container {
+    margin: 10px;
+
+    .band-link {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 10px;
+
+      &:hover {
+        color: slategray;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -93,12 +118,12 @@
         flex: 1;
         margin: 0;
         margin-left: 20px;
-        .group {
-          display: flex;
-          flex-direction: column;
 
-          .name {
-            line-height: 1;
+        .group {
+          margin-bottom: 5px;
+
+          .description {
+            font-size: 1.4rem;
           }
         }
       }
@@ -116,20 +141,13 @@
         margin-left: 20px;
       }
     }
-  }
-}
 
-@media screen and (min-width: 992px) {
-  .user-artist-page {
-    .artist-details-container {
-      .details {
-        .group {
-          display: flex;
-          flex-direction: row;
+    .band-container {
+      .band-link {
+        flex-direction: row;
 
-          .name {
-            line-height: unset;
-          }
+        p {
+          flex: 1;
         }
       }
     }

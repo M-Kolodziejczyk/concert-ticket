@@ -86,8 +86,9 @@ const UserArtistPage = () => {
           </div>
           <div className="details">
             <div className="group">
-              <p className="name">Name:</p>
-              <p>{userArtist.name}</p>
+              <p>
+                <strong>{userArtist.name}</strong>
+              </p>
             </div>
             <div className="group">
               <p className="name">Genre:</p>
@@ -98,7 +99,6 @@ const UserArtistPage = () => {
               <p>{userArtist.role}</p>
             </div>
             <div className="group">
-              <p className="name">Description:</p>
               <p className="description">{userArtist.description}</p>
             </div>
           </div>
@@ -172,19 +172,26 @@ const UserArtistPage = () => {
           </form>
         </div>
       </div>
-      <div className="band-container">
-        {userArtist?.bands?.items.length > 0 &&
-          userArtist?.bands?.items.map((item) => (
+      {userArtist?.bands?.items.length > 0 && (
+        <div className="band-container">
+          <h3>Bands: </h3>
+          {userArtist?.bands?.items.map((item) => (
             <Link
-              to={`/artists/${item.band.id}`}
-              className="band"
+              to={`/bands/${item.band.id}`}
+              className="band-link"
               key={item.band.id}
             >
-              <p>Name: {item.band.name}</p>
-              <p>Genre: {item.band.genre}</p>
+              <p>
+                <strong>Name: </strong>
+                {item.band.name}
+              </p>
+              <p>
+                <strong>Genre: </strong> {item.band.genre}
+              </p>
             </Link>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
