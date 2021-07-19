@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 import {
@@ -81,8 +82,7 @@ const UserBandPage = ({ match }) => {
             )}
             <div className="details">
               <p>
-                <strong>Name: </strong>
-                {userBand.name}
+                <strong>{userBand.name}</strong>
               </p>
               <p>
                 <strong>Genre: </strong>
@@ -92,10 +92,7 @@ const UserBandPage = ({ match }) => {
                 <strong>Created: </strong>
                 {format(new Date(userBand.createdAt), "dd MMM y")}{" "}
               </p>
-              <p className="description">
-                <strong>Description: </strong>
-                {userBand.description}
-              </p>
+              <p className="description">{userBand.description}</p>
 
               <div className="btn-wrapper">
                 <CustomButton
@@ -142,11 +139,26 @@ const UserBandPage = ({ match }) => {
             <h4>Band members:</h4>
             {userBand.members.items.length > 0 &&
               userBand.members.items.map((member, i) => (
-                <div className="band" key={i}>
-                  <p>Name: {member.artist.name}</p>
-                  <p>Role: {member.artist.role}</p>
-                  <p>Genre: {member.artist.genre}</p>
-                </div>
+                <Link
+                  to={`/artists/${member.artistID}`}
+                  className="band"
+                  key={i}
+                >
+                  <p>
+                    <strong>Name: </strong>
+                    {member.artist.name}
+                  </p>
+                  <div className="role-genre">
+                    <p>
+                      <strong>Role: </strong>
+                      {member.artist.role}
+                    </p>
+                    <p>
+                      <strong>Genre: </strong>
+                      {member.artist.genre}
+                    </p>
+                  </div>
+                </Link>
               ))}
           </div>
           <div className="invitation-container">

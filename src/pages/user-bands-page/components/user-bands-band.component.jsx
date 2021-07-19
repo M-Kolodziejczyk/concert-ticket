@@ -13,10 +13,17 @@ const UserBandsBand = ({ band }) => {
       className="user-bands-band"
       key={band.id}
     >
-      <p className="name">Name: {band.name}</p>
-      <p className="genre">Genre: {band.genre}</p>
+      <p className="name">
+        <strong>Name: </strong>
+        {band.name}
+      </p>
+      <p className="genre">
+        <strong>Genre: </strong>
+        {band.genre}
+      </p>
       <p className="date">
-        Created: {format(new Date(band.createdAt), "dd MMM y")}{" "}
+        <strong>Created: </strong>
+        {format(new Date(band.createdAt), "dd MMM y")}{" "}
       </p>
       <Edit className="edit" />
     </Link>

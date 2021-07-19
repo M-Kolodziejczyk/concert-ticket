@@ -1,6 +1,4 @@
 .user-band-page {
-  border: 1px solid lightgray;
-  border-radius: 10px;
   margin: 40px 10px 100px;
 
   .user-band-container {
@@ -80,13 +78,19 @@
       }
 
       .band {
+        display: flex;
+        flex-direction: column;
         border: 1px solid lightgray;
         border-radius: 10px;
         padding: 0 5px;
         margin-top: 10px;
 
+        &:hover {
+          color: slategray;
+        }
+
         p {
-          margin: 5px 0;
+          margin: 0;
           font-size: 1rem;
         }
       }
@@ -190,6 +194,18 @@
 
           .button_container {
             align-items: flex-start;
+          }
+        }
+      }
+
+      .members {
+        .band {
+          .role-genre {
+            display: flex;
+
+            p {
+              flex: 1;
+            }
           }
         }
       }
