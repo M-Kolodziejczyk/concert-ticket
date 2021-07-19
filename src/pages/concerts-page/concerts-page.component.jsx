@@ -26,8 +26,8 @@ const ConcertsPage = () => {
   return (
     <div className="concerts-page">
       {loading && <Spinner />}
+      <h1>Concerts</h1>
       <div className="concerts-page-container">
-        <h1>Concerts</h1>
         {listConcerts &&
           listConcerts.map((concert, i) => <Concert {...concert} key={i} />)}
       </div>
