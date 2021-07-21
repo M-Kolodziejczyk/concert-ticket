@@ -26,6 +26,7 @@ import {
   changePasswordSuccess,
   changePasswordFailure,
   addArtistId,
+  removeArtistId,
 } from "./user.actions";
 
 export function* loadUser() {
@@ -210,6 +211,17 @@ export function* onCreateArtistSuccess() {
   yield takeLatest(ArtistActionTypes.CREATE_ARTIST_SUCCESS, addArtistIdToUser);
 }
 
+export function* removeArtistIdFromUser() {
+  yield put(removeArtistId(null));
+}
+
+export function* onDeleteArtistSuccess() {
+  yield takeLatest(
+    ArtistActionTypes.DELETE_USER_ARTIST_SUCCESS,
+    removeArtistIdFromUser
+  );
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
@@ -224,5 +236,6 @@ export function* userSagas() {
     call(onGetUser),
     call(onChangePasswordStart),
     call(onCreateArtistSuccess),
+    call(onDeleteArtistSuccess),
   ]);
 }

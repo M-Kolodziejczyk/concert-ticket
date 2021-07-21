@@ -222,6 +222,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
           artistID: action.payload,
         },
       };
+    case UserActionTypes.REMOVE_ARTIST_ID:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          artistID: null,
+        },
+      };
     default:
       return state;
   }

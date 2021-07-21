@@ -145,3 +145,7 @@ export const addArtistId = (id) => ({
   type: UserActionTypes.ADD_ARTIST_ID,
   payload: id,
 });
+
+export const removeArtistId = () => ({
+  type: UserActionTypes.REMOVE_ARTIST_ID,
+});
