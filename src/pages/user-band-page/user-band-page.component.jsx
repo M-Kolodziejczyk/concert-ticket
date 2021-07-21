@@ -129,11 +129,11 @@ const UserBandPage = ({ match }) => {
             </form>
           </div>
           <div className="add-artist-container">
-            {(userBand.members.items.length === 0 ||
+            {userArtistId &&
               !checkIfArtistIsBandMember(
                 userBand.members.items,
                 userArtistId
-              )) && <AddArtist />}
+              ) && <AddArtist />}
           </div>
           <div className="members">
             <h4>Band members:</h4>
