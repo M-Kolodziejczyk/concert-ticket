@@ -138,3 +138,18 @@ export const listArtistsFailure = (error) => ({
   type: ArtistActionTypes.LIST_ARTISTS_FAILURE,
   payload: error,
 });
+
+export const deleteUserArtistStart = (artistId) => ({
+  type: ArtistActionTypes.DELETE_USER_ARTIST_START,
+  payload: artistId,
+});
+
+export const deleteUserArtistSuccess = (res) => ({
+  type: ArtistActionTypes.DELETE_USER_ARTIST_SUCCESS,
+  payload: res,
+});
+
+export const deleteUserArtistFailure = (error) => ({
+  type: ArtistActionTypes.DELETE_USER_ARTIST_FAILURE,
+  payload: error,
+});

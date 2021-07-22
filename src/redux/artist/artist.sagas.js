@@ -23,6 +23,8 @@ import {
   getUserArtistImageFailure,
   listArtistsSuccess,
   listArtistsFailure,
+  deleteUserArtistSuccess,
+  deleteUserArtistFailure,
 } from "./artist.actions";
 
 export function* createArtist({ payload: artist }) {
@@ -33,6 +35,7 @@ export function* createArtist({ payload: artist }) {
       query: mutations.createArtist,
       variables: { input: { ...artist } },
     });
+
     yield API.graphql({
       authMode: "AMAZON_COGNITO_USER_POOLS",
       query: mutations.updateUser,
@@ -198,6 +201,68 @@ export function* onListArtistsStart() {
   yield takeLatest(ArtistActionTypes.LIST_ARTISTS_START, listArtists);
 }
 
+export function* deleteUserArtist({ payload }) {
+  try {
+    const authUser = yield Auth.currentAuthenticatedUser();
+
+    yield Storage.remove("artist-image", {
+      level: "protected",
+    });
+
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.deleteArtist,
+      variables: {
+        input: {
+          id: payload,
+        },
+      },
+    });
+
+    const bands = res.data.deleteArtist.bands.items;
+    console.log("BANDS: ", bands);
+    if (bands.length > 0) {
+      for (let band of bands) {
+        console.log("BAND: ", band);
+        yield API.graphql({
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+          query: mutations.deleteArtistBandJoin,
+          variables: {
+            input: {
+              id: band.id,
+            },
+          },
+        });
+      }
+    }
+    console.log("3");
+
+    yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.updateUser,
+      variables: {
+        input: {
+          email: authUser.attributes.email,
+          artistID: null,
+        },
+      },
+    });
+
+    console.log("RES: ", res.data.deleteArtist.bands.items);
+
+    yield put(deleteUserArtistSuccess(res));
+  } catch (error) {
+    yield put(deleteUserArtistFailure(error));
+  }
+}
+
+export function* onDeleteArtistStart() {
+  yield takeLatest(
+    ArtistActionTypes.DELETE_USER_ARTIST_START,
+    deleteUserArtist
+  );
+}
+
 export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
@@ -208,5 +273,6 @@ export function* artistSagas() {
     call(onGetArtistImageStart),
     call(onGetUserArtistImageStart),
     call(onListArtistsStart),
+    call(onDeleteArtistStart),
   ]);
 }

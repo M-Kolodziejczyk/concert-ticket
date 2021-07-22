@@ -170,6 +170,31 @@ const artistReducer = (state = INITIAL_STATE, action) => {
           artists: "List artists failure",
         },
       };
+    case ArtistActionTypes.DELETE_USER_ARTIST_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
+    case ArtistActionTypes.DELETE_USER_ARTIST_SUCCESS:
+      return {
+        ...state,
+        formLoading: false,
+        userArtist: null,
+        userArtistImageUrl: "",
+        successMessage: {
+          deleteArtist: "Artist has been deleted successfully",
+        },
+        errorMessage: {},
+      };
+    case ArtistActionTypes.DELETE_USER_ARTIST_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          deleteArtist: "Delete artist failure",
+        },
+      };
     default:
       return state;
   }
