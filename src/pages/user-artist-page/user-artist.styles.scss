@@ -23,6 +23,14 @@
         display: flex;
         font-size: 2rem;
 
+        &.name {
+          flex-direction: column;
+
+          p {
+            order: 2;
+          }
+        }
+
         .name {
           font-weight: 700;
           margin-right: 10px;
@@ -148,6 +156,28 @@
 
         p {
           flex: 1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-artist-page {
+    .artist-details-container {
+      .details {
+        .group {
+          &.name {
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 0;
+            font-size: 2.4rem;
+
+            p {
+              order: unset;
+            }
+          }
         }
       }
     }

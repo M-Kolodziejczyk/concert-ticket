@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 import {
   createArtistStart,
   getUserArtistStart,
   updateArtistStart,
   uploadArtistImageStart,
   getUserArtistImageStart,
+  deleteUserArtistStart,
 } from "../../redux/artist/artist.actions";
 import validate from "../../validators/artist";
 
@@ -19,6 +21,7 @@ import FormInput from "../../components/form-input/form-input.component";
 import FormTextarea from "../../components/form-textarea/form-textarea.component";
 import ErrorMessage from "../../components/error-message/error-message.component";
 import Spinner from "../../components/spinner/spinner.component";
+import DeleteModal from "../../components/delete-modal/delete-modal.component";
 
 import "./user-artist.styles.scss";
 
@@ -28,8 +31,9 @@ const UserArtistPage = () => {
   const artistLoading = useSelector((state) => state.artist.loading);
   const userArtist = useSelector((state) => state.artist.userArtist);
   const artistID = useSelector((state) => state.user.user.artistID);
-  const errorMessage = useSelector((state) => state.artist.errorMessage);
   const formLoading = useSelector((state) => state.artist.formLoading);
+  const successMessage = useSelector((state) => state.artist.successMessage);
+  const errorMessage = useSelector((state) => state.artist.errorMessage);
   const artistImageUrl = useSelector(
     (state) => state.artist.userArtistImageUrl
   );
@@ -63,6 +67,8 @@ const UserArtistPage = () => {
 
     if (userArtist && Object.keys(userArtist).length > 0) {
       setIsCreateMode(false);
+    } else {
+      setIsCreateMode(true);
     }
   }, [userArtist, dispatch, artistImageUrl]);
 
@@ -85,10 +91,18 @@ const UserArtistPage = () => {
             {artistImageUrl && <img src={artistImageUrl} alt="artist img" />}
           </div>
           <div className="details">
-            <div className="group">
+            <div className="group name">
               <p>
                 <strong>{userArtist.name}</strong>
               </p>
+              <DeleteModal
+                title={`Are you sure you want to delete ${userArtist.name}`}
+                deleteConfirm="Delete"
+                id={userArtist.id}
+                callback={deleteUserArtistStart}
+                successMessage={successMessage.deleteArtist}
+                errorMessage={errorMessage.deleteArtist}
+              />
             </div>
             <div className="group">
               <p className="name">Genre:</p>
