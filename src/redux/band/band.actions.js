@@ -153,3 +153,18 @@ export const addArtistToBandFailure = (error) => ({
   type: BandActionTypes.ADD_ARTIST_TO_BAND_FAILURE,
   payload: error,
 });
+
+export const removeArtistFromBandStart = (id) => ({
+  type: BandActionTypes.REMOVE_ARTIST_FROM_BAND_START,
+  payload: id,
+});
+
+export const removeArtistFromBandSuccess = (res) => ({
+  type: BandActionTypes.REMOVE_ARTIST_FROM_BAND_SUCCESS,
+  payload: res,
+});
+
+export const removeArtistFromBandFailure = (error) => ({
+  type: BandActionTypes.REMOVE_ARTIST_FROM_BAND_FAILURE,
+  payload: error,
+});

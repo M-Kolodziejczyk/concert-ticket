@@ -220,7 +220,6 @@ export function* deleteUserArtist({ payload }) {
     });
 
     const bands = res.data.deleteArtist.bands.items;
-    console.log("BANDS: ", bands);
     if (bands.length > 0) {
       for (let band of bands) {
         console.log("BAND: ", band);
@@ -235,7 +234,6 @@ export function* deleteUserArtist({ payload }) {
         });
       }
     }
-    console.log("3");
 
     yield API.graphql({
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -247,8 +245,6 @@ export function* deleteUserArtist({ payload }) {
         },
       },
     });
-
-    console.log("RES: ", res.data.deleteArtist.bands.items);
 
     yield put(deleteUserArtistSuccess(res));
   } catch (error) {

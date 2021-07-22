@@ -26,6 +26,8 @@ import {
   getuserBandFailure,
   addArtistToBandSuccess,
   addArtistToBandFailure,
+  removeArtistFromBandSuccess,
+  removeArtistFromBandFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -252,6 +254,33 @@ export function* onAddArtistToBandStart() {
   yield takeLatest(BandActionTypes.ADD_ARTIST_TO_BAND_START, addArtistToBand);
 }
 
+export function* removeArtistFromBand({ payload }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.deleteArtistBandJoin,
+      variables: {
+        input: {
+          id: payload,
+        },
+      },
+    });
+
+    console.log(res);
+
+    yield put(removeArtistFromBandSuccess(res.data.deleteArtistBandJoin));
+  } catch (error) {
+    yield put(removeArtistFromBandFailure(error));
+  }
+}
+
+export function* onRemoveArtsitFromBandStart() {
+  yield takeLatest(
+    BandActionTypes.REMOVE_ARTIST_FROM_BAND_START,
+    removeArtistFromBand
+  );
+}
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
@@ -264,5 +293,6 @@ export function* bandSagas() {
     call(onUpdateUserBandStart),
     call(onGetUserBandStart),
     call(onAddArtistToBandStart),
+    call(onRemoveArtsitFromBandStart),
   ]);
 }
