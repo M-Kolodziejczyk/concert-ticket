@@ -77,21 +77,27 @@
         font-size: 1.5rem;
       }
 
-      .band {
-        display: flex;
-        flex-direction: column;
+      .member-container {
         border: 1px solid lightgray;
-        border-radius: 10px;
-        padding: 0 5px;
         margin-top: 10px;
+        border-radius: 10px;
+        padding: 5px;
 
-        &:hover {
-          color: slategray;
+        .band {
+          display: flex;
+          flex-direction: column;
+
+          &:hover {
+            color: slategray;
+          }
+
+          p {
+            margin: 0;
+            font-size: 1rem;
+          }
         }
 
-        p {
-          margin: 0;
-          font-size: 1rem;
+        .delete-container {
         }
       }
     }
@@ -199,12 +205,18 @@
       }
 
       .members {
-        .band {
-          .role-genre {
-            display: flex;
+        .member-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .band {
+            flex: 1;
+            .role-genre {
+              display: flex;
 
-            p {
-              flex: 1;
+              p {
+                flex: 1;
+              }
             }
           }
         }

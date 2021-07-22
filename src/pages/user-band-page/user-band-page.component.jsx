@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
+
 import {
   getBandImageStart,
   createInvitationStart,
   uploadBandImageStart,
   updateUserBandStart,
   getUserBandStart,
+  removeArtistFromBandStart,
 } from "../../redux/band/band.actions";
 
 import validateInvite from "../../validators/send-invite";
@@ -22,6 +24,7 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import FormInput from "../../components/form-input/form-input.component";
 import FormTextarea from "../../components/form-textarea/form-textarea.component";
 import AddArtist from "./components/add-artist.component";
+import DeleteModal from "../../components/delete-modal/delete-modal.component";
 
 import "./user-band-page.styles.scss";
 
@@ -139,26 +142,38 @@ const UserBandPage = ({ match }) => {
             <h4>Band members:</h4>
             {userBand.members.items.length > 0 &&
               userBand.members.items.map((member, i) => (
-                <Link
-                  to={`/artists/${member.artistID}`}
-                  className="band"
-                  key={i}
-                >
-                  <p>
-                    <strong>Name: </strong>
-                    {member.artist.name}
-                  </p>
-                  <div className="role-genre">
+                <div className="member-container">
+                  <Link
+                    to={`/artists/${member.artistID}`}
+                    className="band"
+                    key={i}
+                  >
                     <p>
-                      <strong>Role: </strong>
-                      {member.artist.role}
+                      <strong>Name: </strong>
+                      {member.artist.name}
                     </p>
-                    <p>
-                      <strong>Genre: </strong>
-                      {member.artist.genre}
-                    </p>
+                    <div className="role-genre">
+                      <p>
+                        <strong>Role: </strong>
+                        {member.artist.role}
+                      </p>
+                      <p>
+                        <strong>Genre: </strong>
+                        {member.artist.genre}
+                      </p>
+                    </div>
+                  </Link>
+                  <div className="delete-container">
+                    <DeleteModal
+                      title={`Are you sure you want to delete ${member.artist.name}}`}
+                      deleteConfirm="Delete"
+                      id={member.id}
+                      callback={removeArtistFromBandStart}
+                      successMessage={successMessage.deleteArtist}
+                      errorMessage={errorMessage.deleteArtist}
+                    />
                   </div>
-                </Link>
+                </div>
               ))}
           </div>
           <div className="invitation-container">
@@ -187,8 +202,14 @@ const UserBandPage = ({ match }) => {
               {userBand?.invitations &&
                 JSON.parse(userBand?.invitations).map((invitation, i) => (
                   <div className="invitation" key={i}>
-                    <p>Email: {invitation.email}</p>
-                    <p>Status: {invitation.status}</p>
+                    <p>
+                      <strong>Email: </strong>
+                      {invitation.email}
+                    </p>
+                    <p>
+                      <strong>Status: </strong>
+                      {invitation.status}
+                    </p>
                   </div>
                 ))}
             </div>
