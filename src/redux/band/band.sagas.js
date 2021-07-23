@@ -28,6 +28,8 @@ import {
   addArtistToBandFailure,
   removeArtistFromBandSuccess,
   removeArtistFromBandFailure,
+  removeBandSuccess,
+  removeBandFailure,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -266,8 +268,6 @@ export function* removeArtistFromBand({ payload }) {
       },
     });
 
-    console.log(res);
-
     yield put(removeArtistFromBandSuccess(res.data.deleteArtistBandJoin));
   } catch (error) {
     yield put(removeArtistFromBandFailure(error));
@@ -279,6 +279,63 @@ export function* onRemoveArtsitFromBandStart() {
     BandActionTypes.REMOVE_ARTIST_FROM_BAND_START,
     removeArtistFromBand
   );
+}
+
+export function* removeBand({ payload }) {
+  try {
+    yield Storage.remove(`band-image/${payload}-image`, {
+      level: "public",
+    });
+
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.deleteBand,
+      variables: {
+        input: {
+          id: payload,
+        },
+      },
+    });
+
+    const members = res.data.deleteBand.members.items;
+    const concerts = res.data.deleteBand.concerts.items;
+
+    if (members.length > 0) {
+      for (let member of members) {
+        yield API.graphql({
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+          query: mutations.deleteArtistBandJoin,
+          variables: {
+            input: {
+              id: member.id,
+            },
+          },
+        });
+      }
+    }
+
+    if (concerts.length > 0) {
+      for (let concert of concerts) {
+        yield API.graphql({
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+          query: mutations.deleteArtistBandJoin,
+          variables: {
+            input: {
+              id: concert.id,
+            },
+          },
+        });
+      }
+    }
+
+    yield put(removeBandSuccess(res.data.deleteBand));
+  } catch (error) {
+    yield put(removeBandFailure(error));
+  }
+}
+
+export function* onRemoveBandStart() {
+  yield takeLatest(BandActionTypes.REMOVE_BAND_START, removeBand);
 }
 
 export function* bandSagas() {
@@ -294,5 +351,6 @@ export function* bandSagas() {
     call(onGetUserBandStart),
     call(onAddArtistToBandStart),
     call(onRemoveArtsitFromBandStart),
+    call(onRemoveBandStart),
   ]);
 }

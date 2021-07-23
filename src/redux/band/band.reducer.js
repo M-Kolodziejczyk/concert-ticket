@@ -293,7 +293,6 @@ const bandReducer = (state = INITIAL_STATE, action) => {
       const members = state.userBands[
         action.payload.bandID
       ].members.items.filter((item) => item.id !== action.payload.id);
-      console.log("PAYLOAD: ", action.payload);
       return {
         ...state,
         formLoading: false,
@@ -318,6 +317,38 @@ const bandReducer = (state = INITIAL_STATE, action) => {
         successMessage: {},
         errorMessage: {
           removeArtist: "Failure to remove artist from band",
+        },
+      };
+    case BandActionTypes.REMOVE_BAND_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
+    case BandActionTypes.REMOVE_BAND_SUCCESS:
+      return {
+        ...state,
+        formLoading: false,
+        userBands: {
+          ...state.userBands,
+          [action.payload.id]: {
+            isDeleted: true,
+          },
+        },
+        userListBands: state.userListBands.filter(
+          (band) => band.id !== action.payload.id
+        ),
+        successMessage: {
+          removeBand: "Band has been removed",
+        },
+        errorMessage: {},
+      };
+    case BandActionTypes.REMOVE_BAND_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          removeBand: "Failure to remove band",
         },
       };
     default:

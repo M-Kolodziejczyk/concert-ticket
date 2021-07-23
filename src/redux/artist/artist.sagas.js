@@ -222,7 +222,6 @@ export function* deleteUserArtist({ payload }) {
     const bands = res.data.deleteArtist.bands.items;
     if (bands.length > 0) {
       for (let band of bands) {
-        console.log("BAND: ", band);
         yield API.graphql({
           authMode: "AMAZON_COGNITO_USER_POOLS",
           query: mutations.deleteArtistBandJoin,
