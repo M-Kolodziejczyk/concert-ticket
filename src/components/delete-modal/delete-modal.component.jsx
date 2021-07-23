@@ -16,7 +16,6 @@ const DeleteModal = ({
 
   const handleSubmit = () => {
     dispatch(callback(id));
-    console.log("1");
   };
 
   return (
