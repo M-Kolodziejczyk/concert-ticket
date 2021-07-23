@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 
@@ -10,6 +10,7 @@ import {
   updateUserBandStart,
   getUserBandStart,
   removeArtistFromBandStart,
+  removeBandStart,
 } from "../../redux/band/band.actions";
 
 import validateInvite from "../../validators/send-invite";
@@ -30,6 +31,7 @@ import "./user-band-page.styles.scss";
 
 const UserBandPage = ({ match }) => {
   const dispatch = useDispatch();
+  let history = useHistory();
   const bandId = match.params.id;
   const userBand = useSelector((state) => state.band.userBands[bandId]);
   const bandLoading = useSelector((state) => state.band.loading);
@@ -61,6 +63,12 @@ const UserBandPage = ({ match }) => {
     }
   }, [dispatch, bandImageUrl, userBand]);
 
+  useEffect(() => {
+    if (userBand?.isDeleted === true) {
+      history.push("/user/bands");
+    }
+  }, [userBand, history]);
+
   function checkIfArtistIsBandMember(members, artistId) {
     let isMember = false;
 
@@ -72,10 +80,11 @@ const UserBandPage = ({ match }) => {
 
     return isMember;
   }
+
   return (
     <div className="user-band-page">
       {(bandLoading || userLoading || formLoading) && <Spinner />}
-      {userBand && (
+      {userBand && Object.keys(userBand).length > 1 && (
         <div className="user-band-container">
           <div className="details-container">
             {bandImageUrl && (
@@ -84,9 +93,21 @@ const UserBandPage = ({ match }) => {
               </div>
             )}
             <div className="details">
-              <p>
-                <strong>{userBand.name}</strong>
-              </p>
+              <div className="name-wrapper">
+                <p className="name">
+                  <strong>{userBand.name}</strong>
+                </p>
+                <div className="delete-container">
+                  <DeleteModal
+                    title={`Are you sure you want to delete ${userBand.name}`}
+                    deleteConfirm="Delete"
+                    id={userBand.id}
+                    callback={removeBandStart}
+                    successMessage={successMessage.deleteBand}
+                    errorMessage={errorMessage.deleteBand}
+                  />
+                </div>
+              </div>
               <p>
                 <strong>Genre: </strong>
                 {userBand.genre}
@@ -142,7 +163,7 @@ const UserBandPage = ({ match }) => {
             <h4>Band members:</h4>
             {userBand.members.items.length > 0 &&
               userBand.members.items.map((member, i) => (
-                <div className="member-container">
+                <div className="member-container" key={i}>
                   <Link
                     to={`/artists/${member.artistID}`}
                     className="band"

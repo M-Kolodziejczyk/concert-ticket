@@ -22,6 +22,16 @@
         flex-direction: column;
         align-items: center;
 
+        .name-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .name {
+            order: 1;
+          }
+        }
+
         p {
           text-align: center;
           margin: 0;
@@ -95,9 +105,6 @@
             margin: 0;
             font-size: 1rem;
           }
-        }
-
-        .delete-container {
         }
       }
     }
@@ -181,6 +188,17 @@
         .details {
           width: 100%;
           align-items: flex-start;
+
+          .name-wrapper {
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .name {
+              order: unset;
+              text-align: left;
+            }
+          }
         }
       }
 
