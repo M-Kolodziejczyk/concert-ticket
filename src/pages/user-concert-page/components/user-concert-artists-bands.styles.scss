@@ -3,6 +3,7 @@
 
   .bands {
     margin-bottom: 20px;
+
     .title {
       font-size: 1.5rem;
       font-weight: 700;
@@ -13,10 +14,47 @@
       padding: 5px;
       border-radius: 10px;
       display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
 
-      span {
-        flex: 1;
-        font-size: 16px;
+      .band-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        span {
+          flex: 1;
+          font-size: 16px;
+        }
+      }
+
+      .delete-container {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .user-concert-artists-bands {
+    .bands {
+      .band {
+        flex-direction: row;
+        align-items: center;
+        .band-wrapper {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-concert-artists-bands {
+    .bands {
+      .band {
+        .band-wrapper {
+          flex-direction: row;
+        }
       }
     }
   }

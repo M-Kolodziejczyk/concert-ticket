@@ -972,49 +972,6 @@ export const deleteConcertBandJoin = /* GraphQL */ `
       bandID
       createdAt
       updatedAt
-      concert {
-        id
-        userName
-        identityId
-        name
-        date
-        venue
-        genres
-        description
-        keyImage
-        invitations
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
-      }
-      band {
-        id
-        userName
-        identityId
-        name
-        genre
-        description
-        keyImage
-        invitations
-        createdAt
-        updatedAt
-        owner
-        members {
-          nextToken
-        }
-        concerts {
-          nextToken
-        }
-      }
       owner
     }
   }

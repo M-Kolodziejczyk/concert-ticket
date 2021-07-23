@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+
 import { createConcertInvitationStart } from "../../../redux/concert/concert.actions";
 import validateInvite from "../../../validators/send-invite";
 
@@ -41,8 +42,14 @@ const UserConcertInvitation = ({ concertId }) => {
         {userConcert?.invitations &&
           JSON.parse(userConcert?.invitations).map((invitation, i) => (
             <div className="invitation" key={i}>
-              <p className="email">Email: {invitation.email}</p>
-              <p className="status">Status: {invitation.status}</p>
+              <p className="email">
+                <strong>Email: </strong>
+                {invitation.email}
+              </p>
+              <p className="status">
+                <strong>Status: </strong>
+                {invitation.status}
+              </p>
             </div>
           ))}
       </div>

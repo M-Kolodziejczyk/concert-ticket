@@ -53,6 +53,14 @@
       .invitation {
         flex-direction: row;
         justify-content: space-between;
+
+        .email {
+          flex: 2;
+        }
+
+        .status {
+          flex: 1;
+        }
       }
     }
   }

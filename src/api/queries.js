@@ -339,6 +339,7 @@ export const getUserConcert = /* GraphQL */ `
       owner
       bands {
         items {
+          id
           band {
             id
             name
