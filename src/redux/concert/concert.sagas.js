@@ -30,6 +30,8 @@ import {
   listConcertsWithLimitFailure,
   addBandToConcertSuccess,
   addBandToConcertFailure,
+  removeBandFromConcertSuccess,
+  removeBandFromConcertFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -310,6 +312,30 @@ export function* onAddBandToConcertStart() {
   );
 }
 
+export function* removeBandFromConcert({ payload }) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.deleteConcertBandJoin,
+      variables: {
+        input: {
+          id: payload,
+        },
+      },
+    });
+
+    yield put(removeBandFromConcertSuccess(res.data.deleteConcertBandJoin));
+  } catch (error) {
+    yield put(removeBandFromConcertFailure(error));
+  }
+}
+
+export function* onRemoveBandFromConcertStart() {
+  yield takeLatest(
+    ConcertActionTypes.RMOVE_BAND_FROM_CONCERT_START,
+    removeBandFromConcert
+  );
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
@@ -324,5 +350,6 @@ export function* concertSagas() {
     call(onCreatConcertTicketStart),
     call(onListConcertsWithLimitStart),
     call(onAddBandToConcertStart),
+    call(onRemoveBandFromConcertStart),
   ]);
 }

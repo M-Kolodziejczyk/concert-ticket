@@ -336,6 +336,41 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           addBandToConcert: "Failed to add Band to Concert",
         },
       };
+    case ConcertActionTypes.RMOVE_BAND_FROM_CONCERT_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
+    case ConcertActionTypes.RMOVE_BAND_FROM_CONCERT_SUCCESS:
+      const updatedBands = state.userConcerts[
+        action.payload.concertID
+      ].bands.items.filter((band) => band.id !== action.payload.id);
+      return {
+        ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.concertID]: {
+            ...state.userConcerts[action.payload.concertID],
+            bands: {
+              items: updatedBands,
+            },
+          },
+        },
+        successMessage: {
+          removeBand: "Band has been removed from concert",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.RMOVE_BAND_FROM_CONCERT_FAILURE:
+      return {
+        ...state,
+        loadingForm: false,
+        successMessage: {},
+        errorMessage: {
+          removeBand: "Failed to remove band from Concert",
+        },
+      };
     default:
       return state;
   }
