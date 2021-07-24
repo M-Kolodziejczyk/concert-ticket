@@ -24,14 +24,14 @@ const DeleteModal = ({
         type="button"
         className="btn btn-danger"
         data-bs-toggle="modal"
-        data-bs-target="#deleteModal"
+        data-bs-target={`#deleteModal-${id}`}
       >
         {deleteBtn || "Delete"}
       </button>
 
       <div
         className="modal fade"
-        id="deleteModal"
+        id={`deleteModal-${id}`}
         tabIndex="-1"
         aria-labelledby="deleteModalLabel"
         aria-hidden="true"
