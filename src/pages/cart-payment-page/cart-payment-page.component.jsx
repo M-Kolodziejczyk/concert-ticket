@@ -21,20 +21,21 @@ const promise = loadStripe(
 
 const CartPaymentPage = (props) => {
   const dispatch = useDispatch();
-  const order = useSelector((state) => state.order.order);
+  const orderId = props.match.params.id;
+  const userLoading = useSelector((state) => state.user.userLoading);
+  const order = useSelector((state) => state.order.userOrders[orderId]);
   const orderResponse = useSelector((state) => state.order.createOrderResponse);
   const loading = useSelector((state) => state.order.processPaymentLoading);
   const status = useSelector((state) => state.order.processPaymentStatus);
-  const orderId = props.match.params.id;
   const [endTime, setEndTime] = useState("");
   const [isClearOrderResponseLoading, setIsClearOrderResponseLoading] =
     useState(false);
 
   useEffect(() => {
-    if (Object.keys(order).length === 0 || order.id !== orderId) {
+    if ((!order || order.id !== orderId) && !userLoading) {
       dispatch(getOrderStart(orderId));
     }
-  }, [orderId, dispatch, order]);
+  }, [orderId, dispatch, order, userLoading]);
 
   useEffect(() => {
     if (order?.createdAt) {
@@ -67,7 +68,8 @@ const CartPaymentPage = (props) => {
 
   return (
     <div className="cart-payment-page">
-      {order.status === "PAID" ? (
+      {/* {false ? ( */}
+      {order && order.status === "PAID" ? (
         <h1>Your order is already paid!</h1>
       ) : (
         <>
@@ -149,3 +151,12 @@ const CartPaymentPage = (props) => {
 };
 
 export default CartPaymentPage;
+
+// useEffect(() => {
+//   if (
+//     (Object.keys(order).length === 0 || order.id !== orderId) &&
+//     !userLoading
+//   ) {
+//     dispatch(getOrderStart(orderId));
+//   }
+// }, [orderId, dispatch, order]);
