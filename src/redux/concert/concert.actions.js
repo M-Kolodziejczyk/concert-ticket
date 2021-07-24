@@ -200,3 +200,18 @@ export const removeBandFromConcertFailure = (error) => ({
   type: ConcertActionTypes.RMOVE_BAND_FROM_CONCERT_FAILURE,
   payload: error,
 });
+
+export const removeConcertStart = (id) => ({
+  type: ConcertActionTypes.REMOVE_CONCERT_START,
+  payload: id,
+});
+
+export const removeConcertSuccess = (res) => ({
+  type: ConcertActionTypes.REMOVE_CONCERT_SUCCESS,
+  payload: res,
+});
+
+export const removeConcertFailure = (error) => ({
+  type: ConcertActionTypes.REMOVE_CONCERT_FAILURE,
+  payload: error,
+});

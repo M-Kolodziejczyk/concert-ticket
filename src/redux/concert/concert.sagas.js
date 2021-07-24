@@ -32,6 +32,8 @@ import {
   addBandToConcertFailure,
   removeBandFromConcertSuccess,
   removeBandFromConcertFailure,
+  removeConcertSuccess,
+  removeConcertFailure,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -336,6 +338,42 @@ export function* onRemoveBandFromConcertStart() {
   );
 }
 
+export function* removeConcert({ payload }) {
+  try {
+    const res = yield API.graphql({
+      query: mutations.deleteConcert,
+      variables: {
+        input: {
+          id: payload,
+        },
+      },
+    });
+
+    const bands = res.data.deleteConcert.bands.items;
+    if (bands.length > 0) {
+      for (let band of bands) {
+        yield API.graphql({
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+          query: mutations.deleteConcertBandJoin,
+          variables: {
+            input: {
+              id: band.id,
+            },
+          },
+        });
+      }
+    }
+
+    yield put(removeConcertSuccess(res.data.deleteConcert));
+  } catch (error) {
+    yield put(removeConcertFailure(error));
+  }
+}
+
+export function* onRemoveConcertStart() {
+  yield takeLatest(ConcertActionTypes.REMOVE_CONCERT_START, removeConcert);
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
@@ -351,5 +389,6 @@ export function* concertSagas() {
     call(onListConcertsWithLimitStart),
     call(onAddBandToConcertStart),
     call(onRemoveBandFromConcertStart),
+    call(onRemoveConcertStart),
   ]);
 }

@@ -371,6 +371,38 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           removeBand: "Failed to remove band from Concert",
         },
       };
+    case ConcertActionTypes.REMOVE_CONCERT_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
+    case ConcertActionTypes.REMOVE_CONCERT_SUCCESS:
+      return {
+        ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.id]: {
+            isDeleted: true,
+          },
+        },
+        userListConcerts: state.userListConcerts.filter(
+          (concert) => concert.id !== action.payload.id
+        ),
+        successMessage: {
+          removeConcert: "Concert has been removed",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.REMOVE_CONCERT_FAILURE:
+      return {
+        ...state,
+        loadingForm: false,
+        successMessage: {},
+        errorMessage: {
+          removeConcert: "Failed to remove concert",
+        },
+      };
     default:
       return state;
   }
