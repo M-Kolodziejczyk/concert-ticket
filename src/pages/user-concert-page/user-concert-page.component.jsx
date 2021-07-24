@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
+
 import {
   getConcertImageStart,
   getUserConcertStart,
   uploadConcertImageStart,
+  removeConcertStart,
 } from "../../redux/concert/concert.actions";
 
 import useFileForm from "../../hooks/useFileForm";
@@ -18,23 +21,28 @@ import UserConcertEdit from "./components/user-concert-edit.component";
 import UserConcertInvitation from "./components/user-concert-invitation.component";
 import UserConcertArtistsBands from "./components/user-concert-artists-bands.component";
 import UserConcertAddBand from "./components/user-concert-add-band.component";
+import DeleteModal from "../../components/delete-modal/delete-modal.component";
 
 import "./user-concert-page.styles.scss";
 
 const UserConcertPage = ({ match }) => {
   const dispatch = useDispatch();
   const concertId = match.params.id;
+  let history = useHistory();
   const userConcert = useSelector(
     (state) => state.concert.userConcerts[concertId]
   );
   const loading = useSelector((state) => state.concert.loading);
   const loadingForm = useSelector((state) => state.concert.loadingForm);
+  const successMessage = useSelector((state) => state.concert.successMessage);
+  const errorMessage = useSelector((state) => state.concert.errorMessage);
   const userLoading = useSelector((state) => state.user.getUserLoading);
   const concertImageUrl = useSelector(
     (state) => state.concert.concertsImage[concertId]
   );
 
   const date = new Date(userConcert?.date);
+  console.log("Date: ", date);
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
     useFileForm(concertId, ["image/jpeg"], uploadConcertImageStart);
@@ -51,10 +59,16 @@ const UserConcertPage = ({ match }) => {
     }
   }, [concertId, dispatch, userConcert]);
 
+  useEffect(() => {
+    if (userConcert?.isDeleted === true) {
+      history.push("/user/concerts");
+    }
+  }, [userConcert, history]);
+
   return (
     <div className="user-concert-page">
       {(loading || userLoading || loadingForm) && <Spinner />}
-      {userConcert && (
+      {userConcert && Object.keys(userConcert).length > 1 && (
         <div className="container">
           <div className="details-container">
             {concertImageUrl && (
@@ -121,6 +135,17 @@ const UserConcertPage = ({ match }) => {
           <UserConcertArtistsBands concertId={concertId} />
           <UserConcertTicket concertId={concertId} />
           <UserConcertInvitation concertId={concertId} />
+          <div className="delete-container">
+            <DeleteModal
+              title={`Are you sure you want to delete ${userConcert.name}`}
+              deleteBtn="Delete Concert"
+              deleteConfirm="Delete"
+              id={concertId}
+              callback={removeConcertStart}
+              successMessage={successMessage.removeConcert}
+              errorMessage={errorMessage.removeConcert}
+            />
+          </div>
         </div>
       )}
     </div>
