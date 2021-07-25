@@ -111,32 +111,36 @@ const ConcertPage = () => {
       <div className="tickets-container">
         <h3>Tickets:</h3>
         {concertTickets &&
-          concertTickets.map((ticket) => {
-            return (
-              <div key={ticket.id} className="ticket">
-                <p className="desc">{ticket.description}</p>
-                <p>ID: {ticket.id}</p>
-                <p>
-                  <strong>Type: </strong> {ticket.type}
-                </p>
-                <p>
-                  <strong>Price:</strong> {ticket.price}
-                </p>
-                <button className="cart-btn" onClick={() => addToCart(ticket)}>
-                  <Cart /> Add To Cart
-                </button>
-                {errorMessage[ticket.id] && (
-                  <p className="error">{errorMessage[ticket.id]}</p>
-                )}
-                {error[ticket.id] && (
-                  <p className="error">{error[ticket.id]}</p>
-                )}
-                {addToCartMessage[ticket.id] && (
-                  <p className="success">{addToCartMessage[ticket.id]}</p>
-                )}
-              </div>
-            );
-          })}
+          concertTickets
+            .filter((ticket) => ticket.quantity > 0)
+            .map((ticket) => {
+              return (
+                <div key={ticket.id} className="ticket">
+                  <p className="desc">{ticket.description}</p>
+                  <p>
+                    <strong>Type: </strong> {ticket.type}
+                  </p>
+                  <p>
+                    <strong>Price:</strong> {ticket.price}
+                  </p>
+                  <button
+                    className="cart-btn"
+                    onClick={() => addToCart(ticket)}
+                  >
+                    <Cart /> Add To Cart
+                  </button>
+                  {errorMessage[ticket.id] && (
+                    <p className="error">{errorMessage[ticket.id]}</p>
+                  )}
+                  {error[ticket.id] && (
+                    <p className="error">{error[ticket.id]}</p>
+                  )}
+                  {addToCartMessage[ticket.id] && (
+                    <p className="success">{addToCartMessage[ticket.id]}</p>
+                  )}
+                </div>
+              );
+            })}
       </div>
     </div>
   );
