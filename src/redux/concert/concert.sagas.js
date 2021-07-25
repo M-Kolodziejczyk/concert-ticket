@@ -26,6 +26,8 @@ import {
   updateUserConcertFailure,
   createConcertTicketSuccess,
   createConcertTicketFailure,
+  deleteConcertTicketSuccess,
+  deleteConcertTicketFailure,
   listConcertsWithLimitSuccess,
   listConcertsWithLimitFailure,
   addBandToConcertSuccess,
@@ -267,6 +269,31 @@ export function* onCreatConcertTicketStart() {
   );
 }
 
+export function* deleteConcertTicket({ payload }) {
+  try {
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: mutations.deleteTicket,
+      variables: {
+        input: {
+          id: payload,
+        },
+      },
+    });
+
+    yield put(deleteConcertTicketSuccess(res.data.deleteTicket));
+  } catch (error) {
+    yield put(deleteConcertTicketFailure(error));
+  }
+}
+
+export function* onDeleteConcertTicketStart() {
+  yield takeLatest(
+    ConcertActionTypes.DELETE_CONCERT_TICKET_START,
+    deleteConcertTicket
+  );
+}
+
 export function* listConcertsWithLimit({ payload }) {
   try {
     const res = yield API.graphql({
@@ -364,6 +391,21 @@ export function* removeConcert({ payload }) {
       }
     }
 
+    const tickets = res.data.deleteConcert.tickets.items;
+    if (tickets.length > 0) {
+      for (let ticket of tickets) {
+        yield API.graphql({
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+          query: mutations.deleteTicket,
+          variables: {
+            input: {
+              id: ticket.id,
+            },
+          },
+        });
+      }
+    }
+
     yield put(removeConcertSuccess(res.data.deleteConcert));
   } catch (error) {
     yield put(removeConcertFailure(error));
@@ -386,6 +428,7 @@ export function* concertSagas() {
     call(onGetUserConcertStart),
     call(onUpdateUserConcertStart),
     call(onCreatConcertTicketStart),
+    call(onDeleteConcertTicketStart),
     call(onListConcertsWithLimitStart),
     call(onAddBandToConcertStart),
     call(onRemoveBandFromConcertStart),

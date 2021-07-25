@@ -42,7 +42,6 @@ const UserConcertPage = ({ match }) => {
   );
 
   const date = new Date(userConcert?.date);
-  console.log("Date: ", date);
 
   const { handleChangeImage, handleSubmitImage, imageUrl, imageErrors } =
     useFileForm(concertId, ["image/jpeg"], uploadConcertImageStart);

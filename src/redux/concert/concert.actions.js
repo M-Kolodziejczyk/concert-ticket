@@ -156,6 +156,21 @@ export const createConcertTicketFailure = (error) => ({
   payload: error,
 });
 
+export const deleteConcertTicketStart = (id) => ({
+  type: ConcertActionTypes.DELETE_CONCERT_TICKET_START,
+  payload: id,
+});
+
+export const deleteConcertTicketSuccess = (res) => ({
+  type: ConcertActionTypes.DELETE_CONCERT_TICKET_SUCCESS,
+  payload: res,
+});
+
+export const deleteConcertTicketFailure = (error) => ({
+  type: ConcertActionTypes.DELETE_CONCERT_TICKET_FAILURE,
+  payload: error,
+});
+
 export const listConcertsWithLimitStart = (limit) => ({
   type: ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_START,
   payload: limit,

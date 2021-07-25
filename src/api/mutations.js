@@ -488,6 +488,25 @@ export const deleteConcert = /* GraphQL */ `
         }
         nextToken
       }
+      tickets {
+        items {
+          id
+          eventName
+          description
+          price
+          startDate
+          endDate
+          date
+          venue
+          type
+          quantity
+          concertID
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;

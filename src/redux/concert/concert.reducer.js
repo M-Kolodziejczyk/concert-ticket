@@ -278,6 +278,41 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           createTicket: "ticket create failure",
         },
       };
+    case ConcertActionTypes.DELETE_CONCERT_TICKET_START:
+      return {
+        ...state,
+        loadingForm: true,
+      };
+    case ConcertActionTypes.DELETE_CONCERT_TICKET_SUCCESS:
+      const updatedTickets = state.userConcerts[
+        action.payload.concertID
+      ].tickets.items.filter((item) => item.id !== action.payload.id);
+      return {
+        ...state,
+        loadingForm: false,
+        userConcerts: {
+          ...state.userConcerts,
+          [action.payload.concertID]: {
+            ...state.userConcerts[action.payload.concertID],
+            tickets: {
+              items: updatedTickets,
+            },
+          },
+        },
+        successMessage: {
+          deleteTicket: "Ticket has been deleted successfully",
+        },
+        errorMessage: {},
+      };
+    case ConcertActionTypes.DELETE_CONCERT_TICKET_FAILURE:
+      return {
+        ...state,
+        loadingForm: false,
+        successMessage: {},
+        errorMessage: {
+          deleteTicket: "ticket delete failure",
+        },
+      };
     case ConcertActionTypes.LIST_CONCERTS_WITH_LIMIT_START:
       return {
         ...state,
@@ -403,6 +438,7 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           removeConcert: "Failed to remove concert",
         },
       };
+
     default:
       return state;
   }

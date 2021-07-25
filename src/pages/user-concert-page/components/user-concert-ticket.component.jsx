@@ -2,13 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
-import { createConcertTicketStart } from "../../../redux/concert/concert.actions";
 
+import {
+  createConcertTicketStart,
+  deleteConcertTicketStart,
+} from "../../../redux/concert/concert.actions";
 import validate from "../../../validators/ticket";
 import useForm from "../../../hooks/useForm";
 
 import CustomButton from "../../../components/custom-button/custom-button.component";
 import FormInput from "../../../components/form-input/form-input.component";
+import DeleteModal from "../../../components/delete-modal/delete-modal.component";
 
 import "./user-concert-ticket.styles.scss";
 
@@ -158,6 +162,17 @@ const UserConcertTicket = ({ concertId }) => {
                 <strong>Description: </strong>
                 {ticket.description}
               </p>
+              <div className="delete-container">
+                <DeleteModal
+                  title={`Are you sure you want to delete ${ticket.eventName}`}
+                  deleteBtn="Delete Concert"
+                  deleteConfirm="Delete"
+                  id={ticket.id}
+                  callback={deleteConcertTicketStart}
+                  successMessage={successMessage.deleteTicket}
+                  errorMessage={errorMessage.deleteTicket}
+                />
+              </div>
             </div>
           ))}
       </div>
