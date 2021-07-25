@@ -27,6 +27,12 @@ const UserOrderPage = ({ match }) => {
       {loading && <Spinner />}
       {userOrder && (
         <div className="order-container">
+          {userOrder.status === "NEW" && (
+            <Link to={`/cart/payment/${userOrder.id}`} className="pay-link">
+              {" "}
+              Go to Pay
+            </Link>
+          )}
           <div className="details">
             <p>
               <strong>Name: </strong>
@@ -38,20 +44,18 @@ const UserOrderPage = ({ match }) => {
             </p>
             <p>
               <strong>Total: </strong>
-              {userOrder.total}$
+              {userOrder.total.toFixed(2)}$
             </p>
             <p>
               <strong>Status: </strong>
               {userOrder.status}
             </p>
           </div>
-          {userOrder.status === "NEW" && (
-            <Link to={`/cart/payment/${userOrder.id}`}> Go to Pay</Link>
-          )}
-          <div className="tickets-container">
-            <h2>Tickets</h2>
-            {userOrder.tickets &&
-              userOrder.tickets.items.map((ticket) => (
+          {userOrder.status === "PAID" &&
+            userOrder.tickets &&
+            userOrder.tickets.items.map((ticket) => (
+              <div className="tickets-container">
+                <h2>Tickets</h2>
                 <div className="ticket" key={ticket.id}>
                   <div className="ticket-header">
                     <p className="name">
@@ -74,7 +78,7 @@ const UserOrderPage = ({ match }) => {
                     </p>
                     <p>
                       <strong>price: </strong>
-                      {ticket.ticket.price}
+                      {ticket.ticket.price.toFixed(2)}$
                     </p>
                     <div className="ticket-generator">
                       <strong>
@@ -83,8 +87,8 @@ const UserOrderPage = ({ match }) => {
                     </div>
                   </div>
                 </div>
-              ))}
-          </div>
+              </div>
+            ))}
         </div>
       )}
     </div>
