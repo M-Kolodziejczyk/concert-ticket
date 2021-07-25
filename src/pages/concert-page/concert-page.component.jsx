@@ -121,7 +121,7 @@ const ConcertPage = () => {
                     <strong>Type: </strong> {ticket.type}
                   </p>
                   <p>
-                    <strong>Price:</strong> {ticket.price}
+                    <strong>Price:</strong> {ticket.price.toFixed(2)}$
                   </p>
                   <button
                     className="cart-btn"

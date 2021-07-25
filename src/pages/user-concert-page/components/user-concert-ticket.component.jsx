@@ -132,8 +132,8 @@ const UserConcertTicket = ({ concertId }) => {
                   {ticket.type}
                 </p>
                 <p>
-                  <strong>Prrice: </strong>
-                  {ticket.price}
+                  <strong>Price: </strong>
+                  {ticket.price.toFixed(2)}$
                 </p>
                 <p>
                   <strong>Quantity: </strong>

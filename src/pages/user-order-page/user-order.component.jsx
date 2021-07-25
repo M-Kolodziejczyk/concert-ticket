@@ -51,11 +51,11 @@ const UserOrderPage = ({ match }) => {
               {userOrder.status}
             </p>
           </div>
-          {userOrder.status === "PAID" &&
-            userOrder.tickets &&
-            userOrder.tickets.items.map((ticket) => (
-              <div className="tickets-container">
-                <h2>Tickets</h2>
+          {userOrder.status === "PAID" && userOrder.tickets && (
+            <div className="tickets-container">
+              <h2>Tickets:</h2>
+
+              {userOrder.tickets.items.map((ticket) => (
                 <div className="ticket" key={ticket.id}>
                   <div className="ticket-header">
                     <p className="name">
@@ -87,8 +87,9 @@ const UserOrderPage = ({ match }) => {
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -97,7 +97,7 @@ const TicketGenerator = ({ ticket }) => {
           </View>
           <View style={styles.section}>
             <Text style={styles.type}>{ticket.ticket.type}</Text>
-            <Text style={styles.price}>{ticket.ticket.price} $</Text>
+            <Text style={styles.price}>{ticket.ticket.price.toFixed(2)}$</Text>
           </View>
 
           <Text style={styles.event}>{ticket.ticket.eventName}</Text>
