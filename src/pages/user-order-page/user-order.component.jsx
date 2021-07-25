@@ -60,25 +60,25 @@ const UserOrderPage = ({ match }) => {
                   <div className="ticket-header">
                     <p className="name">
                       <strong>Event: </strong>
-                      {ticket.ticket.eventName}
+                      {ticket.eventName}
                     </p>
                     <p>
                       <strong>Date: </strong>
-                      {format(new Date(ticket.ticket.date), "MMM d Y")}
+                      {format(new Date(ticket.date), "MMM d Y")}
                     </p>
                     <p>
                       <strong>Venue: </strong>
-                      {ticket.ticket.venue}
+                      {ticket.venue}
                     </p>
                   </div>
                   <div className="ticket-body">
                     <p className="type">
                       <strong>Type: </strong>
-                      {ticket.ticket.type}
+                      {ticket.type}
                     </p>
                     <p>
                       <strong>price: </strong>
-                      {ticket.ticket.price.toFixed(2)}$
+                      {ticket.price.toFixed(2)}$
                     </p>
                     <div className="ticket-generator">
                       <strong>

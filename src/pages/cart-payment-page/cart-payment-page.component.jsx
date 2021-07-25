@@ -100,21 +100,21 @@ const CartPaymentPage = (props) => {
                     <div className="ticket-header">
                       <p className="event">
                         <strong>Event: </strong>
-                        {ticket.ticket.eventName}
+                        {ticket.event}
                       </p>
                       <p className="type">
                         <strong>Type: </strong>
-                        {ticket.ticket.type}
+                        {ticket.type}
                       </p>
                     </div>
                     <div className="ticket-body">
                       <p className="venue">
                         <strong>Venue: </strong>
-                        {ticket.ticket.venue}
+                        {ticket.venue}
                       </p>
                       <p className="price">
                         <strong>Price: </strong>
-                        {ticket.ticket.price.toFixed(2)}$
+                        {ticket.price.toFixed(2)}$
                       </p>
                     </div>
                   </div>
