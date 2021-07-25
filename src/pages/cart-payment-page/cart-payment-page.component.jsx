@@ -68,7 +68,6 @@ const CartPaymentPage = (props) => {
 
   return (
     <div className="cart-payment-page">
-      {/* {false ? ( */}
       {order && order.status === "PAID" ? (
         <h1>Your order is already paid!</h1>
       ) : (
@@ -115,7 +114,7 @@ const CartPaymentPage = (props) => {
                       </p>
                       <p className="price">
                         <strong>Price: </strong>
-                        {ticket.ticket.price}
+                        {ticket.ticket.price.toFixed(2)}$
                       </p>
                     </div>
                   </div>
