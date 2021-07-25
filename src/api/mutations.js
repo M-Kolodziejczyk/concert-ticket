@@ -1145,45 +1145,8 @@ export const updateTicket = /* GraphQL */ `
       type
       quantity
       concertID
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      concert {
-        id
-        userName
-        identityId
-        name
-        date
-        venue
-        genres
-        description
-        keyImage
-        invitations
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -1205,45 +1168,8 @@ export const deleteTicket = /* GraphQL */ `
       type
       quantity
       concertID
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      concert {
-        id
-        userName
-        identityId
-        name
-        date
-        venue
-        genres
-        description
-        keyImage
-        invitations
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -1255,61 +1181,17 @@ export const createTicketOrder = /* GraphQL */ `
   ) {
     createTicketOrder(input: $input, condition: $condition) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
-      order {
-        id
-        customer
-        userName
-        status
-        stripeIntentID
-        total
-        createdAt
-        tickets {
-          nextToken
-        }
-        updatedAt
-        userID
-      }
+      event
+      type
+      date
+      price
+      venue
       createdAt
       updatedAt
-      ticket {
-        id
-        eventName
-        description
-        price
-        startDate
-        endDate
-        date
-        venue
-        type
-        quantity
-        concertID
-        orders {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          description
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
     }
   }
 `;
@@ -1320,61 +1202,17 @@ export const updateTicketOrder = /* GraphQL */ `
   ) {
     updateTicketOrder(input: $input, condition: $condition) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
-      order {
-        id
-        customer
-        userName
-        status
-        stripeIntentID
-        total
-        createdAt
-        tickets {
-          nextToken
-        }
-        updatedAt
-        userID
-      }
+      event
+      type
+      date
+      price
+      venue
       createdAt
       updatedAt
-      ticket {
-        id
-        eventName
-        description
-        price
-        startDate
-        endDate
-        date
-        venue
-        type
-        quantity
-        concertID
-        orders {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          description
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
     }
   }
 `;
@@ -1385,61 +1223,17 @@ export const deleteTicketOrder = /* GraphQL */ `
   ) {
     deleteTicketOrder(input: $input, condition: $condition) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
-      order {
-        id
-        customer
-        userName
-        status
-        stripeIntentID
-        total
-        createdAt
-        tickets {
-          nextToken
-        }
-        updatedAt
-        userID
-      }
+      event
+      type
+      date
+      price
+      venue
       createdAt
       updatedAt
-      ticket {
-        id
-        eventName
-        description
-        price
-        startDate
-        endDate
-        date
-        venue
-        type
-        quantity
-        concertID
-        orders {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          description
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
     }
   }
 `;
@@ -1456,19 +1250,6 @@ export const createOrder = /* GraphQL */ `
       stripeIntentID
       total
       createdAt
-      tickets {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       updatedAt
       userID
     }
@@ -1487,19 +1268,6 @@ export const updateOrder = /* GraphQL */ `
       stripeIntentID
       total
       createdAt
-      tickets {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       updatedAt
       userID
     }
@@ -1518,19 +1286,6 @@ export const deleteOrder = /* GraphQL */ `
       stripeIntentID
       total
       createdAt
-      tickets {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       updatedAt
       userID
     }

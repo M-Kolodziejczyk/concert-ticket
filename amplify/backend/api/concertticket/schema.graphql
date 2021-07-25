@@ -179,11 +179,15 @@ type TicketOrder
     ]
   ) {
   id: ID!
-  ticketID: ID!
-  orderID: ID!
   userID: ID!
-  price: Float
+  orderID: ID!
+  ticketID: ID!
   fullName: String!
+  event: String!
+  type: String!
+  date: AWSDateTime!
+  price: Float!
+  venue: String!
   ticket: Ticket @connection(fields: ["ticketID"])
   order: Order @connection(fields: ["orderID"])
 }

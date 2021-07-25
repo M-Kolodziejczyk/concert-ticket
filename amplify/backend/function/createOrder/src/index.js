@@ -90,11 +90,15 @@ async function createTicketOrder(event, date, orderID) {
             Item: {
               __typename: "TicketOrder",
               id: uuid.v4(),
-              ticketID: res.ticketID,
-              orderID: orderID,
               userID: event.identity.claims.username,
-              price: res.price,
+              orderID: orderID,
+              ticketID: res.ticketID,
               fullName: event.arguments.input.fullName,
+              event: res.event,
+              type: res.type,
+              date: res.date,
+              price: res.price,
+              venue: res.venue,
               createdAt: date,
               updatedAt: date,
             },
@@ -143,6 +147,10 @@ async function updateTicketIfAvailable(id) {
       ConditionalCheckFailedException: false,
       ticketID: res.Attributes.id,
       price: res.Attributes.price,
+      event: res.Attributes.eventName,
+      type: res.Attributes.type,
+      date: res.Attributes.date,
+      venue: res.Attributes.venue,
     };
   } catch (error) {
     if (error.code === "ConditionalCheckFailedException") {

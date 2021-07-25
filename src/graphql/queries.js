@@ -143,11 +143,15 @@ export const getTicketOrder = /* GraphQL */ `
   query GetTicketOrder($id: ID!) {
     getTicketOrder(id: $id) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
+      event
+      type
+      date
+      price
+      venue
       order {
         id
         customer
@@ -210,11 +214,15 @@ export const listTicketOrders = /* GraphQL */ `
     listTicketOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        ticketID
-        orderID
         userID
-        price
+        orderID
+        ticketID
         fullName
+        event
+        type
+        date
+        price
+        venue
         order {
           id
           customer
@@ -262,11 +270,15 @@ export const getOrder = /* GraphQL */ `
       tickets {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }
@@ -650,11 +662,15 @@ export const getTicket = /* GraphQL */ `
       orders {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }

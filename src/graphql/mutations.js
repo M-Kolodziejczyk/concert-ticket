@@ -1239,11 +1239,15 @@ export const createTicket = /* GraphQL */ `
       orders {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }
@@ -1299,11 +1303,15 @@ export const updateTicket = /* GraphQL */ `
       orders {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }
@@ -1359,11 +1367,15 @@ export const deleteTicket = /* GraphQL */ `
       orders {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }
@@ -1406,11 +1418,15 @@ export const createTicketOrder = /* GraphQL */ `
   ) {
     createTicketOrder(input: $input, condition: $condition) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
+      event
+      type
+      date
+      price
+      venue
       order {
         id
         customer
@@ -1471,11 +1487,15 @@ export const updateTicketOrder = /* GraphQL */ `
   ) {
     updateTicketOrder(input: $input, condition: $condition) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
+      event
+      type
+      date
+      price
+      venue
       order {
         id
         customer
@@ -1536,11 +1556,15 @@ export const deleteTicketOrder = /* GraphQL */ `
   ) {
     deleteTicketOrder(input: $input, condition: $condition) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
+      event
+      type
+      date
+      price
+      venue
       order {
         id
         customer
@@ -1610,11 +1634,15 @@ export const createOrder = /* GraphQL */ `
       tickets {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }
@@ -1641,11 +1669,15 @@ export const updateOrder = /* GraphQL */ `
       tickets {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }
@@ -1672,11 +1704,15 @@ export const deleteOrder = /* GraphQL */ `
       tickets {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
         }

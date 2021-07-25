@@ -67,61 +67,17 @@ export const getTicketOrder = /* GraphQL */ `
   query GetTicketOrder($id: ID!) {
     getTicketOrder(id: $id) {
       id
-      ticketID
-      orderID
       userID
-      price
+      orderID
+      ticketID
       fullName
-      order {
-        id
-        customer
-        userName
-        status
-        stripeIntentID
-        total
-        createdAt
-        tickets {
-          nextToken
-        }
-        updatedAt
-        userID
-      }
+      event
+      type
+      date
+      price
+      venue
       createdAt
       updatedAt
-      ticket {
-        id
-        eventName
-        description
-        price
-        startDate
-        endDate
-        date
-        venue
-        type
-        quantity
-        concertID
-        orders {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          description
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
-      }
     }
   }
 `;
@@ -134,40 +90,17 @@ export const listTicketOrders = /* GraphQL */ `
     listTicketOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        ticketID
-        orderID
         userID
-        price
+        orderID
+        ticketID
         fullName
-        order {
-          id
-          customer
-          userName
-          status
-          stripeIntentID
-          total
-          createdAt
-          updatedAt
-          userID
-        }
+        event
+        type
+        date
+        price
+        venue
         createdAt
         updatedAt
-        ticket {
-          id
-          eventName
-          description
-          price
-          startDate
-          endDate
-          date
-          venue
-          type
-          quantity
-          concertID
-          createdAt
-          updatedAt
-          owner
-        }
       }
       nextToken
     }
@@ -186,21 +119,17 @@ export const getOrder = /* GraphQL */ `
       tickets {
         items {
           id
-          ticketID
-          orderID
           userID
-          price
+          orderID
+          ticketID
           fullName
+          event
+          type
+          date
+          price
+          venue
           createdAt
           updatedAt
-          ticket {
-            eventName
-            description
-            date
-            venue
-            type
-            price
-          }
         }
         nextToken
       }
@@ -218,17 +147,17 @@ export const listOrders = /* GraphQL */ `
     listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        customer
-        userName
-        status
-        stripeIntentID
-        total
-        createdAt
-        tickets {
-          nextToken
-        }
-        updatedAt
         userID
+        orderID
+        ticketID
+        fullName
+        event
+        type
+        date
+        price
+        venue
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -639,45 +568,8 @@ export const getTicket = /* GraphQL */ `
       type
       quantity
       concertID
-      orders {
-        items {
-          id
-          ticketID
-          orderID
-          userID
-          price
-          fullName
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
-      concert {
-        id
-        userName
-        identityId
-        name
-        date
-        venue
-        genres
-        description
-        keyImage
-        invitations
-        createdAt
-        updatedAt
-        owner
-        bands {
-          nextToken
-        }
-        artists {
-          nextToken
-        }
-        tickets {
-          nextToken
-        }
-      }
       owner
     }
   }
@@ -701,26 +593,8 @@ export const listTickets = /* GraphQL */ `
         type
         quantity
         concertID
-        orders {
-          nextToken
-        }
         createdAt
         updatedAt
-        concert {
-          id
-          userName
-          identityId
-          name
-          date
-          venue
-          genres
-          description
-          keyImage
-          invitations
-          createdAt
-          updatedAt
-          owner
-        }
         owner
       }
       nextToken
