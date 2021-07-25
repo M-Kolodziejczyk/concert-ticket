@@ -87,20 +87,20 @@ const TicketGenerator = ({ ticket }) => {
         <View style={styles.view}>
           <View style={styles.header}>
             <View style={styles.venue}>
-              <Text style={styles.a}>{ticket.ticket.venue}</Text>
+              <Text style={styles.a}>{ticket.venue}</Text>
             </View>
             <View style={styles.date}>
               <Text style={styles.a}>
-                {format(new Date(ticket.ticket.date), "MMMM d Y, H:mm")}
+                {format(new Date(ticket.date), "MMMM d Y, H:mm")}
               </Text>
             </View>
           </View>
           <View style={styles.section}>
-            <Text style={styles.type}>{ticket.ticket.type}</Text>
-            <Text style={styles.price}>{ticket.ticket.price.toFixed(2)}$</Text>
+            <Text style={styles.type}>{ticket.type}</Text>
+            <Text style={styles.price}>{ticket.price.toFixed(2)}$</Text>
           </View>
 
-          <Text style={styles.event}>{ticket.ticket.eventName}</Text>
+          <Text style={styles.event}>{ticket.event}</Text>
           <Text style={styles.name}>{ticket.fullName}</Text>
           <Text style={styles.id}>{ticket.id}</Text>
         </View>
