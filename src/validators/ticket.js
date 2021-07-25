@@ -11,7 +11,7 @@ const validate = (values) => {
 
   if (!values.price) {
     errors.price = "Price is required";
-  } else if (values.price >= 1) {
+  } else if (Number(values.price) < 1) {
     errors.price = "Price must be at least 1.00";
   }
 
@@ -25,7 +25,7 @@ const validate = (values) => {
 
   if (!values.quantity) {
     errors.quantity = "Quantity is required";
-  } else if (values.quantity > 0) {
+  } else if (Number(values.quantity) <= 0) {
     errors.quantity = "Quantity must be higher than 0";
   }
 
