@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "auth": {
+      "concertticket08f3b569": [
+        "read",
+        "delete"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "read",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

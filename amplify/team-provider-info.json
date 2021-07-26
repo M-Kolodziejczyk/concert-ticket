@@ -61,6 +61,10 @@
         "processPayment": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
           "s3Key": "amplify-builds/processPayment-71446a58543648475a59-build.zip"
+        },
+        "delteAccount": {
+          "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
+          "s3Key": "amplify-builds/delteAccount-696c7a39695839436e4d-build.zip"
         }
       }
     }
