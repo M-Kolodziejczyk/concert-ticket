@@ -13,6 +13,67 @@ export const getUser = /* GraphQL */ `
     }
   }
 `;
+export const getFullUser = /* GraphQL */ `
+  query GetFullUser($email: String!) {
+    getUser(email: $email) {
+      email
+      name
+      artistID
+      createdAt
+      updatedAt
+      owner
+      concerts {
+        items {
+          id
+          userName
+          identityId
+          name
+          date
+          venue
+          genres
+          description
+          keyImage
+          invitations
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      bands {
+        items {
+          id
+          userName
+          identityId
+          name
+          genre
+          description
+          keyImage
+          invitations
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      artist {
+        id
+        identityId
+        name
+        description
+        genre
+        role
+        createdAt
+        updatedAt
+        owner
+        bands {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+
 export const listUsers = /* GraphQL */ `
   query ListUsers(
     $email: String

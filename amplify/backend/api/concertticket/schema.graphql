@@ -299,4 +299,7 @@ type Mutation {
 
   processPayment(input: ProcessPaymentInput!): String
     @function(name: "processPayment-${env}")
+
+  delteAccount(userName: String, email: String): String
+    @function(name: "delteAccount-${env}")
 }

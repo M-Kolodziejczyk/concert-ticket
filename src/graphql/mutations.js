@@ -67,6 +67,11 @@ export const processPayment = /* GraphQL */ `
     processPayment(input: $input)
   }
 `;
+export const delteAccount = /* GraphQL */ `
+  mutation DelteAccount($userName: String, $email: String) {
+    delteAccount(userName: $userName, email: $email)
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
