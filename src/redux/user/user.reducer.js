@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   userLoading: true,
   getUserLoading: false,
   isLogged: false,
+  isAccountDeleted: false,
   errorMessage: {},
   successMessage: {},
   user: {},
@@ -14,10 +15,17 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case UserActionTypes.LOAD_USER_START:
+      return {
+        ...state,
+        isAccountDeleted: false,
+      };
     case UserActionTypes.SIGN_UP_START:
       return {
         ...state,
         formLoading: true,
+        successMessage: {},
+        errorMessage: {},
       };
     case UserActionTypes.SIGN_UP_SUCCESS:
       return {
@@ -63,6 +71,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         formLoading: true,
+        isAccountDeleted: false,
       };
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
@@ -74,6 +83,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         successMessage: { signin: "You have signed in successfully" },
         isLogged: true,
         userLoading: false,
+        isAccountDeleted: false,
       };
     case UserActionTypes.SIGN_IN_FAILURE:
       return {
@@ -228,6 +238,42 @@ const userReducer = (state = INITIAL_STATE, action) => {
         user: {
           ...state.user,
           artistID: null,
+        },
+      };
+    case UserActionTypes.DELETE_USER_START:
+      return {
+        ...state,
+        formLoading: true,
+      };
+    case UserActionTypes.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        formLoading: false,
+        isLogged: false,
+        currentUser: null,
+        user: {},
+        isAccountDeleted: action.payload.body.isUserDelete,
+        successMessage: {
+          deleteUser: "User has been deleted successfully.",
+        },
+        errorMessage: {},
+      };
+    case UserActionTypes.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          deleteUser: "Failed to delete user",
+        },
+      };
+    case UserActionTypes.DELETE_USER_REQUIREMENTS_FAILURE:
+      return {
+        ...state,
+        formLoading: false,
+        successMessage: {},
+        errorMessage: {
+          deleteUser: action.payload.message,
         },
       };
     default:

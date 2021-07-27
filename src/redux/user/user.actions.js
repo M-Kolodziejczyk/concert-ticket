@@ -149,3 +149,22 @@ export const addArtistId = (id) => ({
 export const removeArtistId = () => ({
   type: UserActionTypes.REMOVE_ARTIST_ID,
 });
+
+export const deleteUserStart = () => ({
+  type: UserActionTypes.DELETE_USER_START,
+});
+
+export const deleteUserSuccess = (res) => ({
+  type: UserActionTypes.DELETE_USER_SUCCESS,
+  payload: res,
+});
+
+export const deleteUserFailure = (error) => ({
+  type: UserActionTypes.DELETE_USER_FAILURE,
+  payload: error,
+});
+
+export const deleteUserRequirementsFailure = (res) => ({
+  type: UserActionTypes.DELETE_USER_REQUIREMENTS_FAILURE,
+  payload: res,
+});

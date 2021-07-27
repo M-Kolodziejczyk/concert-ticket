@@ -27,6 +27,9 @@ import {
   changePasswordFailure,
   addArtistId,
   removeArtistId,
+  deleteUserSuccess,
+  deleteUserFailure,
+  deleteUserRequirementsFailure,
 } from "./user.actions";
 
 export function* loadUser() {
@@ -222,6 +225,63 @@ export function* onDeleteArtistSuccess() {
   );
 }
 
+export function* deleteUser() {
+  try {
+    const authUser = yield Auth.currentAuthenticatedUser();
+    const email = authUser.attributes.email;
+    const userName = authUser.username;
+
+    const res = yield API.graphql({
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      query: queries.getFullUser,
+      variables: {
+        email,
+      },
+    });
+
+    const concerts = res.data.getUser.concerts.items;
+    const bands = res.data.getUser.bands.items;
+    const artistID = res.data.getUser.artistID;
+
+    if (concerts.length > 0) {
+      yield put(
+        deleteUserRequirementsFailure({
+          message: "You must delete all your concerts first!",
+        })
+      );
+    } else if (bands.length > 0) {
+      yield put(
+        deleteUserRequirementsFailure({
+          message: "You must delete all your bands first!",
+        })
+      );
+    } else if (artistID !== null) {
+      yield put(
+        deleteUserRequirementsFailure({
+          message: "You must delete your artist first!",
+        })
+      );
+    } else {
+      const res = yield API.graphql({
+        query: mutations.delteAccount,
+        variables: {
+          userName: userName,
+          email: email,
+        },
+      });
+
+      yield Auth.signOut();
+      yield put(deleteUserSuccess(JSON.parse(res.data.delteAccount)));
+    }
+  } catch (error) {
+    yield put(deleteUserFailure(error));
+  }
+}
+
+export function* onDeleteUserStart() {
+  yield takeLatest(UserActionTypes.DELETE_USER_START, deleteUser);
+}
+
 export function* userSagas() {
   yield all([
     call(onSignUpStart),
@@ -237,5 +297,6 @@ export function* userSagas() {
     call(onChangePasswordStart),
     call(onCreateArtistSuccess),
     call(onDeleteArtistSuccess),
+    call(onDeleteUserStart),
   ]);
 }
