@@ -54,17 +54,17 @@ exports.handler = async (event) => {
 
     response = {
       statusCode: 200,
-      body: JSON.stringify({
+      body: {
         message: "User deleted successfuly",
         isUserDelete: true,
-      }),
+      },
     };
   } catch (e) {
     response = {
       statusCode: 404,
-      body: JSON.stringify(e),
+      body: e,
     };
   }
 
-  return response;
+  return JSON.stringify(response);
 };

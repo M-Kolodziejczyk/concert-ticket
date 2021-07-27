@@ -64,7 +64,7 @@
         },
         "delteAccount": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
-          "s3Key": "amplify-builds/delteAccount-696c7a39695839436e4d-build.zip"
+          "s3Key": "amplify-builds/delteAccount-43415947367870786349-build.zip"
         }
       }
     }
