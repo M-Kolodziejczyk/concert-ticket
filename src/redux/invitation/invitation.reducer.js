@@ -151,6 +151,17 @@ const invitationReducer = (state = INITIAL_STATE, action) => {
           concertInvitation: "Reject concert invitaion failure",
         },
       };
+    case InvitationActionTypes.CLEAR_USER:
+      return {
+        ...state,
+        errorMessage: {},
+        successMessage: {},
+        bandInvitations: [],
+        concertInvitations: [],
+        loadingInvitations: false,
+        loadingFormInvitations: false,
+        isListInvitationComplete: false,
+      };
     default:
       return state;
   }

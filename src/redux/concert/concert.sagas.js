@@ -4,6 +4,7 @@ import * as mutations from "../../api/mutations";
 import * as queries from "../../api/queries";
 
 import ConcertActionTypes from "./concert.types";
+import UserActionTypes from "../user/user.types";
 
 import {
   createConcertSuccess,
@@ -36,6 +37,7 @@ import {
   removeBandFromConcertFailure,
   removeConcertSuccess,
   removeConcertFailure,
+  clearUser,
 } from "./concert.actions";
 
 export function* createConcert({ payload: concert }) {
@@ -416,6 +418,18 @@ export function* onRemoveConcertStart() {
   yield takeLatest(ConcertActionTypes.REMOVE_CONCERT_START, removeConcert);
 }
 
+export function* clearUserData() {
+  yield put(clearUser());
+}
+
+export function* onDeleteUserSuccess() {
+  yield takeLatest(UserActionTypes.DELETE_USER_SUCCESS, clearUserData);
+}
+
+export function* onSignOutSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearUserData);
+}
+
 export function* concertSagas() {
   yield all([
     call(onCreateConcertStart),
@@ -433,5 +447,7 @@ export function* concertSagas() {
     call(onAddBandToConcertStart),
     call(onRemoveBandFromConcertStart),
     call(onRemoveConcertStart),
+    call(onDeleteUserSuccess),
+    call(onSignOutSuccess),
   ]);
 }

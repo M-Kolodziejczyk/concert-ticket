@@ -67,3 +67,7 @@ export const listUserOrdersByDateFailure = (error) => ({
   type: OrderActionTypes.LIST_USER_ORDERS_BY_DATE_FAILURE,
   payload: error,
 });
+
+export const clearUser = () => ({
+  type: OrderActionTypes.CLEAR_USER,
+});

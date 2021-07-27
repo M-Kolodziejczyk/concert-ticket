@@ -351,6 +351,17 @@ const bandReducer = (state = INITIAL_STATE, action) => {
           removeBand: "Failure to remove band",
         },
       };
+    case BandActionTypes.CLEAR_USER:
+      return {
+        ...state,
+        userListBands: [],
+        userBands: {},
+        successMessage: {},
+        errorMessage: {},
+        isUserBandsEmpty: false,
+        formLoading: false,
+        loading: false,
+      };
     default:
       return state;
   }

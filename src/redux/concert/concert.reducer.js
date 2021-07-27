@@ -438,7 +438,19 @@ const concertReducer = (state = INITIAL_STATE, action) => {
           removeConcert: "Failed to remove concert",
         },
       };
-
+    case ConcertActionTypes.CLEAR_USER:
+      return {
+        ...state,
+        successMessage: {},
+        errorMessage: {},
+        userConcerts: {},
+        userListConcerts: [],
+        isUserConcertsEmpty: false,
+        loading: false,
+        loadingImg: false,
+        loadingForm: false,
+        isFormSuccess: false,
+      };
     default:
       return state;
   }

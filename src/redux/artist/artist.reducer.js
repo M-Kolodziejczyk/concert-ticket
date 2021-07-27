@@ -195,6 +195,16 @@ const artistReducer = (state = INITIAL_STATE, action) => {
           deleteArtist: "Delete artist failure",
         },
       };
+    case ArtistActionTypes.CLEAR_USER:
+      return {
+        ...state,
+        userArtist: {},
+        formLoading: false,
+        loading: false,
+        userArtistImageUrl: "",
+        successMessage: {},
+        errorMessage: {},
+      };
     default:
       return state;
   }

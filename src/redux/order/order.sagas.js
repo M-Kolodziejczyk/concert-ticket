@@ -4,6 +4,7 @@ import * as mutations from "../../api/mutations";
 import * as queries from "../../api/queries";
 
 import OrderActionTypes from "./order.types";
+import UserActionTypes from "../user/user.types";
 
 import {
   createOrderSuccess,
@@ -14,6 +15,7 @@ import {
   processPaymentFailure,
   listUserOrdersByDateSuccess,
   listUserOrdersByDateFailure,
+  clearUser,
 } from "./order.actions";
 
 export function* createOrder({ payload: { userName, fullName, tickets } }) {
@@ -117,11 +119,25 @@ export function* onListUserOrdersByDate() {
   );
 }
 
+export function* clearUserData() {
+  yield put(clearUser());
+}
+
+export function* onDeleteUserSuccess() {
+  yield takeLatest(UserActionTypes.DELETE_USER_SUCCESS, clearUserData);
+}
+
+export function* onSignOutSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearUserData);
+}
+
 export function* orderSagas() {
   yield all([
     call(onCreateOrderStart),
     call(onGetOrderStart),
     call(onProcessPaymentStart),
     call(onListUserOrdersByDate),
+    call(onDeleteUserSuccess),
+    call(onSignOutSuccess),
   ]);
 }

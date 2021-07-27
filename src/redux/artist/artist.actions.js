@@ -153,3 +153,7 @@ export const deleteUserArtistFailure = (error) => ({
   type: ArtistActionTypes.DELETE_USER_ARTIST_FAILURE,
   payload: error,
 });
+
+export const clearUser = () => ({
+  type: ArtistActionTypes.CLEAR_USER,
+});

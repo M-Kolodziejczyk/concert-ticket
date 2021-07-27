@@ -4,6 +4,7 @@ import * as mutations from "../../api/mutations";
 import * as queries from "../../api/queries";
 
 import ArtistActionTypes from "./artist.types";
+import UserActionTypes from "../user/user.types";
 
 import {
   createArtistSuccess,
@@ -25,6 +26,7 @@ import {
   listArtistsFailure,
   deleteUserArtistSuccess,
   deleteUserArtistFailure,
+  clearUser,
 } from "./artist.actions";
 
 export function* createArtist({ payload: artist }) {
@@ -258,6 +260,18 @@ export function* onDeleteArtistStart() {
   );
 }
 
+export function* clearUserData() {
+  yield put(clearUser());
+}
+
+export function* onDeleteUserSuccess() {
+  yield takeLatest(UserActionTypes.DELETE_USER_SUCCESS, clearUserData);
+}
+
+export function* onSignOutSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearUserData);
+}
+
 export function* artistSagas() {
   yield all([
     call(onCreateArtistStart),
@@ -269,5 +283,7 @@ export function* artistSagas() {
     call(onGetUserArtistImageStart),
     call(onListArtistsStart),
     call(onDeleteArtistStart),
+    call(onDeleteUserSuccess),
+    call(onSignOutSuccess),
   ]);
 }

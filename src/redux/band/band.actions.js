@@ -183,3 +183,7 @@ export const removeBandFailure = (error) => ({
   type: BandActionTypes.REMOVE_BAND_FAILURE,
   payload: error,
 });
+
+export const clearUser = () => ({
+  type: BandActionTypes.CLEAR_USER,
+});

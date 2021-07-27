@@ -74,3 +74,7 @@ export const rejectConcertInvitationFailure = (error) => ({
   type: InvitationActionTypes.REJECT_BAND_INVITATION_FAILURE,
   payload: error,
 });
+
+export const clearUser = () => ({
+  type: InvitationActionTypes.CLEAR_USER,
+});

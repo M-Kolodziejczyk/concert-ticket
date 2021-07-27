@@ -4,6 +4,7 @@ import * as mutations from "../../api/mutations";
 import * as queries from "../../api/queries";
 
 import BandActionTypes from "./band.types";
+import UserActionTypes from "../user/user.types";
 
 import {
   createBandSuccess,
@@ -30,6 +31,7 @@ import {
   removeArtistFromBandFailure,
   removeBandSuccess,
   removeBandFailure,
+  clearUser,
 } from "./band.actions";
 
 export function* createBand({ payload: band }) {
@@ -338,6 +340,18 @@ export function* onRemoveBandStart() {
   yield takeLatest(BandActionTypes.REMOVE_BAND_START, removeBand);
 }
 
+export function* clearUserData() {
+  yield put(clearUser());
+}
+
+export function* onDeleteUserSuccess() {
+  yield takeLatest(UserActionTypes.DELETE_USER_SUCCESS, clearUserData);
+}
+
+export function* onSignOutSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearUserData);
+}
+
 export function* bandSagas() {
   yield all([
     call(onCreateBandStart),
@@ -352,5 +366,7 @@ export function* bandSagas() {
     call(onAddArtistToBandStart),
     call(onRemoveArtsitFromBandStart),
     call(onRemoveBandStart),
+    call(onDeleteUserSuccess),
+    call(onSignOutSuccess),
   ]);
 }

@@ -4,6 +4,7 @@ import * as queries from "../../api/queries";
 import * as mutations from "../../api/mutations";
 
 import InvitationActionTypes from "./invitation.type";
+import UserActionTypes from "../user/user.types";
 
 import {
   listUserInvitationsSuccess,
@@ -16,6 +17,7 @@ import {
   acceptConcertInvitationFailure,
   rejectConcertInvitationSucces,
   rejectConcertInvitationFailure,
+  clearUser,
 } from "./invitation.actions";
 
 export function* listUserInvitation({ payload: email }) {
@@ -156,6 +158,18 @@ export function* onRejectConcertInvitationStart() {
   );
 }
 
+export function* clearUserData() {
+  yield put(clearUser());
+}
+
+export function* onDeleteUserSuccess() {
+  yield takeLatest(UserActionTypes.DELETE_USER_SUCCESS, clearUserData);
+}
+
+export function* onSignOutSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearUserData);
+}
+
 export function* invitationSagas() {
   yield all([
     call(onListUserInvitationsStart),
@@ -163,5 +177,7 @@ export function* invitationSagas() {
     call(onRejectBandInvitationStart),
     call(onAcceptConcertInvitationStart),
     call(onRejectConcertInvitationStart),
+    call(onDeleteUserSuccess),
+    call(onSignOutSuccess),
   ]);
 }

@@ -128,6 +128,23 @@ const orderReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         listUserOrders: null,
       };
+    case OrderActionTypes.CLEAR_USER:
+      return {
+        ...state,
+        listUserOrders: [],
+        userOrders: {},
+        savedOrders: {},
+        isCreateOrderSuccess: false,
+        successMessage: {},
+        createOrderResponse: {},
+        errorMessage: {},
+        processPayment: {
+          status: "",
+        },
+        processPaymentLoading: false,
+        processPaymentStatus: "",
+        loading: false,
+      };
     default:
       return state;
   }

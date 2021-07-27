@@ -230,3 +230,7 @@ export const removeConcertFailure = (error) => ({
   type: ConcertActionTypes.REMOVE_CONCERT_FAILURE,
   payload: error,
 });
+
+export const clearUser = () => ({
+  type: ConcertActionTypes.CLEAR_USER,
+});
