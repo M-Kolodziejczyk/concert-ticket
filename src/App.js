@@ -25,6 +25,7 @@ import ConcertPage from "./pages/concert-page/concert-page.component";
 import CartPage from "./pages/cart-page/cart-page.component";
 import CartPaymentPage from "./pages/cart-payment-page/cart-payment-page.component";
 import ScrollToTop from "./components/scroll-to-top/scroll-to-top";
+import ConfirmDeleteAccountPage from "./pages/confirm-delete-account-page/confirm-delete-account-page.component";
 
 import "./App.css";
 
@@ -76,6 +77,11 @@ const App = () => {
         <Route exact path="/bands/:id" component={BandPage} />
         <Route exact path="/concerts" component={ConcertsPage} />
         <Route exact path="/concerts/:id" component={ConcertPage} />
+        <Route
+          exact
+          path="/user-deleted"
+          component={ConfirmDeleteAccountPage}
+        />
         <PrivateRoute path="/user" component={UserPage} />
         <PrivateRoute exact path="/cart" component={CartPage} />
         <PrivateRoute
