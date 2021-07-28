@@ -151,6 +151,29 @@
           ]
         }
       ]
+    },
+    "preSignupLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "concertticket08f3b569",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "concertticket",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
     }
   },
   "storage": {

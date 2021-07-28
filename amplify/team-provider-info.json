@@ -65,6 +65,10 @@
         "delteAccount": {
           "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
           "s3Key": "amplify-builds/delteAccount-43415947367870786349-build.zip"
+        },
+        "preSignupLambda": {
+          "deploymentBucketName": "amplify-concertticket-devv-112252-deployment",
+          "s3Key": "amplify-builds/preSignupLambda-4b7465745145726f3961-build.zip"
         }
       }
     }

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "auth": {
+      "concertticket08f3b569": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "api": {
+      "concertticket": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
