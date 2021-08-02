@@ -58,7 +58,10 @@ const UserDetailsPage = () => {
       </div>
       <h1>User details</h1>
       <div className="details">
-        <span className="email">Email: {userEmail}</span>
+        <p className="email">
+          <strong>Email: </strong>
+          {userEmail}
+        </p>
       </div>
 
       <div className="form-container">

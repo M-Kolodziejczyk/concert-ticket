@@ -2,6 +2,10 @@ ConcertTicket Project
 Live Demo:
 https://concert-ticket.mike-kolodziejczyk.com/
 
+Test user:
+email: rmh36309@cuoly.com
+password: Concert789
+
 Features:
 
 - signup
