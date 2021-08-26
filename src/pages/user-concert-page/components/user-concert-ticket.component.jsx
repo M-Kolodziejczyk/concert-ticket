@@ -165,7 +165,7 @@ const UserConcertTicket = ({ concertId }) => {
               <div className="delete-container">
                 <DeleteModal
                   title={`Are you sure you want to delete ${ticket.eventName}`}
-                  deleteBtn="Delete Concert"
+                  deleteBtn="Delete Ticket"
                   deleteConfirm="Delete"
                   id={ticket.id}
                   callback={deleteConcertTicketStart}
